@@ -11,7 +11,7 @@ async function updateLeaderboard() {
       (p, i) => `
         <div class="player">
           <span class="rank">${i + 1}</span>
-          <span>${p.人名}</span>
+          <span>${p.號碼}</span>
           <span>${p.分數}</span>
         </div>`
     ).join("");
