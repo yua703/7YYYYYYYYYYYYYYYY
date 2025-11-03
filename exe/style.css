@@ -34,9 +34,11 @@ body {
   background: white;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  max-width: 320px;
+  max-width: 300px;       /* 桌面預設寬度 */
+  width: 90%;             /* 手機自動縮放寬度 */
   margin: auto;
   padding: 20px;
+  box-sizing: border-box; /* 確保 padding 不會超過寬度 */
 }
 
 .header {
@@ -54,9 +56,29 @@ body {
   justify-content: space-between;
   padding: 6px 0;
   border-bottom: 1px solid #eee;
+  flex-wrap: wrap;       /* 手機小螢幕可換行 */
+}
+
+.player span {
+  flex: 1 1 30%;         /* 每個欄位最少佔 30%，可縮小 */
+  text-align: center;
+  min-width: 50px;       /* 避免太小 */
 }
 
 .rank {
   font-weight: bold;
   color: #0078d4;
+}
+
+/* 小螢幕手機樣式 */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2em;   /* 標題縮小 */
+  }
+  #leaderboard {
+    padding: 10px;      /* 內距縮小 */
+  }
+  .header span, .player span {
+    font-size: 0.9em;   /* 文字縮小 */
+  }
 }
