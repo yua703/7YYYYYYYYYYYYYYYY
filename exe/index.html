@@ -3,16 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>即時排行榜</title>
-
-  <!-- 連結 CSS 樣式檔 -->
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
   <h1>🏆 即時排行榜</h1>
+
+  <!-- 組別切換標籤 -->
+  <div id="tabs">
+    <button data-sheet="個人總積分" class="active">總積分</button>
+    <button data-sheet="第一組排名">第一組</button>
+    <button data-sheet="第二組排名">第二組</button>
+    <button data-sheet="第三組排名">第三組</button>
+    <button data-sheet="第四組排名">第四組</button>
+    <button data-sheet="第五組排名">第五組</button>
+    <button data-sheet="第六組排名">第六組</button>
+    <button data-sheet="第七組排名">第七組</button>
+  </div>
+
+  <!-- 排行榜區 -->
   <div id="leaderboard">載入中...</div>
 
-  <!-- 連結 JavaScript 檔案（放在 body 最下面） -->
   <script src="main.js"></script>
 </body>
 </html>
