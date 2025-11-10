@@ -15,18 +15,17 @@ async function updateLeaderboard(sheetName) {
     const sorted = data.sort((a, b) => Number(b.分數) - Number(a.分數)).slice(0, 10);
 
     // 根據表單名稱決定表頭右邊的文字
-    // 如果目前是「個人總積分」→ 顯示「總積分」
-    // 其他組別 → 顯示「分數」
     const scoreTitle = (sheetName === "個人總積分") ? "總積分" : "分數";
 
     // 計算同分併列排名
     let lastScore = null;
     let lastRank = 0;
 
-    // 組出 HTML 表格內容
+    // 組出 HTML 表格內容（多了「梯次」）
     const html = `
       <div class="header">
         <span>排名</span>
+        <span>梯次</span>
         <span>玩家號碼</span>
         <span>${scoreTitle}</span>
       </div>
@@ -43,6 +42,7 @@ async function updateLeaderboard(sheetName) {
         return `
         <div class="player">
           <span class="rank">${rank}</span>
+          <span>${p.梯次 || "-"}</span>
           <span>${p.號碼}</span>
           <span>${p.分數}</span>
         </div>`;
@@ -52,7 +52,6 @@ async function updateLeaderboard(sheetName) {
     // 將排行榜內容更新到頁面上
     document.getElementById("leaderboard").innerHTML = html;
   } catch (err) {
-    // 若讀取資料失敗，顯示錯誤訊息
     document.getElementById("leaderboard").innerHTML = "讀取失敗 😢";
     console.error(err);
   }
@@ -61,14 +60,9 @@ async function updateLeaderboard(sheetName) {
 // 處理標籤按鈕點擊事件
 document.querySelectorAll("#tabs button").forEach(btn => {
   btn.addEventListener("click", () => {
-    // 移除舊的 active 樣式
     document.querySelectorAll("#tabs button").forEach(b => b.classList.remove("active"));
-    // 新按下的按鈕加上 active
     btn.classList.add("active");
-
-    // 更新目前的組別
     currentSheet = btn.dataset.sheet;
-    // 重新載入排行榜
     updateLeaderboard(currentSheet);
   });
 });

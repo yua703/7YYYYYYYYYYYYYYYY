@@ -49,6 +49,7 @@ body {
   margin-bottom: 8px;
 }
 
+/* 每位玩家一列 */
 .player {
   display: flex;
   justify-content: space-between;
@@ -56,28 +57,33 @@ body {
   border-bottom: 1px solid #eee;
 }
 
+/* 排名樣式 */
 .rank {
   font-weight: bold;
   color: #0078d4;
+  border-right: 2px solid #ccc; /* 🔹在排名右邊加上直線分隔 */
+  padding-right: 8px;            /* 🔹讓文字與線保持距離 */
+  margin-right: 8px;             /* 🔹讓線與其他欄位間有空間 */
 }
+
 /* ---------- 手機專用樣式 ---------- */
 @media (max-width: 480px) {
   h1 {
-    font-size: 1.5em;        /* 標題稍大 */
+    font-size: 1.5em;
   }
 
   #leaderboard {
-    width: 95%;              /* 手機幾乎滿版 */
-    padding: 15px;           /* 內距稍微縮小 */
-    max-width: none;         /* 移除桌面 max-width 限制 */
+    width: 95%;
+    padding: 15px;
+    max-width: none;
   }
 
   .header span, .player span {
-    font-size: 1.1em;        /* 文字稍大 */
+    font-size: 1.1em;
   }
 
   .player {
-    padding: 10px 0;         /* 每列高度加大 */
-    flex-wrap: wrap;         /* 欄位換行，防止擠壓 */
+    padding: 10px 0;
+    flex-wrap: wrap;
   }
 }
