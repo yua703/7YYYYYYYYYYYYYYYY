@@ -7,21 +7,21 @@ let currentSheet = "個人總積分";
 // 主要更新排行榜函式
 async function updateLeaderboard(sheetName) {
   try {
-    // 取得對應組別的 Google Sheet JSON 資料
+    // 從 Google Sheet 取得 JSON 資料
     const res = await fetch(sheetBase + encodeURIComponent(sheetName) + "?t=" + Date.now());
     const data = await res.json();
 
-    // 依分數排序（高→低），取前 10 名
-    const sorted = data.sort((a, b) => Number(b.分數) - Number(a.分數)).slice(0, 10);
+    // ✅ 不排序，依照試算表順序顯示
+    const sorted = data.slice(0, 10);
 
-    // 根據表單名稱決定表頭右邊的文字
+    // 根據表單名稱決定右上角標題
     const scoreTitle = (sheetName === "個人總積分") ? "總積分" : "分數";
 
-    // 計算同分併列排名
+    // ✅ 改良版同分併列排名演算法
     let lastScore = null;
     let lastRank = 0;
+    let actualRank = 0; // 實際第幾筆資料（不跳號）
 
-    // 組出 HTML 表格內容（多了「梯次」）
     const html = `
       <div class="header">
         <span>排名</span>
@@ -29,16 +29,20 @@ async function updateLeaderboard(sheetName) {
         <span>玩家號碼</span>
         <span>${scoreTitle}</span>
       </div>
-      ${sorted.map((p, i) => {
-        // 如果分數和上一筆一樣，排名不變；否則排名等於目前索引 + 1
+      ${sorted.map((p) => {
+        actualRank++; // 每筆資料+1
+
         let rank;
         if (p.分數 === lastScore) {
+          // 分數相同 → 跟前一個同名次
           rank = lastRank;
         } else {
-          rank = i + 1;
+          // 分數不同 → 以目前第幾筆作為排名
+          rank = actualRank;
           lastRank = rank;
           lastScore = p.分數;
         }
+
         return `
         <div class="player">
           <span class="rank">${rank}</span>
@@ -49,7 +53,6 @@ async function updateLeaderboard(sheetName) {
       }).join("")}
     `;
 
-    // 將排行榜內容更新到頁面上
     document.getElementById("leaderboard").innerHTML = html;
   } catch (err) {
     document.getElementById("leaderboard").innerHTML = "讀取失敗 😢";
@@ -57,7 +60,7 @@ async function updateLeaderboard(sheetName) {
   }
 }
 
-// 處理標籤按鈕點擊事件
+// 處理切換按鈕
 document.querySelectorAll("#tabs button").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll("#tabs button").forEach(b => b.classList.remove("active"));
@@ -67,8 +70,8 @@ document.querySelectorAll("#tabs button").forEach(btn => {
   });
 });
 
-// 初次載入時更新一次排行榜
+// 初次載入排行榜
 updateLeaderboard(currentSheet);
 
-// 每 5 秒自動更新目前顯示的組別排行榜
+// 每 5 秒自動更新排行榜
 setInterval(() => updateLeaderboard(currentSheet), 5000);
