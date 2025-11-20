@@ -1,0 +1,23 @@
+body {
+  font-family: "Microsoft JhengHei", sans-serif;
+  padding: 20px;
+}
+
+/* 標籤列 */
+#tabs {
+  margin-bottom: 20px;
+}
+
+#tabs button {
+  padding: 10px 20px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+#tabs button.active {
+  background: #333;
+  color: white;
+  font-weight: bold;
+}
