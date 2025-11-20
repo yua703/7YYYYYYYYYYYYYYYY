@@ -1,5 +1,5 @@
 // Google Sheet 文件 ID
-const sheetBase = "https://opensheet.elk.sh/1L_CCR3hjhCiSXe-fE4Y253PPnEQwAIPIMD8epDfzEbw/";
+const sheetBase = "https://opensheet.elk.sh/1EdjiH8Itg6wNBf4MS9IlT-j5yYkFqR3uqo0Toic28N8/";
 
 // 初始顯示的表單名稱（預設為「個人總積分」）
 let currentSheet = "個人總積分";
@@ -25,7 +25,6 @@ async function updateLeaderboard(sheetName) {
     const html = `
       <div class="header">
         <span>排名</span>
-        <span>梯次</span>
         <span>玩家號碼</span>
         <span>${scoreTitle}</span>
       </div>
@@ -46,8 +45,7 @@ async function updateLeaderboard(sheetName) {
         return `
         <div class="player">
           <span class="rank">${rank}</span>
-          <span>${p.梯次 || "-"}</span>
-          <span>${p.號碼}</span>
+          <span>${p.編號}</span>
           <span>${p.分數}</span>
         </div>`;
       }).join("")}
