@@ -1,40 +1,170 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-
-  <!-- 🔥 手機 RWD 必加！ -->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>賽事主頁</title>
-
-  <!-- 主網站 CSS -->
-  <link rel="stylesheet" href="main.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校園賽事官方網站</title>
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <h1>賽事主畫面</h1>
 
-  <!-- 頁籤 -->
-  <div id="tabs">
-    <button class="active" data-target="intro">賽事介紹</button>
-    <button data-target="leaderboard">排行榜</button>
-  </div>
+    <div id="view-home" class="page-view active">
+        
+        <header class="hero-section">
+            <img src="img/123.png" alt="賽事主視覺" class="full-img">
+            <div class="hero-text">
+                <h1>2025 校園運動大賽</h1>
+                <p>熱血．競技．榮耀</p>
+            </div>
+        </header>
 
-  <!-- 介紹內容 -->
-  <div id="intro">
-    <h2>組別介紹</h2>
-    <p>這裡放賽事內容、規則、圖片等...</p>
-  </div>
+        <section class="section-padding">
+            <h2>關於本次賽事</h2>
+            <p class="desc-text">
+                本屆賽事旨在促進學生間的交流與合作，透過多元化的競賽項目，展現青春活力。無論你是運動健將還是策略大師，這裡都有屬於你的舞台！
+            </p>
+        </section>
 
-  <!-- 排行榜 iframe（預設隱藏） -->
-  <iframe
-  id="leaderboard-frame"
-  src="leaderboard/leaderboard.html"
-  style="display:none; width:100%; height:900px; border:none;">
-  </iframe>
+        <section class="section-padding bg-gray">
+            <h2>七大競賽項目</h2>
+            <div class="carousel-container" id="events-carousel">
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="耐力">
+                    <h3>耐力</h3>
+                    <p>耐力。</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="爆發力">
+                    <h3>爆發力</h3>
+                    <p>爆發力。</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="反應力">
+                    <h3>反應力</h3>
+                    <p>反應力。</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="專注力">
+                    <h3>專注力</h3>
+                    <p>專注力。</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="敏捷力">
+                    <h3>敏捷力</h3>
+                    <p>敏捷力。</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="協調力">
+                    <h3>協調力</h3>
+                    <p>協調力。</p>
+                </div>
+                <div class="carousel-item">
+                    <img src="img/123.png" alt="智力">
+                    <h3>智力</h3>
+                    <p>智力。</p>
+                </div>
+            </div>
+        </section>
 
-  <!-- 主網站 JS -->
-  <script src="main.js"></script>
+        <section class="section-padding">
+            <h2>賽事細節</h2>
+            
+            <div class="detail-tabs">
+                <button class="detail-tab-btn active" data-target="detail-participants">參賽方法</button>
+                <button class="detail-tab-btn" data-target="detail-scoring">計分方法</button>
+                <button class="detail-tab-btn" data-target="detail-map">賽事地圖</button>
+            </div>
+
+            <div id="detail-participants" class="detail-content active">
+                <h3>參賽資格</h3>
+                <p>全校各系所、班級皆可組隊報名。每隊人數上限 10 人。</p>
+                <img src="img/123.png" alt="參賽說明圖" class="content-img">
+            </div>
+            <div id="detail-scoring" class="detail-content">
+                <h3>積分規則</h3>
+                <p>各項目冠軍得 10 分，亞軍 7 分，季軍 5 分。總積分最高者獲勝。</p>
+            </div>
+            <div id="detail-map" class="detail-content">
+                <h3>場地配置</h3>
+                <p>比賽將於體育館及操場同時進行。</p>
+                <img src="img/123.png" alt="地圖" class="content-img">
+            </div>
+        </section>
+
+        <section class="section-padding bg-dark">
+            <h2>關於我們</h2>
+            <p>主辦單位：113互動設計系</p>
+            <p>聯絡我們：sports@school.edu.tw</p>
+            <br>
+            <a href="#" class="btn-primary">追蹤官方 IG</a>
+        </section>
+
+        <footer class="footer-hero">
+            <img src="img/123.png" alt="結尾圖片" class="full-img">
+        </footer>
+        
+        <div style="height: 80px;"></div>
+    </div>
+
+
+    <div id="view-leaderboard" class="page-view">
+        <header class="leaderboard-header">
+            <h1>🏆 即時排行榜</h1>
+        </header>
+
+        <div id="leaderboard-tabs-container">
+            <button data-sheet="七大項總錦標" class="lb-tab active">七大項總錦標</button>
+            <button data-sheet="第一組分數計算" class="lb-tab">第一組</button>
+            <button data-sheet="第二組分數計算" class="lb-tab">第二組</button>
+            <button data-sheet="第三組分數計算" class="lb-tab">第三組</button>
+            <button data-sheet="第四組分數計算" class="lb-tab">第四組</button>
+            <button data-sheet="第五組分數計算" class="lb-tab">第五組</button>
+            <button data-sheet="第六組分數計算" class="lb-tab">第六組</button>
+            <button data-sheet="第七組分數計算" class="lb-tab">第七組</button>
+            <button data-sheet="第八組分數計算" class="lb-tab">第八組</button>
+            <button data-sheet="第九組分數計算" class="lb-tab">第九組</button>
+            <button data-sheet="第十組分數計算" class="lb-tab">第十組</button>
+            <button data-sheet="第十一組分數計算" class="lb-tab">第十一組</button>
+            <button data-sheet="第十二組分數計算" class="lb-tab">第十二組</button>
+            <button data-sheet="第十三組分數計算" class="lb-tab">第十三組</button>
+            <button data-sheet="第十四組分數計算" class="lb-tab">第十四組</button>
+            <button data-sheet="第十五組分數計算" class="lb-tab">第十五組</button>
+            <button data-sheet="第十六組分數計算" class="lb-tab">第十六組</button>
+            <button data-sheet="第十七組分數計算" class="lb-tab">第十七組</button>
+            </div>
+
+        <div id="leaderboard-data">載入中...</div>
+
+        <div style="height: 80px;"></div>
+    </div>
+
+
+    <div id="view-groups" class="page-view">
+        <div style="padding: 50px 20px; text-align: center;">
+            <h2>組別功能開發中 🚧</h2>
+            <p>稍後我們會再詳細討論這個部分。</p>
+        </div>
+    </div>
+
+
+    <nav class="bottom-nav">
+        <button class="nav-btn active" data-view="view-home">
+            <span class="icon">ℹ️</span>
+            <span class="text">賽事介紹</span>
+        </button>
+        
+        <button class="nav-btn" data-view="view-groups">
+            <span class="icon">👥</span>
+            <span class="text">組別</span>
+        </button>
+        
+        <button class="nav-btn" data-view="view-leaderboard">
+            <span class="icon">📊</span>
+            <span class="text">排行榜</span>
+        </button>
+    </nav>
+
+    <script src="main.js"></script>
 </body>
 </html>
