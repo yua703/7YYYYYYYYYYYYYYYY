@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>校園賽事官方網站</title>
+    <title>ExErcise - 校園賽事</title>
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -32,22 +32,22 @@
                 <div class="carousel-item">
                     <img src="img/123.png" alt="耐力">
                     <h3>耐力</h3>
-                    <p>耐力。</p>
+                    <p>挑戰極限的體能試煉。</p>
                 </div>
                 <div class="carousel-item">
                     <img src="img/123.png" alt="爆發力">
                     <h3>爆發力</h3>
-                    <p>爆發力。</p>
+                    <p>瞬間釋放你的能量。</p>
                 </div>
                 <div class="carousel-item">
                     <img src="img/123.png" alt="反應力">
                     <h3>反應力</h3>
-                    <p>反應力。</p>
+                    <p>電光石火間的決斷。</p>
                 </div>
                 <div class="carousel-item">
                     <img src="img/123.png" alt="專注力">
                     <h3>專注力</h3>
-                    <p>專注力。</p>
+                    <p>心無旁騖，直指目標。</p>
                 </div>
                 <div class="carousel-item">
                     <img src="img/123.png" alt="敏捷力">
@@ -71,7 +71,8 @@
             <h2>賽事細節</h2>
             
             <div class="detail-tabs">
-                <button class="detail-tab-btn active" data-target="detail-participants">參賽方法</button>
+                <button class="detail-tab-btn active" data-target="detail-participants">競賽規章</button>
+                <button class="detail-tab-btn" data-target="detail-time">時程表</button>
                 <button class="detail-tab-btn" data-target="detail-scoring">計分方法</button>
                 <button class="detail-tab-btn" data-target="detail-map">賽事地圖</button>
             </div>
@@ -80,6 +81,12 @@
                 <h3>參賽資格</h3>
                 <p>全校各系所、班級皆可組隊報名。每隊人數上限 10 人。</p>
                 <img src="img/123.png" alt="參賽說明圖" class="content-img">
+            </div>
+            <div id="detail-time" class="detail-content">
+                <h3>時程表</h3>
+                <p>上午 08:00 - 開幕式</p>
+                <p>上午 09:00 - 小組預賽</p>
+                <img src="img/123.png" alt="時程表" class="time-img">
             </div>
             <div id="detail-scoring" class="detail-content">
                 <h3>積分規則</h3>
@@ -132,19 +139,357 @@
             <button data-sheet="第十五組分數計算" class="lb-tab">第十五組</button>
             <button data-sheet="第十六組分數計算" class="lb-tab">第十六組</button>
             <button data-sheet="第十七組分數計算" class="lb-tab">第十七組</button>
-            </div>
+        </div>
 
         <div id="leaderboard-data">載入中...</div>
-
         <div style="height: 80px;"></div>
     </div>
 
 
     <div id="view-groups" class="page-view">
-        <div style="padding: 50px 20px; text-align: center;">
-            <h2>組別功能開發中 🚧</h2>
-            <p>稍後我們會再詳細討論這個部分。</p>
-        </div>
+        <div class="section-padding">
+            <h2>參賽組別</h2>
+            <p class="desc-text">共 17 組隊伍參與本次賽事</p>
+
+            <div class="groups-grid">
+                
+                <div class="group-card">
+                    <span class="group-badge">#1</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>火焰戰隊</h3>
+                        <p>以速度和靈活性著稱的強力隊伍</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>火焰戰隊成立於 2023 年，由一群熱愛短跑的學生組成。擅長戰術是快速進攻。</p>
+                            <hr>
+                            <p>隊長：王小明</p>
+                            <p>成員：張三、李四、王五...</p>
+                            <div style="height: 200px; background:#f5f5f5; margin-top:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">更多照片區塊</div>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#2</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>閃電突擊</h3>
+                        <p>注重團隊配合的戰術型團隊</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>如閃電般迅速，如雷聲般震撼。我們是來自資工系的菁英部隊。</p>
+                            <hr>
+                            <p>隊長：陳大華</p>
+                            <div style="height: 200px; background:#f5f5f5; margin-top:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">更多照片區塊</div>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#3</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>藍海戰士</h3>
+                        <p>防守穩健，攻守平衡的隊伍</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>像大海一樣深不可測，我們的防守滴水不漏。</p>
+                            <hr>
+                            <p>隊長：林小美</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#4</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>綠茵勇者</h3>
+                        <p>擁有豐富經驗的老牌強隊</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>我們在操場上揮灑汗水，為了榮耀而戰。</p>
+                            <hr>
+                            <p>隊長：黃阿土</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#5</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>鋼鐵巨人</h3>
+                        <p>力量與耐力的極致展現</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>沒有人能突破我們的防線。</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#6</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>疾風之翼</h3>
+                        <p>天下武功，唯快不破</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>我們的速度將撕裂空氣。</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#7</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>榮耀之盾</h3>
+                        <p>為了榮譽，戰鬥到底</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#8</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>幻影刺客</h3>
+                        <p>神出鬼沒，難以捉摸</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#9</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>荒野雄獅</h3>
+                        <p>展現王者的霸氣</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#10</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>銀河艦隊</h3>
+                        <p>來自外太空的神秘力量</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#11</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>暴風騎士</h3>
+                        <p>席捲全場的風暴</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#12</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>烈日軍團</h3>
+                        <p>熱情如火，燃燒賽場</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#13</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>寒冰守衛</h3>
+                        <p>冷靜分析，精準打擊</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#14</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>雷霆戰將</h3>
+                        <p>氣勢磅礡，無人能擋</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#15</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>光明使者</h3>
+                        <p>傳遞運動家精神</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#16</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>暗夜獵手</h3>
+                        <p>黑夜中的王者</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+                <div class="group-card">
+                    <span class="group-badge">#17</span>
+                    <img src="img/123.png" alt="隊伍圖片" class="group-img">
+                    <div class="group-info">
+                        <h3>巔峰王者</h3>
+                        <p>目標只有第一名</p>
+                    </div>
+                    <div class="group-body">
+                        <div class="group-content-inner">
+                            <h4>隊伍介紹</h4>
+                            <p>詳細介紹文字...</p>
+                        </div>
+                    </div>
+                    <div class="close-bottom-area">
+                        <div class="bouncing-arrow"></div>
+                        <span class="close-text">點擊收合</span>
+                    </div>
+                </div>
+
+            </div> </div>
+        
+        <div style="height: 80px;"></div>
     </div>
 
 

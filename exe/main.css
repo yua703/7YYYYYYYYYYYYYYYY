@@ -9,24 +9,22 @@ body {
     font-family: "Noto Sans TC", sans-serif;
     background-color: #f9f9f9;
     color: #333;
-    /* 防止底部導覽列遮擋內容，這是一種全域解法，也可以用 HTML 裡的 spacer */
-    padding-bottom: 60px; 
+    padding-bottom: 70px; /* 避免被底部導覽列擋住 */
 }
 
-/* 圖片通用設定 */
 img {
     max-width: 100%;
     display: block;
 }
 
-/* --- 頁面視圖切換邏輯 --- */
+/* --- 頁面視圖切換動畫 --- */
 .page-view {
-    display: none; /* 預設全部隱藏 */
+    display: none;
     animation: fadeIn 0.3s ease;
 }
 
 .page-view.active {
-    display: block; /* 只有加了 active 的才會顯示 */
+    display: block;
 }
 
 @keyframes fadeIn {
@@ -34,18 +32,18 @@ img {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- 1. 首頁樣式 --- */
+/* --- 首頁區域 --- */
 .hero-section, .footer-hero {
     position: relative;
     width: 100%;
-    height: 60vh; /* 手機版高度，可調整 */
+    height: 50vh; /* 手機版高度適中即可 */
     overflow: hidden;
 }
 
 .full-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 保持比例填滿，會裁切 */
+    object-fit: cover;
 }
 
 .hero-text {
@@ -53,7 +51,7 @@ img {
     bottom: 20px;
     left: 20px;
     color: white;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.7);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 .section-padding {
@@ -63,27 +61,32 @@ img {
 .bg-gray { background-color: #eee; }
 .bg-dark { background-color: #222; color: white; text-align: center; }
 
-h2 { margin-bottom: 20px; border-left: 5px solid #0078d4; padding-left: 10px; }
+h2 {
+    margin-bottom: 20px;
+    border-left: 5px solid #0078d4;
+    padding-left: 10px;
+    font-size: 1.5rem;
+}
 
-/* 七大項目滑動區 (Carousel) */
+/* --- 七大項目滑動區 (Carousel) --- */
 .carousel-container {
     display: flex;
-    overflow-x: auto; /* 允許左右滑動 */
+    overflow-x: auto;
     gap: 15px;
     padding-bottom: 10px;
     scroll-behavior: smooth;
-    /* 隱藏捲軸但保留功能 */
-    scrollbar-width: none; 
+    scrollbar-width: none; /* Firefox 隱藏捲軸 */
 }
-.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-container::-webkit-scrollbar { display: none; /* Chrome/Safari 隱藏捲軸 */ }
 
 .carousel-item {
-    min-width: 200px; /* 每個卡片的寬度 */
+    min-width: 160px; /* 稍微縮小一點讓手機可以看到更多個 */
     background: white;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    flex-shrink: 0; /* 防止被擠壓 */
+    flex-shrink: 0;
+    text-align: center;
 }
 
 .carousel-item img {
@@ -94,67 +97,100 @@ h2 { margin-bottom: 20px; border-left: 5px solid #0078d4; padding-left: 10px; }
     margin-bottom: 10px;
 }
 
-/* 賽事細節分頁 */
-.detail-tabs { margin-bottom: 15px; display: flex; gap: 10px; }
+.carousel-item h3 { font-size: 1.1rem; margin-bottom: 5px; }
+.carousel-item p { font-size: 0.9rem; color: #666; }
+
+/* --- 賽事細節分頁 --- */
+.detail-tabs {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    padding-bottom: 5px;
+}
+
 .detail-tab-btn {
-    padding: 8px 15px;
+    padding: 8px 16px;
     border: 1px solid #ccc;
     background: white;
     border-radius: 20px;
     cursor: pointer;
+    white-space: nowrap; /* 讓文字不換行 */
+    font-size: 0.95rem;
 }
+
 .detail-tab-btn.active {
     background: #0078d4;
     color: white;
     border-color: #0078d4;
 }
-.detail-content { display: none; background: white; padding: 20px; border-radius: 10px; }
-.detail-content.active { display: block; }
-.content-img { margin-top: 15px; border-radius: 5px; }
 
-/* 按鈕樣式 */
-.btn-primary, .btn-secondary {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 5px;
-    text-decoration: none;
-    border-radius: 5px;
+/* 內容區塊樣式 */
+.detail-content {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-.btn-primary { background: #0078d4; color: white; }
-.btn-secondary { background: #555; color: white; }
+.detail-content.active { display: block; }
 
+/* 圖片通用樣式 (包含你新增的 time-img) */
+.content-img, .time-img {
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-/* --- 2. 排行榜樣式 --- */
+/* 按鈕 */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 25px;
+    background: #E1306C; /* IG 的顏色或是原本的藍色 */
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    font-weight: bold;
+}
+
+/* --- 排行榜樣式 --- */
 .leaderboard-header {
     background: #0078d4;
     color: white;
-    padding: 20px;
+    padding: 15px;
     text-align: center;
 }
 
+/* 排行榜上方按鈕滑動區 */
 #leaderboard-tabs-container {
     display: flex;
     overflow-x: auto;
     background: #f1f1f1;
     padding: 10px;
-    white-space: nowrap; /* 不換行 */
+    white-space: nowrap;
+    /* 隱藏捲軸 */
+    scrollbar-width: none;
 }
+#leaderboard-tabs-container::-webkit-scrollbar { display: none; }
 
 .lb-tab {
     background: white;
     border: none;
-    padding: 8px 16px;
-    margin-right: 10px;
+    padding: 6px 14px;
+    margin-right: 8px;
     border-radius: 20px;
     font-size: 14px;
     cursor: pointer;
     transition: 0.2s;
+    color: #555;
+    flex-shrink: 0; /* 確保按鈕不會被壓縮 */
 }
 
 .lb-tab.active {
     background: #0078d4;
     color: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 #leaderboard-data {
@@ -163,7 +199,7 @@ h2 { margin-bottom: 20px; border-left: 5px solid #0078d4; padding-left: 10px; }
     padding: 0 15px;
 }
 
-/* 排行榜列表項目 (沿用你之前的設計) */
+/* 排行榜列表 */
 .lb-header {
     display: flex;
     justify-content: space-between;
@@ -171,6 +207,7 @@ h2 { margin-bottom: 20px; border-left: 5px solid #0078d4; padding-left: 10px; }
     padding: 10px;
     border-bottom: 2px solid #0078d4;
     color: #555;
+    font-size: 0.9rem;
 }
 .lb-player {
     display: flex;
@@ -178,17 +215,16 @@ h2 { margin-bottom: 20px; border-left: 5px solid #0078d4; padding-left: 10px; }
     padding: 12px 10px;
     border-bottom: 1px solid #eee;
     background: white;
+    font-size: 0.95rem;
 }
 .lb-rank {
     font-weight: bold;
     color: #0078d4;
-    width: 40px;
-    border-right: 1px solid #ddd;
-    margin-right: 10px;
+    width: 30px;
+    display: inline-block;
 }
 
-
-/* --- 底部導覽列 (Sticky Bottom Nav) --- */
+/* --- 底部固定導覽列 --- */
 .bottom-nav {
     position: fixed;
     bottom: 0;
@@ -209,11 +245,240 @@ h2 { margin-bottom: 20px; border-left: 5px solid #0078d4; padding-left: 10px; }
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #888;
-    font-size: 12px;
+    color: #aaa;
+    font-size: 11px;
     cursor: pointer;
     width: 100%;
 }
 
-.nav-btn .icon { font-size: 20px; margin-bottom: 2px; }
+
+.nav-btn .icon { font-size: 22px; margin-bottom: 2px; }
 .nav-btn.active { color: #0078d4; font-weight: bold; }
+.nav-btn.active .icon { transform: scale(1.1); transition: 0.2s; }
+
+/* =========================================
+   5. 組別頁面樣式 (Groups) - 滿版展開版
+   ========================================= */
+
+/* 1. 網格容器 */
+.groups-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+/* 2. 卡片基礎外觀 (未展開狀態) */
+.group-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    /* 🔥 關鍵動畫設定：設定所有會變化的屬性都要有過渡效果 */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* 初始狀態不顯示捲軸 */
+    overflow-y: hidden; 
+}
+
+/* --- 圖片 --- */
+.group-img {
+    width: 100%;
+    height: 140px; /* 平常是小圖 */
+    object-fit: cover;
+    transition: height 0.4s ease; /* 圖片高度變化的動畫 */
+}
+
+/* --- 編號 Badge --- */
+.group-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.6); /* 改深色背景比較清楚 */
+    color: white;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    z-index: 5;
+}
+
+/* --- 標題簡介區 --- */
+.group-info {
+    padding: 12px;
+    transition: padding 0.4s ease;
+    background: white; /* 確保有背景色 */
+    position: relative; /* 為了設定層級 */
+    z-index: 10; /* 🔥 關鍵：確保文字浮在圖片上面 */
+}
+.group-info h3 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #0078d4;
+}
+.group-info p {
+    font-size: 0.85rem;
+    color: #666;
+    line-height: 1.4;
+    /* 限制兩行 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* --- 詳細內容區 (平常隱藏) --- */
+.group-body {
+    height: 0; /* 高度為 0 */
+    opacity: 0; /* 透明 */
+    padding: 0 15px; /* 不佔空間 */
+    transition: all 0.4s ease 0.1s; /* 稍微延遲一點再出現 */
+}
+
+/* --- 關閉按鈕 (平常隱藏) --- */
+.close-card-btn {
+    position: absolute;
+    top: 15px;
+    left: 15px; /* 在左上角，根據你的圖示 */
+    background: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none; /* 隱藏時不可點擊 */
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    cursor: pointer;
+}
+
+
+/* =========================================
+   🔥 關鍵：卡片展開後的狀態 (.active)
+   ========================================= */
+.group-card.active {
+    /* 變成固定定位，脫離網格，蓋在最上面 */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* 滿版高度 */
+    z-index: 1000; /* 確保在最上層 (比底部導覽列還高) */
+    border-radius: 0; /* 滿版時不需要圓角 */
+    box-shadow: none;
+    overflow-y: auto; /* 允許卡片內部垂直滑動 */
+    padding-bottom: 60px; /* 預留底部空間 */
+    background: #fff;
+}
+
+/* 展開時：圖片變大 Banner */
+.group-card.active .group-img {
+    height: 260px; /* 根據你的 Wireframe 設定一個大高度 */
+}
+
+/* 展開時：標題區增加留白與上移效果 */
+.group-card.active .group-info {
+    padding: 20px;
+    background: white;
+    margin-top: -30px; /* 往上蓋住圖片一點點 */
+    border-radius: 20px 20px 0 0; /* 圓角 */
+    position: relative;
+    z-index: 20; /* 🔥 比平常更高 */
+}
+.group-card.active .group-info h3 { font-size: 1.5rem; } /* 標題變大 */
+.group-card.active .group-info p { -webkit-line-clamp: unset; line-clamp: unset; } /* 解除文字行數限制 */
+
+/* 展開時：顯示詳細內容 */
+.group-card.active .group-body {
+    height: auto; /* 高度自動 */
+    opacity: 1; /* 顯示 */
+    padding: 0 20px 40px 20px;
+}
+
+/* 展開時：顯示關閉按鈕 */
+.group-card.active .close-card-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 當有卡片展開時，鎖定 body 不能滑動 */
+body.lock-scroll {
+    overflow: hidden;
+}
+/* =========================================
+   6. 底部關閉按鈕 (New Bottom Close Btn)
+   ========================================= */
+
+/* 1. 隱藏原本左上角的 X 按鈕 */
+.close-card-btn {
+    display: none !important;
+}
+
+/* 2. 底部漸層控制區 (容器) */
+.close-bottom-area {
+    position: fixed; /* 固定在螢幕底部 */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px; /* 感應區高度 */
+    /* 製作由下往上的黑色漸層，比較有質感 */
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 水平置中 */
+    justify-content: flex-end; /* 靠下對齊 */
+    padding-bottom: 25px; /* 離底部的距離 */
+    z-index: 2000; /* 確保在最上層 */
+    
+    /* 預設隱藏 */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    cursor: pointer;
+}
+
+/* 當卡片展開時，顯示底部按鈕 */
+.group-card.active .close-bottom-area {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 3. 跳動的倒三角形 */
+.bouncing-arrow {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 15px solid #fff; /* 白色倒三角 */
+    margin-bottom: 8px;
+    animation: bounce 2s infinite; /* 動畫設定 */
+}
+
+/* 4. 文字樣式 */
+.close-text {
+    color: white;
+    font-size: 14px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* 定義跳動動畫 */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px); /* 往上跳 10px */
+    }
+    60% {
+        transform: translateY(-5px); /* 往上跳 5px */
+    }
+}
