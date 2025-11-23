@@ -114,45 +114,53 @@ async function updateLeaderboard(sheetName) {
         
         const data = await res.json();
         
-        // 錯誤處理：如果 Google Sheet 沒資料
         if (!data || data.length === 0) {
             container.innerHTML = "<p style='text-align:center; padding:20px;'>目前尚無資料</p>";
             return;
         }
 
-        const sorted = data.slice(0, 10); // 取前 10 名
+        const sorted = data.slice(0, 10);
         const scoreTitle = (sheetName.includes("總錦標")) ? "總積分" : "分數";
 
-        // 排名運算 (同分同名次)
         let lastScore = null, lastRank = 0, actualRank = 0;
 
         const listHtml = sorted.map((p) => {
             actualRank++;
-            let rank = (p.分數 === lastScore) ? lastRank : actualRank;
             
-            // 資料格式容錯 (避免 undefined)
+            const pName = p.姓名 || p.Name || "-"; 
             const pNumber = p.編號 || p.玩家號碼 || "未知";
-            const pScore = p.分數 !== undefined ? p.分數 : 0;
+            
+            // 🔥 關鍵修改：如果有分數，四捨五入到小數點第 2 位
+            let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
+            // 如果不是數字(例如 NaN)，就顯示 0
+            if (isNaN(rawScore)) rawScore = 0;
+            
+            // 使用 toFixed(2) 固定顯示兩位小數，例如 68320.00 或 982.20
+            // 如果你不想要 .00，可以用 Math.round(rawScore * 100) / 100
+            let pScore = Number.isInteger(rawScore) ? rawScore : rawScore.toFixed(2);
 
-            if (pScore !== lastScore) {
+            let rank = (rawScore === lastScore) ? lastRank : actualRank;
+
+            if (rawScore !== lastScore) {
                 lastRank = rank;
-                lastScore = pScore;
+                lastScore = rawScore;
             }
             
             return `
             <div class="lb-player">
-                <div style="display:flex; align-items:center;">
-                    <span class="lb-rank">#${rank}</span>
-                    <span>${pNumber}</span>
-                </div>
-                <span style="font-weight:bold; color:#333;">${pScore}</span>
+                <span class="lb-rank">#${rank}</span>
+                <span class="lb-name">${pName}</span>
+                <span class="lb-number">${pNumber}</span>
+                <span class="lb-score">${pScore}</span>
             </div>`;
         }).join("");
 
         container.innerHTML = `
             <div class="lb-header">
-                <span>排名 / 號碼</span>
-                <span>${scoreTitle}</span>
+                <span class="lb-rank">排名</span>
+                <span class="lb-name">姓名</span>
+                <span class="lb-number">號碼</span>
+                <span class="lb-score">${scoreTitle}</span>
             </div>
             ${listHtml}
         `;

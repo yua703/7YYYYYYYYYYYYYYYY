@@ -9,7 +9,7 @@ body {
     font-family: "Noto Sans TC", sans-serif;
     background-color: #f9f9f9;
     color: #333;
-    padding-bottom: 70px; /* 避免被底部導覽列擋住 */
+    padding-bottom: 0px; /* 避免被底部導覽列擋住 */
 }
 
 img {
@@ -36,7 +36,7 @@ img {
 .hero-section, .footer-hero {
     position: relative;
     width: 100%;
-    height: 50vh; /* 手機版高度適中即可 */
+    height: 80vh; /* 手機版高度適中即可 */
     overflow: hidden;
 }
 
@@ -481,4 +481,103 @@ body.lock-scroll {
     60% {
         transform: translateY(-5px); /* 往上跳 5px */
     }
+}
+/* =========================================
+   7. 關於我們 (白色虛線風格 - 內縮版)
+   ========================================= */
+.section-dashed-white {
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    position: relative; /* 為了定位線條 */
+    
+    /* 這裡不需要直接寫 border 了，我們用下面兩個 "偽元素" 來畫線 */
+}
+
+/* 上方的虛線 */
+.section-dashed-white::before {
+    content: "";
+    display: block;
+    width: 90%;       /* 🔥 設定寬度 90%，這樣左右就會留白 5% */
+    height: 1px;
+    border-top: 3px dashed #ccc; /* 虛線樣式 */
+    margin: 0 auto 30px auto;    /* 置中，並跟下方的文字保持距離 */
+}
+
+/* 下方的虛線 */
+.section-dashed-white::after {
+    content: "";
+    display: block;
+    width: 90%;       /* 🔥 設定寬度 90% */
+    height: 1px;
+    border-top: 3px dashed #ccc; /* 虛線樣式 */
+    margin: 30px auto 0 auto;    /* 跟上方的文字保持距離，並置中 */
+}
+/* =========================================
+   8. 排行榜格狀對齊 (嚴格對齊版)
+   ========================================= */
+
+/* 設定每一列的網格比例 */
+.lb-header, .lb-player {
+    display: grid;
+    
+    /* 🔥 關鍵設定：4 個欄位的寬度分配 */
+    /* 1. 排名: 40px (固定) */
+    /* 2. 姓名: 1fr (彈性空間，名字長一點也沒關係) */
+    /* 3. 號碼: 50px (固定，就在名字旁邊) */
+    /* 4. 分數: 80px (固定，確保不會擠到前面) */
+    grid-template-columns: 40px 1fr 50px 80px;
+    
+    gap: 5px; /* 欄位間距縮小一點，讓號碼離名字近一點 */
+    align-items: center;
+    padding: 12px 10px;
+    border-bottom: 1px solid #eee;
+}
+
+/* 標題列專用 */
+.lb-header {
+    background-color: #f1f1f1;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: bold;
+    border-bottom: 2px solid #0078d4;
+}
+
+/* --- 個別欄位對齊設定 --- */
+
+/* 1. 排名 */
+.lb-rank {
+    font-weight: bold;
+    color: #0078d4;
+    text-align: left;
+}
+
+/* 2. 姓名 */
+.lb-name {
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap; /* 不換行 */
+    overflow: hidden;
+    text-overflow: ellipsis; /* 太長變... */
+    text-align: left;
+}
+
+/* 3. 號碼 */
+.lb-number {
+    color: #888;
+    font-size: 0.85em;
+    text-align: right; /* 靠右對齊，讓它靠近分數一點，或是改成 left 靠近名字 */
+}
+
+/* 4. 分數 */
+.lb-score {
+    font-weight: bold;
+    color: #0078d4;
+    text-align: right; /* 強制靠右 */
+    white-space: nowrap; /* 絕對不換行 */
+    overflow: hidden;    /* 萬一真的爆版也不要擠別人 */
+}
+
+.lb-player {
+    background: white;
 }
