@@ -140,77 +140,51 @@ h2 {
 .carousel-item h3 { font-size: 1.1rem; margin-bottom: 5px; color: #333; }
 .carousel-item p { font-size: 0.9rem; color: #666; margin: 0; }
 /* =========================================
-   5. 賽事細節分頁 (Tabs) - 單行不滑動版
+   5. 賽事細節分頁 (Tabs) - 智慧伸縮版
    ========================================= */
 .detail-tabs {
     margin-bottom: 15px;
     display: flex;
-    
-    /* 🔥 改小間距 (原本 10px -> 改 5px)，節省空間 */
-    gap: 5px; 
-    
+    gap: 5px;
     padding-bottom: 5px;
-    
-    /* 🔥 強制不換行 */
-    flex-wrap: nowrap; 
-    
-    /* 🔥 禁止左右滑動 */
-    overflow-x: hidden; 
+    flex-wrap: nowrap; /* 強制不換行 */
+    overflow-x: hidden; /* 禁止滑動 */
 }
 
 .detail-tab-btn {
-    /* 🔥 關鍵設定：讓所有按鈕平分寬度，自動縮放 */
-    flex: 1; 
+    /* 🔥 預設狀態 (未選中) */
+    flex: 1; /* 大家先平分空間 */
+    padding: 8px 2px; /* 左右內距縮小，把空間留給文字 */
     
-    /* 減少左右留白 (原本 16px -> 改 4px)，確保字不會被切掉 */
-    padding: 8px 4px; 
-    
-    /* 確保文字置中 */
-    text-align: center;
-    
-    border: 1px solid #ccc;
+    border: 1px solid #ddd; /* 邊框淡一點 */
     background: white;
     border-radius: 20px;
     cursor: pointer;
     
-    /* 稍微縮小一點字體，避免爆版 (原本 0.95rem -> 改 0.85rem 或 13px) */
-    font-size: 13px; 
+    /* 🔥 字體大小維持正常，不要縮太小 */
+    font-size: 14px; 
+    color: #666;
     
     white-space: nowrap;
-    min-width: 0; /* 允許按鈕在極小螢幕下壓縮 */
+    min-width: 0; /* 允許壓縮 */
+    
+    /* 加入過渡動畫，讓變大變小很順暢 */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
+/* 🔥 選中狀態 (Active) */
 .detail-tab-btn.active {
+    /* 🔥 關鍵：選中的按鈕權重變大，佔用更多空間 (例如 1.5 倍) */
+    flex: 1.5; 
+    
     background: #0078d4;
     color: white;
     border-color: #0078d4;
-}
-
-/* 下面的內容區塊保持不變 */
-.detail-content {
-    display: none;
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.detail-content.active { display: block; }
-
-.content-img, .time-img {
-    margin-top: 15px;
-    border-radius: 5px;
-    width: 100%;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.btn-primary {
-    display: inline-block;
-    padding: 10px 25px;
-    background: #E1306C;
-    color: white;
-    text-decoration: none;
-    border-radius: 25px;
+    
+    /* 🔥 選中時字體變大、變粗 */
+    font-size: 15px; 
     font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,120,212, 0.3);
 }
 
 /* =========================================
