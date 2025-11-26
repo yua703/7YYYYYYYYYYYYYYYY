@@ -119,7 +119,7 @@ async function updateLeaderboard(sheetName) {
             return;
         }
 
-        const sorted = data.slice(0, 10);
+        const sorted = data.slice(0, 15);
         const scoreTitle = (sheetName.includes("總錦標")) ? "總積分" : "分數";
 
         let lastScore = null, lastRank = 0, actualRank = 0;

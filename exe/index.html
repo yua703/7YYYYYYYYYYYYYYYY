@@ -113,33 +113,45 @@
     </div>
 
 
+    <!-- =========================
+         2. 排行榜 (Leaderboard) - 左側導覽版
+    ========================== -->
     <div id="view-leaderboard" class="page-view">
         <header class="leaderboard-header">
             <h1>🏆 即時排行榜</h1>
         </header>
 
-        <div id="leaderboard-tabs-container">
-            <button data-sheet="七大項總錦標" class="lb-tab active">七大項總錦標</button>
-            <button data-sheet="第一組分數計算" class="lb-tab">第一組</button>
-            <button data-sheet="第二組分數計算" class="lb-tab">第二組</button>
-            <button data-sheet="第三組分數計算" class="lb-tab">第三組</button>
-            <button data-sheet="第四組分數計算" class="lb-tab">第四組</button>
-            <button data-sheet="第五組分數計算" class="lb-tab">第五組</button>
-            <button data-sheet="第六組分數計算" class="lb-tab">第六組</button>
-            <button data-sheet="第七組分數計算" class="lb-tab">第七組</button>
-            <button data-sheet="第八組分數計算" class="lb-tab">第八組</button>
-            <button data-sheet="第九組分數計算" class="lb-tab">第九組</button>
-            <button data-sheet="第十組分數計算" class="lb-tab">第十組</button>
-            <button data-sheet="第十一組分數計算" class="lb-tab">第十一組</button>
-            <button data-sheet="第十二組分數計算" class="lb-tab">第十二組</button>
-            <button data-sheet="第十三組分數計算" class="lb-tab">第十三組</button>
-            <button data-sheet="第十四組分數計算" class="lb-tab">第十四組</button>
-            <button data-sheet="第十五組分數計算" class="lb-tab">第十五組</button>
-            <button data-sheet="第十六組分數計算" class="lb-tab">第十六組</button>
-            <button data-sheet="第十七組分數計算" class="lb-tab">第十七組</button>
+        <!-- 🔥 新增：主要佈局容器 (讓選單在左，資料在右) -->
+        <div class="leaderboard-main-area">
+            
+            <!-- 左側：垂直選單 -->
+            <div id="leaderboard-tabs-container">
+                <!-- 這裡的按鈕文字比較長也不怕 -->
+                <button data-sheet="七大項總錦標" class="lb-tab active">七大項總錦標</button>
+                <button data-sheet="第一組分數計算" class="lb-tab">第一組</button>
+                <button data-sheet="第二組分數計算" class="lb-tab">第二組</button>
+                <button data-sheet="第三組分數計算" class="lb-tab">第三組</button>
+                <button data-sheet="第四組分數計算" class="lb-tab">第四組</button>
+                <button data-sheet="第五組分數計算" class="lb-tab">第五組</button>
+                <button data-sheet="第六組分數計算" class="lb-tab">第六組</button>
+                <button data-sheet="第七組分數計算" class="lb-tab">第七組</button>
+                <button data-sheet="第八組分數計算" class="lb-tab">第八組</button>
+                <button data-sheet="第九組分數計算" class="lb-tab">第九組</button>
+                <button data-sheet="第十組分數計算" class="lb-tab">第十組</button>
+                <button data-sheet="第十一組分數計算" class="lb-tab">第十一組</button>
+                <button data-sheet="第十二組分數計算" class="lb-tab">第十二組</button>
+                <button data-sheet="第十三組分數計算" class="lb-tab">第十三組</button>
+                <button data-sheet="第十四組分數計算" class="lb-tab">第十四組</button>
+                <button data-sheet="第十五組分數計算" class="lb-tab">第十五組</button>
+                <button data-sheet="第十六組分數計算" class="lb-tab">第十六組</button>
+                <button data-sheet="第十七組分數計算" class="lb-tab">第十七組</button>
+            </div>
+
+            <!-- 右側：資料顯示區 -->
+            <div id="leaderboard-data">載入中...</div>
         </div>
 
-        <div id="leaderboard-data">載入中...</div>
+        <!-- 底部留白 (配合固定導覽列) -->
         <div style="height: 80px;"></div>
     </div>
 
