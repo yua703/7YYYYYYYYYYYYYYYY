@@ -336,7 +336,7 @@ h2 {
 .lb-player { background: white; }
 
 /* =========================================
-   7. 底部固定導覽列 (縮放 + 變色 + 防露餡 終極版)
+   7. 底部固定導覽列 (縮放 + 變色 + 防露餡 - 手機優化版)
    ========================================= */
 .bottom-nav {
     position: fixed;
@@ -344,18 +344,18 @@ h2 {
     left: 0;
     width: 100%;
     
-    /* 🔥 高度自動 + 最小高度 80px，讓它夠大好按 */
+    /* 🔥 高度改小：70px，更適合手機閱讀 */
     height: auto;
-    min-height: 100px; 
+    min-height: 70px; 
     
     background: white;
-    box-shadow: 0 -4px 15px rgba(0,0,0,0.15);
+    box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-around;
     align-items: center;
     z-index: 999;
 
-    /* 🔥 關鍵修復：填滿手機底部的安全區域 (解決露出下面圖片的問題) */
+    /* 確保填滿手機底部安全區域 */
     padding-bottom: env(safe-area-inset-bottom);
     padding-top: 5px; 
 }
@@ -367,44 +367,45 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: #aaa; /* 未選中的顏色 (灰色) */
-    font-size: 12px; 
+    color: #aaa; 
+    
+    /* 🔥 字體稍微縮小 (12px -> 11px) */
+    font-size: 11px; 
+    
     cursor: pointer;
     
-    /* 🔥 設定按鈕的形狀 (為了讓背景色塊好看，必須固定寬高) */
-    width: 80px;
-    height: 65px;
-    border-radius: 16px; /* 圓角 */
+    /* 🔥 按鈕尺寸縮小 (原本 80x65 -> 改為 70x55) 以適應 70px 的Bar */
+    width: 70px;
+    height: 55px;
+    border-radius: 14px; /* 圓角也稍微改小 */
 
-    /* 🔥 關鍵 1：設定過渡動畫，讓變大變小會有「Q彈」的感覺 */
+    /* 動畫設定 */
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     
-    /* 🔥 關鍵 2：預設狀態 (未選中) 稍微縮小、變淡 */
-    transform: scale(0.9); 
-    opacity: 0.6; 
+    /* 未選中時：稍微縮小 */
+    transform: scale(0.95); 
+    opacity: 0.7; 
 }
 
 .nav-btn .icon {
-    font-size: 30px; /* 基礎圖示大小 */
-    margin-bottom: 4px;
+    /* 🔥 圖示縮小 (30px -> 24px) */
+    font-size: 24px; 
+    margin-bottom: 2px;
 }
 
-/* 點選狀態 (變大、變色、不透明) */
+/* 點選狀態 (變大 + 變色) */
 .nav-btn.active {
-    /* 🔥 關鍵 3：背景變色！ */
     background-color: #e6f2fa; /* 淺藍色背景 */
     
-    color: #0078d4; /* 文字變深藍 */
+    color: #0078d4; 
     font-weight: bold;
     
-    /* 🔥 關鍵 4：同時放大！(結合縮放與變色) */
+    /* 🔥 放大比例維持 1.15 倍，因為基礎尺寸變小了，這樣放大剛好 */
     transform: scale(1.15); 
     opacity: 1;
     
-    /* 加一點陰影讓按鈕浮起來 */
-    box-shadow: 0 4px 8px rgba(0,120,212, 0.15);
+    box-shadow: 0 3px 6px rgba(0,120,212, 0.15);
 }
-
 /* =========================================
    8. 組別頁面樣式 (滿版展開版)
    ========================================= */
