@@ -58,27 +58,82 @@ detailBtns.forEach(btn => {
 
 
 // ==========================================
-// 3. 七大項目自動輪播 (Carousel)
+// 3. 七大項目無限絲滑輪播 (Smooth Marquee)
 // ==========================================
-const carousel = document.getElementById('events-carousel');
-let autoScroll;
+const track = document.querySelector('.carousel-track');
+const container = document.querySelector('.carousel-container');
 
-function startCarousel() {
-    autoScroll = setInterval(() => {
-        // 如果滑到最右邊，就回到最左邊
-        if (carousel.scrollLeft + carousel.clientWidth >= carousel.scrollWidth - 10) {
-            carousel.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-            carousel.scrollBy({ left: 180, behavior: 'smooth' });
+if (track && container) {
+    const items = Array.from(document.querySelectorAll('.carousel-item'));
+    const itemWidth = items[0].offsetWidth; 
+    const gap = 15; 
+    const singleSetWidth = (itemWidth + gap) * items.length; // 一組原本的總寬度
+
+    // 1. 複製卡片 (為了無縫接軌，我們複製 2 組放到後面)
+    // 這樣結構變成：[原始組] [複製組1] [複製組2]
+    // 足夠應付大部分螢幕寬度
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        track.appendChild(clone);
+    });
+    items.forEach(item => {
+        const clone = item.cloneNode(true);
+        track.appendChild(clone);
+    });
+
+    // 2. 動畫變數
+    let currentScroll = 0;
+    let speed = 0.2; // 🔥 調整這裡改變速度 (數值越大越快)
+    let isPaused = false;
+    let animationId;
+
+    // 3. 核心動畫函式
+    function animate() {
+        if (!isPaused) {
+            currentScroll += speed;
+            
+            // 如果跑完了一組的寬度，就瞬間歸零 (無縫輪迴的關鍵)
+            if (currentScroll >= singleSetWidth) {
+                currentScroll = 0;
+            }
+            
+            // 套用移動
+            track.style.transform = `translateX(${-currentScroll}px)`;
         }
-    }, 2500); // 每 2.5 秒滑動一次
-}
+        
+        animationId = requestAnimationFrame(animate);
+    }
 
-// 用戶觸碰時暫停輪播，提升體驗
-if(carousel) {
-    carousel.addEventListener('touchstart', () => clearInterval(autoScroll));
-    carousel.addEventListener('touchend', () => startCarousel()); // 手放開後繼續
-    startCarousel(); // 啟動
+    // 4. 啟動動畫
+    animate();
+
+    // 5. 互動暫停 (手指按住或滑鼠移上去時暫停)
+    container.addEventListener('touchstart', () => { isPaused = true; });
+    container.addEventListener('touchend', () => { isPaused = false; });
+    container.addEventListener('mouseenter', () => { isPaused = true; });
+    container.addEventListener('mouseleave', () => { isPaused = false; });
+    
+    // 手指拖曳邏輯 (選用，如果要讓使用者可以手動滑更快)
+    let startX = 0;
+    let scrollLeftAtStart = 0;
+
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].pageX;
+        scrollLeftAtStart = currentScroll;
+    });
+
+    container.addEventListener('touchmove', (e) => {
+        const x = e.touches[0].pageX;
+        const walk = (startX - x) * 1.5; // 拖曳倍率
+        let newScroll = scrollLeftAtStart + walk;
+        
+        // 處理邊界
+        if (newScroll < 0) newScroll += singleSetWidth;
+        if (newScroll >= singleSetWidth) newScroll -= singleSetWidth;
+        
+        currentScroll = newScroll;
+        track.style.transform = `translateX(${-currentScroll}px)`;
+    });
 }
 
 
@@ -119,7 +174,7 @@ async function updateLeaderboard(sheetName) {
             return;
         }
 
-        const sorted = data.slice(0, 15);
+        const sorted = data.slice(0, 10);
         const scoreTitle = (sheetName.includes("總錦標")) ? "總積分" : "分數";
 
         let lastScore = null, lastRank = 0, actualRank = 0;
@@ -158,7 +213,7 @@ async function updateLeaderboard(sheetName) {
         container.innerHTML = `
             <div class="lb-header">
                 <span class="lb-rank">排名</span>
-                <span class="lb-name">姓名</span>
+                <span class="lb-name">暱稱</span>
                 <span class="lb-number">號碼</span>
                 <span class="lb-score">${scoreTitle}</span>
             </div>
