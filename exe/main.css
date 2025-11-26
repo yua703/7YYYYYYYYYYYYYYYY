@@ -94,39 +94,56 @@ h2 {
 }
 
 /* =========================================
-   4. 七大項目滑動區 (Carousel)
+   4. 七大項目滑動區 (Carousel) - 固定寬度版
    ========================================= */
 .carousel-container {
     display: flex;
-    overflow-x: auto;
-    gap: 15px;
+    overflow-x: auto; /* 允許左右滑動 */
+    gap: 15px;        /* 卡片間距 */
     padding-bottom: 10px;
     scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox 隱藏捲軸 */
+    
+    /* 隱藏捲軸 */
+    scrollbar-width: none; 
 }
-.carousel-container::-webkit-scrollbar { display: none; /* Chrome/Safari 隱藏捲軸 */ }
+.carousel-container::-webkit-scrollbar { display: none; }
 
 .carousel-item {
-    min-width: 160px; /* 卡片寬度 */
+    /* 🔥 關鍵修改：鎖定寬度，不讓圖片撐開 */
+    width: 200px;       /* 固定寬度，可以依你喜好調整 (例如 180px 或 220px) */
+    max-width: 70vw;    /* 在超小手機上，單張卡片最多佔螢幕 70% */
+    
+    /* 防止被擠壓或拉伸 */
+    flex-shrink: 0; 
+    flex-grow: 0;
+    
     background: white;
     border-radius: 10px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    flex-shrink: 0;
     text-align: center;
 }
 
 .carousel-item img {
-    width: 100%;
-    height: 120px;
-    object-fit: cover;
+    width: 100%;       /* 跟隨卡片寬度 */
+    height: 120px;     /* 固定高度，保持整齊 */
+    object-fit: cover; /* 裁切多餘部分，不變形 */
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
-.carousel-item h3 { font-size: 1.1rem; margin-bottom: 5px; }
-.carousel-item p { font-size: 0.9rem; color: #666; }
+.carousel-item h3 { 
+    font-size: 1.1rem; 
+    margin-bottom: 5px; 
+    font-weight: bold;
+    color: #333;
+}
 
+.carousel-item p { 
+    font-size: 0.9rem; 
+    color: #666;
+    margin: 0;
+}
 /* =========================================
    5. 賽事細節分頁 (Tabs) - 單行不滑動版
    ========================================= */
