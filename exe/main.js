@@ -58,7 +58,7 @@ detailBtns.forEach(btn => {
 
 
 // ==========================================
-// 3. 七大項目無限絲滑輪播 (Smooth Marquee)
+// 3. 七大項目無限絲滑輪播 (時間校正版)
 // ==========================================
 const track = document.querySelector('.carousel-track');
 const container = document.querySelector('.carousel-container');
@@ -67,72 +67,60 @@ if (track && container) {
     const items = Array.from(document.querySelectorAll('.carousel-item'));
     const itemWidth = items[0].offsetWidth; 
     const gap = 15; 
-    const singleSetWidth = (itemWidth + gap) * items.length; // 一組原本的總寬度
+    const singleSetWidth = (itemWidth + gap) * items.length; 
 
-    // 1. 複製卡片 (為了無縫接軌，我們複製 2 組放到後面)
-    // 這樣結構變成：[原始組] [複製組1] [複製組2]
-    // 足夠應付大部分螢幕寬度
-    items.forEach(item => {
-        const clone = item.cloneNode(true);
-        track.appendChild(clone);
-    });
-    items.forEach(item => {
-        const clone = item.cloneNode(true);
-        track.appendChild(clone);
-    });
+    // 1. 複製卡片 (2組)
+    items.forEach(item => track.appendChild(item.cloneNode(true)));
+    items.forEach(item => track.appendChild(item.cloneNode(true)));
 
     // 2. 動畫變數
     let currentScroll = 0;
-    let speed = 0.5; // 🔥 調整這裡改變速度 (數值越大越快)
+    
+    // 🔥 速度設定：每秒移動多少像素 (Pixels Per Second)
+    // 建議設定 60 ~ 100 之間，數字越大越快
+    const speedPPS = 32; 
+    
     let isPaused = false;
-    let animationId;
+    let lastTime = performance.now(); // 記錄上一次的時間
 
-    // 3. 核心動畫函式
-    function animate() {
+    // 3. 核心動畫函式 (加入 Delta Time)
+    function animate(currentTime) {
+        // 計算距離上一次執行經過了多久 (秒)
+        const deltaTime = (currentTime - lastTime) / 1000;
+        lastTime = currentTime;
+
         if (!isPaused) {
-            currentScroll += speed;
+            // 根據時間來決定移動距離，而不是根據幀數
+            // 移動距離 = 速度(每秒px) * 經過時間(秒)
+            const moveDistance = speedPPS * deltaTime;
             
-            // 如果跑完了一組的寬度，就瞬間歸零 (無縫輪迴的關鍵)
+            currentScroll += moveDistance;
+            
             if (currentScroll >= singleSetWidth) {
                 currentScroll = 0;
             }
             
-            // 套用移動
             track.style.transform = `translateX(${-currentScroll}px)`;
         }
         
-        animationId = requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }
 
     // 4. 啟動動畫
-    animate();
+    requestAnimationFrame(animate);
 
-    // 5. 互動暫停 (手指按住或滑鼠移上去時暫停)
+    // 5. 互動暫停
     container.addEventListener('touchstart', () => { isPaused = true; });
-    container.addEventListener('touchend', () => { isPaused = false; });
-    container.addEventListener('mouseenter', () => { isPaused = true; });
-    container.addEventListener('mouseleave', () => { isPaused = false; });
-    
-    // 手指拖曳邏輯 (選用，如果要讓使用者可以手動滑更快)
-    let startX = 0;
-    let scrollLeftAtStart = 0;
-
-    container.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].pageX;
-        scrollLeftAtStart = currentScroll;
+    container.addEventListener('touchend', () => { 
+        isPaused = false; 
+        lastTime = performance.now(); // 重置時間，避免暫停後暴衝
     });
-
-    container.addEventListener('touchmove', (e) => {
-        const x = e.touches[0].pageX;
-        const walk = (startX - x) * 1.5; // 拖曳倍率
-        let newScroll = scrollLeftAtStart + walk;
-        
-        // 處理邊界
-        if (newScroll < 0) newScroll += singleSetWidth;
-        if (newScroll >= singleSetWidth) newScroll -= singleSetWidth;
-        
-        currentScroll = newScroll;
-        track.style.transform = `translateX(${-currentScroll}px)`;
+    
+    // 電腦版滑鼠暫停
+    container.addEventListener('mouseenter', () => { isPaused = true; });
+    container.addEventListener('mouseleave', () => { 
+        isPaused = false; 
+        lastTime = performance.now(); 
     });
 }
 
