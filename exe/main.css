@@ -140,51 +140,67 @@ h2 {
 .carousel-item h3 { font-size: 1.1rem; margin-bottom: 5px; color: #333; }
 .carousel-item p { font-size: 0.9rem; color: #666; margin: 0; }
 /* =========================================
-   5. 賽事細節分頁 (Tabs) - 智慧伸縮版
+   5. 賽事細節分頁 (滑動背景 + 不換行版)
    ========================================= */
 .detail-tabs {
     margin-bottom: 15px;
     display: flex;
-    gap: 5px;
-    padding-bottom: 5px;
-    flex-wrap: nowrap; /* 強制不換行 */
-    overflow-x: hidden; /* 禁止滑動 */
+    position: relative; /* 讓滑動塊可以定位 */
+    background-color: #f5f5f5; /* 底座改為淺灰色 */
+    border-radius: 25px; /* 圓角造型 */
+    padding: 4px; /* 內距，讓滑動塊不要貼邊 */
+    
+    /* 🔥 強制不換行，不準滑動 */
+    flex-wrap: nowrap; 
+    overflow: hidden; 
+}
+
+/* 滑動背景塊 (藍色膠囊) */
+.tab-indicator {
+    position: absolute;
+    top: 4px;
+    left: 4px; /* 初始位置 */
+    height: calc(100% - 8px); /* 高度自動計算 */
+    background-color: #0078d4;
+    border-radius: 20px;
+    
+    /* 🔥 關鍵動畫：使用 transform 移動，絕對絲滑不抖動 */
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s ease;
+    z-index: 1; /* 在文字下面 */
+    
+    /* 寬度會由 JS 動態計算，這裡先給個預設 */
+    width: 0; 
+    pointer-events: none; /* 不擋滑鼠點擊 */
 }
 
 .detail-tab-btn {
-    /* 🔥 預設狀態 (未選中) */
-    flex: 1; /* 大家先平分空間 */
-    padding: 8px 2px; /* 左右內距縮小，把空間留給文字 */
+    /* 🔥 關鍵：大家平分空間，剛好填滿一行 */
+    flex: 1; 
     
-    border: 1px solid #ddd; /* 邊框淡一點 */
-    background: white;
-    border-radius: 20px;
-    cursor: pointer;
+    position: relative;
+    z-index: 2; /* 在藍色塊上面 */
     
-    /* 🔥 字體大小維持正常，不要縮太小 */
+    background: transparent; /* 背景透明 */
+    border: none;
+    padding: 10px 0; /* 上下留白 */
+    
+    /* 字體設定 */
     font-size: 14px; 
     color: #666;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.2s; /* 文字顏色變換動畫 */
     
+    /* 禁止換行，確保永遠是一行 */
     white-space: nowrap;
+    text-align: center;
     min-width: 0; /* 允許壓縮 */
-    
-    /* 加入過渡動畫，讓變大變小很順暢 */
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-/* 🔥 選中狀態 (Active) */
+/* 選中狀態 (只改文字顏色，背景由 tab-indicator 負責) */
 .detail-tab-btn.active {
-    /* 🔥 關鍵：選中的按鈕權重變大，佔用更多空間 (例如 1.5 倍) */
-    flex: 1.5; 
-    
-    background: #0078d4;
-    color: white;
-    border-color: #0078d4;
-    
-    /* 🔥 選中時字體變大、變粗 */
-    font-size: 15px; 
+    color: white; /* 選中變白字 */
     font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,120,212, 0.3);
 }
 
 /* =========================================

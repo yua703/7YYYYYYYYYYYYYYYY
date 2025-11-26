@@ -9,6 +9,9 @@
 </head>
 <body>
 
+    <!-- =========================
+         1. 首頁 (Home)
+    ========================== -->
     <div id="view-home" class="page-view active">
         
         <header class="hero-section">
@@ -28,47 +31,38 @@
 
         <section class="section-padding bg-gray">
             <h2>七大競賽項目</h2>
-            <!-- 最外層容器 (負責隱藏超出範圍的內容) -->
             <div class="carousel-container" id="events-carousel">
-                <!-- 內層軌道 (負責移動) -->
                 <div class="carousel-track">
-                    <!-- 項目 1 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="耐力">
                         <h3>耐力</h3>
                         <p>挑戰極限的體能試煉。</p>
                     </div>
-                    <!-- 項目 2 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="爆發力">
                         <h3>爆發力</h3>
                         <p>瞬間釋放你的能量。</p>
                     </div>
-                    <!-- 項目 3 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="反應力">
                         <h3>反應力</h3>
                         <p>電光石火間的決斷。</p>
                     </div>
-                    <!-- 項目 4 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="專注力">
                         <h3>專注力</h3>
                         <p>心無旁騖，直指目標。</p>
                     </div>
-                    <!-- 項目 5 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="敏捷力">
                         <h3>敏捷力</h3>
                         <p>敏捷力。</p>
                     </div>
-                    <!-- 項目 6 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="協調力">
                         <h3>協調力</h3>
                         <p>協調力。</p>
                     </div>
-                    <!-- 項目 7 -->
                     <div class="carousel-item">
                         <img src="img/123.png" alt="智力">
                         <h3>智力</h3>
@@ -81,13 +75,19 @@
         <section class="section-padding">
             <h2>賽事細節</h2>
             
+            <!-- 賽事細節選單 (滑動背景版) -->
             <div class="detail-tabs">
+                <!-- 🔥 新增：藍色滑動背景塊 -->
+                <div class="tab-indicator"></div>
+
+                <!-- 第一個按鈕預設 active -->
                 <button class="detail-tab-btn active" data-target="detail-participants">競賽規章</button>
                 <button class="detail-tab-btn" data-target="detail-time">時程表</button>
                 <button class="detail-tab-btn" data-target="detail-scoring">計分方法</button>
                 <button class="detail-tab-btn" data-target="detail-map">賽事地圖</button>
             </div>
 
+            <!-- 內容區塊 -->
             <div id="detail-participants" class="detail-content active">
                 <h3>參賽資格</h3>
                 <p>全校各系所、班級皆可組隊報名。每隊人數上限 10 人。</p>
@@ -132,12 +132,8 @@
             <h1>🏆 即時排行榜</h1>
         </header>
 
-        <!-- 🔥 新增：主要佈局容器 (讓選單在左，資料在右) -->
         <div class="leaderboard-main-area">
-            
-            <!-- 左側：垂直選單 -->
             <div id="leaderboard-tabs-container">
-                <!-- 這裡的按鈕文字比較長也不怕 -->
                 <button data-sheet="七大項總錦標" class="lb-tab active">七大項總錦標</button>
                 <button data-sheet="第一組分數計算" class="lb-tab">第一組</button>
                 <button data-sheet="第二組分數計算" class="lb-tab">第二組</button>
@@ -158,22 +154,23 @@
                 <button data-sheet="第十七組分數計算" class="lb-tab">第十七組</button>
             </div>
 
-            <!-- 右側：資料顯示區 -->
             <div id="leaderboard-data">載入中...</div>
         </div>
 
-        <!-- 底部留白 (配合固定導覽列) -->
         <div style="height: 80px;"></div>
     </div>
 
 
+    <!-- =========================
+         3. 參賽組別 (Groups)
+    ========================== -->
     <div id="view-groups" class="page-view">
         <div class="section-padding">
             <h2>參賽組別</h2>
             <p class="desc-text">共 17 組隊伍參與本次賽事</p>
 
             <div class="groups-grid">
-                
+                <!-- #1 -->
                 <div class="group-card">
                     <span class="group-badge">#1</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -187,16 +184,16 @@
                             <p>火焰戰隊成立於 2023 年，由一群熱愛短跑的學生組成。擅長戰術是快速進攻。</p>
                             <hr>
                             <p>隊長：王小明</p>
-                            <p>成員：張三、李四、王五...</p>
                             <div style="height: 200px; background:#f5f5f5; margin-top:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">更多照片區塊</div>
                         </div>
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #2 -->
                 <div class="group-card">
                     <span class="group-badge">#2</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -207,18 +204,16 @@
                     <div class="group-body">
                         <div class="group-content-inner">
                             <h4>隊伍介紹</h4>
-                            <p>如閃電般迅速，如雷聲般震撼。我們是來自資工系的菁英部隊。</p>
-                            <hr>
-                            <p>隊長：陳大華</p>
-                            <div style="height: 200px; background:#f5f5f5; margin-top:10px; display:flex; align-items:center; justify-content:center; color:#aaa;">更多照片區塊</div>
+                            <p>如閃電般迅速，如雷聲般震撼。</p>
                         </div>
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
-
+                
+                <!-- #3 -->
                 <div class="group-card">
                     <span class="group-badge">#3</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -236,10 +231,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #4 -->
                 <div class="group-card">
                     <span class="group-badge">#4</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -257,10 +253,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #5 -->
                 <div class="group-card">
                     <span class="group-badge">#5</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -276,10 +273,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #6 -->
                 <div class="group-card">
                     <span class="group-badge">#6</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -295,10 +293,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #7 -->
                 <div class="group-card">
                     <span class="group-badge">#7</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -314,10 +313,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #8 -->
                 <div class="group-card">
                     <span class="group-badge">#8</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -333,10 +333,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #9 -->
                 <div class="group-card">
                     <span class="group-badge">#9</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -352,10 +353,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #10 -->
                 <div class="group-card">
                     <span class="group-badge">#10</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -371,10 +373,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #11 -->
                 <div class="group-card">
                     <span class="group-badge">#11</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -390,10 +393,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #12 -->
                 <div class="group-card">
                     <span class="group-badge">#12</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -409,10 +413,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #13 -->
                 <div class="group-card">
                     <span class="group-badge">#13</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -428,10 +433,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #14 -->
                 <div class="group-card">
                     <span class="group-badge">#14</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -447,10 +453,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #15 -->
                 <div class="group-card">
                     <span class="group-badge">#15</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -466,10 +473,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #16 -->
                 <div class="group-card">
                     <span class="group-badge">#16</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -485,10 +493,11 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
 
+                <!-- #17 -->
                 <div class="group-card">
                     <span class="group-badge">#17</span>
                     <img src="img/123.png" alt="隊伍圖片" class="group-img">
@@ -504,16 +513,19 @@
                     </div>
                     <div class="close-bottom-area">
                         <div class="bouncing-arrow"></div>
-                        <span class="close-text">點擊回上一頁</span>
+                        <span class="close-text">點擊收合</span>
                     </div>
                 </div>
-
-            </div> </div>
+            </div> 
+        </div>
         
         <div style="height: 80px;"></div>
     </div>
 
 
+    <!-- =========================
+         底部導覽列
+    ========================== -->
     <nav class="bottom-nav">
         <button class="nav-btn active" data-view="view-home">
             <span class="icon">ℹ️</span>

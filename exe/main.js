@@ -30,28 +30,72 @@ navButtons.forEach(btn => {
 
 
 // ==========================================
-// 2. 賽事細節分頁 (競賽規章/時程表/計分/地圖)
+// 2. 賽事細節分頁 (滑動背景 + 內容切換 修復版)
 // ==========================================
 const detailBtns = document.querySelectorAll('.detail-tab-btn');
-// 這裡很重要：我們抓取所有 class 為 detail-content 的區塊
 const detailContents = document.querySelectorAll('.detail-content');
+const tabIndicator = document.querySelector('.tab-indicator');
 
+// 移動滑動塊的函式
+function moveIndicator(targetBtn) {
+    if (!targetBtn || !tabIndicator) return;
+
+    // 1. 計算目標按鈕相對於父容器的位置
+    const left = targetBtn.offsetLeft;
+    const width = targetBtn.offsetWidth;
+
+    // 2. 設定滑動塊的寬度與位置
+    tabIndicator.style.width = `${width}px`;
+    tabIndicator.style.transform = `translateX(${left}px)`; 
+}
+
+// 初始化：頁面載入時，把滑塊移到目前的 active 按鈕上
+function initTabs() {
+    const activeBtn = document.querySelector('.detail-tab-btn.active');
+    if (activeBtn) {
+        moveIndicator(activeBtn);
+        
+        // 確保對應的內容也是顯示的
+        const targetId = activeBtn.dataset.target;
+        const targetDiv = document.getElementById(targetId);
+        if (targetDiv) {
+            detailContents.forEach(c => c.classList.remove('active'));
+            targetDiv.classList.add('active');
+        }
+    }
+}
+
+// 監聽視窗大小改變 (RWD)：重新計算位置，避免跑版
+window.addEventListener('resize', () => {
+    const activeBtn = document.querySelector('.detail-tab-btn.active');
+    if (activeBtn) moveIndicator(activeBtn);
+});
+
+// 頁面載入完成後執行初始化
+window.addEventListener('load', initTabs);
+
+// 按鈕點擊事件
 detailBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // 1. 移除按鈕 active
+        // 1. 按鈕狀態切換 (字體變色)
         detailBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
 
-        // 2. 隱藏所有內容區塊
-        detailContents.forEach(content => content.classList.remove('active'));
+        // 2. 移動藍色背景塊 (解決卡頓關鍵)
+        moveIndicator(btn);
 
-        // 3. 顯示目標區塊
+        // 3. 內容切換 (解決內容不見的問題)
+        // 先把所有內容藏起來
+        detailContents.forEach(content => content.classList.remove('active'));
+        
+        // 再把目標內容顯示出來
         const targetId = btn.dataset.target;
         const targetDiv = document.getElementById(targetId);
+        
         if (targetDiv) {
             targetDiv.classList.add('active');
         } else {
-            console.error("找不到 ID 為 " + targetId + " 的區塊，請檢查 HTML ID");
+            console.error("找不到 ID 為 " + targetId + " 的區塊，請檢查 HTML");
         }
     });
 });
@@ -75,48 +119,34 @@ if (track && container) {
 
     // 2. 動畫變數
     let currentScroll = 0;
-    
-    // 🔥 速度設定：每秒移動多少像素 (Pixels Per Second)
-    // 建議設定 60 ~ 100 之間，數字越大越快
     const speedPPS = 32; 
-    
     let isPaused = false;
-    let lastTime = performance.now(); // 記錄上一次的時間
+    let lastTime = performance.now(); 
 
-    // 3. 核心動畫函式 (加入 Delta Time)
+    // 3. 核心動畫函式
     function animate(currentTime) {
-        // 計算距離上一次執行經過了多久 (秒)
         const deltaTime = (currentTime - lastTime) / 1000;
         lastTime = currentTime;
 
         if (!isPaused) {
-            // 根據時間來決定移動距離，而不是根據幀數
-            // 移動距離 = 速度(每秒px) * 經過時間(秒)
             const moveDistance = speedPPS * deltaTime;
-            
             currentScroll += moveDistance;
             
             if (currentScroll >= singleSetWidth) {
                 currentScroll = 0;
             }
-            
             track.style.transform = `translateX(${-currentScroll}px)`;
         }
-        
         requestAnimationFrame(animate);
     }
 
-    // 4. 啟動動畫
     requestAnimationFrame(animate);
 
-    // 5. 互動暫停
     container.addEventListener('touchstart', () => { isPaused = true; });
     container.addEventListener('touchend', () => { 
         isPaused = false; 
-        lastTime = performance.now(); // 重置時間，避免暫停後暴衝
+        lastTime = performance.now(); 
     });
-    
-    // 電腦版滑鼠暫停
     container.addEventListener('mouseenter', () => { isPaused = true; });
     container.addEventListener('mouseleave', () => { 
         isPaused = false; 
@@ -139,12 +169,8 @@ lbTabs.forEach(btn => {
         btn.classList.add('active');
         currentSheet = btn.dataset.sheet;
         
-        // 切換時顯示載入中
         document.getElementById('leaderboard-data').innerHTML = '<p style="text-align:center; padding:20px; color:#666;">資料更新中...</p>';
         updateLeaderboard(currentSheet);
-        
-        // 確保選中的按鈕滾動到可視範圍
-        btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
     });
 });
 
@@ -173,13 +199,8 @@ async function updateLeaderboard(sheetName) {
             const pName = p.姓名 || p.Name || "-"; 
             const pNumber = p.編號 || p.玩家號碼 || "未知";
             
-            // 🔥 關鍵修改：如果有分數，四捨五入到小數點第 2 位
             let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
-            // 如果不是數字(例如 NaN)，就顯示 0
             if (isNaN(rawScore)) rawScore = 0;
-            
-            // 使用 toFixed(2) 固定顯示兩位小數，例如 68320.00 或 982.20
-            // 如果你不想要 .00，可以用 Math.round(rawScore * 100) / 100
             let pScore = Number.isInteger(rawScore) ? rawScore : rawScore.toFixed(2);
 
             let rank = (rawScore === lastScore) ? lastRank : actualRank;
@@ -201,7 +222,7 @@ async function updateLeaderboard(sheetName) {
         container.innerHTML = `
             <div class="lb-header">
                 <span class="lb-rank">排名</span>
-                <span class="lb-name">暱稱</span>
+                <span class="lb-name">姓名</span>
                 <span class="lb-number">號碼</span>
                 <span class="lb-score">${scoreTitle}</span>
             </div>
@@ -228,6 +249,8 @@ function stopLeaderboardUpdate() {
         console.log("排行榜監聽暫停");
     }
 }
+
+
 // ==========================================
 // 5. 組別展開功能 (底部按鈕版)
 // ==========================================
@@ -239,16 +262,13 @@ function closeAllCards() {
 }
 
 groupCards.forEach(card => {
-    // 1. 卡片本身的點擊 (展開用)
     card.addEventListener('click', (e) => {
-        // 如果點到的是底部關閉區，不執行這裡 (交給下面處理)
         if (e.target.closest('.close-bottom-area')) return;
 
         const isAlreadyActive = card.classList.contains('active');
 
         if (isAlreadyActive) {
-            // 如果已經開著，就不用做事(讓使用者點下方按鈕關閉)，或是你想點擊任意處關閉也可以
-            // 這裡保留點擊任意處不關閉，強迫使用下方按鈕 (體驗比較明確)
+            // 已展開時不做事
         } else {
             closeAllCards();
             card.classList.add('active');
@@ -256,12 +276,11 @@ groupCards.forEach(card => {
         }
     });
 
-    // 2. 監聽「底部關閉區域」的點擊
     const closeBtn = card.querySelector('.close-bottom-area');
     if (closeBtn) {
         closeBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // 避免觸發卡片點擊
-            closeAllCards();     // 執行關閉
+            e.stopPropagation(); 
+            closeAllCards();     
         });
     }
 });
