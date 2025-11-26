@@ -83,7 +83,7 @@ if (track && container) {
 
     // 2. 動畫變數
     let currentScroll = 0;
-    let speed = 0.4; // 🔥 調整這裡改變速度 (數值越大越快)
+    let speed = 0.5; // 🔥 調整這裡改變速度 (數值越大越快)
     let isPaused = false;
     let animationId;
 
