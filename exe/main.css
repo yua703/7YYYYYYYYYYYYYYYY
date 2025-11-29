@@ -202,6 +202,28 @@ h2 {
     color: white; /* 選中變白字 */
     font-weight: bold;
 }
+/* =========================================
+   5.5 內容區塊顯示/隱藏 (這是你目前缺少的)
+   ========================================= */
+
+/* 1. 預設把所有內容都藏起來 */
+.detail-content {
+    display: none;
+    padding-top: 20px; /* 與上面的選單保持距離 */
+}
+
+/* 2. 只有被加上 .active 的那個區塊才會顯示 */
+.detail-content.active {
+    display: block;
+    /* 選擇性：加一點淡入動畫讓體驗更好 */
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* 簡單的淡入動畫 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
 
 /* =========================================
    6. 排行榜 (Leaderboard) - 左側垂直選單版
