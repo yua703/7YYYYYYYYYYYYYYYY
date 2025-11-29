@@ -501,6 +501,15 @@ h2 {
 /* 鎖定背景捲動 */
 body.lock-scroll { overflow: hidden; }
 
+.group-body hr {
+    margin-top: 30px;    /* 線上面留白多一點 */
+    margin-bottom: 20px; /* 線下面留白多一點 */
+    
+    /* 順便教你怎麼改線的樣子 (選用) */
+    border: none;
+    border-top: 1px solid #ddd; /* 淺灰色細線 */
+}
+
 /* =========================================
    9. 底部關閉按鈕 (New Bottom Close Btn)
    ========================================= */
