@@ -3,12 +3,22 @@
 // ==========================================
 const navButtons = document.querySelectorAll('.bottom-nav .nav-btn');
 const pages = document.querySelectorAll('.page-view');
-
-// 排行榜的自動更新計時器
 let leaderboardInterval = null;
 
 navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
+        // 如果點擊當前頁面，滑回頂端
+        if (btn.classList.contains('active')) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // 🔥 加強：如果在首頁按了「賽事介紹」，也重置回「時程表」
+            if (btn.dataset.view === 'view-home') {
+                const defaultTab = document.querySelector('.detail-tab-btn[data-target="detail-time"]');
+                if (defaultTab) defaultTab.click();
+            }
+            return;
+        }
+
         // 1. UI 狀態更新
         navButtons.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
@@ -18,6 +28,16 @@ navButtons.forEach(btn => {
         const targetId = btn.dataset.view;
         const targetPage = document.getElementById(targetId);
         if (targetPage) targetPage.classList.add('active');
+
+        // 切換頁面後回到頂端
+        window.scrollTo(0, 0);
+
+        // 🔥 新增邏輯：如果切換回「首頁 (view-home)」，強制重置為「時程表」
+        if (targetId === 'view-home') {
+            // 找到時程表按鈕並觸發點擊，這樣藍色方塊和內容都會歸位
+            const defaultTab = document.querySelector('.detail-tab-btn[data-target="detail-time"]');
+            if (defaultTab) defaultTab.click();
+        }
 
         // 3. 排行榜自動更新邏輯
         if (targetId === 'view-leaderboard') {
@@ -102,124 +122,102 @@ detailBtns.forEach(btn => {
 
 
 // ==========================================
-// 3. 七大項目無限絲滑輪播 (自動 + 手動拖曳版)
+// 3. 七大項目無限絲滑輪播 (防手勢衝突版)
 // ==========================================
 const track = document.querySelector('.carousel-track');
 const container = document.querySelector('.carousel-container');
 
 if (track && container) {
     const items = Array.from(document.querySelectorAll('.carousel-item'));
-    
-    // 防呆：如果沒有項目就不執行
-    if (items.length > 0) {
-        const itemWidth = items[0].offsetWidth; 
-        const gap = 15; // 請確保這跟 CSS 設定的 gap 一樣
-        const singleSetWidth = (itemWidth + gap) * items.length; 
+    const itemWidth = items[0].offsetWidth; 
+    const gap = 15; 
+    const singleSetWidth = (itemWidth + gap) * items.length; 
 
-        // 1. 複製卡片 (為了讓拖曳時左右都有東西，建議複製 2 組)
-        items.forEach(item => track.appendChild(item.cloneNode(true)));
-        items.forEach(item => track.appendChild(item.cloneNode(true)));
+    // 複製 2 組卡片以實現無限滾動 (總共 3 組)
+    items.forEach(item => track.appendChild(item.cloneNode(true)));
+    items.forEach(item => track.appendChild(item.cloneNode(true)));
 
-        // 2. 變數設定
-        let currentScroll = 0;
-        const speedPPS = 32; // 自動播放速度
-        let isPaused = false; // 是否暫停自動播放
-        let lastTime = performance.now(); 
+    let currentScroll = 0;
+    const speedPPS = 32; // 自動播放速度
+    let isPaused = false;
+    let lastTime = performance.now(); 
 
-        // 拖曳相關變數
-        let isDragging = false;
-        let startX = 0;
-        let startScrollPos = 0;
+    // 手勢控制變數
+    let startX = 0;
+    let startY = 0;
+    let startScroll = 0;
+    let isDragging = false;
 
-        // 3. 核心動畫函式 (負責更新畫面與檢查邊界)
-        function animate(currentTime) {
-            const deltaTime = (currentTime - lastTime) / 1000;
-            lastTime = currentTime;
+    // 1. 動畫迴圈
+    function animate(currentTime) {
+        const deltaTime = (currentTime - lastTime) / 1000;
+        lastTime = currentTime;
 
-            // 只有在「沒被暫停」且「沒在拖曳」時，才自動增加數值
-            if (!isPaused && !isDragging) {
-                const moveDistance = speedPPS * deltaTime;
-                currentScroll += moveDistance;
-            }
-
-            // --- 無限循環的核心邏輯 (雙向檢查) ---
-            // 狀況 A: 往左跑超過一組寬度 -> 歸零 (無縫跳回開頭)
+        if (!isPaused) {
+            const moveDistance = speedPPS * deltaTime;
+            currentScroll += moveDistance;
+            
+            // 處理向左無限循環
             if (currentScroll >= singleSetWidth) {
                 currentScroll -= singleSetWidth;
             }
-            // 狀況 B: 往右滑過頭 (變成負數) -> 補上一組寬度 (無縫跳去後面)
-            else if (currentScroll < 0) {
+            // 處理向右無限循環 (防止手動拖曳過頭)
+            if (currentScroll < 0) {
                 currentScroll += singleSetWidth;
             }
 
-            // 更新 DOM 位置
             track.style.transform = `translateX(${-currentScroll}px)`;
-            
-            requestAnimationFrame(animate);
         }
-
-        // 啟動動畫
         requestAnimationFrame(animate);
-
-        // =========================================
-        // 3.1 手指觸控事件 (Mobile Swipe)
-        // =========================================
-        
-        // 手指按下去
-        container.addEventListener('touchstart', (e) => {
-            isPaused = true;        // 暫停自動播
-            isDragging = true;      // 標記開始拖曳
-            startX = e.touches[0].pageX; // 記錄手指初始 X 位置
-            startScrollPos = currentScroll; // 記錄當下的滾動位置
-        });
-
-        // 手指移動中
-        container.addEventListener('touchmove', (e) => {
-            if (!isDragging) return; // 沒按著就不理它
-            
-            const currentX = e.touches[0].pageX;
-            const walk = currentX - startX; // 計算滑動距離 (右滑為正，左滑為負)
-            
-            // 更新滾動位置 (減號是因為 translateX 越負越往左)
-            currentScroll = startScrollPos - walk; 
-        });
-
-        // 手指放開
-        container.addEventListener('touchend', () => {
-            isDragging = false;
-            isPaused = false;       // 恢復自動播
-            lastTime = performance.now(); // 重置時間，避免時間差造成暴衝
-        });
-
-        // =========================================
-        // 3.2 滑鼠事件 (電腦版也要能拖的話可保留)
-        // =========================================
-        container.addEventListener('mousedown', (e) => {
-            isPaused = true;
-            isDragging = true;
-            startX = e.pageX;
-            startScrollPos = currentScroll;
-            container.style.cursor = 'grabbing'; // 改變游標樣式
-        });
-
-        container.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            e.preventDefault(); // 防止選取文字
-            const x = e.pageX;
-            const walk = x - startX;
-            currentScroll = startScrollPos - walk;
-        });
-
-        const stopDragging = () => {
-            isDragging = false;
-            isPaused = false;
-            lastTime = performance.now();
-            container.style.cursor = 'grab';
-        };
-
-        container.addEventListener('mouseup', stopDragging);
-        container.addEventListener('mouseleave', stopDragging);
     }
+    requestAnimationFrame(animate);
+
+    // 2. 觸控開始
+    container.addEventListener('touchstart', (e) => {
+        isPaused = true;
+        isDragging = true;
+        startX = e.touches[0].pageX;
+        startY = e.touches[0].pageY; // 記錄垂直位置，用來判斷方向
+        startScroll = currentScroll; // 記錄按下時的位置
+    }, { passive: false }); // 🔥 關鍵：允許我們阻止預設滾動
+
+    // 3. 觸控移動 (核心邏輯：方向鎖定)
+    container.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        
+        const x = e.touches[0].pageX;
+        const y = e.touches[0].pageY;
+        
+        // 計算水平與垂直的移動距離
+        const diffX = x - startX;
+        const diffY = y - startY;
+
+        // 🔥 判斷：如果「水平移動」大於「垂直移動」，代表你想滑動卡片
+        if (Math.abs(diffX) > Math.abs(diffY)) {
+            if (e.cancelable) e.preventDefault(); // 🛑 禁止網頁上下捲動！
+            
+            // 跟隨手指移動 (乘上 1.5 倍讓滑動感更靈敏)
+            currentScroll = startScroll - (diffX * 1.5);
+            
+            // 即時更新位置
+            track.style.transform = `translateX(${-currentScroll}px)`;
+        }
+        // 如果是垂直移動大於水平，就不做事，讓瀏覽器正常捲動網頁
+    }, { passive: false }); // 🔥 這裡也要加 passive: false
+
+    // 4. 觸控結束
+    container.addEventListener('touchend', () => { 
+        isPaused = false; 
+        isDragging = false;
+        lastTime = performance.now(); // 重置時間防止暴衝
+    });
+
+    // 滑鼠暫停 (電腦版)
+    container.addEventListener('mouseenter', () => { isPaused = true; });
+    container.addEventListener('mouseleave', () => { 
+        isPaused = false; 
+        lastTime = performance.now(); 
+    });
 }
 
 
@@ -352,3 +350,12 @@ groupCards.forEach(card => {
         });
     }
 });
+// ==========================================
+// 🔥 新增：強制每次進入或重整都在頁面頂端
+// ==========================================
+if ('scrollRestoration' in history) {
+    // 告訴瀏覽器：「不要雞婆幫我記住捲動位置，我要自己控制」
+    history.scrollRestoration = 'manual'; 
+}
+// 滾動到頂端
+window.scrollTo(0, 0);

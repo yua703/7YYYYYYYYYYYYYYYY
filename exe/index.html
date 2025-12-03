@@ -75,38 +75,44 @@
         <section class="section-padding">
             <h2>賽事細節</h2>
             
-            <!-- 賽事細節選單 (滑動背景版) -->
+            <!-- 賽事細節選單 -->
             <div class="detail-tabs">
-                <!-- 🔥 新增：藍色滑動背景塊 -->
                 <div class="tab-indicator"></div>
 
-                <!-- 第一個按鈕預設 active -->
-                <button class="detail-tab-btn active" data-target="detail-participants">競賽規章</button>
-                <button class="detail-tab-btn" data-target="detail-time">時程表</button>
+                <!-- 🔥 順序已改：時程表放第一個，並加上 active -->
+                <button class="detail-tab-btn active" data-target="detail-time">時程表</button>
                 <button class="detail-tab-btn" data-target="detail-scoring">計分方法</button>
                 <button class="detail-tab-btn" data-target="detail-map">賽事地圖</button>
+                <!-- 🔥 競賽規章移到最後 -->
+                <button class="detail-tab-btn" data-target="detail-participants">競賽規章</button>
             </div>
 
-            <!-- 內容區塊 -->
-            <div id="detail-participants" class="detail-content active">
-                <h3>參賽資格</h3>
-                <p>全校各系所、班級皆可組隊報名。每隊人數上限 10 人。</p>
-                <img src="img/123.png" alt="參賽說明圖" class="content-img">
-            </div>
-            <div id="detail-time" class="detail-content">
+            <!-- 內容區塊 1: 時程表 (預設顯示 active) -->
+            <div id="detail-time" class="detail-content active">
                 <h3>時程表</h3>
                 <p>上午 08:00 - 開幕式</p>
                 <p>上午 09:00 - 小組預賽</p>
                 <img src="img/123.png" alt="時程表" class="time-img">
             </div>
+
+            <!-- 內容區塊 2: 計分方法 -->
             <div id="detail-scoring" class="detail-content">
                 <h3>積分規則</h3>
                 <p>各項目冠軍得 10 分，亞軍 7 分，季軍 5 分。總積分最高者獲勝。</p>
             </div>
+
+            <!-- 內容區塊 3: 賽事地圖 -->
             <div id="detail-map" class="detail-content">
                 <h3>場地配置</h3>
                 <p>比賽將於體育館及操場同時進行。</p>
                 <img src="img/123.png" alt="地圖" class="content-img">
+            </div>
+
+            <!-- 內容區塊 4: 競賽規章 (移到最後) -->
+            <div id="detail-participants" class="detail-content">
+                <h3>參賽資格</h3>
+                <p>全校各系所、班級皆可組隊報名。每隊人數上限 10 人。</p>
+                <img src="img/123.png" alt="參賽說明圖" class="content-img">
             </div>
         </section>
 
@@ -166,8 +172,8 @@
     ========================== -->
     <div id="view-groups" class="page-view">
         <div class="section-padding">
-            <h2>參賽組別</h2>
-            <p class="desc-text">共 17 組隊伍參與本次賽事</p>
+            <h2>賽事項目</h2>
+            <!-- <p class="desc-text">共 17 組隊伍參與本次賽事</p> -->
 
             <div class="groups-grid">
                 <!-- #1 -->
@@ -570,6 +576,11 @@
         </div>
         
         <div style="height: 80px;"></div>
+    </div>
+
+    <!-- 🔥 新增：過場動畫遮罩 -->
+    <div id="transition-overlay">
+        <div class="spinner"></div>
     </div>
 
 
