@@ -359,3 +359,57 @@ if ('scrollRestoration' in history) {
 }
 // 滾動到頂端
 window.scrollTo(0, 0);
+
+// ==========================================
+// 6. GSAP 視差與動畫效果
+// ==========================================
+
+// 確保 GSAP 插件已註冊 (防呆)
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // --- A. 視差滾動 (Parallax) ---
+    // 使用 Timeline 讓多個圖層統一管理
+    const parallaxTl = gsap.timeline({
+        scrollTrigger: {
+            trigger: ".para-container", // 觸發區域：整個視差容器
+            start: "top top",           // 當容器頂部 碰到 視窗頂部 時開始
+            end: "+=2000", // 🔥 設定這個區塊要滑多久 (數值越大，元素出來得越慢)
+            pin: true,     // 🔥 釘住畫面 (必備！不然一下就滑過去了)
+            scrub: true                 // 🔥 關鍵：動畫進度綁定滾動條 (絲滑感)
+        }
+    });
+
+    // 設定各圖層移動速度 (y 值越大，移動越快，產生錯視感)
+    parallaxTl
+        .to(".para-back",  { y: -100, ease: "none" }, 0) // 背景動很慢
+        .to(".para-mid",   { y: -200, ease: "none" }, 0) // 中景動普通
+        .to(".para-front", { y: -400, ease: "none" }, 0) // 前景動最快
+        .to(".para-super-front", { y: -600, ease: "none" }, 0)
+        .to(".para-flying-obj", { top: "-=400px", ease: "none" }, 0);
+
+
+    // --- B. 飛入飛出效果 (Trigger Animation) ---
+    // 這是一個獨立的動畫，不綁定 scrub，而是觸發播放
+    gsap.fromTo(".para-flying-obj", 
+        { 
+            y: -800,      // 初始狀態：在右邊 800px (螢幕外)
+            opacity: 0   // 初始狀態：透明
+        },
+        {
+            y: 0,        // 結束狀態：回到原位
+            opacity: 1,  // 結束狀態：顯示
+            duration: 1.5, // 動畫時間 1.5 秒
+            ease: "bounce.out", // 緩動效果：快進慢出
+            scrollTrigger: {
+                trigger: ".para-container",
+                start: "top center", // 當容器頂部 碰到 視窗中間 時觸發
+                
+                toggleActions: "play none none reverse" 
+            }
+        }
+    );
+
+} else {
+    console.warn("GSAP 或 ScrollTrigger 未載入，請檢查 HTML 是否引入 CDN");
+}

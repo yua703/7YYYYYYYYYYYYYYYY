@@ -47,17 +47,78 @@ img {
 /* =========================================
    3. 首頁區域 (Hero Section)
    ========================================= */
-/* 設定首尾圖片的基礎樣式 */
-.hero-section, .footer-hero {
+
+/* 1. 視差容器 (取代原本的 hero-section) */
+.para-container {
     position: relative;
     width: 100%;
-    overflow: hidden;
+    height: 100vh; /* 設定高度佔滿整個螢幕 */
+    overflow: hidden; /* 把飛出去的圖片藏起來 */
+    background-color: #f0f0f0; /* 預設背景色 */
 }
 
-/* 🔥 獨立設定：首頁最上面的大圖高度 */
-.hero-section {
-    height: 85vh; /* 設定為螢幕高度的 85%，讓它看起來佔比更大 */
+/* 2. 所有圖層共用設定 (全域) */
+.para-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* 🔥 控制大小：第一個數字是寬度，第二個是高度 (auto 代表自動維持比例) */
+    /* 改成 110% 可以稍微放大一點點，改成 100% 就是剛好滿版 */
+    background-size: 100% auto; 
+    
+    /* 🔥 控制位置：第一個是水平(X)，第二個是垂直(Y) */
+    /* top center = 靠上置中 (這是你目前的設定) */
+    /* center center = 正中間 */
+    /* center bottom = 靠下置中 */
+    background-position: top center; 
+    
+    background-repeat: no-repeat;
+    pointer-events: none;
 }
+
+/* 3. 個別圖層 (這裡換成你的圖檔路徑) */
+.para-back {
+    background-size: cover;
+    /* 如果你暫時只有一張圖，就先放在這裡 */
+    background-image: url('img/a.webp'); 
+    z-index: 1;
+}
+
+.para-mid {
+    /* 這裡放中景圖 (記得要透明背景) */
+    background-image: url('img/b.webp');
+    z-index: 2;
+}
+
+.para-front {
+    /* 這裡放前景圖 (記得要透明背景) */
+    background-image: url('img/c.webp');
+    z-index: 4;
+}
+.para-super-front {
+    /* 建議把檔名改成 simple-name.webp，避免路徑錯誤 */
+    background-image: url('img/d.webp'); 
+    
+    /* 🔥 層級要最高：原本 front 是 4，這個就要設 5 或更高 */
+    z-index: 5; 
+}
+
+/* 4. 飛入物件 (從旁邊飛進來的圖) */
+img.para-flying-obj {
+    position: absolute;
+    top: 0%;
+    right: 0%;
+    z-index: 20;
+    opacity: 0; /* 初始隱藏，交給 GSAP */
+    width: auto;        /* 寬度自動 (依原始大小) */
+    max-width: 430px;   /* 但最大不要超過 400px (你可以自己改這個數字) */
+    height: auto;       /* 高度自動按比例調整，絕對不會變形 */
+}
+
+
 
 /* 🔥 獨立設定：頁尾圖片高度 */
 .footer-hero {
