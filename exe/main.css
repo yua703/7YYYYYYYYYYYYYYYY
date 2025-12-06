@@ -323,7 +323,7 @@ h2 {
 #leaderboard-tabs-container {
     display: flex;
     flex-direction: column; /* 🔥 垂直排列 */
-    width: 100px; /* 固定寬度 */
+    width: 120px; /* 固定寬度 */
     background: #eef2f5; /* 淺灰背景 */
     padding: 10px 0; /* 上下留白 */
     
@@ -340,12 +340,13 @@ h2 {
 .lb-tab {
     background: transparent;
     border: none;
-    padding: 15px 5px; /* 增加點擊範圍 */
+    padding: 20px 3px; /* 增加點擊範圍 */
     margin: 0;
     font-size: 13px;
     color: #666;
     cursor: pointer;
     transition: 0.2s;
+    height: 65px;
     text-align: center;
     width: 100%;
     border-bottom: 1px solid #e0e0e0; /* 分隔線 */
@@ -353,6 +354,7 @@ h2 {
     /* 讓文字換行，支援長名稱 */
     white-space: normal; 
     line-height: 1.4;
+    
 }
 
 /* 選中狀態：變成白色背景 + 左邊藍條 */
