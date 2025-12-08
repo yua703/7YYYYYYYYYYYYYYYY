@@ -247,8 +247,16 @@ async function updateLeaderboard(sheetName) {
         
         if (!res.ok) throw new Error("網路回應錯誤");
         
-        const data = await res.json();
-        
+        const rawData = await res.json(); // 1. 先抓原始資料
+
+// 2. 過濾：只有當「姓名」或「編號」其中一個有值時，才算有效資料
+const data = rawData.filter(p => {
+    const name = p.姓名 || p.Name;
+    const number = p.編號 || p.玩家號碼;
+    // 檢查是不是空字串或不存在
+    return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
+});
+                
         if (!data || data.length === 0) {
             container.innerHTML = "<p style='text-align:center; padding:20px;'>目前尚無資料</p>";
             return;
