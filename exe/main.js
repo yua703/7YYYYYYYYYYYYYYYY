@@ -394,30 +394,31 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
         .to(".para-mid",   { y: -200, ease: "none" }, 0) // 中景動普通
         .to(".para-front", { y: -400, ease: "none" }, 0) // 前景動最快
         .to(".para-super-front", { y: -600, ease: "none" }, 0)
-        .to(".para-flying-obj", { top: "-=400px", ease: "none" }, 0);
-
-
-    // --- B. 飛入飛出效果 (Trigger Animation) ---
-    // 這是一個獨立的動畫，不綁定 scrub，而是觸發播放
-    gsap.fromTo(".para-flying-obj", 
-        { 
-            y: -800,      // 初始狀態：在右邊 800px (螢幕外)
-            opacity: 0   // 初始狀態：透明
-        },
-        {
-            y: 0,        // 結束狀態：回到原位
-            opacity: 1,  // 結束狀態：顯示
-            duration: 1.5, // 動畫時間 1.5 秒
-            ease: "bounce.out", // 緩動效果：快進慢出
-            scrollTrigger: {
-                trigger: ".para-container",
-                start: "top center", // 當容器頂部 碰到 視窗中間 時觸發
-                
-                toggleActions: "play none none reverse" 
-            }
-        }
-    );
-
-} else {
-    console.warn("GSAP 或 ScrollTrigger 未載入，請檢查 HTML 是否引入 CDN");
+        .to(".para-flying-obj", {  y: -600, ease: "none" }, 0);
 }
+
+
+//     // --- B. 飛入飛出效果 (Trigger Animation) ---
+//     // 這是一個獨立的動畫，不綁定 scrub，而是觸發播放
+//     gsap.fromTo(".para-flying-obj", 
+//         { 
+//             y: -800,      // 初始狀態：在右邊 800px (螢幕外)
+//             opacity: 0   // 初始狀態：透明
+//         },
+//         {
+//             y: 0,        // 結束狀態：回到原位
+//             opacity: 1,  // 結束狀態：顯示
+//             duration: 1.5, // 動畫時間 1.5 秒
+//             ease: "bounce.out", // 緩動效果：快進慢出
+//             scrollTrigger: {
+//                 trigger: ".para-container",
+//                 start: "top center", // 當容器頂部 碰到 視窗中間 時觸發
+                
+//                 toggleActions: "play none none reverse" 
+//             }
+//         }
+//     );
+
+// } else {
+//     console.warn("GSAP 或 ScrollTrigger 未載入，請檢查 HTML 是否引入 CDN");
+// }
