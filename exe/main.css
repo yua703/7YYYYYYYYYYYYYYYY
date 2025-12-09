@@ -26,6 +26,20 @@ img {
     height: auto;
     display: block;
 }
+h2 {
+    font-size: 1.4rem;       /* 字體大小 */
+    color: #4882A6;          /* 使用你的主題藍色 (或是改成 #333 深灰) */
+    font-weight: bold;       /* 粗體 */
+    
+    /* 🔥 這裡是你要求的：下方增加內距 */
+    padding-bottom: 20px; 
+    
+    /* 建議：通常我們會搭配 margin，讓它跟下面的文字保持距離 */
+    margin-bottom: 15px; 
+        
+    /* (選用) 如果你想要標題下面有一條分隔線，這行會很好看 */
+    border-bottom: 1px solid #eee;
+}
 
 /* =========================================
    2. 頁面切換動畫
@@ -295,8 +309,11 @@ img {
    6. 排行榜 (Leaderboard) - 左側垂直選單版
    ========================================= */
 .leaderboard-header {
-    background: #4882A6;
-    color: white;
+    background-image: url('img/eeeee.webp'); 
+    background-size: cover;    /* 讓圖片填滿整個長條 */
+    background-position: center; /* 圖片居中 */
+    background-repeat: no-repeat;
+    color: #32617f;
     padding: 30px;
     text-align: center;
     /* 讓標題有點陰影，區隔下面的內容 */
@@ -321,7 +338,7 @@ img {
 #leaderboard-tabs-container {
     display: flex;
     flex-direction: column; /* 🔥 垂直排列 */
-    width: 120px; /* 固定寬度 */
+    width: 140px; /* 固定寬度 */
     background: #eef2f5; /* 淺灰背景 */
     padding: 10px 0; /* 上下留白 */
     
@@ -336,34 +353,87 @@ img {
 }
 #leaderboard-tabs-container::-webkit-scrollbar { display: none; }
 
+/* 1. 修改按鈕設定：這次改成「左邊」留位子 */
 .lb-tab {
+    /* --- 其他設定保持不變 --- */
     background: transparent;
     border: none;
-    padding: 20px 3px; /* 增加點擊範圍 */
     margin: 0;
     font-size: 13px;
     color: #666;
     cursor: pointer;
     transition: 0.2s;
     height: 65px;
-    text-align: center;
     width: 100%;
-    border-bottom: 1px solid #e0e0e0; /* 分隔線 */
-    
-    /* 讓文字換行，支援長名稱 */
-    white-space: normal; 
+    border-bottom: 1px solid #e0e0e0;
+    white-space: normal;
     line-height: 1.4;
+    position: relative;
     
+    /* 🔥 修改這裡：左邊留多一點空間 (25px)，右邊恢復少一點 (5px) */
+    /* 上 | 右 | 下 | 左 */
+    padding: 20px 20px 20px 45px; 
+    text-align: left;
+}
+/* 🔥 單獨修正：讓第一個按鈕 (七大項總錦標) 回復置中 */
+.lb-tab:first-child {
+    text-align: center;  /* 改回置中對齊 */
+    
+    /* 把左邊預留給數字的 45px 空間取消，改回原本左右平衡的設定 */
+    /* 上下 20px，左右 5px */
+    padding: 20px 5px;   
+}
+/* 3. 🔥 關鍵設定：排除第一個(總錦標)，從第二個開始計數 */
+.lb-tab:not(:first-child) {
+    /* 只有不是第一個的孩子，才讓計數器 +1 */
+    counter-increment: group-num;
 }
 
-/* 選中狀態：變成白色背景 + 左邊藍條 */
+/* 2. 修改數字位置：釘在左側 */
+.lb-tab:not(:first-child)::after {
+    content: counter(group-num); /* 讀取數字 */
+    
+    position: absolute;/* 位置設定：垂直置中，靠左 */
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    
+    /* 🔥 核心修改：變成一個有顏色的方塊 */
+    width: 24px;
+    height: 24px;
+    background-color: #b0b0b0; /* 預設背景：灰色 */
+    color: white;              /* 數字顏色：白色 */
+    
+    /* 讓數字在方塊裡面置中 */
+    text-align: center;
+    line-height: 24px;
+    
+    /* 外觀美化 */
+    border-radius: 6px;  /* 圓角，看起來比較柔和 */
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    
+    /* 增加一點斜度 (選用，如果你想要像截圖那樣稍微斜斜的) */
+    /* transform: translateY(-50%) skewX(-10deg); */ 
+}
+
+/* 3. 🔥 關鍵設定：當被選中 (Active) 時，背景變色 */
+.lb-tab.active:not(:first-child)::after {
+    background-color: #4882A6; /* 變成你的主題藍色 */
+    box-shadow: 0 2px 5px rgba(72, 130, 166, 0.4); /* 加一點發光陰影 */
+    
+    /* 如果你想讓選中時數字方塊變稍微大一點，可以加這行 */
+    /* transform: translateY(-50%) scale(1.1); */
+}
+
+/* 4. 同步讓選中的文字也變藍色 (原本的設定應該有，再次確認) */
 .lb-tab.active {
     background: #fff;
     color: #4882A6;
     font-weight: bold;
-    border-left: 4px solid #4882A6; /* 左側亮條 */
+    border-left: 4px solid #4882A6;
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    border-bottom: none;
 }
 
 /* --- 右側：資料顯示區 --- */
@@ -721,4 +791,10 @@ body.lock-scroll { overflow: hidden; }
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+/* --- 鎖定背景捲動專用 --- */
+/* 當這個 class 被加到 body 上時，整個網頁就不能滑動 */
+body.lock-scroll {
+    overflow: hidden !important; /* 強制隱藏捲軸 */
+    height: 100vh; /* 確保高度被鎖定 */
 }
