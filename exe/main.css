@@ -64,17 +64,12 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    
-    /* 🔥 控制大小：第一個數字是寬度，第二個是高度 (auto 代表自動維持比例) */
-    /* 改成 110% 可以稍微放大一點點，改成 100% 就是剛好滿版 */
-    background-size: 100% auto; 
-    
-    /* 🔥 控制位置：第一個是水平(X)，第二個是垂直(Y) */
-    /* top center = 靠上置中 (這是你目前的設定) */
-    /* center center = 正中間 */
-    /* center bottom = 靠下置中 */
-    background-position: top center; 
-    
+
+    /* 讓圖維持比例且滿版鋪滿 */
+    background-size: cover;
+    /* 🔥 圖片正中央對準螢幕中央 */
+    background-position: center center;
+
     background-repeat: no-repeat;
     pointer-events: none;
 }
@@ -145,14 +140,6 @@ img.para-flying-obj {
 
 .bg-gray { background-color: #eee; }
 
-h2 {
-    margin-bottom: 40px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
-    /* 🔥 關鍵修改：讓文字置中 */
-    text-align: center;
-}
 
 /* =========================================
    4. 七大項目無限輪播 (Smooth Scrolling)
