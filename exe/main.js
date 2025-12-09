@@ -391,10 +391,10 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     // 設定各圖層移動速度 (y 值越大，移動越快，產生錯視感)
     parallaxTl
         .to(".para-back",  { y: -100, ease: "none" }, 0) // 背景動很慢
-        .to(".para-mid",   { y: -200, ease: "none" }, 0) // 中景動普通
-        .to(".para-front", { y: -400, ease: "none" }, 0) // 前景動最快
-        .to(".para-super-front", { y: -600, ease: "none" }, 0)
-        .to(".para-flying-obj", {  y: -600, ease: "none" }, 0);
+        .to(".para-mid",   { y: -100, ease: "none" }, 0) // 中景動普通
+        .to(".para-front", { y: -300, ease: "none" }, 0) // 前景動最快
+        .to(".para-super-front", { y: -400, ease: "none" }, 0)
+        .to(".para-flying-obj", {  y: -400, ease: "none" }, 0);
 }
 
 
