@@ -13,7 +13,7 @@ html, body {
     overflow-x: hidden; 
     
     font-family: "Noto Sans TC", sans-serif;
-    background-color: #f9f9f9;
+    background-color: #fbfaf6;
     color: #333;
     
     /* 確保圖片貼底，不要有預設的底部留白 */
@@ -149,7 +149,7 @@ img {
     padding: 40px 20px;
 }
 
-.bg-gray { background-color: #eee; }
+.bg-gray { background-color: #f3f0ea; }
 
 
 /* =========================================
@@ -220,7 +220,7 @@ img {
     top: 4px;
     bottom: 4px; 
     left: 0; 
-    background-color: #0078d4;
+    background-color: #4882A6;
     border-radius: 20px;
     
     /* 🔥 關鍵動畫 */
@@ -295,7 +295,7 @@ img {
    6. 排行榜 (Leaderboard) - 左側垂直選單版
    ========================================= */
 .leaderboard-header {
-    background: #0078d4;
+    background: #4882A6;
     color: white;
     padding: 30px;
     text-align: center;
@@ -358,9 +358,9 @@ img {
 /* 選中狀態：變成白色背景 + 左邊藍條 */
 .lb-tab.active {
     background: #fff;
-    color: #0078d4;
+    color: #4882A6;
     font-weight: bold;
-    border-left: 4px solid #0078d4; /* 左側亮條 */
+    border-left: 4px solid #4882A6; /* 左側亮條 */
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     border-bottom: none;
 }
@@ -391,13 +391,13 @@ img {
     font-size: 0.85rem;
     color: #666;
     font-weight: bold;
-    border-bottom: 2px solid #0078d4;
+    border-bottom: 2px solid #4882A6;
     position: sticky; /* 讓標題固定在最上面 */
     top: 0;
     z-index: 5;
 }
 
-.lb-rank { font-weight: bold; color: #0078d4; text-align: left; font-size: 0.9rem; }
+.lb-rank { font-weight: bold; color: #4882A6; text-align: left; font-size: 0.9rem; }
 .lb-name { 
     font-weight: bold; color: #333; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; 
@@ -405,7 +405,7 @@ img {
 }
 .lb-number { color: #888; font-size: 0.8rem; text-align: right; }
 .lb-score { 
-    font-weight: bold; color: #0078d4; text-align: right; 
+    font-weight: bold; color: #4882A6; text-align: right; 
     white-space: nowrap; overflow: hidden; font-size: 0.9rem;
 }
 .lb-player { background: white; }
@@ -472,7 +472,7 @@ img {
 .nav-btn.active {
     background-color: #e6f2fa; /* 淺藍色背景 */
     
-    color: #0078d4; 
+    color: #4882A6; 
     font-weight: bold;
     
     /* 🔥 放大比例維持 1.15 倍，因為基礎尺寸變小了，這樣放大剛好 */
@@ -530,7 +530,7 @@ img {
     position: relative;
     z-index: 10;
 }
-.group-info h3 { font-size: 1rem; margin-bottom: 5px; color: #0078d4; /* 強制不換行 */
+.group-info h3 { font-size: 1rem; margin-bottom: 5px; color: #4882A6; /* 強制不換行 */
     white-space: nowrap; 
     /* 超出隱藏 */
     overflow: hidden; 
@@ -596,7 +596,7 @@ body.lock-scroll { overflow: hidden; }
 .close-bottom-area {
     position: fixed; bottom: 0; left: 0;
     width: 100%; height: 120px;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    background: linear-gradient(to top, rgba(72, 130, 166, 0.9) 0%, rgba(72, 130, 166,0.4) 60%, transparent 100%);
     display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
     padding-bottom: 25px;
     z-index: 2000;
@@ -666,7 +666,7 @@ body.lock-scroll { overflow: hidden; }
 .btn-primary {
     display: inline-block;
     padding: 10px 22px;
-    background-color: #0078d4;   /* 藍色主色 */
+    background-color: #E7AC4A; 
     color: white;
     text-decoration: none;
     font-size: 15px;
