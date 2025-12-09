@@ -332,6 +332,7 @@ img {
     
     /* 隱藏捲軸但保留功能 (美觀) */
     scrollbar-width: none; 
+    counter-reset: group-num;
 }
 #leaderboard-tabs-container::-webkit-scrollbar { display: none; }
 
