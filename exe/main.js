@@ -372,29 +372,31 @@ window.scrollTo(0, 0);
 // 6. GSAP 視差與動畫效果
 // ==========================================
 
-// 確保 GSAP 插件已註冊 (防呆)
+// 確保 GSAP 插件已註冊
 if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     gsap.registerPlugin(ScrollTrigger);
 
-    // --- A. 視差滾動 (Parallax) ---
-    // 使用 Timeline 讓多個圖層統一管理
+    // --- 視差滾動 (Parallax) ---
     const parallaxTl = gsap.timeline({
         scrollTrigger: {
-            trigger: ".para-container", // 觸發區域：整個視差容器
-            start: "top top",           // 當容器頂部 碰到 視窗頂部 時開始
-            end: "+=2000", // 🔥 設定這個區塊要滑多久 (數值越大，元素出來得越慢)
-            pin: true,     // 🔥 釘住畫面 (必備！不然一下就滑過去了)
-            scrub: true                 // 🔥 關鍵：動畫進度綁定滾動條 (絲滑感)
+            trigger: ".para-container",
+            start: "top top",
+            end: "bottom top", 
+            scrub: true // 綁定滾動條
         }
     });
 
-    // 設定各圖層移動速度 (y 值越大，移動越快，產生錯視感)
+    // 設定各圖層移動速度 
+    // y 為負值代表往上移
+    // 數字越大 (越負) = 動越快 = 感覺離鏡頭越近
     parallaxTl
-        .to(".para-back",  { y: -100, ease: "none" }, 0) // 背景動很慢
-        .to(".para-mid",   { y: -100, ease: "none" }, 0) // 中景動普通
-        .to(".para-front", { y: -300, ease: "none" }, 0) // 前景動最快
-        .to(".para-super-front", { y: -400, ease: "none" }, 0)
-        .to(".para-flying-obj", {  y: -400, ease: "none" }, 0);
+        // .to(".para-back",        { y: -100, ease: "none" }, 0) // 背景動很慢
+        .to(".para-mid",         { y: -200, ease: "none" }, 0) // 中景動稍快
+        .to(".para-front",       { y: -400, ease: "none" }, 0) // 前景動快
+        .to(".para-super-front", { y: -600, ease: "none" }, 0); // 特寫動最快
+
+} else {
+    console.warn("GSAP 未載入");
 }
 
 

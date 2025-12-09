@@ -48,64 +48,67 @@ img {
    3. 首頁區域 (Hero Section)
    ========================================= */
 
-/* 1. 視差容器 (取代原本的 hero-section) */
 .para-container {
     position: relative;
     width: 100%;
-    height: 100vh; /* 設定高度佔滿整個螢幕 */
-    overflow: hidden; /* 把飛出去的圖片藏起來 */
-    background-color: #f0f0f0; /* 預設背景色 */
+    height: 65vh;
+    overflow: hidden;
+    background-color: #f0f0f0;
 }
 
-/* 2. 所有圖層共用設定 (全域) */
+/* 2. 所有圖層共用設定 */
 .para-layer {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-
-    /* 讓圖維持比例且滿版鋪滿 */
-    background-size: cover;
-    /* 🔥 圖片正中央對準螢幕中央 */
-    background-position: center center;
-
+    background-size: cover; /* 滿版 */
+    background-position: center;
     background-repeat: no-repeat;
     pointer-events: none;
 }
 
-/* 3. 個別圖層 (這裡換成你的圖檔路徑) */
+/* 3. 個別圖層設定 */
+
+/* 層級 1: 背景 */
 .para-back {
-    background-size: cover;
-    /* 如果你暫時只有一張圖，就先放在這裡 */
     background-image: url('img/a.webp'); 
     z-index: 1;
+    background-size: 100% auto;
 }
 
+/* 層級 2: 中景 */
 .para-mid {
-    /* 這裡放中景圖 (記得要透明背景) */
     background-image: url('img/b.webp');
     z-index: 2;
+    background-size: 100% auto; 
+    
+    /* 🔥 修改：位置設為「正中間」 */
+    /* 想要往下一點？改成 center 60% */
+    background-position: center center;
 }
 
+/* 層級 3: 前景 */
 .para-front {
-    /* 這裡放前景圖 (記得要透明背景) */
     background-image: url('img/c.webp');
-    z-index: 4;
-}
-.para-super-front {
-    /* 建議把檔名改成 simple-name.webp，避免路徑錯誤 */
-    background-image: url('img/d.webp'); 
+    z-index: 3;
+    background-size: 100% auto; 
     
-    /* 🔥 層級要最高：原本 front 是 4，這個就要設 5 或更高 */
-    z-index: 5; 
+    /* 🔥 修改：位置設為「正中間」 */
+    /* 想要往下一點？改成 center 60% */
+    background-position: center center;
 }
+
+/* 層級 4: 特寫層 (原本你有兩個 super-front，我幫你留下了 d.webp) */
 .para-super-front {
-    /* 建議把檔名改成 simple-name.webp，避免路徑錯誤 */
-    background-image: url('img/fly.webp'); 
+    background-image: url('img/df.webp'); 
+    z-index: 4; /* 最高層 */
+    background-size: 100% auto; 
     
-    /* 🔥 層級要最高：原本 front 是 4，這個就要設 5 或更高 */
-    z-index: 5; 
+    /* 🔥 修改：位置設為「正中間」 */
+    /* 想要往下一點？改成 center 60% */
+    background-position: center center;
 }
 
 
@@ -294,7 +297,7 @@ img {
 .leaderboard-header {
     background: #0078d4;
     color: white;
-    padding: 15px;
+    padding: 30px;
     text-align: center;
     /* 讓標題有點陰影，區隔下面的內容 */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
