@@ -391,9 +391,9 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     // 數字越大 (越負) = 動越快 = 感覺離鏡頭越近
     parallaxTl
         // .to(".para-back",        { y: -100, ease: "none" }, 0) // 背景動很慢
-        .to(".para-mid",         { y: -200, ease: "none" }, 0) // 中景動稍快
-        .to(".para-front",       { y: -400, ease: "none" }, 0) // 前景動快
-        .to(".para-super-front", { y: -600, ease: "none" }, 0); // 特寫動最快
+        .to(".para-mid",         { y: -100, ease: "none" }, 0) // 中景動稍快
+        .to(".para-front",       { y: -200, ease: "none" }, 0) // 前景動快
+        .to(".para-super-front", { y: -300, ease: "none" }, 0); // 特寫動最快
 
 } else {
     console.warn("GSAP 未載入");
