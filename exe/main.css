@@ -680,11 +680,6 @@ body.lock-scroll { overflow: hidden; }
     transition: all 0.25s ease;
 }
 
-/* 點按瞬間 */
-.btn-primary:active {
-    transform: translateY(0);
-    box-shadow: none;
-}
 
 /* =========================================
    11. 過場動畫 (Page Transition)
