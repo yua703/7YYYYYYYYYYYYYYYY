@@ -631,27 +631,61 @@ body.lock-scroll { overflow: hidden; }
    10. 關於我們 (白色虛線風格 - 內縮版)
    ========================================= */
 .section-dashed-white {
-    background-color: #ffffff;
-    color: #333;
+    background-color: #333;
+    color: #ffffff;
     text-align: center;
     position: relative;
+    padding-bottom: 100px;
+}
+.section-dashed-white p {
+    font-size: 13px; /* 自己調 */
+}
+.section-dashed-white .about-grid {
+    /* 整塊在區塊中置中 */
+    display: inline-flex;
+    gap: 24px;
+    text-align: left;     /* 內文改成靠左，避免全部置中不好讀 */
+    margin: 20px auto;
+    align-items: flex-start;
 }
 
-/* 上方的虛線 */
-.section-dashed-white::before {
-    content: ""; display: block;
-    width: 90%; height: 1px;
-    border-top: 3px dashed #ccc;
-    margin: 0 auto 30px auto;
+/* 左邊標題欄（主辦 / 協辦 / 合作） */
+.section-dashed-white .about-left p {
+    margin: 4px 0;
+    white-space: nowrap;  /* 不要換行，看起來整齊 */
 }
 
-/* 下方的虛線 */
-.section-dashed-white::after {
-    content: ""; display: block;
-    width: 90%; height: 1px;
-    border-top: 3px dashed #ccc;
-    margin: 30px auto 0 auto;
+/* 右邊內容欄 */
+.section-dashed-white .about-right p {
+    margin: 4px 0;
 }
+
+/* EMAIL 讓它跟上面有一點距離，置中顯示 */
+.section-dashed-white .about-email {
+    margin-bottom: 50px;
+}
+/* —— 按鈕樣式（追蹤官方 IG） —— */
+.btn-primary {
+    display: inline-block;
+    padding: 10px 22px;
+    background-color: #0078d4;   /* 藍色主色 */
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin-bottom: 50px;
+
+    /* 動畫與互動 */
+    transition: all 0.25s ease;
+}
+
+/* 點按瞬間 */
+.btn-primary:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
 /* =========================================
    11. 過場動畫 (Page Transition)
    ========================================= */
