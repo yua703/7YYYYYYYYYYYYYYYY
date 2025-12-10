@@ -798,3 +798,94 @@ body.lock-scroll {
     overflow: hidden !important; /* 強制隱藏捲軸 */
     height: 100vh; /* 確保高度被鎖定 */
 }
+/* =========================================
+   🖥️ 電腦版面優化 (Desktop Optimization)
+   當螢幕寬度大於 1024px 時生效 (電腦/平板橫向)
+   ========================================= */
+@media (min-width: 1024px) {
+
+    /* 1. 網頁背景：改成深色質感，強調中間的內容 */
+    body {
+        background-attachment: fixed; /* 背景固定不動 */
+        min-height: 100vh;
+        
+        /* 讓內容區塊置中 */
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    /* 2. 核心容器：限制最大寬度，模擬手機畫面 */
+    /* 針對你的三個主要頁面區塊 */
+    #view-home, 
+    #view-leaderboard, 
+    #view-groups {
+        max-width: 800px;  /* 限制寬度在 600px */
+        width: 100%;
+        margin: 0 auto;    /* 置中 */
+        background-color: #fff; /* 確保內容背景是白的 */
+        min-height: 100vh; /* 讓白色背景至少填滿高度 */
+        position: relative;
+    }
+
+    /* 3. 修正：底部導覽列 (Bottom Nav) */
+    /* 因為它是 fixed，必須強制定位回中間 */
+    .bottom-nav {
+        max-width: 600px; /* 寬度跟內容一樣 */
+        width: 100%;
+        left: 50%;        /* 定位到螢幕正中間 */
+        transform: translateX(-50%); /* 修正置中偏移 */
+        
+        bottom: 20px;     /* 稍微浮起來一點點，比較有設計感 */
+        border-radius: 50px; /* 變成膠囊狀 */
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* 浮起來的陰影 */
+        padding-bottom: 5px; /* 取消手機安全距離，因為浮起來了 */
+    }
+
+    /* 4. 修正：展開後的卡片 (.group-card.active) */
+    /* 這也是 fixed，要讓它看起來像中間彈出的視窗 */
+    .group-card.active {
+        width: 600px;     /* 固定寬度 */
+        left: 50%;
+        transform: translateX(-50%);
+        
+        height: 96vh;     /* 不要佔滿全螢幕，上下留點縫隙 */
+        top: 2vh;         /* 垂直置中 */
+        
+        border-radius: 16px; /* 圓角 */
+        overflow: hidden; 
+    }
+
+    /* 5. 修正：卡片底部的關閉區塊 (.close-bottom-area) */
+    /* 這個也是 fixed，必須跟著卡片一起定位 */
+    .close-bottom-area {
+        width: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+        
+        bottom: 2vh;      /* 配合卡片的底部位置 */
+        border-radius: 0 0 16px 16px; /* 配合卡片的圓角 */
+    }
+
+    /* 6. 修正：過場動畫遮罩 */
+    #transition-overlay {
+        max-width: 600px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    /* 7. 美化電腦版的捲軸 (讓它細一點，不要那麼醜) */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+        background: rgba(0,0,0,0.2);
+        border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(0,0,0,0.4);
+    }
+}
