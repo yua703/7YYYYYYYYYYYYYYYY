@@ -338,9 +338,9 @@ h2 {
 #leaderboard-tabs-container {
     display: flex;
     flex-direction: column; /* 🔥 垂直排列 */
-    width: 140px; /* 固定寬度 */
+    width: 130px; /* 固定寬度 */
     background: #eef2f5; /* 淺灰背景 */
-    padding: 10px 0; /* 上下留白 */
+    padding: 20px 0; /* 上下留白 */
     
     /* 讓左側可以自己獨立捲動 */
     height: 100%; 
@@ -353,87 +353,105 @@ h2 {
 }
 #leaderboard-tabs-container::-webkit-scrollbar { display: none; }
 
-/* 1. 修改按鈕設定：這次改成「左邊」留位子 */
+/* --- 按鈕容器基本設定 --- */
 .lb-tab {
-    /* --- 其他設定保持不變 --- */
-    background: transparent;
-    border: none;
-    margin: 0;
-    font-size: 13px;
-    color: #666;
-    cursor: pointer;
-    transition: 0.2s;
-    height: 65px;
-    width: 100%;
-    border-bottom: 1px solid #e0e0e0;
-    white-space: normal;
-    line-height: 1.4;
     position: relative;
+    width: 100%;
+    height: 70px;
+    flex-shrink: 0;
+    border: none;      
+    background: transparent;
+    border-bottom: 0.5px solid #888;
+    /* 排版：文字靠左，但要留位置給左上角的三角形 */
+    padding: 7px 10px 0 25px; /* 🔥 左邊縮小一點空間 (原本45 -> 40) */
     
-    /* 🔥 修改這裡：左邊留多一點空間 (25px)，右邊恢復少一點 (5px) */
-    /* 上 | 右 | 下 | 左 */
-    padding: 20px 20px 20px 45px; 
     text-align: left;
-}
-/* 🔥 單獨修正：讓第一個按鈕 (七大項總錦標) 回復置中 */
-.lb-tab:first-child {
-    text-align: center;  /* 改回置中對齊 */
+    font-size: 16px;
+    color: #888;
+    font-weight: 500;
+    line-height: 1.3;
+    white-space: normal;
     
-    /* 把左邊預留給數字的 45px 空間取消，改回原本左右平衡的設定 */
-    /* 上下 20px，左右 5px */
-    padding: 20px 5px;   
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    /* 讓文字垂直置中 */
+    display: flex;
+    align-items: center;
 }
-/* 3. 🔥 關鍵設定：排除第一個(總錦標)，從第二個開始計數 */
+
+/* 排除第一個「總錦標」，從第二個開始計數 */
 .lb-tab:not(:first-child) {
-    /* 只有不是第一個的孩子，才讓計數器 +1 */
     counter-increment: group-num;
 }
 
-/* 2. 修改數字位置：釘在左側 */
-.lb-tab:not(:first-child)::after {
-    content: counter(group-num); /* 讀取數字 */
+/* =========================================
+   🔥 核心魔法：左上角的三角形數字 (微調版)
+   ========================================= */
+.lb-tab:not(:first-child)::before {
+    content: counter(group-num);
     
-    position: absolute;/* 位置設定：垂直置中，靠左 */
-    top: 50%;
-    left: 10px;
-    transform: translateY(-50%);
+    /* 絕對定位在左上角 */
+    position: absolute;
+    top: 0;
+    left: 0;
     
-    /* 🔥 核心修改：變成一個有顏色的方塊 */
-    width: 24px;
-    height: 24px;
-    background-color: #b0b0b0; /* 預設背景：灰色 */
-    color: white;              /* 數字顏色：白色 */
+    /* 🔥 縮小尺寸 (原本45 -> 30) */
+    width: 42px;
+    height: 35px;
     
-    /* 讓數字在方塊裡面置中 */
-    text-align: center;
-    line-height: 24px;
+    /* 預設背景色：灰色 (沒選中時) */
+    background-color: #bbb; 
+    color: white; /* 數字為白色 */
     
-    /* 外觀美化 */
-    border-radius: 6px;  /* 圓角，看起來比較柔和 */
-    font-size: 12px;
+    /* 切成三角形 */
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    
+    /* 調整數字的位置 */
+    display: flex;
+    padding-top: 3px;   /* 微調空隙 */
+    padding-left: 5px;  /* 微調空隙 */
+    align-items: flex-start;
+    justify-content: flex-start;
+    
+    font-size: 14px; /* 字體縮小一點 */
     font-weight: bold;
-    font-family: Arial, sans-serif;
-    
-    /* 增加一點斜度 (選用，如果你想要像截圖那樣稍微斜斜的) */
-    /* transform: translateY(-50%) skewX(-10deg); */ 
+    font-family: "Permanent Marker", cursive, sans-serif;
+    z-index: 2;
+    transition: all 0.3s ease; /* 加入變色動畫 */
 }
 
-/* 3. 🔥 關鍵設定：當被選中 (Active) 時，背景變色 */
-.lb-tab.active:not(:first-child)::after {
-    background-color: #4882A6; /* 變成你的主題藍色 */
-    box-shadow: 0 2px 5px rgba(72, 130, 166, 0.4); /* 加一點發光陰影 */
-    
-    /* 如果你想讓選中時數字方塊變稍微大一點，可以加這行 */
-    /* transform: translateY(-50%) scale(1.1); */
-}
-
-/* 4. 同步讓選中的文字也變藍色 (原本的設定應該有，再次確認) */
+/* =========================================
+   🔥 選中狀態 (Active)：藍底 + 白三角 + 藍字
+   ========================================= */
 .lb-tab.active {
-    background: #fff;
-    color: #4882A6;
+    background: #4882A6; /* 滿版藍色 */
+    color: white;        /* 文字變白 */
     font-weight: bold;
-    border-left: 4px solid #4882A6;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-bottom: none;
+    
+    /* 保持斜切造型 */
+    clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
+    
+    box-shadow: 2px 2px 10px rgba(72, 130, 166, 0.4);
+    transform: scale(1.02);
+    z-index: 5;
+}
+
+/* 🔥 選中時，三角形的顏色變化 (這就是你要的效果！) */
+.lb-tab.active:not(:first-child)::before {
+    background-color: white; /* 🔥 三角形背景變白色 */
+    color: #4882A6;          /* 🔥 三角形裡的數字變藍色 */
+    
+    /* 這裡不需要改變尺寸或位置，只要變色就好 */
+}
+
+/* 第一個按鈕 (總錦標) 的特別設定 */
+.lb-tab:first-child {
+    justify-content: center;
+    padding: 0;
+    text-align: center;
 }
 
 /* --- 右側：資料顯示區 --- */
@@ -450,7 +468,7 @@ h2 {
     display: grid;
     /* 🔥 稍微調整寬度，適應變窄的右側空間 */
     /* 排名 | 姓名(彈性) | 號碼 | 分數 */
-    grid-template-columns: 30px 1fr 45px 70px;
+    grid-template-columns: 40px 1fr 45px 80px;
     gap: 5px;
     align-items: center;
     padding: 12px 5px; /* 左右內縮一點 */
@@ -470,9 +488,9 @@ h2 {
 
 .lb-rank { font-weight: bold; color: #4882A6; text-align: left; font-size: 0.9rem; }
 .lb-name { 
-    font-weight: bold; color: #333; 
+    font-weight: bold; color: #888; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; 
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 .lb-number { color: #888; font-size: 0.8rem; text-align: right; }
 .lb-score { 
