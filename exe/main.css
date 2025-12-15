@@ -26,10 +26,12 @@ img {
     height: auto;
     display: block;
 }
+
 h2 {
     font-size: 1.4rem;       /* 字體大小 */
-    color: #4882A6;          /* 使用你的主題藍色 (或是改成 #333 深灰) */
+    color: #4882A6;          /* 使用你的主題藍色 */
     font-weight: bold;       /* 粗體 */
+    text-align: center;
     
     /* 🔥 這裡是你要求的：下方增加內距 */
     padding-bottom: 20px; 
@@ -37,7 +39,7 @@ h2 {
     /* 建議：通常我們會搭配 margin，讓它跟下面的文字保持距離 */
     margin-bottom: 15px; 
         
-    /* (選用) 如果你想要標題下面有一條分隔線，這行會很好看 */
+    /* (選用) 如果你想要標題下面有一條分隔線 */
     border-bottom: 1px solid #eee;
 }
 
@@ -97,9 +99,6 @@ h2 {
     background-image: url('img/b.webp');
     z-index: 2;
     background-size: 100% auto; 
-    
-    /* 🔥 修改：位置設為「正中間」 */
-    /* 想要往下一點？改成 center 60% */
     background-position: center center;
 }
 
@@ -108,54 +107,33 @@ h2 {
     background-image: url('img/c.webp');
     z-index: 3;
     background-size: 100% auto; 
-    
-    /* 🔥 修改：位置設為「正中間」 */
-    /* 想要往下一點？改成 center 60% */
     background-position: center center;
 }
 
-/* 層級 4: 特寫層 (原本你有兩個 super-front，我幫你留下了 d.webp) */
+/* 層級 4: 特寫層 */
 .para-super-front {
     background-image: url('img/df.webp'); 
     z-index: 4; /* 最高層 */
     background-size: 100% auto; 
-    
-    /* 🔥 修改：位置設為「正中間」 */
-    /* 想要往下一點？改成 center 60% */
     background-position: center center;
 }
 
-
-/* 4. 飛入物件 (從旁邊飛進來的圖) */
-/* img.para-flying-obj {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-    z-index: 20;
-    opacity: 0; /* 初始隱藏，交給 GSAP */
-    /* width: auto;        /* 寬度自動 (依原始大小) */
-    /* max-width: 430px;   但最大不要超過 400px (你可以自己改這個數字) */
-    /* height: auto;       高度自動按比例調整，絕對不會變形 */
-/* } */
-
-
-
 /* 🔥 獨立設定：頁尾圖片高度 */
 .footer-hero {
-    height: 80vh; /* 保持原本設定或隨意調整 */
+    height: 80vh; 
 }
 
 .full-img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 讓圖片填滿且不變形 */
+    object-fit: cover; 
 }
 
 .hero-text {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    color: white;
+    color: #f0f0f0;
     text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
@@ -163,7 +141,28 @@ h2 {
     padding: 40px 20px;
 }
 
-.bg-gray { background-color: #f3f0ea; }
+.bg-gray { background-color: #f4f2f0; }
+
+
+/* =========================================
+   🔥 新增：關於本次賽事 (專屬設定區)
+   這裡可以讓你單獨改這一塊的顏色
+   ========================================= */
+.section-about {
+    /* 1. 修改背景顏色 (試著改成白色、淺灰或你的主題色) */
+    background-color: #ffffff; 
+    
+    /* 2. 修改整個區塊的間距 (上 右 下 左) */
+    /* 如果覺得太擠，把 40px 改大 */
+    padding: 40px 20px; 
+}
+
+/* 如果你想單獨改這一塊的「文字顏色」 */
+.section-about .desc-text {
+    color: #333333;  /* 文字顏色 (深灰) */
+    font-size: 1rem; /* 字體大小 */
+    line-height: 1.8; /* 行距 (讓文字好讀一點) */
+}
 
 
 /* =========================================
@@ -172,7 +171,7 @@ h2 {
 .carousel-container {
     width: 100%;
     overflow: hidden;
-    padding-bottom: 10px;
+    padding-bottom: 5px;
     position: relative;
     
     /* 防止選取文字影響體驗 */
@@ -192,19 +191,10 @@ h2 {
     width: 200px;       
     max-width: 70vw;    
     flex-shrink: 0; 
-    
-    /* 🔥 改動 1：背景變透明 */
     background: transparent; 
-    
-    /* 🔥 改動 2：去掉原本的卡片陰影 */
     box-shadow: none;
-    
-    /* 🔥 改動 3：去掉內距，讓圖片貼齊邊緣 */
     padding: 0;
-    
-    /* 去掉容器圓角 (因為沒有背景色了) */
     border-radius: 0; 
-    
     text-align: center;
 }
 
@@ -212,8 +202,7 @@ h2 {
 .carousel-item img {
     width: 100%;
     height: 250px;
-    object-fit: cover;
-        
+    object-fit: cover;   
 }
 
 /* =========================================
@@ -240,73 +229,49 @@ h2 {
     left: 0; 
     background-color: #4882A6;
     border-radius: 20px;
-    
-    /* 🔥 關鍵動畫 */
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s ease;
     z-index: 1; /* 在文字下面 */
-    
-    /* 寬度會由 JS 動態計算 */
     width: 0; 
     pointer-events: none; 
 }
 
 .detail-tab-btn {
-    /* 🔥 關鍵：大家平分空間，剛好填滿一行 */
     flex: 1; 
-    
     position: relative;
     z-index: 2; /* 在藍色塊上面 */
-    
-    background: transparent; /* 背景透明 */
+    background: transparent; 
     border: none;
-    
-    /* 🔥 修改這裡：改用 Flexbox 來做絕對置中 */
     display: flex;
-    align-items: center;     /* 垂直置中 */
-    justify-content: center; /* 水平置中 */
-    padding: 10px 0;         /* 上下留白 */
-    
-    /* 字體設定 */
+    align-items: center;    
+    justify-content: center; 
+    padding: 10px 0;        
     font-size: 14px; 
     color: #666;
     font-weight: 500;
     cursor: pointer;
-    transition: color 0.2s; /* 文字顏色變換動畫 */
-    
-    /* 禁止換行，確保永遠是一行 */
+    transition: color 0.2s; 
     white-space: nowrap;
-    min-width: 0; /* 允許壓縮 */
-    
-    /* 確保行高一致 */
+    min-width: 0; 
     line-height: 1; 
 }
 
-/* 選中狀態 (只改文字顏色，背景由 tab-indicator 負責) */
+/* 選中狀態 */
 .detail-tab-btn.active {
-    color: white; /* 選中變白字 */
+    color: white; 
     font-weight: bold;
 }
-/* =========================================
-   5.5 內容區塊顯示/隱藏 (這是你目前缺少的)
-   ========================================= */
 
-/* 1. 預設把所有內容都藏起來 */
+/* =========================================
+   5.5 內容區塊顯示/隱藏
+   ========================================= */
 .detail-content {
     display: none;
-    padding-top: 20px; /* 與上面的選單保持距離 */
+    padding-top: 20px; 
 }
 
-/* 2. 只有被加上 .active 的那個區塊才會顯示 */
 .detail-content.active {
     display: block;
-    /* 選擇性：加一點淡入動畫讓體驗更好 */
     animation: fadeIn 0.3s ease-out;
-}
-
-/* 簡單的淡入動畫 */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================================
@@ -314,13 +279,12 @@ h2 {
    ========================================= */
 .leaderboard-header {
     background-image: url('img/eeeee.webp'); 
-    background-size: cover;    /* 讓圖片填滿整個長條 */
-    background-position: center; /* 圖片居中 */
+    background-size: cover;    
+    background-position: center; 
     background-repeat: no-repeat;
     color: #32617f;
     padding: 30px;
     text-align: center;
-    /* 讓標題有點陰影，區隔下面的內容 */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     position: relative;
     z-index: 10;
@@ -328,31 +292,24 @@ h2 {
 
 /* 🔥 核心佈局：左右分割容器 */
 .leaderboard-main-area {
-    display: flex; /* 啟用左右排列 */
-    align-items: flex-start; /* 內容靠上對齊 */
-    
-    /* 設定高度：螢幕高度 - 標題高度 - 底部導覽列高度 */
-    /* 這樣做可以讓內容在區域內捲動，而不是整頁捲動 */
+    display: flex; 
+    align-items: flex-start; 
     height: calc(100vh - 60px - 80px); 
-    overflow: hidden; /* 防止容器本身撐開 */
+    overflow: hidden; 
     background-color: #f9f9f9;
 }
 
 /* --- 左側：垂直選單欄 --- */
 #leaderboard-tabs-container {
     display: flex;
-    flex-direction: column; /* 🔥 垂直排列 */
-    width: 110px; /* 固定寬度 */
-    background: #eef2f5; /* 淺灰背景 */
-    padding: 20px 0; /* 上下留白 */
-    
-    /* 讓左側可以自己獨立捲動 */
+    flex-direction: column; 
+    width: 110px; 
+    background: #eef2f5; 
+    padding: 20px 0; 
     height: 100%; 
     overflow-y: auto; 
     overflow-x: hidden;
-    flex-shrink: 0; /* 寬度不會被壓縮 */
-    
-    /* 隱藏捲軸但保留功能 (美觀) */
+    flex-shrink: 0; 
     scrollbar-width: none; 
     counter-reset: group-num;
 }
@@ -367,92 +324,63 @@ h2 {
     border: none;      
     background: transparent;
     border-bottom: 0.5px solid #888;
-    /* 排版：文字靠左，但要留位置給左上角的三角形 */
-    padding: 7px 10px 0 25px; /* 🔥 左邊縮小一點空間 (原本45 -> 40) */
-    
+    padding: 7px 10px 0 25px; 
     text-align: left;
     font-size: 13px;
     color: #888;
     font-weight: 500;
     line-height: 1.3;
     white-space: normal;
-    
-    background: transparent;
     cursor: pointer;
     transition: all 0.3s ease;
-    
-    /* 讓文字垂直置中 */
     display: flex;
     align-items: center;
 }
 
-/* 排除第一個「總錦標」，從第二個開始計數 */
 .lb-tab:not(:first-child) {
     counter-increment: group-num;
 }
 
-/* =========================================
-   🔥 核心魔法：左上角的三角形數字 (微調版)
-   ========================================= */
+/* 左上角的三角形數字 */
 .lb-tab:not(:first-child)::before {
     content: counter(group-num);
-    
-    /* 絕對定位在左上角 */
     position: absolute;
     top: 0;
     left: 0;
-    
-    /* 🔥 縮小尺寸 (原本45 -> 30) */
     width: 32px;
     height: 25px;
-    
-    /* 預設背景色：灰色 (沒選中時) */
     background-color: #bbb; 
-    color: white; /* 數字為白色 */
-    
-    /* 切成三角形 */
+    color: white; 
     clip-path: polygon(0 0, 100% 0, 0 100%);
-    
-    /* 調整數字的位置 */
     display: flex;
-    padding-top: 3px;   /* 微調空隙 */
-    padding-left: 5px;  /* 微調空隙 */
+    padding-top: 3px;   
+    padding-left: 5px;  
     align-items: flex-start;
     justify-content: flex-start;
-    
-    font-size: 11px; /* 字體縮小一點 */
+    font-size: 11px; 
     font-weight: bold;
     font-family: "Permanent Marker", cursive, sans-serif;
     z-index: 2;
-    transition: all 0.3s ease; /* 加入變色動畫 */
+    transition: all 0.3s ease; 
 }
 
-/* =========================================
-   🔥 選中狀態 (Active)：藍底 + 白三角 + 藍字
-   ========================================= */
+/* 選中狀態 (Active) */
 .lb-tab.active {
-    background: #4882A6; /* 滿版藍色 */
-    color: white;        /* 文字變白 */
+    background: #4882A6; 
+    color: white;        
     font-weight: bold;
     border-bottom: none;
-    
-    /* 保持斜切造型 */
     clip-path: polygon(0 0, 100% 0, 95% 100%, 0 100%);
-    
     box-shadow: 2px 2px 10px rgba(72, 130, 166, 0.4);
     transform: scale(1.02);
     z-index: 5;
 }
 
-/* 🔥 選中時，三角形的顏色變化 (這就是你要的效果！) */
 .lb-tab.active:not(:first-child)::before {
-    background-color: white; /* 🔥 三角形背景變白色 */
-    color: #4882A6;          /* 🔥 三角形裡的數字變藍色 */
-    
-    /* 這裡不需要改變尺寸或位置，只要變色就好 */
+    background-color: white; 
+    color: #4882A6;          
 }
 
-/* 第一個按鈕 (總錦標) 的特別設定 */
 .lb-tab:first-child {
     justify-content: center;
     padding: 0;
@@ -461,22 +389,20 @@ h2 {
 
 /* --- 右側：資料顯示區 --- */
 #leaderboard-data {
-    flex: 1; /* 佔滿剩下所有寬度 */
-    height: 100%; /* 跟左邊一樣高 */
-    overflow-y: auto; /* 讓資料可以自己捲動 */
+    flex: 1; 
+    height: 100%; 
+    overflow-y: auto; 
     padding: 10px;
     background: #fff;
 }
 
-/* --- 排行榜 Grid 對齊設定 (保持你原本喜歡的整齊版) --- */
+/* --- 排行榜 Grid 對齊設定 --- */
 .lb-header, .lb-player {
     display: grid;
-    /* 🔥 稍微調整寬度，適應變窄的右側空間 */
-    /* 排名 | 姓名(彈性) | 號碼 | 分數 */
     grid-template-columns: 40px 1fr 45px 80px;
     gap: 5px;
     align-items: center;
-    padding: 12px 5px; /* 左右內縮一點 */
+    padding: 12px 5px; 
     border-bottom: 1px solid #eee;
 }
 
@@ -486,7 +412,7 @@ h2 {
     color: #666;
     font-weight: bold;
     border-bottom: 2px solid #4882A6;
-    position: sticky; /* 讓標題固定在最上面 */
+    position: sticky; 
     top: 0;
     z-index: 5;
 }
@@ -505,26 +431,21 @@ h2 {
 .lb-player { background: white; }
 
 /* =========================================
-   7. 底部固定導覽列 (縮放 + 變色 + 防露餡 - 手機優化版)
+   7. 底部固定導覽列 (手機優化版)
    ========================================= */
 .bottom-nav {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
-    
-    /* 🔥 高度改小：70px，更適合手機閱讀 */
     height: auto;
     min-height: 70px; 
-    
     background: white;
     box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
     display: flex;
     justify-content: space-around;
     align-items: center;
     z-index: 999;
-
-    /* 確保填滿手機底部安全區域 */
     padding-bottom: env(safe-area-inset-bottom);
     padding-top: 5px; 
 }
@@ -537,44 +458,36 @@ h2 {
     align-items: center;
     justify-content: center;
     color: #aaa; 
-    
-    /* 🔥 字體稍微縮小 (12px -> 11px) */
     font-size: 11px; 
-    
     cursor: pointer;
-    
-    /* 🔥 按鈕尺寸縮小 (原本 80x65 -> 改為 70x55) 以適應 70px 的Bar */
     width: 70px;
     height: 55px;
-    border-radius: 14px; /* 圓角也稍微改小 */
-
-    /* 動畫設定 */
+    border-radius: 14px; 
     transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    
-    /* 未選中時：稍微縮小 */
     transform: scale(0.95); 
     opacity: 0.7; 
 }
 
-.nav-btn .icon {
-    /* 🔥 圖示縮小 (30px -> 24px) */
-    font-size: 24px; 
-    margin-bottom: 2px;
+/* 自訂底部導覽列 ICON 圖片設定 */
+.nav-icon {
+    width: 40px;   /* 寬度固定 */
+    height: 40px;  /* 高度固定 */
+    margin-bottom: -3px; /* 維持原本的間距 */
+    object-fit: contain; 
+    display: block; 
+    transition: all 0.3s ease;
 }
 
-/* 點選狀態 (變大 + 變色) */
+/* 點選狀態 */
 .nav-btn.active {
-    background-color: #e6f2fa; /* 淺藍色背景 */
-    
+    background-color: #e6f2fa; 
     color: #4882A6; 
     font-weight: bold;
-    
-    /* 🔥 放大比例維持 1.15 倍，因為基礎尺寸變小了，這樣放大剛好 */
     transform: scale(1.15); 
     opacity: 1;
-    
     box-shadow: 0 3px 6px rgba(0,120,212, 0.15);
 }
+
 /* =========================================
    8. 組別頁面樣式 (滿版展開版)
    ========================================= */
@@ -583,7 +496,6 @@ h2 {
     grid-template-columns: 1fr 1fr;
     gap: 15px;
     margin-top: 15px;
-    /* 這裡絕對不能有 transform，否則 fixed 定位會失效 */
 }
 
 .group-card {
@@ -624,12 +536,10 @@ h2 {
     position: relative;
     z-index: 10;
 }
-.group-info h3 { font-size: 1rem; margin-bottom: 5px; color: #4882A6; /* 強制不換行 */
-    white-space: nowrap; 
-    /* 超出隱藏 */
-    overflow: hidden; 
-    /* 顯示 ... */
-    text-overflow: ellipsis;}
+.group-info h3 { 
+    font-size: 1rem; margin-bottom: 5px; color: #4882A6; 
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
 .group-info p {
     font-size: 0.85rem; color: #666; line-height: 1.4;
     display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
@@ -658,10 +568,9 @@ h2 {
     padding: 20px; background: white; margin-top: -30px;
     border-radius: 20px 20px 0 0; position: relative; z-index: 20;
 }
-.group-card.active .group-info h3 { font-size: 1.5rem; 
-/* 恢復正常換行 */
+.group-card.active .group-info h3 { 
+    font-size: 1.5rem; 
     white-space: normal; 
-    /* 顯示完整內容 */
     overflow: visible;
 }
 .group-card.active .group-info p { -webkit-line-clamp: unset; line-clamp: unset; }
@@ -674,12 +583,10 @@ h2 {
 body.lock-scroll { overflow: hidden; }
 
 .group-body hr {
-    margin-top: 30px;    /* 線上面留白多一點 */
-    margin-bottom: 20px; /* 線下面留白多一點 */
-    
-    /* 順便教你怎麼改線的樣子 (選用) */
+    margin-top: 30px;    
+    margin-bottom: 20px; 
     border: none;
-    border-top: 1px solid #ddd; /* 淺灰色細線 */
+    border-top: 1px solid #ddd; 
 }
 
 /* =========================================
@@ -730,33 +637,28 @@ body.lock-scroll { overflow: hidden; }
     padding-bottom: 100px;
 }
 .section-dashed-white p {
-    font-size: 13px; /* 自己調 */
+    font-size: 13px; 
 }
 .section-dashed-white .about-grid {
-    /* 整塊在區塊中置中 */
     display: inline-flex;
     gap: 24px;
-    text-align: left;     /* 內文改成靠左，避免全部置中不好讀 */
+    text-align: left;    
     margin: 20px auto;
     align-items: flex-start;
 }
 
-/* 左邊標題欄（主辦 / 協辦 / 合作） */
 .section-dashed-white .about-left p {
     margin: 4px 0;
-    white-space: nowrap;  /* 不要換行，看起來整齊 */
+    white-space: nowrap;  
 }
 
-/* 右邊內容欄 */
 .section-dashed-white .about-right p {
     margin: 4px 0;
 }
 
-/* EMAIL 讓它跟上面有一點距離，置中顯示 */
 .section-dashed-white .about-email {
     margin-bottom: 50px;
 }
-/* —— 按鈕樣式（追蹤官方 IG） —— */
 .btn-primary {
     display: inline-block;
     padding: 10px 22px;
@@ -767,8 +669,6 @@ body.lock-scroll { overflow: hidden; }
     font-weight: 600;
     border-radius: 8px;
     margin-bottom: 50px;
-
-    /* 動畫與互動 */
     transition: all 0.25s ease;
 }
 
@@ -782,31 +682,26 @@ body.lock-scroll { overflow: hidden; }
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #ffffff; /* 白底遮罩 */
-    z-index: 9999; /* 確保蓋在最上面 */
-    
+    background-color: #ffffff; 
+    z-index: 9999; 
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    /* 預設隱藏 */
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s ease; /* 淡入淡出動畫 */
+    transition: opacity 0.3s ease; 
 }
 
-/* 啟動狀態 */
 #transition-overlay.active {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* 轉圈圈動畫 */
 .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid #f3f3f3; /* 淺灰底圈 */
-    border-top: 4px solid #0078d4; /* 藍色轉動圈 */
+    border: 4px solid #f3f3f3; 
+    border-top: 4px solid #0078d4; 
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
 }
@@ -815,79 +710,64 @@ body.lock-scroll { overflow: hidden; }
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-/* --- 鎖定背景捲動專用 --- */
-/* 當這個 class 被加到 body 上時，整個網頁就不能滑動 */
-body.lock-scroll {
-    overflow: hidden !important; /* 強制隱藏捲軸 */
-    height: 100vh; /* 確保高度被鎖定 */
-}
+
 /* =========================================
    🖥️ 電腦版面優化 (Desktop Optimization)
    當螢幕寬度大於 1024px 時生效 (電腦/平板橫向)
    ========================================= */
 @media (min-width: 1024px) {
 
-    /* 1. 網頁背景：改成深色質感，強調中間的內容 */
+    /* 1. 網頁背景 */
     body {
-        background-attachment: fixed; /* 背景固定不動 */
+        background-attachment: fixed; 
         min-height: 100vh;
-        
-        /* 讓內容區塊置中 */
         display: flex;
         justify-content: center;
         align-items: flex-start;
     }
 
-    /* 2. 核心容器：限制最大寬度，模擬手機畫面 */
-    /* 針對你的三個主要頁面區塊 */
+    /* 2. 核心容器 */
     #view-home, 
     #view-leaderboard, 
     #view-groups {
-        max-width: 800px;  /* 限制寬度在 600px */
+        max-width: 800px;  
         width: 100%;
-        margin: 0 auto;    /* 置中 */
-        background-color: #fff; /* 確保內容背景是白的 */
-        min-height: 100vh; /* 讓白色背景至少填滿高度 */
+        margin: 0 auto;    
+        background-color: #fff; 
+        min-height: 100vh; 
         position: relative;
     }
 
-    /* 3. 修正：底部導覽列 (Bottom Nav) */
-    /* 因為它是 fixed，必須強制定位回中間 */
+    /* 3. 修正：底部導覽列 */
     .bottom-nav {
-        max-width: 600px; /* 寬度跟內容一樣 */
+        max-width: 600px; 
         width: 100%;
-        left: 50%;        /* 定位到螢幕正中間 */
-        transform: translateX(-50%); /* 修正置中偏移 */
-        
-        bottom: 20px;     /* 稍微浮起來一點點，比較有設計感 */
-        border-radius: 50px; /* 變成膠囊狀 */
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3); /* 浮起來的陰影 */
-        padding-bottom: 5px; /* 取消手機安全距離，因為浮起來了 */
+        left: 50%;        
+        transform: translateX(-50%); 
+        bottom: 20px;     
+        border-radius: 50px; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
+        padding-bottom: 5px; 
     }
 
-    /* 4. 修正：展開後的卡片 (.group-card.active) */
-    /* 這也是 fixed，要讓它看起來像中間彈出的視窗 */
+    /* 4. 修正：展開後的卡片 */
     .group-card.active {
-        width: 600px;     /* 固定寬度 */
+        width: 600px;     
         left: 50%;
         transform: translateX(-50%);
-        
-        height: 96vh;     /* 不要佔滿全螢幕，上下留點縫隙 */
-        top: 2vh;         /* 垂直置中 */
-        
-        border-radius: 16px; /* 圓角 */
+        height: 96vh;     
+        top: 2vh;         
+        border-radius: 16px; 
         overflow: hidden; 
     }
 
-    /* 5. 修正：卡片底部的關閉區塊 (.close-bottom-area) */
-    /* 這個也是 fixed，必須跟著卡片一起定位 */
+    /* 5. 修正：卡片底部的關閉區塊 */
     .close-bottom-area {
         width: 600px;
         left: 50%;
         transform: translateX(-50%);
-        
-        bottom: 2vh;      /* 配合卡片的底部位置 */
-        border-radius: 0 0 16px 16px; /* 配合卡片的圓角 */
+        bottom: 2vh;      
+        border-radius: 0 0 16px 16px; 
     }
 
     /* 6. 修正：過場動畫遮罩 */
@@ -897,7 +777,7 @@ body.lock-scroll {
         transform: translateX(-50%);
     }
 
-    /* 7. 美化電腦版的捲軸 (讓它細一點，不要那麼醜) */
+    /* 7. 美化電腦版的捲軸 */
     ::-webkit-scrollbar {
         width: 8px;
     }
@@ -911,20 +791,4 @@ body.lock-scroll {
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(0,0,0,0.4);
     }
-}
-/* =========================================
-   自訂底部導覽列 ICON 圖片設定
-   ========================================= */
-
-/* 1. 設定圖片尺寸，確保跟原本 Emoji 一樣大 */
-.nav-icon {
-    width: 40px;   /* 寬度固定 */
-    height: 40px;  /* 高度固定 */
-    
-    margin-bottom: -3px; /* 維持原本的間距 */
-    object-fit: contain; /* 確保圖片比例正確，不會被拉寬或壓扁 */
-    display: block; /* 避免圖片下方產生奇怪的空隙 */
-    
-    /* 讓圖片跟著按鈕一起有過渡動畫 */
-    transition: all 0.3s ease;
 }
