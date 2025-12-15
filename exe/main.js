@@ -399,28 +399,47 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
     console.warn("GSAP 未載入");
 }
 
+/* =========================================
+   組別卡片展開/關閉邏輯 (包含鎖定背景功能)
+   ========================================= */
+const cards = document.querySelectorAll('.group-card');
+const closeBtnArea = document.querySelector('.close-bottom-area'); // 假設這是你的關閉按鈕區域
 
-//     // --- B. 飛入飛出效果 (Trigger Animation) ---
-//     // 這是一個獨立的動畫，不綁定 scrub，而是觸發播放
-//     gsap.fromTo(".para-flying-obj", 
-//         { 
-//             y: -800,      // 初始狀態：在右邊 800px (螢幕外)
-//             opacity: 0   // 初始狀態：透明
-//         },
-//         {
-//             y: 0,        // 結束狀態：回到原位
-//             opacity: 1,  // 結束狀態：顯示
-//             duration: 1.5, // 動畫時間 1.5 秒
-//             ease: "bounce.out", // 緩動效果：快進慢出
-//             scrollTrigger: {
-//                 trigger: ".para-container",
-//                 start: "top center", // 當容器頂部 碰到 視窗中間 時觸發
-                
-//                 toggleActions: "play none none reverse" 
-//             }
-//         }
-//     );
+// 1. 監聽每一個卡片的點擊事件
+cards.forEach(card => {
+    card.addEventListener('click', function(e) {
+        // 如果已經打開了，就不做反應 (避免重複觸發)
+        if (this.classList.contains('active')) return;
 
-// } else {
-//     console.warn("GSAP 或 ScrollTrigger 未載入，請檢查 HTML 是否引入 CDN");
-// }
+        // A. 關閉其他已經打開的卡片 (如果你希望一次只開一張)
+        cards.forEach(c => {
+            c.classList.remove('active');
+            c.scrollTop = 0; // 重置捲動位置
+        });
+
+        // B. 展開目前點擊的這張卡片
+        this.classList.add('active');
+
+        // C. 🔥 關鍵：鎖住背景，讓它不能動！
+        document.body.classList.add('lock-scroll');
+    });
+});
+
+// 2. 定義「關閉卡片」的函式
+function closeAllCards() {
+    // A. 把所有卡片的 active 拿掉
+    cards.forEach(card => {
+        card.classList.remove('active');
+    });
+
+    // B. 🔥 關鍵：解鎖背景，這時候原本的捲動位置會自動保留！
+    document.body.classList.remove('lock-scroll');
+}
+
+// 3. 監聽「底部關閉區塊」的點擊
+if (closeBtnArea) {
+    closeBtnArea.addEventListener('click', function(e) {
+        e.stopPropagation(); // 防止點擊穿透
+        closeAllCards();
+    });
+}

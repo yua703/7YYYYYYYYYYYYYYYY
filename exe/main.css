@@ -561,6 +561,8 @@ h2 {
     overflow-y: auto;
     padding-bottom: 60px;
     background: #fff;
+
+    overscroll-behavior: contain;
 }
 
 .group-card.active .group-img { height: 260px; }
@@ -580,7 +582,10 @@ h2 {
 }
 
 /* 鎖定背景捲動 */
-body.lock-scroll { overflow: hidden; }
+body.lock-scroll {
+    overflow: hidden !important; /* 禁止背景滾動 */
+    /* ❌ 不要加 height: 100vh; 這可能會導致位置重置 */
+}
 
 .group-body hr {
     margin-top: 30px;    
