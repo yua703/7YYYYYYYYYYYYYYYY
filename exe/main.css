@@ -67,7 +67,7 @@ h2 {
 .para-container {
     position: relative;
     width: 100%;
-    height: 80vh;
+    height: 30vh;
     overflow: hidden;
     background-color: #f0f0f0;
 }
