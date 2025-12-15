@@ -167,7 +167,7 @@ h2 {
 
 
 /* =========================================
-   4. 七大項目無限輪播 (Smooth Scrolling)
+   4. 七大項目無限輪播 (純圖片版)
    ========================================= */
 .carousel-container {
     width: 100%;
@@ -180,38 +180,42 @@ h2 {
     -webkit-user-select: none;
 }
 
+/* 🔥 關鍵：這一塊絕對不能動，它負責讓東西橫著排 */
 .carousel-track {
-    display: flex;
-    gap: 15px; /* 卡片間距 */
-    /* ❌ 移除這行 transition，因為我們要用 JS 做連續動畫 */
-    /* transition: transform 0.5s ease-in-out; */
-    
-    /* 確保位置可以用 JS 控制 */
+    display: flex;         /* 讓內容橫向排列 */
+    gap: 20px;             /* 圖片之間的距離 */
     will-change: transform; 
 }
 
+/* 修改這裡：把卡片變成透明、無框 */
 .carousel-item {
     width: 200px;       
     max-width: 70vw;    
     flex-shrink: 0; 
-    background: white;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    /* 🔥 改動 1：背景變透明 */
+    background: transparent; 
+    
+    /* 🔥 改動 2：去掉原本的卡片陰影 */
+    box-shadow: none;
+    
+    /* 🔥 改動 3：去掉內距，讓圖片貼齊邊緣 */
+    padding: 0;
+    
+    /* 去掉容器圓角 (因為沒有背景色了) */
+    border-radius: 0; 
+    
     text-align: center;
 }
 
+/* 修改圖片：把圓角加在圖片上 */
 .carousel-item img {
     width: 100%;
-    height: 120px;
+    height: 250px;
     object-fit: cover;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    pointer-events: none;
+        
 }
 
-.carousel-item h3 { font-size: 1.1rem; margin-bottom: 5px; color: #333; }
-.carousel-item p { font-size: 0.9rem; color: #666; margin: 0; }
 /* =========================================
    5. 賽事細節分頁 (滑動背景 + 不換行版)
    ========================================= */
@@ -907,4 +911,20 @@ body.lock-scroll {
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(0,0,0,0.4);
     }
+}
+/* =========================================
+   自訂底部導覽列 ICON 圖片設定
+   ========================================= */
+
+/* 1. 設定圖片尺寸，確保跟原本 Emoji 一樣大 */
+.nav-icon {
+    width: 40px;   /* 寬度固定 */
+    height: 40px;  /* 高度固定 */
+    
+    margin-bottom: -3px; /* 維持原本的間距 */
+    object-fit: contain; /* 確保圖片比例正確，不會被拉寬或壓扁 */
+    display: block; /* 避免圖片下方產生奇怪的空隙 */
+    
+    /* 讓圖片跟著按鈕一起有過渡動畫 */
+    transition: all 0.3s ease;
 }
