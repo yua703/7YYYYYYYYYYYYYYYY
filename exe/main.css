@@ -505,7 +505,19 @@ h2 {
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    
+    /* ❌ 原本是 transition: all ... 這太貪心了，容易當機 */
+    /* ✅ 改成只針對需要動的東西做動畫 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; 
+    
+    /* 🔥🔥🔥 關鍵修復：開啟硬體加速 (GPU) 🔥🔥🔥 */
+    /* 這幾行可以防止 iOS 渲染時圖片消失或閃爍 */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    
+    /* 避免內容溢出造成奇怪的切邊 */
     overflow-y: hidden; 
 }
 
@@ -514,6 +526,7 @@ h2 {
     height: 140px;
     object-fit: cover;
     transition: height 0.4s ease;
+    will-change: height;
 }
 
 .group-badge {
@@ -552,13 +565,15 @@ h2 {
 }
 
 /* --- 卡片展開狀態 (.active) --- */
-.group-card.active {
+/* .group-card.active {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
     z-index: 1000;
     border-radius: 0; box-shadow: none;
     overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
     padding-bottom: 60px;
     background: #fff;
 
@@ -581,10 +596,16 @@ h2 {
     height: auto; opacity: 1; padding: 0 20px 40px 20px;
 }
 
-/* 鎖定背景捲動 */
 body.lock-scroll {
-    overflow: hidden !important; /* 禁止背景滾動 */
-    /* ❌ 不要加 height: 100vh; 這可能會導致位置重置 */
+    position: fixed;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+html.lock-scroll {
+    overflow: hidden !important;
+    height: 100% !important;
 }
 
 .group-body hr {
@@ -592,7 +613,7 @@ body.lock-scroll {
     margin-bottom: 20px; 
     border: none;
     border-top: 1px solid #ddd; 
-}
+} */
 
 /* =========================================
    9. 底部關閉按鈕 (New Bottom Close Btn)
@@ -796,4 +817,194 @@ body.lock-scroll {
     ::-webkit-scrollbar-thumb:hover {
         background: rgba(0,0,0,0.4);
     }
+}
+/* =========================================
+   🔥 App Store 級別：分身投影動畫樣式 (最終修正版)
+   ========================================= */
+
+/* 1. 當分身出現時，讓本尊暫時隱形 (但位置保留，版面不跑掉) */
+.group-card.is-hidden-by-overlay {
+    opacity: 0 !important;
+    pointer-events: none;
+}
+
+/* 2. 投影層容器 (全螢幕遮罩) */
+#clone-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    
+    /* 🔥 強制使用視窗高度，解決手機版面覆蓋不全問題 */
+    height: 100vh; 
+    height: 100dvh; /* 針對新版手機瀏覽器的最佳化單位 */
+    
+    z-index: 9999;
+    pointer-events: none; /* 沒打開時不擋路 */
+    
+    /* 預設背景透明 */
+    background-color: rgba(255, 255, 255, 0); 
+    transition: background-color 0.3s ease;
+}
+
+/* 啟動時的狀態：背景變成「實心純白」，蓋住後面所有東西 */
+#clone-overlay.active {
+    pointer-events: auto; /* 打開後可以點擊 */
+    background-color: #ffffff !important; /* 🔥 強制純白，絕不透視 */
+}
+
+/* 3. 內層捲動容器 (讓長內容可以捲動) */
+.overlay-scroll-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain; /* 防止滑動穿透 */
+    -webkit-overflow-scrolling: touch;
+    
+    /* 隱藏捲軸但保留功能 */
+    scrollbar-width: none; 
+    
+    /* 🔥 關鍵：下面多留空間給固定按鈕 (120px 按鈕高度 + 20px 緩衝) */
+    /* 這樣滑到底的時候，最後一行字才不會被按鈕擋住 */
+    padding-bottom: 140px; 
+}
+.overlay-scroll-container::-webkit-scrollbar { display: none; }
+
+/* 4. 分身卡片本體 (負責變形動畫) */
+.overlay-card {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    background: white;
+    transform-origin: top left; /* 動畫起點 */
+    
+    /* 告訴瀏覽器這些屬性會變，請開啟 GPU 加速 */
+    will-change: transform, width, height, border-radius;
+    overflow: hidden;
+}
+
+/* 5. 分身圖片 */
+.overlay-img {
+    width: 100%;
+    height: 140px; /* 初始高度跟原本一樣 */
+    object-fit: cover;
+    display: block;
+    will-change: height;
+    transition: height 0.3s ease;
+}
+/* 展開後的圖片高度 */
+#clone-overlay.active .overlay-img {
+    height: 280px; 
+}
+
+/* 6. 內容區域 */
+.overlay-content {
+    opacity: 0; /* 一開始隱藏，等卡片變大後再淡入 */
+    transform: translateY(20px);
+    transition: all 0.3s ease 0.1s; /* 稍微延遲一點出現 */
+}
+
+/* 當動畫開始，內容淡入 */
+#clone-overlay.active .overlay-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.overlay-header {
+    padding: 20px 20px 0 20px;
+}
+
+.overlay-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #4882A6;
+    margin-bottom: 5px;
+}
+.overlay-desc {
+    font-size: 1rem;
+    color: #666;
+}
+.overlay-badge {
+    display: inline-block;
+    background: #4882A6;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+}
+
+.overlay-body {
+    padding: 0 20px 20px 20px;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* 7. 底部按鈕固定 (Fixed Bottom) - 這是你要的「點擊收合」 */
+.overlay-bottom-close {
+    position: absolute; /* 絕對定位 */
+    bottom: 0;          /* 死死黏在最下面 */
+    left: 0;
+    width: 100%;
+    height: 120px;      /* 漸層區域高度 */
+    
+    /* 排版設定 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-bottom: 30px; /* 文字離底部的距離 */
+    
+    /* 背景漸層：從透明(上) 到 純白(下)，防止文字看不清楚 */
+    background: linear-gradient(to top, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0));
+    
+    z-index: 100; /* 確保在最上層 */
+    cursor: pointer;
+    
+    /* 防止手機誤觸選取文字 */
+    user-select: none; 
+    -webkit-user-select: none;
+
+    /* 🔥 關鍵修改：預設是隱藏的 (opacity: 0) */
+    opacity: 0;
+    pointer-events: none; /* 隱藏時不准點 */
+    
+    /* 🔥 關鍵動畫：當 active 拿掉時，0秒瞬間消失，不給點擊機會 */
+    transition: opacity 0s;
+}
+/* 當分身層啟動時，按鈕才慢慢浮現 */
+#clone-overlay.active .overlay-bottom-close {
+    opacity: 1;
+    pointer-events: auto; /* 出現時才準點 */
+    
+    /* 延遲 0.2s 才出現，讓體驗更優雅，不要跟卡片一起炸出來 */
+    transition: opacity 0.3s ease 0.1s; 
+}
+.bouncing-arrow {
+    /* 箭頭樣式保持原本的 */
+    width: 0; height: 0;
+    border-left: 10px solid transparent; border-right: 10px solid transparent;
+    border-top: 15px solid #4882A6; /* 改成藍色箭頭比較明顯，原本是白色 */
+    margin-bottom: 8px;
+    animation: bounce 2s infinite;
+}
+.close-text {
+    /* 文字樣式 */
+    color: #4882A6; /* 改成藍色文字 */
+    font-size: 14px; 
+    letter-spacing: 2px;
+    font-weight: bold; 
+}
+
+/* 8. 預設隱藏分身層 (解決進網頁破圖白塊問題) */
+.overlay-hidden {
+    display: none !important;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 9. 🔥 當組別展開時，隱藏原本的底部導覽列 */
+body.lock-scroll .bottom-nav {
+    display: none !important;
 }
