@@ -326,7 +326,7 @@ function stopLeaderboardUpdate() {
 
 
 // ==========================================
-// 5. 組別展開功能 (App Store 風格 - 分身投影版)
+// 5. 組別展開功能 (修正版：解決長文無法滑動問題)
 // ==========================================
 const overlay = document.getElementById('clone-overlay');
 const overlayCard = overlay.querySelector('.overlay-card');
@@ -335,11 +335,12 @@ const overlayTitle = overlay.querySelector('.overlay-title');
 const overlayDesc = overlay.querySelector('.overlay-desc');
 const overlayBadge = overlay.querySelector('.overlay-badge');
 const overlayBody = overlay.querySelector('.overlay-body');
+const overlayScrollContainer = overlay.querySelector('.overlay-scroll-container'); // 抓取捲動容器
 
-// 🔥 這裡只抓取「底部收合按鈕」，因為右上角的叉叉已經拿掉了
+// 抓取底部收合按鈕
 const overlayCloseBtns = overlay.querySelectorAll('.overlay-bottom-close');
 
-let originalCard = null; // 用來記住目前是從哪張卡片點開的
+let originalCard = null;
 
 // --- 1. 打開動畫 ---
 function openOverlay(card) {
@@ -347,111 +348,117 @@ function openOverlay(card) {
     
     originalCard = card;
     
-    // 抓取原本卡片的資料
+    // 1. 抓取資料
     const originalImg = card.querySelector('.group-img');
     const badgeText = card.querySelector('.group-badge').innerText;
     const titleText = card.querySelector('h3').innerText;
     const descText = card.querySelector('.group-info p').innerText;
     const hiddenBody = card.querySelector('.group-content-inner'); 
     
-    // 1. 鎖定背景捲動
+    // 2. 鎖定背景
     document.body.classList.add('lock-scroll');
 
-    // 2. 抓取原本卡片在螢幕上的位置 (FLIP - First)
+    // 3. 抓取座標
     const rect = card.getBoundingClientRect();
     
-    // 3. 把內容複製進分身
+    // 4. 填入內容
     overlayImg.src = originalImg.src;
     overlayBadge.innerText = badgeText;
     overlayTitle.innerText = titleText;
     overlayDesc.innerText = descText;
     
-    // 複製詳情內容
     if(hiddenBody) {
         overlayBody.innerHTML = hiddenBody.innerHTML;
     } else {
         overlayBody.innerHTML = "";
     }
 
-    // 4. 設定分身初始狀態 (位置與大小跟原本卡片一模一樣)
+    // 5. 初始狀態 (絕對定位，飄在原位)
     overlay.classList.remove('overlay-hidden');
     overlay.style.display = 'block';
     
+    // 重置樣式，確保動畫開始前是絕對定位
+    overlayCard.style.position = 'absolute'; 
+    overlayCard.style.top = '0';
+    overlayCard.style.left = '0';
     overlayCard.style.width = `${rect.width}px`;
     overlayCard.style.height = `${rect.height}px`;
     overlayCard.style.transform = `translate(${rect.left}px, ${rect.top}px)`;
     overlayCard.style.borderRadius = '12px'; 
     
-    // 5. 隱藏本尊 (保持佔位，但視覺隱藏)
+    // 6. 隱藏本尊
     card.classList.add('is-hidden-by-overlay');
 
-    // 6. 執行展開動畫 (FLIP - Play)
+    // 7. 執行動畫
     requestAnimationFrame(() => {
-        // 加入 active class 啟動 CSS transition
         overlay.classList.add('active');
         
-        // 設定最終狀態 (全螢幕)
-        overlayCard.style.width = '100%';
-        overlayCard.style.height = '100%'; 
-        overlayCard.style.minHeight = '100vh';
+        // 變形為全螢幕
         overlayCard.style.transform = `translate(0, 0)`;
+        overlayCard.style.width = '100%';
+        overlayCard.style.height = '100%'; // 動畫過程中先佔滿
         overlayCard.style.borderRadius = '0px';
+
+        // 🔥🔥🔥 關鍵修正：動畫結束後 (0.3s)，讓卡片「落地」變成可捲動狀態 🔥🔥🔥
+        setTimeout(() => {
+            // 切換成 relative，這樣父容器才知道它有多高，捲軸才會出現！
+            overlayCard.style.position = 'relative'; 
+            overlayCard.style.height = 'auto'; // 高度自動撐開
+            overlayCard.style.minHeight = '100%'; // 最少也要滿版
+        }, 300);
     });
 }
 
-// --- 2. 關閉動畫 (防連點修正版) ---
+// --- 2. 關閉動畫 (防連點 + 捲動修正) ---
 function closeOverlay() {
-    // 如果已經在關閉中 (沒有 originalCard)，就直接擋掉，防止連點
     if (!originalCard) return;
 
-    // 1. 🔥 關鍵：立刻鎖死點擊，防止手速快的人按兩下造成 bug
+    // 1. 鎖死點擊
     overlay.style.pointerEvents = 'none';
 
-    // 2. 重新抓取原本卡片的位置
+    // 2. 抓取原本卡片位置
     const rect = originalCard.getBoundingClientRect();
 
-    // 3. 移除 active，按鈕會瞬間消失 (因為 CSS 改成了 transition: 0s)
-    overlay.classList.remove('active');
-    
-    // 4. 強制分身飛回原本的位置
-    overlayCard.style.width = `${rect.width}px`;
-    overlayCard.style.height = `${rect.height}px`; 
-    overlayCard.style.transform = `translate(${rect.left}px, ${rect.top}px)`;
-    overlayCard.style.borderRadius = '12px';
+    // 3. 🔥 關鍵：關閉前先把捲軸歸零，不然飛回去的位置會錯亂
+    overlayScrollContainer.scrollTop = 0;
 
-    // 5. 等動畫跑完 (0.3s)
+    // 4. 🔥 關鍵：變回絕對定位 (Absolute)，準備飛回去
+    overlayCard.style.position = 'absolute';
+    overlayCard.style.height = '100vh'; // 變回視窗大小
+    overlayCard.style.width = '100%';
+    overlayCard.style.top = '0';
+    overlayCard.style.left = '0';
+
+    // 5. 執行縮小動畫
+    // 使用 requestAnimationFrame 確保樣式切換後才開始動
+    requestAnimationFrame(() => {
+        overlay.classList.remove('active');
+        
+        overlayCard.style.width = `${rect.width}px`;
+        overlayCard.style.height = `${rect.height}px`; 
+        overlayCard.style.transform = `translate(${rect.left}px, ${rect.top}px)`;
+        overlayCard.style.borderRadius = '12px';
+    });
+
+    // 6. 動畫結束清理
     setTimeout(() => {
-        // 隱藏分身層
         overlay.style.display = 'none';
         overlay.classList.add('overlay-hidden');
-        
-        // 顯示本尊
         originalCard.classList.remove('is-hidden-by-overlay');
-        
-        // 解鎖背景
         document.body.classList.remove('lock-scroll');
-        
-        // 清理變數
         originalCard = null;
         
-        // 捲動回分身的頂部
-        document.querySelector('.overlay-scroll-container').scrollTop = 0;
-        
-        // 🔥 關鍵：動畫結束後，恢復點擊功能 (讓下次打開時可以點)
+        // 恢復點擊
         overlay.style.pointerEvents = 'auto';
-        
     }, 300);
 }
 
 // --- 事件監聽 ---
-
-// 1. 綁定所有卡片點擊
 const cards = document.querySelectorAll('.group-card');
 cards.forEach(card => {
     card.addEventListener('click', () => openOverlay(card));
 });
 
-// 2. 綁定關閉按鈕 (只剩下底部那個)
 overlayCloseBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();

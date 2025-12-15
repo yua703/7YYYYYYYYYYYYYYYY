@@ -870,18 +870,23 @@ html.lock-scroll {
 }
 .overlay-scroll-container::-webkit-scrollbar { display: none; }
 
-/* 4. 分身卡片本體 (負責變形動畫) */
+/* 4. 分身卡片本體 */
 .overlay-card {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%; 
     background: white;
-    transform-origin: top left; /* 動畫起點 */
+    transform-origin: top left; 
     
-    /* 告訴瀏覽器這些屬性會變，請開啟 GPU 加速 */
     will-change: transform, width, height, border-radius;
     overflow: hidden;
+    
+    /* 🔥🔥🔥 關鍵修正：補上這行！讓卡片不管是變大還是變小都有動畫 */
+    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), 
+                width 0.3s ease, 
+                height 0.3s ease, 
+                border-radius 0.3s ease;
 }
 
 /* 5. 分身圖片 */
@@ -898,17 +903,23 @@ html.lock-scroll {
     height: 280px; 
 }
 
-/* 6. 內容區域 */
+/* 6. 內容區域 (修正版：關閉時極速消失，防止擠壓) */
 .overlay-content {
-    opacity: 0; /* 一開始隱藏，等卡片變大後再淡入 */
+    opacity: 0;
     transform: translateY(20px);
-    transition: all 0.3s ease 0.1s; /* 稍微延遲一點出現 */
+    
+    /* 🔥 關鍵修改：關閉時，0.05秒內瞬間淡出！ */
+    /* 這樣在卡片開始變窄之前，文字就已經看不見了，就不會有擠壓感 */
+    transition: opacity 0.05s ease, transform 0.05s ease; 
 }
 
-/* 當動畫開始，內容淡入 */
+/* 當動畫開始 (展開時)，才使用慢速過渡 */
 #clone-overlay.active .overlay-content {
     opacity: 1;
     transform: translateY(0);
+    
+    /* 展開時維持原本的優雅動畫 (慢 0.3s) */
+    transition: all 0.3s ease 0.1s; 
 }
 
 .overlay-header {
@@ -1004,7 +1015,18 @@ html.lock-scroll {
     pointer-events: none;
 }
 
-/* 9. 🔥 當組別展開時，隱藏原本的底部導覽列 */
-body.lock-scroll .bottom-nav {
-    display: none !important;
+/* 9. 背景鎖定 (iOS 強力鎖定版) */
+body.lock-scroll {
+    position: fixed; /* 強制固定 */
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    
+    /* 這裡不要寫 top，因為 top 會由 JS 動態計算，才能鎖在當前位置 */
+    
+    /* 隱藏導覽列 */
+    .bottom-nav {
+        display: none !important;
+    }
 }
