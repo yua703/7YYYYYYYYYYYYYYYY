@@ -819,214 +819,117 @@ html.lock-scroll {
     }
 }
 /* =========================================
-   🔥 App Store 級別：分身投影動畫樣式 (最終修正版)
+   🔥 新版：右側滑入式頁面 (Slide-in from Right)
    ========================================= */
 
-/* 1. 當分身出現時，讓本尊暫時隱形 (但位置保留，版面不跑掉) */
-.group-card.is-hidden-by-overlay {
-    opacity: 0 !important;
-    pointer-events: none;
-}
-
-/* 2. 投影層容器 (全螢幕遮罩) */
+/* 1. 投影層容器 (全螢幕，預設藏在右邊) */
 #clone-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     
-    /* 🔥 強制使用視窗高度，解決手機版面覆蓋不全問題 */
+    /* 強制使用視窗高度 */
     height: 100vh; 
-    height: 100dvh; /* 針對新版手機瀏覽器的最佳化單位 */
+    height: 100dvh;
     
     z-index: 9999;
-    pointer-events: none; /* 沒打開時不擋路 */
+    background-color: #ffffff; /* 實心白底 */
     
-    /* 預設背景透明 */
-    background-color: rgba(255, 255, 255, 0); 
-    transition: background-color 0.3s ease;
+    /* 🔥 核心關鍵：預設先移到螢幕右側外面 */
+    transform: translate3d(100%, 0, 0);
+    
+    /* 滑動動畫設定 */
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    
+    /* 開啟硬體加速 */
+    will-change: transform;
 }
-
-/* 啟動時的狀態：背景變成「實心純白」，蓋住後面所有東西 */
+/* 🔥 狀態 B：出現在「中間」 */
 #clone-overlay.active {
-    pointer-events: auto; /* 打開後可以點擊 */
-    background-color: #ffffff !important; /* 🔥 強制純白，絕不透視 */
+    transform: translate3d(0%, 0, 0);
 }
 
-/* 3. 內層捲動容器 (讓長內容可以捲動) */
+/* 🔥 狀態 C：躲在「上面」 (為了退場專用) */
+#clone-overlay.exit-to-top {
+    transform: translate3d(0, -100%, 0) !important;
+}
+
+
+/* 2. 內層捲動容器 */
 .overlay-scroll-container {
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    overscroll-behavior: contain; /* 防止滑動穿透 */
+    overscroll-behavior: contain; 
     -webkit-overflow-scrolling: touch;
-    
-    /* 隱藏捲軸但保留功能 */
     scrollbar-width: none; 
     
-    /* 🔥 關鍵：下面多留空間給固定按鈕 (120px 按鈕高度 + 20px 緩衝) */
-    /* 這樣滑到底的時候，最後一行字才不會被按鈕擋住 */
+    /* 下面留空間給固定按鈕 */
     padding-bottom: 140px; 
 }
 .overlay-scroll-container::-webkit-scrollbar { display: none; }
 
-/* 4. 分身卡片本體 */
+/* 3. 分身卡片本體 (現在只是一個單純的容器) */
 .overlay-card {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%; 
+    width: 100%;
     background: white;
-    transform-origin: top left; 
-    
-    will-change: transform, width, height, border-radius;
-    overflow: hidden;
-    
-    /* 🔥🔥🔥 關鍵修正：補上這行！讓卡片不管是變大還是變小都有動畫 */
-    transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), 
-                width 0.3s ease, 
-                height 0.3s ease, 
-                border-radius 0.3s ease;
+    /* 不再需要複雜的變形或絕對定位設定 */
 }
 
-/* 5. 分身圖片 */
+/* 4. 分身圖片 (固定為大圖高度) */
 .overlay-img {
     width: 100%;
-    height: 140px; /* 初始高度跟原本一樣 */
+    height: 280px; /* 直接設定展開後的高度 */
     object-fit: cover;
     display: block;
-    will-change: height;
-    transition: height 0.3s ease;
-}
-/* 展開後的圖片高度 */
-#clone-overlay.active .overlay-img {
-    height: 280px; 
 }
 
-/* 6. 內容區域 (修正版：關閉時極速消失，防止擠壓) */
+/* 5. 內容區域 */
 .overlay-content {
-    opacity: 0;
-    transform: translateY(20px);
-    
-    /* 🔥 關鍵修改：關閉時，0.05秒內瞬間淡出！ */
-    /* 這樣在卡片開始變窄之前，文字就已經看不見了，就不會有擠壓感 */
-    transition: opacity 0.05s ease, transform 0.05s ease; 
-}
-
-/* 當動畫開始 (展開時)，才使用慢速過渡 */
-#clone-overlay.active .overlay-content {
+    /* 不再需要透明度動畫，跟著整頁一起滑入即可 */
+    transform: none;
     opacity: 1;
-    transform: translateY(0);
-    
-    /* 展開時維持原本的優雅動畫 (慢 0.3s) */
-    transition: all 0.3s ease 0.1s; 
 }
 
-.overlay-header {
-    padding: 20px 20px 0 20px;
-}
+.overlay-header { padding: 20px 20px 0 20px; }
+.overlay-title { font-size: 1.8rem; font-weight: bold; color: #4882A6; margin-bottom: 5px; }
+.overlay-desc { font-size: 1rem; color: #666; }
+.overlay-badge { display: inline-block; background: #4882A6; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
+.overlay-body { padding: 0 20px 20px 20px; color: #333; line-height: 1.6; }
 
-.overlay-title {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #4882A6;
-    margin-bottom: 5px;
-}
-.overlay-desc {
-    font-size: 1rem;
-    color: #666;
-}
-.overlay-badge {
-    display: inline-block;
-    background: #4882A6;
-    color: white;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 0.8rem;
-    margin-bottom: 5px;
-}
-
-.overlay-body {
-    padding: 0 20px 20px 20px;
-    color: #333;
-    line-height: 1.6;
-}
-
-/* 7. 底部按鈕固定 (Fixed Bottom) - 這是你要的「點擊收合」 */
+/* 6. 底部按鈕固定 (維持不變) */
 .overlay-bottom-close {
-    position: absolute; /* 絕對定位 */
-    bottom: 0;          /* 死死黏在最下面 */
-    left: 0;
-    width: 100%;
-    height: 120px;      /* 漸層區域高度 */
-    
-    /* 排版設定 */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
-    padding-bottom: 30px; /* 文字離底部的距離 */
-    
-    /* 背景漸層：從透明(上) 到 純白(下)，防止文字看不清楚 */
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 120px;
+    display: flex; flex-direction: column; justify-content: flex-end; align-items: center;
+    padding-bottom: 30px;
     background: linear-gradient(to top, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 0));
-    
-    z-index: 100; /* 確保在最上層 */
-    cursor: pointer;
-    
-    /* 防止手機誤觸選取文字 */
-    user-select: none; 
-    -webkit-user-select: none;
+    z-index: 100; cursor: pointer;
+    user-select: none; -webkit-user-select: none;
+}
+.bouncing-arrow { width: 0; height: 0; border-left: 10px solid transparent; border-right: 10px solid transparent; border-top: 15px solid #4882A6; margin-bottom: 8px; animation: bounce 2s infinite; }
+.close-text { color: #4882A6; font-size: 14px; letter-spacing: 2px; font-weight: bold; }
 
-    /* 🔥 關鍵修改：預設是隱藏的 (opacity: 0) */
-    opacity: 0;
-    pointer-events: none; /* 隱藏時不准點 */
-    
-    /* 🔥 關鍵動畫：當 active 拿掉時，0秒瞬間消失，不給點擊機會 */
-    transition: opacity 0s;
-}
-/* 當分身層啟動時，按鈕才慢慢浮現 */
-#clone-overlay.active .overlay-bottom-close {
-    opacity: 1;
-    pointer-events: auto; /* 出現時才準點 */
-    
-    /* 延遲 0.2s 才出現，讓體驗更優雅，不要跟卡片一起炸出來 */
-    transition: opacity 0.3s ease 0.1s; 
-}
-.bouncing-arrow {
-    /* 箭頭樣式保持原本的 */
-    width: 0; height: 0;
-    border-left: 10px solid transparent; border-right: 10px solid transparent;
-    border-top: 15px solid #4882A6; /* 改成藍色箭頭比較明顯，原本是白色 */
-    margin-bottom: 8px;
-    animation: bounce 2s infinite;
-}
-.close-text {
-    /* 文字樣式 */
-    color: #4882A6; /* 改成藍色文字 */
-    font-size: 14px; 
-    letter-spacing: 2px;
-    font-weight: bold; 
-}
-
-/* 8. 預設隱藏分身層 (解決進網頁破圖白塊問題) */
+/* 7. 預設隱藏 (防止閃爍) */
 .overlay-hidden {
-    display: none !important;
-    opacity: 0;
-    pointer-events: none;
+    /* 這裡改用 visibility，因為 transform 已經把它移出畫面了 */
+    visibility: hidden; 
+}
+#clone-overlay.active {
+    visibility: visible;
 }
 
-/* 9. 背景鎖定 (iOS 強力鎖定版) */
+/* 8. 背景鎖定 (輕量版：防止閃白) */
 body.lock-scroll {
-    position: fixed; /* 強制固定 */
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
+    overflow: hidden !important; /* 只禁止捲動 */
     
-    /* 這裡不要寫 top，因為 top 會由 JS 動態計算，才能鎖在當前位置 */
-    
-    /* 隱藏導覽列 */
-    .bottom-nav {
-        display: none !important;
-    }
+    /* 針對 iOS 的優化，防止滑動穿透 */
+    touch-action: none; 
+    -webkit-overflow-scrolling: auto;
+}
+
+/* 隱藏導覽列 (維持不變) */
+body.lock-scroll .bottom-nav { 
+    display: none !important; 
 }

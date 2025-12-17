@@ -326,130 +326,68 @@ function stopLeaderboardUpdate() {
 
 
 // ==========================================
-// 5. 組別展開功能 (修正版：解決長文無法滑動問題)
+// 5. 組別展開功能 (進階版：右進上出)
 // ==========================================
 const overlay = document.getElementById('clone-overlay');
-const overlayCard = overlay.querySelector('.overlay-card');
 const overlayImg = overlay.querySelector('.overlay-img');
 const overlayTitle = overlay.querySelector('.overlay-title');
 const overlayDesc = overlay.querySelector('.overlay-desc');
 const overlayBadge = overlay.querySelector('.overlay-badge');
 const overlayBody = overlay.querySelector('.overlay-body');
-const overlayScrollContainer = overlay.querySelector('.overlay-scroll-container'); // 抓取捲動容器
-
-// 抓取底部收合按鈕
+const overlayScrollContainer = overlay.querySelector('.overlay-scroll-container'); 
 const overlayCloseBtns = overlay.querySelectorAll('.overlay-bottom-close');
 
-let originalCard = null;
-
-// --- 1. 打開動畫 ---
+// --- 1. 打開頁面 (從右邊滑入) ---
 function openOverlay(card) {
-    if (overlay.classList.contains('active')) return;
+    // 1. 🔥 關鍵：確保它是在「右邊」待命 (移除往上飛的 class)
+    overlay.classList.remove('exit-to-top');
     
-    originalCard = card;
-    
-    // 1. 抓取資料
+    // 2. 鎖定背景
+    document.body.classList.add('lock-scroll');
+
+    // 3. 填入資料
     const originalImg = card.querySelector('.group-img');
     const badgeText = card.querySelector('.group-badge').innerText;
     const titleText = card.querySelector('h3').innerText;
     const descText = card.querySelector('.group-info p').innerText;
     const hiddenBody = card.querySelector('.group-content-inner'); 
     
-    // 2. 鎖定背景
-    document.body.classList.add('lock-scroll');
-
-    // 3. 抓取座標
-    const rect = card.getBoundingClientRect();
-    
-    // 4. 填入內容
     overlayImg.src = originalImg.src;
     overlayBadge.innerText = badgeText;
     overlayTitle.innerText = titleText;
     overlayDesc.innerText = descText;
-    
-    if(hiddenBody) {
-        overlayBody.innerHTML = hiddenBody.innerHTML;
-    } else {
-        overlayBody.innerHTML = "";
-    }
+    overlayBody.innerHTML = hiddenBody ? hiddenBody.innerHTML : "";
 
-    // 5. 初始狀態 (絕對定位，飄在原位)
+    // 4. 重置捲軸
+    if(overlayScrollContainer) overlayScrollContainer.scrollTop = 0;
+
+    // 5. 顯示並滑入
     overlay.classList.remove('overlay-hidden');
-    overlay.style.display = 'block';
     
-    // 重置樣式，確保動畫開始前是絕對定位
-    overlayCard.style.position = 'absolute'; 
-    overlayCard.style.top = '0';
-    overlayCard.style.left = '0';
-    overlayCard.style.width = `${rect.width}px`;
-    overlayCard.style.height = `${rect.height}px`;
-    overlayCard.style.transform = `translate(${rect.left}px, ${rect.top}px)`;
-    overlayCard.style.borderRadius = '12px'; 
-    
-    // 6. 隱藏本尊
-    card.classList.add('is-hidden-by-overlay');
-
-    // 7. 執行動畫
     requestAnimationFrame(() => {
-        overlay.classList.add('active');
-        
-        // 變形為全螢幕
-        overlayCard.style.transform = `translate(0, 0)`;
-        overlayCard.style.width = '100%';
-        overlayCard.style.height = '100%'; // 動畫過程中先佔滿
-        overlayCard.style.borderRadius = '0px';
-
-        // 🔥🔥🔥 關鍵修正：動畫結束後 (0.3s)，讓卡片「落地」變成可捲動狀態 🔥🔥🔥
-        setTimeout(() => {
-            // 切換成 relative，這樣父容器才知道它有多高，捲軸才會出現！
-            overlayCard.style.position = 'relative'; 
-            overlayCard.style.height = 'auto'; // 高度自動撐開
-            overlayCard.style.minHeight = '100%'; // 最少也要滿版
-        }, 300);
+        overlay.classList.add('active'); // 從右邊 -> 中間
     });
 }
 
-// --- 2. 關閉動畫 (防連點 + 捲動修正) ---
+// --- 2. 關閉頁面 (往上面滑出) ---
 function closeOverlay() {
-    if (!originalCard) return;
+    // 1. 🔥 關鍵：加上這個 class，改變它的終點為「上面」
+    overlay.classList.add('exit-to-top');
 
-    // 1. 鎖死點擊
-    overlay.style.pointerEvents = 'none';
+    // 2. 觸發動畫 (移除 active，它就會往 exit-to-top 的位置飛去)
+    overlay.classList.remove('active');
 
-    // 2. 抓取原本卡片位置
-    const rect = originalCard.getBoundingClientRect();
-
-    // 3. 🔥 關鍵：關閉前先把捲軸歸零，不然飛回去的位置會錯亂
-    overlayScrollContainer.scrollTop = 0;
-
-    // 4. 🔥 關鍵：變回絕對定位 (Absolute)，準備飛回去
-    overlayCard.style.position = 'absolute';
-    overlayCard.style.height = '100vh'; // 變回視窗大小
-    overlayCard.style.width = '100%';
-    overlayCard.style.top = '0';
-    overlayCard.style.left = '0';
-
-    // 5. 執行縮小動畫
-    // 使用 requestAnimationFrame 確保樣式切換後才開始動
-    requestAnimationFrame(() => {
-        overlay.classList.remove('active');
-        
-        overlayCard.style.width = `${rect.width}px`;
-        overlayCard.style.height = `${rect.height}px`; 
-        overlayCard.style.transform = `translate(${rect.left}px, ${rect.top}px)`;
-        overlayCard.style.borderRadius = '12px';
-    });
-
-    // 6. 動畫結束清理
+    // 3. 等待動畫結束 (0.3s)
     setTimeout(() => {
-        overlay.style.display = 'none';
+        // 隱藏層級
         overlay.classList.add('overlay-hidden');
-        originalCard.classList.remove('is-hidden-by-overlay');
-        document.body.classList.remove('lock-scroll');
-        originalCard = null;
         
-        // 恢復點擊
-        overlay.style.pointerEvents = 'auto';
+        // 🔥 關鍵：偷偷把它移回「右邊」 (移除 exit-to-top)，準備下次使用
+        overlay.classList.remove('exit-to-top');
+        
+        // 解鎖背景
+        document.body.classList.remove('lock-scroll');
+        
     }, 300);
 }
 
