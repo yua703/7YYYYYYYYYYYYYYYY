@@ -759,7 +759,7 @@ h2 {
     }
 }
 /* =========================================
-   🔥 新版：右側滑入式頁面 (Slide-in from Right)
+   🔥 新版：上方滑入式頁面 (Slide-in from Right)
    ========================================= */
 
 /* 1. 投影層容器 (全螢幕，預設藏在右邊) */
@@ -830,7 +830,26 @@ h2 {
 
 .overlay-header { padding: 20px 20px 0 20px; }
 .overlay-title { font-size: 1.8rem; font-weight: bold; color: #4882A6; margin-bottom: 5px; }
-.overlay-desc { font-size: 1rem; color: #666; }
+.overlay-desc {
+    font-size: 1rem; 
+    color: #666;
+    
+    /* 🔥 新增：下方分隔線 */
+    box-shadow: 
+        0 1px 0 0 #333,                  /* 模擬原本的黑色分隔線 */
+        0 4px 6px -1px rgba(0,0,0,0.1);
+    
+    /* 🔥 調整：增加呼吸空間 */
+    padding-bottom: 15px;  /* 線條跟文字(耐力)的距離 */
+    margin-bottom: 20px;   /* 線條跟下面(組別介紹)的距離 */
+    margin-left: -20px; 
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
+    /* 確保線條寬度佔滿容器 */
+    display: block;
+}
 .overlay-badge { display: inline-block; background: #4882A6; color: #ffffff; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
 .overlay-body { padding: 0 20px 20px 20px; color: #333; line-height: 1.6; }
 
@@ -868,4 +887,22 @@ body.lock-scroll {
 /* 隱藏導覽列 (維持不變) */
 body.lock-scroll .bottom-nav { 
     display: none !important; 
+}
+.detail-tag {
+    /* 1. 佈局設定 */
+    display: inline-block;  /* 讓框框隨文字寬度縮放 (關鍵) */
+    margin-top: 5px;       /* 上方留白 */
+    margin-bottom: 6px;     /* 下方留白 (跟內容分開) */
+    
+    /* 2. 線條與顏色 (重點在這裡) */
+    border: 1.5px solid #555; /* 深灰色邊框 (1.5px 比較有質感，想要細一點改 1px) */
+    color: #555;              /* 文字顏色跟邊框一樣 */
+    background-color: transparent; /* 🔥 背景透明 (只要線) */
+    
+    /* 3. 外觀微調 */
+    padding: 4px 16px;      /* 內距：上下 4px，左右 16px */
+    border-radius: 50px;    /* 膠囊狀圓角 */
+    font-size: 0.9rem;      /* 字體大小 */
+    font-weight: bold;      /* 粗體 */
+    letter-spacing: 1px;    /* 字距稍微拉開一點比較好看 */
 }
