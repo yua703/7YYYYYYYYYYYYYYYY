@@ -837,7 +837,7 @@ html.lock-scroll {
     background-color: #ffffff; /* 實心白底 */
     
     /* 🔥 核心關鍵：預設先移到螢幕右側外面 */
-    transform: translate3d(100%, 0, 0);
+    transform: translate3d(0, -100%, 0);
     
     /* 滑動動畫設定 */
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -845,16 +845,12 @@ html.lock-scroll {
     /* 開啟硬體加速 */
     will-change: transform;
 }
-/* 🔥 狀態 B：出現在「中間」 */
+
+
+/* 啟動狀態：滑入螢幕中間 */
 #clone-overlay.active {
     transform: translate3d(0%, 0, 0);
 }
-
-/* 🔥 狀態 C：躲在「上面」 (為了退場專用) */
-#clone-overlay.exit-to-top {
-    transform: translate3d(0, -100%, 0) !important;
-}
-
 
 /* 2. 內層捲動容器 */
 .overlay-scroll-container {

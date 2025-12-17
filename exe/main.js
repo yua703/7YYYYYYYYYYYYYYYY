@@ -326,7 +326,7 @@ function stopLeaderboardUpdate() {
 
 
 // ==========================================
-// 5. 組別展開功能 (進階版：右進上出)
+// 5. 組別展開功能 (極速版：解決閃白問題)
 // ==========================================
 const overlay = document.getElementById('clone-overlay');
 const overlayImg = overlay.querySelector('.overlay-img');
@@ -337,15 +337,12 @@ const overlayBody = overlay.querySelector('.overlay-body');
 const overlayScrollContainer = overlay.querySelector('.overlay-scroll-container'); 
 const overlayCloseBtns = overlay.querySelectorAll('.overlay-bottom-close');
 
-// --- 1. 打開頁面 (從右邊滑入) ---
+// --- 1. 打開頁面 (滑入) ---
 function openOverlay(card) {
-    // 1. 🔥 關鍵：確保它是在「右邊」待命 (移除往上飛的 class)
-    overlay.classList.remove('exit-to-top');
-    
-    // 2. 鎖定背景
+    // 1. 鎖定背景 (不再需要計算 top，直接鎖)
     document.body.classList.add('lock-scroll');
 
-    // 3. 填入資料
+    // 2. 填入資料
     const originalImg = card.querySelector('.group-img');
     const badgeText = card.querySelector('.group-badge').innerText;
     const titleText = card.querySelector('h3').innerText;
@@ -358,34 +355,29 @@ function openOverlay(card) {
     overlayDesc.innerText = descText;
     overlayBody.innerHTML = hiddenBody ? hiddenBody.innerHTML : "";
 
-    // 4. 重置捲軸
+    // 3. 重置捲軸
     if(overlayScrollContainer) overlayScrollContainer.scrollTop = 0;
 
-    // 5. 顯示並滑入
+    // 4. 顯示並滑入
     overlay.classList.remove('overlay-hidden');
     
+    // 強制瀏覽器準備好渲染，避免閃爍
     requestAnimationFrame(() => {
-        overlay.classList.add('active'); // 從右邊 -> 中間
+        overlay.classList.add('active');
     });
 }
 
-// --- 2. 關閉頁面 (往上面滑出) ---
+// --- 2. 關閉頁面 (滑出) ---
 function closeOverlay() {
-    // 1. 🔥 關鍵：加上這個 class，改變它的終點為「上面」
-    overlay.classList.add('exit-to-top');
-
-    // 2. 觸發動畫 (移除 active，它就會往 exit-to-top 的位置飛去)
+    // 1. 滑出
     overlay.classList.remove('active');
 
-    // 3. 等待動畫結束 (0.3s)
+    // 2. 等待動畫結束 (0.3s)
     setTimeout(() => {
         // 隱藏層級
         overlay.classList.add('overlay-hidden');
         
-        // 🔥 關鍵：偷偷把它移回「右邊」 (移除 exit-to-top)，準備下次使用
-        overlay.classList.remove('exit-to-top');
-        
-        // 解鎖背景
+        // 🔥 關鍵：解鎖背景 (因為沒有用 fixed，所以不需要 scrollTo，位置會自動保留！)
         document.body.classList.remove('lock-scroll');
         
     }, 300);
