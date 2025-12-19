@@ -906,3 +906,136 @@ body.lock-scroll .bottom-nav {
     font-weight: bold;      /* 粗體 */
     letter-spacing: 1px;    /* 字距稍微拉開一點比較好看 */
 }
+/* 修改 .overlay-body 裡面的 hr 設定 */
+.overlay-body hr {
+    /* 1. 殺掉預設樣式 (最關鍵的一步) */
+    border: none;
+    height: 1px;       /* 設定線條高度 */
+    background-color: #ccc; /* 設定線條顏色 (淺灰) */
+    
+    /* 2. 精準控制間距 */
+    margin-top: 20px;    /* 線條 跟 上面文字 的距離 */
+    margin-bottom: 20px; /* 線條 跟 下面標籤(組員) 的距離 */
+    
+    /* 3. 確保寬度 */
+    width: 100%;
+    display: block;
+    
+    /* (選用) 如果你想讓線條也跟標籤一樣是圓角 */
+    border-radius: 1px;
+}
+/* =========================================
+   🔥 新增：多圖滑動與全螢幕樣式
+   ========================================= */
+
+/* 1. 詳情頁圖片容器 */
+.overlay-slider-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px; /* 固定高度 */
+    overflow: hidden; /* 超出隱藏 */
+    background: #f0f0f0;
+}
+
+/* 2. 圖片軌道 (Flex 排列) */
+.overlay-slider-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    will-change: transform; /* 優化效能 */
+    cursor: grab; /* 手型游標 */
+}
+
+/* 3. 單張圖片 */
+.overlay-slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    flex-shrink: 0; /* 防止被壓縮 */
+    display: block;
+}
+
+/* 4. 右上角計數器 (仿照 G4 Badge 風格) */
+.overlay-image-counter {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(50, 60, 70, 0.8); /* 深灰半透明底 */
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px; /* 橢圓導角 */
+    pointer-events: none; /* 讓點擊穿透 */
+    z-index: 10;
+    letter-spacing: 1px;
+}
+
+/* =========================================
+   🔥 全螢幕檢視器 (Lightbox)
+   ========================================= */
+#fullscreen-lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    z-index: 99999; /* 最上層 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#fullscreen-lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 全螢幕軌道 */
+.lightbox-track {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    cursor: grab;
+}
+
+/* 全螢幕圖片 (完整顯示 contain) */
+.lightbox-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+/* 全螢幕右上角計數器 */
+.lightbox-counter {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-weight: bold;
+    z-index: 100;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+/* 全螢幕關閉按鈕 */
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    cursor: pointer;
+    z-index: 100;
+    padding: 10px; 
+    margin: -10px;
+    transition: opacity 0.2s;
+}

@@ -326,76 +326,267 @@ function stopLeaderboardUpdate() {
 
 
 // ==========================================
-// 5. 組別展開功能 (極速版：解決閃白問題)
+// 5. 組別展開功能 (含多圖滑動 & 全螢幕) - Bug修復版
 // ==========================================
+
+// 🔥 設定：每一組的照片清單
+const GROUP_GALLERY = {
+    "G1": ["img/1.webp", "img/1.webp", "img/1.webp"], 
+    "G4": ["img/4.webp", "img/4.webp"],
+    // 其他沒寫的組別，程式會自動預設只有一張封面圖
+};
+
+// DOM 元素選取
 const overlay = document.getElementById('clone-overlay');
-const overlayImg = overlay.querySelector('.overlay-img');
 const overlayTitle = overlay.querySelector('.overlay-title');
 const overlayDesc = overlay.querySelector('.overlay-desc');
 const overlayBadge = overlay.querySelector('.overlay-badge');
 const overlayBody = overlay.querySelector('.overlay-body');
-const overlayScrollContainer = overlay.querySelector('.overlay-scroll-container'); 
+const overlayScrollContainer = overlay.querySelector('.overlay-scroll-container');
 const overlayCloseBtns = overlay.querySelectorAll('.overlay-bottom-close');
 
-// --- 1. 打開頁面 (滑入) ---
+// 滑動相關元素
+const sliderTrack = overlay.querySelector('.overlay-slider-track');
+const sliderCounter = overlay.querySelector('.overlay-image-counter');
+
+// 🔥 核心修正：將 Index 變數統一管理，不要讓 enableSwipe 自己私藏
+let currentImages = []; 
+let currentSlideIndex = 0; 
+
+// 全螢幕相關元素
+const lightbox = document.getElementById('fullscreen-lightbox');
+const lightboxTrack = lightbox.querySelector('.lightbox-track');
+const lightboxCounter = lightbox.querySelector('.lightbox-counter');
+const lightboxClose = lightbox.querySelector('.lightbox-close');
+
+// --- 功能 A: 開啟詳情頁 (Overlay) ---
 function openOverlay(card) {
-    // 1. 鎖定背景 (不再需要計算 top，直接鎖)
     document.body.classList.add('lock-scroll');
 
-    // 2. 填入資料
-    const originalImg = card.querySelector('.group-img');
-    const badgeText = card.querySelector('.group-badge').innerText;
+    // 1. 抓取基本文字資料
+    const badgeText = card.querySelector('.group-badge').innerText; 
     const titleText = card.querySelector('h3').innerText;
     const descText = card.querySelector('.group-info p').innerText;
-    const hiddenBody = card.querySelector('.group-content-inner'); 
-    
-    overlayImg.src = originalImg.src;
+    const hiddenBody = card.querySelector('.group-content-inner');
+    const originalImgSrc = card.querySelector('.group-img').src;
+
+    // 2. 準備圖片資料
+    if (GROUP_GALLERY[badgeText]) {
+        currentImages = GROUP_GALLERY[badgeText];
+    } else {
+        // 預設只有一張圖
+        currentImages = [originalImgSrc];
+    }
+
+    // 3. 填入文字
     overlayBadge.innerText = badgeText;
     overlayTitle.innerText = titleText;
     overlayDesc.innerText = descText;
     overlayBody.innerHTML = hiddenBody ? hiddenBody.innerHTML : "";
 
-    // 3. 重置捲軸
-    if(overlayScrollContainer) overlayScrollContainer.scrollTop = 0;
-
-    // 4. 顯示並滑入
-    overlay.classList.remove('overlay-hidden');
+    // 4. 初始化滑動器
+    initSlider(sliderTrack, currentImages, 'overlay-slide-img');
     
-    // 強制瀏覽器準備好渲染，避免閃爍
+    // 🔥 核心修正：打開時強制歸零
+    currentSlideIndex = 0; 
+    updateCounter(sliderCounter, 1, currentImages.length);
+    sliderTrack.style.transform = `translateX(0px)`; 
+
+    // 5. 顯示 Overlay
+    if(overlayScrollContainer) overlayScrollContainer.scrollTop = 0;
+    overlay.classList.remove('overlay-hidden');
     requestAnimationFrame(() => {
         overlay.classList.add('active');
     });
 }
 
-// --- 2. 關閉頁面 (滑出) ---
-function closeOverlay() {
-    // 1. 滑出
-    overlay.classList.remove('active');
+// --- 功能 B: 初始化滑動軌道 ---
+function initSlider(trackElement, images, imgClass) {
+    trackElement.innerHTML = ''; // 清空
+    images.forEach((src, index) => {
+        const img = document.createElement('img');
+        img.src = src;
+        img.className = imgClass; 
+        // 點擊詳情頁圖片 -> 開啟全螢幕
+        if (imgClass === 'overlay-slide-img') {
+            img.onclick = () => openLightbox(index);
+        }
+        trackElement.appendChild(img);
+    });
+}
 
-    // 2. 等待動畫結束 (0.3s)
-    setTimeout(() => {
-        // 隱藏層級
-        overlay.classList.add('overlay-hidden');
+// --- 功能 C: 更新計數器文字 ---
+function updateCounter(element, current, total) {
+    element.innerText = `${current}/${total}`;
+}
+
+// --- 功能 D: 通用滑動邏輯 ---
+function enableSwipe(trackElement, counterElement, isLightbox = false) {
+    let startX = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let isDragging = false;
+    let animationID;
+
+    // 觸控開始
+    trackElement.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        animationID = requestAnimationFrame(animation);
         
-        // 🔥 關鍵：解鎖背景 (因為沒有用 fixed，所以不需要 scrollTo，位置會自動保留！)
+        // 🔥 核心修正：這裡改用全域變數 currentSlideIndex，確保讀到的是歸零後的數值
+        // 如果是全螢幕模式，因為全螢幕是獨立邏輯，這裡我們只處理詳情頁
+        if(!isLightbox) {
+            prevTranslate = currentSlideIndex * -trackElement.offsetWidth;
+        }
+    }, { passive: true });
+
+    // 觸控移動
+    trackElement.addEventListener('touchmove', (e) => {
+        if (isDragging) {
+            const currentX = e.touches[0].clientX;
+            const diff = currentX - startX;
+            currentTranslate = prevTranslate + diff;
+        }
+    }, { passive: true });
+
+    // 觸控結束
+    trackElement.addEventListener('touchend', () => {
+        isDragging = false;
+        cancelAnimationFrame(animationID);
+
+        const movedBy = currentTranslate - prevTranslate;
+        const threshold = 50; 
+
+        // 🔥 核心修正：直接操作全域變數
+        if (movedBy < -threshold && currentSlideIndex < currentImages.length - 1) {
+            currentSlideIndex += 1;
+        } else if (movedBy > threshold && currentSlideIndex > 0) {
+            currentSlideIndex -= 1;
+        }
+
+        setPositionByIndex();
+    });
+
+    // 動畫幀
+    function animation() {
+        if(isDragging) {
+            setSliderPosition(currentTranslate);
+            requestAnimationFrame(animation);
+        }
+    }
+
+    // 設定位置 (拖曳中)
+    function setSliderPosition(pos) {
+        trackElement.style.transform = `translateX(${pos}px)`;
+    }
+
+    // 設定位置 (放開後吸附)
+    function setPositionByIndex() {
+        const width = trackElement.offsetWidth;
+        
+        // 🔥 核心修正：使用全域變數計算位置
+        currentTranslate = currentSlideIndex * -width;
+        
+        trackElement.style.transition = 'transform 0.3s ease-out';
+        trackElement.style.transform = `translateX(${currentTranslate}px)`;
+        
+        setTimeout(() => {
+            trackElement.style.transition = 'none';
+        }, 300);
+
+        updateCounter(counterElement, currentSlideIndex + 1, currentImages.length);
+    }
+}
+
+// 啟用詳情頁的滑動
+enableSwipe(sliderTrack, sliderCounter, false);
+
+
+// --- 功能 E: 全螢幕 Lightbox 邏輯 ---
+function openLightbox(startIndex) {
+    initSlider(lightboxTrack, currentImages, 'lightbox-img');
+    lightbox.classList.add('active');
+    
+    // 全螢幕使用獨立的 index，不干擾詳情頁
+    setupLightboxSwipe(startIndex);
+}
+
+function setupLightboxSwipe(initialIndex) {
+    let index = initialIndex; // 全螢幕內部的獨立變數
+    let startX = 0;
+    let isDragging = false;
+    
+    // 初始化位置
+    const width = window.innerWidth;
+    lightboxTrack.style.transition = 'none'; // 避免開啟時有動畫
+    lightboxTrack.style.transform = `translateX(${-index * width}px)`;
+    updateCounter(lightboxCounter, index + 1, currentImages.length);
+
+    lightboxTrack.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        lightboxTrack.style.transition = 'none';
+    });
+
+    lightboxTrack.addEventListener('touchmove', e => {
+        if (!isDragging) return;
+        const diff = e.touches[0].clientX - startX;
+        const width = window.innerWidth;
+        const translate = (index * -width) + diff;
+        lightboxTrack.style.transform = `translateX(${translate}px)`;
+        e.preventDefault(); 
+    }, { passive: false });
+
+    lightboxTrack.addEventListener('touchend', e => {
+        isDragging = false;
+        const endX = e.changedTouches[0].clientX;
+        const diff = endX - startX;
+        const width = window.innerWidth;
+
+        if (diff < -50 && index < currentImages.length - 1) {
+            index++;
+        } else if (diff > 50 && index > 0) {
+            index--;
+        }
+
+        lightboxTrack.style.transition = 'transform 0.3s ease';
+        lightboxTrack.style.transform = `translateX(${index * -width}px)`;
+        updateCounter(lightboxCounter, index + 1, currentImages.length);
+    });
+}
+
+// 關閉全螢幕
+lightboxClose.addEventListener('click', () => {
+    lightbox.classList.remove('active');
+});
+
+// --- 功能 F: 關閉詳情頁 ---
+function closeOverlay() {
+    overlay.classList.remove('active');
+    setTimeout(() => {
+        overlay.classList.add('overlay-hidden');
         document.body.classList.remove('lock-scroll');
         
+        // 關閉時也保險歸零一次
+        currentSlideIndex = 0;
+        sliderTrack.style.transform = `translateX(0px)`;
     }, 300);
 }
 
-// --- 事件監聽 ---
+// 綁定點擊卡片事件
 const cards = document.querySelectorAll('.group-card');
 cards.forEach(card => {
     card.addEventListener('click', () => openOverlay(card));
 });
 
+// 綁定關閉按鈕
 overlayCloseBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
         closeOverlay();
     });
 });
-
 // ==========================================
 // 6. GSAP 視差與動畫效果
 // ==========================================
