@@ -420,28 +420,30 @@ function updateCounter(element, current, total) {
     element.innerText = `${current}/${total}`;
 }
 
-// --- 功能 D: 通用滑動邏輯 (防手勢衝突優化版) ---
+// --- 功能 D: 通用滑動邏輯 (修正版：恢復即時拖曳感 + 方向鎖定) ---
 function enableSwipe(trackElement, counterElement, isLightbox = false) {
     let startX = 0;
-    let startY = 0; // 🔥 新增：紀錄垂直位置
+    let startY = 0;
     let currentTranslate = 0;
     let prevTranslate = 0;
     let isDragging = false;
     let animationID;
-    let isHorizontal = null; // 🔥 新增：用來鎖定方向的旗標
+    let isHorizontal = null; // 用來鎖定方向
 
     // 觸控開始
     trackElement.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
-        startY = e.touches[0].clientY; // 🔥 紀錄 Y
+        startY = e.touches[0].clientY;
         isDragging = true;
-        isHorizontal = null; // 重置方向判定
+        isHorizontal = null; // 重置方向
+        
+        // 🔥 修正點 1：動畫迴圈要立刻啟動，不能等方向判斷
         animationID = requestAnimationFrame(animation);
         
         if(!isLightbox) {
             prevTranslate = currentSlideIndex * -trackElement.offsetWidth;
         }
-    }, { passive: false }); // 🔥 關鍵修改：改成 false 才能擋住捲動
+    }, { passive: false });
 
     // 觸控移動
     trackElement.addEventListener('touchmove', (e) => {
@@ -452,33 +454,29 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
         const diffX = currentX - startX;
         const diffY = currentY - startY;
 
-        // 🔥 核心邏輯：方向鎖定
-        // 如果還沒判定方向，就先比較 X 和 Y 的移動距離
+        // 判斷方向 (只在第一次移動時判斷)
         if (isHorizontal === null) {
-            // 如果 X 移動距離 > Y 移動距離，認定為「水平滑動意圖」
             if (Math.abs(diffX) > Math.abs(diffY)) {
-                isHorizontal = true;
+                isHorizontal = true; // 鎖定為水平
             } else {
-                isHorizontal = false;
+                isHorizontal = false; // 鎖定為垂直
             }
         }
 
-        // 🔥 如果判定是水平滑動，就執行圖片移動，並「殺掉」垂直捲動
+        // 如果是水平滑動
         if (isHorizontal) {
-            if (e.cancelable) e.preventDefault(); // 🛑 禁止網頁上下捲動
-            currentTranslate = prevTranslate + diffX;
+            if (e.cancelable) e.preventDefault(); // 禁止網頁上下捲動
+            currentTranslate = prevTranslate + diffX; // 🔥 這裡會持續更新位置
         }
-        // 如果是垂直滑動 (isHorizontal === false)，就不更新 currentTranslate
-        // 這樣圖片不會動，瀏覽器會自然地去捲動網頁
-
-    }, { passive: false }); // 🔥 關鍵修改：改成 false
+        
+    }, { passive: false });
 
     // 觸控結束
     trackElement.addEventListener('touchend', () => {
         isDragging = false;
         cancelAnimationFrame(animationID);
 
-        // 只有在真的是水平滑動時，才計算換頁
+        // 只有在水平滑動模式下，才計算換頁
         if (isHorizontal) {
             const movedBy = currentTranslate - prevTranslate;
             const threshold = 50; 
@@ -488,30 +486,33 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
             } else if (movedBy > threshold && currentSlideIndex > 0) {
                 currentSlideIndex -= 1;
             }
-            
-            setPositionByIndex();
-        } else {
-            // 如果剛剛是垂直滑動，圖片位置要歸位 (防止稍微被拖動到一點點)
-             setPositionByIndex();
         }
+        
+        // 無論如何都要歸位 (吸附效果)
+        setPositionByIndex();
     });
 
-    // 動畫幀
+    // 🔥 修正點 2：動畫迴圈邏輯優化
     function animation() {
-        if(isDragging && isHorizontal) { // 只有鎖定水平時才跑動畫
-            setSliderPosition(currentTranslate);
+        if(isDragging) {
+            // 只有在確定是「水平滑動」時，才更新圖片位置
+            if(isHorizontal) {
+                setSliderPosition(currentTranslate);
+            }
+            // 迴圈繼續跑，直到手指放開
             requestAnimationFrame(animation);
         }
     }
 
-    // 設定位置 (拖曳中)
+    // 設定位置 (拖曳中：無動畫，跟隨手指)
     function setSliderPosition(pos) {
         trackElement.style.transform = `translateX(${pos}px)`;
     }
 
-    // 設定位置 (放開後吸附)
+    // 設定位置 (放開後：有動畫，吸附到定位)
     function setPositionByIndex() {
         const width = trackElement.offsetWidth;
+        // 重新計算正確位置
         currentTranslate = currentSlideIndex * -width;
         
         trackElement.style.transition = 'transform 0.3s ease-out';
