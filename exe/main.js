@@ -420,57 +420,85 @@ function updateCounter(element, current, total) {
     element.innerText = `${current}/${total}`;
 }
 
-// --- 功能 D: 通用滑動邏輯 ---
+// --- 功能 D: 通用滑動邏輯 (防手勢衝突優化版) ---
 function enableSwipe(trackElement, counterElement, isLightbox = false) {
     let startX = 0;
+    let startY = 0; // 🔥 新增：紀錄垂直位置
     let currentTranslate = 0;
     let prevTranslate = 0;
     let isDragging = false;
     let animationID;
+    let isHorizontal = null; // 🔥 新增：用來鎖定方向的旗標
 
     // 觸控開始
     trackElement.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY; // 🔥 紀錄 Y
         isDragging = true;
+        isHorizontal = null; // 重置方向判定
         animationID = requestAnimationFrame(animation);
         
-        // 🔥 核心修正：這裡改用全域變數 currentSlideIndex，確保讀到的是歸零後的數值
-        // 如果是全螢幕模式，因為全螢幕是獨立邏輯，這裡我們只處理詳情頁
         if(!isLightbox) {
             prevTranslate = currentSlideIndex * -trackElement.offsetWidth;
         }
-    }, { passive: true });
+    }, { passive: false }); // 🔥 關鍵修改：改成 false 才能擋住捲動
 
     // 觸控移動
     trackElement.addEventListener('touchmove', (e) => {
-        if (isDragging) {
-            const currentX = e.touches[0].clientX;
-            const diff = currentX - startX;
-            currentTranslate = prevTranslate + diff;
+        if (!isDragging) return;
+
+        const currentX = e.touches[0].clientX;
+        const currentY = e.touches[0].clientY;
+        const diffX = currentX - startX;
+        const diffY = currentY - startY;
+
+        // 🔥 核心邏輯：方向鎖定
+        // 如果還沒判定方向，就先比較 X 和 Y 的移動距離
+        if (isHorizontal === null) {
+            // 如果 X 移動距離 > Y 移動距離，認定為「水平滑動意圖」
+            if (Math.abs(diffX) > Math.abs(diffY)) {
+                isHorizontal = true;
+            } else {
+                isHorizontal = false;
+            }
         }
-    }, { passive: true });
+
+        // 🔥 如果判定是水平滑動，就執行圖片移動，並「殺掉」垂直捲動
+        if (isHorizontal) {
+            if (e.cancelable) e.preventDefault(); // 🛑 禁止網頁上下捲動
+            currentTranslate = prevTranslate + diffX;
+        }
+        // 如果是垂直滑動 (isHorizontal === false)，就不更新 currentTranslate
+        // 這樣圖片不會動，瀏覽器會自然地去捲動網頁
+
+    }, { passive: false }); // 🔥 關鍵修改：改成 false
 
     // 觸控結束
     trackElement.addEventListener('touchend', () => {
         isDragging = false;
         cancelAnimationFrame(animationID);
 
-        const movedBy = currentTranslate - prevTranslate;
-        const threshold = 50; 
+        // 只有在真的是水平滑動時，才計算換頁
+        if (isHorizontal) {
+            const movedBy = currentTranslate - prevTranslate;
+            const threshold = 50; 
 
-        // 🔥 核心修正：直接操作全域變數
-        if (movedBy < -threshold && currentSlideIndex < currentImages.length - 1) {
-            currentSlideIndex += 1;
-        } else if (movedBy > threshold && currentSlideIndex > 0) {
-            currentSlideIndex -= 1;
+            if (movedBy < -threshold && currentSlideIndex < currentImages.length - 1) {
+                currentSlideIndex += 1;
+            } else if (movedBy > threshold && currentSlideIndex > 0) {
+                currentSlideIndex -= 1;
+            }
+            
+            setPositionByIndex();
+        } else {
+            // 如果剛剛是垂直滑動，圖片位置要歸位 (防止稍微被拖動到一點點)
+             setPositionByIndex();
         }
-
-        setPositionByIndex();
     });
 
     // 動畫幀
     function animation() {
-        if(isDragging) {
+        if(isDragging && isHorizontal) { // 只有鎖定水平時才跑動畫
             setSliderPosition(currentTranslate);
             requestAnimationFrame(animation);
         }
@@ -484,8 +512,6 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
     // 設定位置 (放開後吸附)
     function setPositionByIndex() {
         const width = trackElement.offsetWidth;
-        
-        // 🔥 核心修正：使用全域變數計算位置
         currentTranslate = currentSlideIndex * -width;
         
         trackElement.style.transition = 'transform 0.3s ease-out';

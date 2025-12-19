@@ -1014,7 +1014,7 @@ body.lock-scroll .bottom-nav {
 /* 全螢幕右上角計數器 */
 .lightbox-counter {
     position: absolute;
-    top: 30px;
+    top: 20px;
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -1026,7 +1026,7 @@ body.lock-scroll .bottom-nav {
 /* 全螢幕關閉按鈕 */
 .lightbox-close {
     position: absolute;
-    top: 20px;
+    top: 10px;
     left: 20px;
     color: white;
     display: flex;
