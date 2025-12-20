@@ -935,6 +935,41 @@ body.lock-scroll .bottom-nav {
 }
 
 /* =========================================
+   🔥 新增：右下角放大鏡圖示樣式
+   ========================================= */
+.overlay-expand-icon {
+    position: absolute;
+    bottom: 15px; /* 距離底部 15px */
+    right: 15px;  /* 距離右側 15px */
+    
+    /* 風格設定 (仿照右上角計數器) */
+    background-color: rgba(50, 60, 70, 0.8); /* 深灰半透明底 */
+    color: #ffffff; /* 圖示變白色 */
+    
+    /* 圓形外觀 */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    
+    /* 讓裡面的 SVG 置中 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    z-index: 10;
+    
+    /* 🔥關鍵：讓滑鼠/手指點擊「穿透」這個圖示 */
+    /* 這樣使用者點到圖示時，實際上是點到下面的圖片，依然能觸發全螢幕功能 */
+    pointer-events: none; 
+}
+
+/* 設定 SVG 的大小 */
+.overlay-expand-icon svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* =========================================
    🔥 全螢幕檢視器 (Lightbox)
    ========================================= */
 #fullscreen-lightbox {
