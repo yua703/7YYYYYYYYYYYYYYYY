@@ -331,8 +331,17 @@ function stopLeaderboardUpdate() {
 
 // 🔥 設定：每一組的照片清單
 const GROUP_GALLERY = {
-    "G1": ["img/1.webp", "img/1.webp", "img/1.webp"], 
-    "G4": ["img/4.webp", "img/4.webp"],
+    "G2": ["img/2.webp","img/2 (1).webp", "img/2 (2).webp", "img/2 (3).webp"], 
+    "G3": ["img/3.webp","img/3 (1).webp", "img/3 (2).webp", "img/3 (3).webp"],
+    "G4": ["img/4.webp","img/4 (1).webp", "img/4 (2).webp", "img/4 (3).webp"],
+    "G9": ["img/9.webp","img/9 (1).webp", "img/9 (2).webp", "img/9 (3).webp", "img/9 (4).webp"],
+    "G10": ["img/10.webp","img/10 (1).webp", "img/10 (2).webp", "img/10 (3).webp"],
+    "G11": ["img/11.webp","img/11 (1).webp", "img/11 (2).webp"],
+    "G13": ["img/13.webp","img/13 (1).webp", "img/13 (2).webp", "img/13 (3).webp"],
+    "G14": ["img/14.webp","img/14 (1).webp", "img/14 (2).webp", "img/14 (3).webp"],
+
+
+
     // 其他沒寫的組別，程式會自動預設只有一張封面圖
 };
 
