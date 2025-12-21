@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>即時排行榜</title>
-  <link rel="stylesheet" href="leaderboard.css">
-  <script src="leaderboard.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExErcise 賽事即時戰況</title>
+    <link rel="stylesheet" href="lb-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <h1>🏆 即時排行榜</h1>
 
-  <!-- 組別切換標籤 -->
-  <div id="tabs">
-    <button data-sheet="七大項總錦標" class="active">七大項總錦標</button>
-    <button data-sheet="第一組分數計算">第一組</button>
-    <button data-sheet="第二組分數計算">第二組</button>
-    <button data-sheet="第三組分數計算">第三組</button>
-    <button data-sheet="第四組分數計算">第四組</button>
-    <button data-sheet="第五組分數計算">第五組</button>
-    <button data-sheet="第六組分數計算">第六組</button>
-    <button data-sheet="第七組分數計算">第七組</button>
-    <button data-sheet="第八組分數計算">第八組</button>
-    <button data-sheet="第九組分數計算">第九組</button>
-    <button data-sheet="第十組分數計算">第十組</button>
-    <button data-sheet="第十一組分數計算">第十一組</button>
-    <button data-sheet="第十二組分數計算">第十二組</button>
-    <button data-sheet="第十三組分數計算">第十三組</button>
-    <button data-sheet="第十四組分數計算">第十四組</button>
-    <button data-sheet="第十五組分數計算">第十五組</button>
-    <button data-sheet="第十六組分數計算">第十六組</button>
-    <button data-sheet="第十七組分數計算">第十七組</button>
-  </div>
+    <div class="lb-container">
+        <header class="lb-top-header">
+            <h1 id="current-category-title">載入中...</h1>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </header>
 
-  <!-- 排行榜區 -->
-  <div id="leaderboard">載入中...</div>
+        <div class="lb-list-header">
+            <span class="col-rank">排名</span>
+            <span class="col-name">暱稱</span>
+            <span class="col-number">編號</span>
+            <span class="col-score">分數</span>
+        </div>
 
-  <script src="leaderboard.js"></script>
+        <div id="leaderboard-data" class="lb-list-body">
+            </div>
+    </div>
+
+    <script src="lb-script.js"></script>
 </body>
 </html>

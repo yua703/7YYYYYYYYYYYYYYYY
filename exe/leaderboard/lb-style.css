@@ -1,0 +1,154 @@
+/* =========================================
+   全域設定
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Noto Sans TC", sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    height: 100vh;
+    overflow: hidden; /* 禁止捲動，適合展示螢幕 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* =========================================
+   容器佈局
+   ========================================= */
+.lb-container {
+    width: 95%;
+    max-width: 1000px;
+    height: 95vh;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* =========================================
+   頂部標題區 (含進度條)
+   ========================================= */
+.lb-top-header {
+    background: #4882A6;
+    color: #ffffff;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
+.lb-top-header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+/* 進度條容器 */
+.progress-bar-container {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+/* 進度條動畫 */
+.progress-bar {
+    height: 100%;
+    background-color: #E7AC4A; /* 金黃色進度條 */
+    width: 0%;
+    /* 動畫在 JS 中動態重置 */
+}
+
+/* =========================================
+   排行榜列表樣式
+   ========================================= */
+.lb-list-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 100px; /* 調整欄位寬度 */
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: #eef2f5;
+    font-weight: bold;
+    color: #555;
+    border-bottom: 2px solid #ddd;
+    font-size: 1.2rem;
+}
+
+.col-rank { text-align: center; }
+.col-name { text-align: left; padding-left: 10px;}
+.col-number { text-align: center; }
+.col-score { text-align: right; padding-right: 10px;}
+
+.lb-list-body {
+    flex: 1;
+    overflow-y: auto; /* 內容過多時可滾動 */
+    padding: 10px 0;
+    background-color: #fff;
+}
+
+/* 隱藏捲軸但保留功能 */
+.lb-list-body::-webkit-scrollbar {
+    width: 6px;
+}
+.lb-list-body::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 3px;
+}
+
+/* 單一玩家列 */
+.lb-player {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 100px;
+    gap: 10px;
+    padding: 15px 20px;
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+/* 前三名特別樣式 */
+.lb-player:nth-child(1) .lb-rank-num { color: #d4af37; font-size: 1.5rem; } /* 金 */
+.lb-player:nth-child(2) .lb-rank-num { color: #c0c0c0; font-size: 1.4rem; } /* 銀 */
+.lb-player:nth-child(3) .lb-rank-num { color: #cd7f32; font-size: 1.3rem; } /* 銅 */
+
+.lb-player:nth-child(odd) { background-color: #f9f9f9; }
+
+.lb-rank-num {
+    font-family: 'Permanent Marker', cursive;
+    text-align: center;
+    font-weight: bold;
+    color: #4882A6;
+}
+
+.lb-player-name { font-weight: bold; color: #333; padding-left: 10px; }
+.lb-player-num { color: #888; text-align: center; font-size: 0.95rem; }
+.lb-player-score { font-weight: bold; color: #E7AC4A; text-align: right; padding-right: 10px; }
+
+/* 進場動畫 */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 載入中/無資料文字 */
+.status-msg {
+    text-align: center;
+    padding: 50px;
+    color: #888;
+    font-size: 1.2rem;
+}
