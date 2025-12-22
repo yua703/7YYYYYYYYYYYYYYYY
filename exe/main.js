@@ -242,28 +242,47 @@ lbTabs.forEach(btn => {
 
 async function updateLeaderboard(sheetName) {
     const container = document.getElementById('leaderboard-data');
+    
+    // 🔥 1. 讀取翻譯：載入中
+    const tLoading = translations[currentLang]['lb_loading'];
+    
+    // 如果是第一次載入，或是切換頁籤時，顯示載入文字
+    // (這裡稍微判斷一下，避免自動更新時一直閃爍)
+    if (!container.querySelector('.lb-player')) {
+        container.innerHTML = `<p style="text-align:center; padding:20px; color:#666;">${tLoading}</p>`;
+    }
+
     try {
         const res = await fetch(sheetBase + encodeURIComponent(sheetName) + "?t=" + Date.now());
         
         if (!res.ok) throw new Error("網路回應錯誤");
         
-        const rawData = await res.json(); // 1. 先抓原始資料
+        const rawData = await res.json();
 
-// 2. 過濾：只有當「姓名」或「編號」其中一個有值時，才算有效資料
-const data = rawData.filter(p => {
-    const name = p.姓名 || p.Name;
-    const number = p.編號 || p.玩家號碼;
-    // 檢查是不是空字串或不存在
-    return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
-});
+        // 過濾資料
+        const data = rawData.filter(p => {
+            const name = p.姓名 || p.Name;
+            const number = p.編號 || p.玩家號碼;
+            return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
+        });
                 
         if (!data || data.length === 0) {
-            container.innerHTML = "<p style='text-align:center; padding:20px;'>目前尚無資料</p>";
+            // 🔥 2. 讀取翻譯：無資料
+            const tNoData = translations[currentLang]['lb_no_data'];
+            container.innerHTML = `<p style='text-align:center; padding:20px;'>${tNoData}</p>`;
             return;
         }
 
         const sorted = data.slice(0, 20);
-        const scoreTitle = (sheetName.includes("總錦標")) ? "總積分" : "分數";
+        
+        // 🔥 3. 讀取翻譯：欄位名稱
+        const tRank = translations[currentLang]['lb_rank_col'];   // 排名
+        const tName = translations[currentLang]['lb_name_col'];   // 暱稱
+        const tNum  = translations[currentLang]['lb_num_col'];    // 編號
+        
+        // 判斷是「分數」還是「總積分」
+        const isTotal = sheetName.includes("總錦標");
+        const scoreTitle = isTotal ? translations[currentLang]['lb_total_col'] : translations[currentLang]['lb_score_col'];
 
         let lastScore = null, lastRank = 0, actualRank = 0;
 
@@ -293,18 +312,21 @@ const data = rawData.filter(p => {
             </div>`;
         }).join("");
 
+        // 🔥 4. 組合 HTML (將翻譯變數放入)
         container.innerHTML = `
             <div class="lb-header">
-                <span class="lb-rank">排名</span>
-                <span class="lb-name">暱稱</span>
-                <span class="lb-number">編號</span>
+                <span class="lb-rank">${tRank}</span>
+                <span class="lb-name">${tName}</span>
+                <span class="lb-number">${tNum}</span>
                 <span class="lb-score">${scoreTitle}</span>
             </div>
             ${listHtml}
         `;
     } catch (err) {
         console.error(err);
-        container.innerHTML = "<p style='text-align:center; padding:20px; color:red;'>讀取失敗，請檢查網路或試算表</p>";
+        // 🔥 5. 讀取翻譯：錯誤訊息
+        const tError = translations[currentLang]['lb_error'];
+        container.innerHTML = `<p style='text-align:center; padding:20px; color:red;'>${tError}</p>`;
     }
 }
 
@@ -642,70 +664,255 @@ function toggleSchedule(element) {
     });
 }
 // ==========================================
-// 7. 多語言切換系統 (i18n)
+// 7. 多語言切換系統 (i18n - 完整翻譯版)
 // ==========================================
-
-// 1. 翻譯字典 (這裡放所有的中文對照英文)
 const translations = {
-    // 中文 (預設)
     'zh': {
-        // 代號 : 中文內容
-        'nav_info': '賽事介紹',
-        'nav_sports': '運動項目',
-        'nav_rank': '排行榜',
+        // 導覽
+        'nav_info': '賽事介紹', 'nav_sports': '運動項目', 'nav_rank': '排行榜',
+        'close_btn': '點擊關閉',
+        
+        // 首頁
         'about_title': '關於本次賽事',
+        'home_brand': '【ExErcise】科技 × 運動賽事',
         'home_slogan': '打破傳統，我們用科技重新定義運動競技。',
+        'home_desc': '無論你是哪類猛將，這裡都有屬於你的戰場。<br>準備好挑戰極限了嗎？快來與夥伴一同釋放自己的潛能吧！',
         'event_items': '七大競賽項目',
         'detail_title': '賽事細節',
-        // ...你可以在這裡繼續加...
+
+        // 分頁按鈕
+        'tab_schedule': '時程表', 'tab_scoring': '計分方法', 'tab_map': '賽事地圖', 'tab_rules': '競賽辦法',
+
+        // 時程表
+        'batch_1': '第一梯次', 'batch_2': '第二梯次', 'batch_3': '第三梯次', 'batch_4': '第四梯次', 'batch_5': '第五梯次',
+        'act_reg_1': '第一梯次報到', 'act_warm_1': '第一梯次熱身', 'act_play_1': '第一梯次體驗遊玩',
+        'act_reg_2': '第二梯次報到', 'act_warm_2': '第二梯次熱身', 'act_play_2': '第二梯次體驗遊玩',
+        'act_reg_3': '第三梯次報到', 'act_warm_3': '第三梯次熱身', 'act_play_3': '第三梯次體驗遊玩',
+        'act_reg_4': '第四梯次報到', 'act_warm_4': '第四梯次熱身', 'act_play_4': '第四梯次體驗遊玩',
+        'act_reg_5': '第五梯次報到', 'act_warm_5': '第五梯次熱身', 'act_play_5': '第五梯次體驗遊玩',
+        'rest_noon': '午休', 'rest_short': '休息片刻', 'event_closing': '頒獎閉幕', 'event_photo': '全體大合照',
+
+        // 計分方法
+        'score_h1': '一、個人單項挑戰',
+        'score_label_rank': '排名方式', 'score_text_rank': '依各項目的分數高低進行排名。',
+        'score_label_reward': '獎勵機制', 'score_text_reward': '各單項取第一名給予獎勵。',
+        'score_label_tie': '同分判定', 'score_text_tie': '如遇成績相同（同分）之情況，將依較早完成報到者排名優先。',
+        'score_h2': '二、個人全項總積分',
+        'score_sub_calc': '積分換算', 'score_desc_calc': '各單項排名前十名者可獲得對應積分：',
+        'rank_1': '第 1 名', 'rank_2': '第 2 名', 'rank_others': '...以此類推', 'rank_10': '第 10 名',
+        'score_sub_method': '採計方式',
+        'score_li_1': '本賽事共分為七大類別。',
+        'score_li_2': '若於同一大類別中參與多個項目並皆獲得積分，將取最高分之項目，作為該類別的最終積分。',
+        'score_sub_total': '總排名與獎勵',
+        'score_li_3': '結算七大類別總積分，分數越高者排名越前。',
+        'score_li_4': '總排名前三名給予獎勵。',
+
+        // 競賽辦法
+        'rule_h1': '一、線上報名',
+        'rule_li_1': '採表單預約制，每梯次限額 34 人。',
+        'rule_li_2': '報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱。',
+        'rule_li_3': '若沒收到，請務必於 12/26（五）前 聯繫主辦單位。',
+        'rule_h2': '二、參賽須知',
+        'rule_li_4': '完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。',
+        'rule_li_5': '請務必穿著適合運動的服裝與運動鞋，以確保活動安全。',
+        'rule_li_6': '挑戰過程中請隨時留意自身身體狀況，量力而為。',
+
+        // Footer
+        'footer_host': '一、主辦單位：', 'footer_co': '二、合作單位：',
+        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '尚未解鎖', 'btn_ig': '追蹤官方IG',
+
+        // 排行榜
+        'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
+
+        // 運動類別
+        'cat_focus': '專注力', 'cat_reaction': '反應力', 'cat_agility': '敏捷力', 'cat_endurance': '耐力',
+        'cat_explosive': '爆發力', 'cat_coordination': '協調力', 'cat_intellect': '智力',
+        'label_intro': '組別介紹', 'label_members': '組員', 'label_advisor': '指導老師',
+
+        // 17 組名稱
+        'g1_name': '培根行動', 'g2_name': 'PECOPECO', 'g3_name': 'SOS:Snap Or Scrap', 'g4_name': '流汗吧！健美詠者',
+        'g5_name': '企色戰隊', 'g6_name': '不是．鴿們', 'g7_name': '老娘不幹了', 'g8_name': '賽馬郎',
+        'g9_name': '溫水煮青蛙', 'g10_name': '超派拍對', 'g11_name': '翻身', 'g12_name': 'hurry down',
+        'g13_name': '重生之我在神界當牛馬', 'g14_name': 'Baa Hind the Door',
+        'g15_name': 'Legend of the rower', 'g16_name': 'Legend of MUAY THAI', 'g17_name': 'THE STONE FLOWER',
+
+        // 17 組介紹 (中文)
+        'g1_desc': '《培根行動 Project Bacon》是一款結合 節奏判定 × 動作揮擊 的反應型遊戲，改編自經典童話《三隻小豬》，玩家將扮演大野狼，在混亂又充滿節奏感的攻防中，突破三隻小豬的連續攻擊。',
+        'g2_desc': '《PECOPECO》是一款可愛互動反應遊戲！玩家手持鳳梨酥，抓準台灣黑熊、石虎與藍鵲張嘴的時機，快速餵食提升好感度，30 秒內收服牠們成為好夥伴吧！',
+        'g3_desc': '以高速婆婆傳說改編，考驗敏捷反應力。玩家需要一邊左右閃避來車，一邊操作皮拉提斯環拍下高速婆婆的清晰身影。各位窮苦超屁的大學生們，快來看看誰能拍到最清晰的瞬間、賺取最高的賞金吧！',
+        'g4_desc': '拔起你的石中劍，打爆邪惡法師梅林，一起甩出汗水💦與肌肉💪‼️<br>成為健美詠者吧‼️',
+        'g5_desc': '你說的對🗣️👍，但是《企色戰隊》🐧🐧🐧是由Group5️⃣自主研發💡的一款節奏類🎵有氧運動遊戲🦵🦵。遊戲發生在一個被稱作「南極🥶」的大陸🌍，某一天，漁船🚢撞擊冰山💥🧊漏出有毒物質😱☣️，部分企鵝變成殭屍🧟⁉️。你🫵將成為助力💪「企鵝戰隊」🐧🩵的神秘力量😏，在「☠️致命殭屍節奏🎶」與「💨有氧驅動踏板👣🔘」之間操控「企鵝機甲🦾🤖」發射水炮💦💦，和企鵝們一起擊敗殭屍👊😡，找回失散的平靜🤗🤗——同時，逐步👣👣發掘「企鵝」的美好🐧❤️🐧💚🐧💙。',
+        'g6_desc': '「鴿們就靠你了！」 變身諾亞方舟上的鴿子，努力拍動翅膀，小心閃避障礙，在洪水中找到那根代表希望的橄欖枝吧！',
+        'g7_desc': '在長期被霸總壓迫的職場中，秘書選擇不再忍耐。<br>本作品以誇張卻熟悉的職場情境為背景，邀請你化身為「決定離職的秘書」，透過丟擲文件的動作，釋放累積已久的壓力。',
+        'g8_desc': '一直跑一直跳 一直動手接金幣水果滿分 變帥潮逼逼馬 變成最盟最帥最最快的賽馬郎',
+        'g9_desc': '野外求生的第三天到達了飢餓邊緣，在這極限30秒內，持續打氣來煮熟青蛙吧，請小心被牠察覺到你的意圖並逃走！',
+        'g10_desc': '身為一名充滿熱情的魔法烘焙師，本來要做出完美的派 🍓🥧，卻在施法時……用了錯誤的魔法咒語 😱✨！ 結果……派 爆走啦！！！ 🧨🤯<br>派變成超派(super pie)居然瘋狂開始朝我丟水果 🍌🍍🍉🍇🍓！！！<br>ㄚㄚㄚㄚ~~ 物痾痾痾物物～～不要再砸了啦！！😭😭<br>再丟下去我這派就 真的不太妙了 🍰💥<br>沒辦法……只好使出這招了 💪🔥<br>👉 水果全反擊！！ 🍓🍋🍉💥<br>準備好讓水果 飛來飛去 🍊✈️🍍✈️<br>展現你的反擊之力吧！！💥🧙‍♂️🎉',
+        'g11_desc': '人生的結果是已知的，那要怎麼創造未知的過程<br>玩家將扮演一隻鹹魚，藉由翻身運動來翻面掙扎，表達自己不甘於現狀的心態',
+        'g12_desc': '愛麗絲在逃離紅心皇后的追捕時，意外跌入了神秘的魔法空間！？<br>在這重力與方向全都失序的空間，她必須努力穩住身體，閃避四面而來的危險與追兵。<br>抓緊平衡、勇敢前進，讓愛麗絲逃離紅心皇后的魔掌吧！',
+        'g13_desc': '這是一個不公平的工作啊<br>欸不是<br>我一隻都沒有漏然後判我輸喔<br>被我拿斧頭打到的死樵夫贏喔<br>有沒有邏輯啊不是啊 <br>我把他打到頭破掉 這樣算我輸喔<br>他亂丟我 我一隻都沒有少ㄟ<br>啊這樣算我輸喔 <br>你們裁判怎麼判的啦<br>好啦 我要回家了啦<br>辭呈送給你啦 乞丐',
+        'g14_desc': '面對狡猾的大野狼不斷從四面八方闖入，你必須眼明手快，將牠阻擋在門外！每一次成功守護，都離小羊的安全更近一步🐑🏠<br>你，能守護到最後嗎？',
+        'g15_desc': 'Inspired by the iconic leg-rowing of Inlay Lake’s Intha fishermen, this game turns tradition into a fast-paced fitness challenge. Balance, row, and chase the thrill of catching as many fish as you can before time runs out.',
+        'g16_desc': 'Our project is inspired by the story of the Muay Thai legend Nai Khanom Tom. <br>Players must coordinate elbow and leg movements to punch the correct buttons in order to defeat the opponent. <br>Within 30 seconds, the more points the player punches, the higher their ranking will be.',
+        'g17_desc': 'Inspired by the folklore of The Stone Flower, this game turns the art of stone carving into an engaging mastery challenge. Break through the stone wall, refine your skills, and uncover beauty hidden within the rock. Only true masters can carve the perfect Stone Flower.',
+        // 🔥 新增：排行榜欄位
+        'lb_rank_col': '排名',
+        'lb_name_col': '暱稱',
+        'lb_num_col': '編號',
+        'lb_score_col': '分數',
+        'lb_total_col': '總積分',
+        'lb_no_data': '目前尚無資料',
+        'lb_loading': '資料更新中...',
+        'lb_error': '讀取失敗，請檢查網路'
     },
     
-    // 英文
     'en': {
-        // 代號 : 英文內容
-        'nav_info': 'Info',
-        'nav_sports': 'Sports',
-        'nav_rank': 'Ranking',
+        // Nav
+        'nav_info': 'Info', 'nav_sports': 'Sports', 'nav_rank': 'Ranking',
+        'close_btn': 'Tap to Close',
+        
+        // Home
         'about_title': 'About Event',
-        'home_slogan': 'Redefining sports with technology.',
-        'event_items': '7 Events',
-        'detail_title': 'Details',
-        // ...對應上面的代號...
+        'home_brand': '【ExErcise】Tech × Sports',
+        'home_slogan': 'Breaking tradition, redefining sports with technology.',
+        'home_desc': 'No matter what kind of warrior you are, there is a battlefield for you here.<br>Ready to challenge the limit? Come unleash your potential with your partners!',
+        'event_items': '7 Competition Events',
+        'detail_title': 'Event Details',
+
+        // Tabs
+        'tab_schedule': 'Schedule', 'tab_scoring': 'Scoring', 'tab_map': 'Map', 'tab_rules': 'Rules',
+
+        // Schedule
+        'batch_1': 'Batch 1', 'batch_2': 'Batch 2', 'batch_3': 'Batch 3', 'batch_4': 'Batch 4', 'batch_5': 'Batch 5',
+        'act_reg_1': 'Registration (Batch 1)', 'act_warm_1': 'Warm-up (Batch 1)', 'act_play_1': 'Gameplay (Batch 1)',
+        'act_reg_2': 'Registration (Batch 2)', 'act_warm_2': 'Warm-up (Batch 2)', 'act_play_2': 'Gameplay (Batch 2)',
+        'act_reg_3': 'Registration (Batch 3)', 'act_warm_3': 'Warm-up (Batch 3)', 'act_play_3': 'Gameplay (Batch 3)',
+        'act_reg_4': 'Registration (Batch 4)', 'act_warm_4': 'Warm-up (Batch 4)', 'act_play_4': 'Gameplay (Batch 4)',
+        'act_reg_5': 'Registration (Batch 5)', 'act_warm_5': 'Warm-up (Batch 5)', 'act_play_5': 'Gameplay (Batch 5)',
+        'rest_noon': 'Lunch Break', 'rest_short': 'Short Break', 'event_closing': 'Closing Ceremony', 'event_photo': 'Group Photo',
+
+        // Scoring
+        'score_h1': '1. Individual Challenge',
+        'score_label_rank': 'Ranking', 'score_text_rank': 'Ranked by score.',
+        'score_label_reward': 'Rewards', 'score_text_reward': 'Top 1 in each item gets a reward.',
+        'score_label_tie': 'Tie-breaker', 'score_text_tie': 'In case of a tie, priority is given to those who registered earlier.',
+        'score_h2': '2. Total Integrated Score',
+        'score_sub_calc': 'Points', 'score_desc_calc': 'Top 10 in each item get points:',
+        'rank_1': '1st', 'rank_2': '2nd', 'rank_others': '...and so on', 'rank_10': '10th',
+        'score_sub_method': 'Calculation',
+        'score_li_1': 'There are 7 categories in total.',
+        'score_li_2': 'If you participate in multiple items within the same category, only the highest score counts.',
+        'score_sub_total': 'Total Ranking',
+        'score_li_3': 'Sum of points from 7 categories. Higher score ranks higher.',
+        'score_li_4': 'Top 3 overall get rewards.',
+
+        // Rules
+        'rule_h1': '1. Online Registration',
+        'rule_li_1': 'Reservation only. 34 people per batch.',
+        'rule_li_2': 'A confirmation email will be sent within 2 days after registration.',
+        'rule_li_3': 'If not received, please contact us by 12/26 (Fri).',
+        'rule_h2': '2. Notice',
+        'rule_li_4': 'Upon registration, receive a "wristband" for scoring. Return it upon exit.',
+        'rule_li_5': 'Please wear sportswear and sports shoes for safety.',
+        'rule_li_6': 'Pay attention to your physical condition during the challenge.',
+
+        // Footer
+        'footer_host': '1. Organizer:', 'footer_co': '2. Co-organizer:',
+        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Locked', 'btn_ig': 'Follow Instagram',
+
+        // Leaderboard
+        'lb_title': 'Live Leaderboard', 'lb_loading': 'Loading...', 'lb_all': 'Overall Championship',
+
+        // Categories & Labels
+        'cat_focus': 'Focus', 'cat_reaction': 'Reaction', 'cat_agility': 'Agility', 'cat_endurance': 'Endurance',
+        'cat_explosive': 'Explosive Power', 'cat_coordination': 'Coordination', 'cat_intellect': 'Intellect',
+        'label_intro': 'Introduction', 'label_members': 'Team Members', 'label_advisor': 'Advisor',
+
+        // Group Names
+        'g1_name': 'Project Bacon', 'g2_name': 'PECOPECO', 'g3_name': 'SOS:Snap Or Scrap', 'g4_name': 'Macho Magic:Sweat It Out!',
+        'g5_name': 'PENGRGB squad', 'g6_name': 'Pigeon The finder', 'g7_name': 'I Quit!', 'g8_name': 'umaro',
+        'g9_name': 'Boiling Frog', 'g10_name': 'Super Pie Party', 'g11_name': 'Turn The Table', 'g12_name': 'hurry down',
+        'g13_name': 'Labor in God’s Realm', 'g14_name': 'Baa Hind the Door',
+        'g15_name': 'Legend of the rower', 'g16_name': 'Legend of MUAY THAI', 'g17_name': 'THE STONE FLOWER',
+
+        // Group Descriptions (English)
+        'g1_desc': '"Project Bacon" is a reaction game combining rhythm and action, adapted from the Three Little Pigs. Players play as the Big Bad Wolf, breaking through the pigs\' attacks in a chaotic rhythm battle.',
+        'g2_desc': '"PECOPECO" is a cute interactive reaction game! Holding a pineapple cake, catch the moment when the Formosan Black Bear, Leopard Cat, and Magpie open their mouths to feed them. Tame them within 30 seconds!',
+        'g3_desc': 'Adapted from the legend of the High-Speed Grandma, testing agility and reaction. Players must dodge cars while using a Pilates ring to capture clear photos of the grandma. Earn the highest bounty!',
+        'g4_desc': 'Pull out your sword from the stone, defeat the evil wizard Merlin, and fling out sweat 💦 and muscle 💪‼️<br>Become a bodybuilding chanter‼️',
+        'g5_desc': 'You are right👍, but 《PENGRGB squad》🐧🐧🐧 is a rhythm🎵-based action🦵🦵 game independently developed💡 by Group 5️⃣.The story takes place🌍 on a continent known as the「 South Pole🥶」. One day, a ship🚢 accidentally crashes into an iceberg 💥🧊, causing mysterious substances to leak out😱 🧪. As a result, some penguins become mutated... into zombies! 🧟‍♂️🧟‍♂️⁉️You🫵 will take on the role of a member of the PENGRGB squad 🐧🎨, harnessing the penguins’ special powers 😏 to restore balance to the land. By ☠️matching colors🎶 and💨 rhythms 👣🔘, you will eliminate the mutated penguins 👊🧟❌, defeat the ZOMBIE👊😡, regain the lost peace 😌😌, and along the journey👣👣, rediscover the beauty of penguins 🐧❤️🐧💚🐧💙.',
+        'g6_desc': '"Bros, rely on you!" Transform into a pigeon on Noah\'s Ark. Flap your wings, dodge obstacles, and find the olive branch of hope in the flood!',
+        'g7_desc': 'In a workplace oppressed by a boss, the secretary chooses not to endure anymore.<br>Set in an exaggerated workplace, play as the "Quitting Secretary" and throw documents to release stress.',
+        'g8_desc': 'Run, jump, and catch coins and fruits. Become the coolest, handsomest, and fastest Horse Man.',
+        'g9_desc': 'On the 3rd day of survival, hunger strikes. Within 30 seconds, pump air to boil the frog, but be careful not to let it notice and escape!',
+        'g10_desc': 'As a magic baker, a spell went wrong 😱✨! The Super Pie went crazy and started throwing fruits 🍌🍍. Fight back!! 🍓🍋🍉💥 Use your counterattack power to deflect the fruits.',
+        'g11_desc': 'The outcome of life is predetermined, so how can we create an unknown journey within it?In this game, the player takes on the role of a salted fish, struggling to flip over through repeated motions, embodying a mindset that refuses to accept the status quo.',
+        'g12_desc': 'Alice fell into a mysterious magic space while escaping the Queen of Hearts!?<br>In this disordered space, stabilize your body, dodge dangers, and help Alice escape!',
+        'g13_desc': 'This is unfair work.<br>Wait, no.<br>I didn\'t miss one, but I lost?<br>The woodcutter who hit me with an axe won?<br>Where is the logic?<br>I hit his head, and I lose?<br>He threw stuff at me, I didn\'t miss any.<br>And I lose?<br>How do you referees judge?<br>Fine, I\'m going home.<br>Here\'s my resignation, beggar.',
+        'g14_desc': 'Facing the sly big bad wolf charging in from every direction, you must react fast and keep it out of the door！With every successful defense, you bring the little lambs one step closer to safety 🐑🏠<br>Can you protect them until the very end?',
+        'g15_desc': 'Inspired by the iconic leg-rowing of Inlay Lake’s Intha fishermen, this game turns tradition into a fast-paced fitness challenge. Balance, row, and chase the thrill of catching as many fish as you can before time runs out.',
+        'g16_desc': 'Our project is inspired by the story of the Muay Thai legend Nai Khanom Tom. <br>Players must coordinate elbow and leg movements to punch the correct buttons in order to defeat the opponent. <br>Within 30 seconds, the more points the player punches, the higher their ranking will be.',
+        'g17_desc': 'Inspired by the folklore of The Stone Flower, this game turns the art of stone carving into an engaging mastery challenge. Break through the stone wall, refine your skills, and uncover beauty hidden within the rock. Only true masters can carve the perfect Stone Flower.',
+        // 🔥 新增：排行榜欄位
+        'lb_rank_col': 'Rank',
+        'lb_name_col': 'Name',
+        'lb_num_col': 'ID',
+        'lb_score_col': 'Score',
+        'lb_total_col': 'Total',
+        'lb_no_data': 'No Data Available',
+        'lb_loading': 'Updating...',
+        'lb_error': 'Load Error'
     }
 };
 
-let currentLang = 'zh'; // 預設語言
+let currentLang = 'zh';
 
+// 修改後的切換語言函式 (含過場動畫)
 function toggleLanguage() {
-    const btnText = document.querySelector('#lang-btn .lang-text');
+    const overlay = document.getElementById('transition-overlay');
     
-    // 1. 切換語言狀態
-    if (currentLang === 'zh') {
-        currentLang = 'en';
-        btnText.innerText = '中'; // 按鈕顯示變成「中」，提示可以切回中文
-    } else {
-        currentLang = 'zh';
-        btnText.innerText = 'EN'; // 按鈕顯示變成「EN」
-    }
+    // 1. 顯示過場動畫
+    overlay.classList.add('active');
 
-    // 2. 執行翻譯
-    applyTranslations();
+    // 2. 設定一個延遲 (例如 500毫秒 = 0.5秒)，讓畫面先變白，再偷偷換文字
+    setTimeout(() => {
+        const btnText = document.querySelector('#lang-btn .lang-text');
+        
+        // 切換語言邏輯
+        if (currentLang === 'zh') {
+            currentLang = 'en';
+            btnText.innerText = '中'; 
+        } else {
+            currentLang = 'zh';
+            btnText.innerText = 'EN';
+        }
+
+        // 執行翻譯 (這時候畫面被遮住了，使用者看不到文字跳動)
+        applyTranslations();
+
+        // 如果在排行榜頁面，也順便更新
+        if (document.getElementById('view-leaderboard').classList.contains('active')) {
+            updateLeaderboard(currentSheet); 
+        }
+
+        // 3. 翻譯好之後，稍微再等一下下再把遮罩關掉，感覺比較順
+        setTimeout(() => {
+            overlay.classList.remove('active');
+        }, 300);
+
+    }, 500); // 這裡控制遮罩要停留多久 (500 = 0.5秒)
 }
 
 function applyTranslations() {
-    // 抓出所有有 data-i18n 屬性的元素
     const elements = document.querySelectorAll('[data-i18n]');
     
     elements.forEach(el => {
-        const key = el.getAttribute('data-i18n'); // 取得代號 (例如 nav_info)
+        const key = el.getAttribute('data-i18n');
         
-        // 如果字典裡有這個代號的翻譯，就換掉文字
         if (translations[currentLang][key]) {
-            // 如果是 input 按鈕，要改 value，其他改 innerText
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
                 el.placeholder = translations[currentLang][key];
             } else {
-                el.innerHTML = translations[currentLang][key]; // 使用 innerHTML 支援 HTML 標籤
+                el.innerHTML = translations[currentLang][key]; 
             }
         }
     });
