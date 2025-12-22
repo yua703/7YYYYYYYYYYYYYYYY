@@ -627,4 +627,86 @@ overlayCloseBtns.forEach(btn => {
         closeOverlay();
     });
 });
+// ==========================================
+// 6. 時程表手風琴效果 (Accordion)
+// ==========================================
+function toggleSchedule(element) {
+    // 1. 切換當前點擊的項目的 active 狀態
+    element.classList.toggle('active');
 
+    const allGroups = document.querySelectorAll('.schedule-group');
+    allGroups.forEach(group => {
+        if (group !== element) {
+            group.classList.remove('active');
+        }
+    });
+}
+// ==========================================
+// 7. 多語言切換系統 (i18n)
+// ==========================================
+
+// 1. 翻譯字典 (這裡放所有的中文對照英文)
+const translations = {
+    // 中文 (預設)
+    'zh': {
+        // 代號 : 中文內容
+        'nav_info': '賽事介紹',
+        'nav_sports': '運動項目',
+        'nav_rank': '排行榜',
+        'about_title': '關於本次賽事',
+        'home_slogan': '打破傳統，我們用科技重新定義運動競技。',
+        'event_items': '七大競賽項目',
+        'detail_title': '賽事細節',
+        // ...你可以在這裡繼續加...
+    },
+    
+    // 英文
+    'en': {
+        // 代號 : 英文內容
+        'nav_info': 'Info',
+        'nav_sports': 'Sports',
+        'nav_rank': 'Ranking',
+        'about_title': 'About Event',
+        'home_slogan': 'Redefining sports with technology.',
+        'event_items': '7 Events',
+        'detail_title': 'Details',
+        // ...對應上面的代號...
+    }
+};
+
+let currentLang = 'zh'; // 預設語言
+
+function toggleLanguage() {
+    const btnText = document.querySelector('#lang-btn .lang-text');
+    
+    // 1. 切換語言狀態
+    if (currentLang === 'zh') {
+        currentLang = 'en';
+        btnText.innerText = '中'; // 按鈕顯示變成「中」，提示可以切回中文
+    } else {
+        currentLang = 'zh';
+        btnText.innerText = 'EN'; // 按鈕顯示變成「EN」
+    }
+
+    // 2. 執行翻譯
+    applyTranslations();
+}
+
+function applyTranslations() {
+    // 抓出所有有 data-i18n 屬性的元素
+    const elements = document.querySelectorAll('[data-i18n]');
+    
+    elements.forEach(el => {
+        const key = el.getAttribute('data-i18n'); // 取得代號 (例如 nav_info)
+        
+        // 如果字典裡有這個代號的翻譯，就換掉文字
+        if (translations[currentLang][key]) {
+            // 如果是 input 按鈕，要改 value，其他改 innerText
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                el.placeholder = translations[currentLang][key];
+            } else {
+                el.innerHTML = translations[currentLang][key]; // 使用 innerHTML 支援 HTML 標籤
+            }
+        }
+    });
+}

@@ -5,638 +5,652 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExErcise</title>
     <link rel="stylesheet" href="main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- =========================
-         1. 首頁 (Home)
-    ========================== -->
-     <div id="view-home" class="page-view active">
+    <div id="view-home" class="page-view active">
         <div class="para-container">
         <img src="img/aaa.webp" alt="首頁橫幅" class="hero-static-img">
         </div>
         <section class="section-padding section-about">
-            <h2>關於本次賽事</h2>
-            <p class="desc-text">
-                【ExErcise】科技 × 運動賽事 打破傳統，我們用科技重新定義運動競技。 <br>
-                無論你是哪類猛將，這裡都有屬於你的戰場。 準備好挑戰極限了嗎？快來與夥伴一同釋放自己的潛能吧！
-            </p>
+            <h2 data-i18n="about_title">關於本次賽事</h2>
+            
+            <div class="about-feature-box">
+                <div class="about-header">
+                    <h3><span class="brand-highlight" data-i18n="home_brand">【ExErcise】科技 × 運動賽事</span></h3>
+                </div>
+                <div class="about-body">
+                    <p class="core-slogan" data-i18n="home_slogan">
+                        打破傳統，我們用科技重新定義運動競技。
+                    </p>
+                    <p class="intro-text" data-i18n="home_desc">
+                        無論你是哪類猛將，這裡都有屬於你的戰場。<br>
+                        準備好挑戰極限了嗎？快來與夥伴一同釋放自己的潛能吧！
+                    </p>
+                </div>
+            </div>
         </section>
 
         <section class="section-padding bg-gray">
-            <h2>七大競賽項目</h2>
+            <h2 data-i18n="event_items">七大競賽項目</h2>
             <div class="carousel-container" id="events-carousel">
                 <div class="carousel-track">
-                    <div class="carousel-item">
-                        <img src="img/76.webp" alt="耐力">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/71.webp" alt="爆發力">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/74.webp" alt="反應力">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/77.webp" alt="專注力">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/75.webp" alt="敏捷力">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/73.webp" alt="協調力">
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/72.webp" alt="智力">
-                    </div>
+                    <div class="carousel-item"><img src="img/76.webp" alt="耐力"></div>
+                    <div class="carousel-item"><img src="img/71.webp" alt="爆發力"></div>
+                    <div class="carousel-item"><img src="img/74.webp" alt="反應力"></div>
+                    <div class="carousel-item"><img src="img/77.webp" alt="專注力"></div>
+                    <div class="carousel-item"><img src="img/75.webp" alt="敏捷力"></div>
+                    <div class="carousel-item"><img src="img/73.webp" alt="協調力"></div>
+                    <div class="carousel-item"><img src="img/72.webp" alt="智力"></div>
                 </div>
             </div>
         </section>
 
         <section class="section-padding">
-            <h2>賽事細節</h2>
+            <h2 data-i18n="detail_title">賽事細節</h2>
             
-            <!-- 賽事細節選單 -->
             <div class="detail-tabs">
                 <div class="tab-indicator"></div>
-
-                <!-- 🔥 順序已改：時程表放第一個，並加上 active -->
-                <button class="detail-tab-btn active" data-target="detail-time">時程表</button>
-                <button class="detail-tab-btn" data-target="detail-scoring">計分方法</button>
-                <button class="detail-tab-btn" data-target="detail-map">賽事地圖</button>
-                <!-- 🔥 競賽規章移到最後 -->
-                <button class="detail-tab-btn" data-target="detail-participants">競賽辦法</button>
+                <button class="detail-tab-btn active" data-target="detail-time" data-i18n="tab_schedule">時程表</button>
+                <button class="detail-tab-btn" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
+                <button class="detail-tab-btn" data-target="detail-map" data-i18n="tab_map">賽事地圖</button>
+                <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
             </div>
 
-            <!-- 內容區塊 1: 時程表 (預設顯示 active) -->
             <div id="detail-time" class="detail-content active">
-                <!-- <h3>時程表</h3> -->
-                <img src="img/time.webp" alt="時程表" class="time-img">
+                <div class="schedule-list">
+                    <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
+                        <div class="sch-header">
+                            <span class="sch-time">08:20~10:10</span>
+                            <span class="sch-event" data-i18n="batch_1">第一梯次</span>
+                            <span class="sch-arrow">▼</span>
+                        </div>
+                        <div class="sch-body">
+                            <div class="sch-sub-row">08:20~08:35 <span data-i18n="act_reg_1">第一梯次報到</span></div>
+                            <div class="sch-sub-row">08:35~08:40 <span data-i18n="act_warm_1">第一梯次熱身</span></div>
+                            <div class="sch-sub-row">08:40~10:10 <span data-i18n="act_play_1">第一梯次體驗遊玩</span></div>
+                        </div>
+                    </div>
+                    <div class="schedule-group bg-dark-yellow" onclick="toggleSchedule(this)">
+                        <div class="sch-header">
+                            <span class="sch-time">10:10~12:00</span>
+                            <span class="sch-event" data-i18n="batch_2">第二梯次</span>
+                            <span class="sch-arrow">▼</span>
+                        </div>
+                        <div class="sch-body">
+                            <div class="sch-sub-row">10:10~10:25 <span data-i18n="act_reg_2">第二梯次報到</span></div>
+                            <div class="sch-sub-row">10:25~10:30 <span data-i18n="act_warm_2">第二梯次熱身</span></div>
+                            <div class="sch-sub-row">10:30~12:00 <span data-i18n="act_play_2">第二梯次體驗遊玩</span></div>
+                        </div>
+                    </div>
+                    <div class="schedule-row rest">
+                        <span class="sch-time">12:00~13:00</span>
+                        <span class="sch-event" data-i18n="rest_noon">午休</span>
+                    </div>
+                    <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
+                        <div class="sch-header">
+                            <span class="sch-time">13:10~15:00</span>
+                            <span class="sch-event" data-i18n="batch_3">第三梯次</span>
+                            <span class="sch-arrow">▼</span>
+                        </div>
+                        <div class="sch-body">
+                            <div class="sch-sub-row">13:10~13:25 <span data-i18n="act_reg_3">第三梯次報到</span></div>
+                            <div class="sch-sub-row">13:25~13:30 <span data-i18n="act_warm_3">第三梯次熱身</span></div>
+                            <div class="sch-sub-row">13:30~15:00 <span data-i18n="act_play_3">第三梯次體驗遊玩</span></div>
+                        </div>
+                    </div>
+                    <div class="schedule-group bg-dark-yellow" onclick="toggleSchedule(this)">
+                        <div class="sch-header">
+                            <span class="sch-time">15:00~16:50</span>
+                            <span class="sch-event" data-i18n="batch_4">第四梯次</span>
+                            <span class="sch-arrow">▼</span>
+                        </div>
+                        <div class="sch-body">
+                            <div class="sch-sub-row">15:00~15:15 <span data-i18n="act_reg_4">第四梯次報到</span></div>
+                            <div class="sch-sub-row">15:15~15:20 <span data-i18n="act_warm_4">第四梯次熱身</span></div>
+                            <div class="sch-sub-row">15:20~16:50 <span data-i18n="act_play_4">第四梯次體驗遊玩</span></div>
+                        </div>
+                    </div>
+                    <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
+                        <div class="sch-header">
+                            <span class="sch-time">16:50~18:40</span>
+                            <span class="sch-event" data-i18n="batch_5">第五梯次</span>
+                            <span class="sch-arrow">▼</span>
+                        </div>
+                        <div class="sch-body">
+                            <div class="sch-sub-row">16:50~17:05 <span data-i18n="act_reg_5">第五梯次報到</span></div>
+                            <div class="sch-sub-row">17:05~17:10 <span data-i18n="act_warm_5">第五梯次熱身</span></div>
+                            <div class="sch-sub-row">17:10~18:40 <span data-i18n="act_play_5">第五梯次體驗遊玩</span></div>
+                        </div>
+                    </div>
+                    <div class="schedule-row rest">
+                        <span class="sch-time">18:40~18:45</span>
+                        <span class="sch-event" data-i18n="rest_short">休息片刻</span>
+                    </div>
+                    <div class="schedule-row end">
+                        <span class="sch-time">18:45~19:15</span>
+                        <span class="sch-event" data-i18n="event_closing">頒獎閉幕</span>
+                    </div>
+                    <div class="schedule-row end">
+                        <span class="sch-time">19:15~19:20</span>
+                        <span class="sch-event" data-i18n="event_photo">全體大合照</span>
+                    </div>
+                </div>
             </div>
 
-            <!-- 內容區塊 2: 計分方法 -->
             <div id="detail-scoring" class="detail-content">
-                <h3>計分規則</h3>
-                <p>一、個人單項挑戰
-                    <br>
-  -  排名方式｜依各項目的分數高低進行排名。
-  <br>
-  - 獎勵機制｜各單項取第一名給予獎勵。
-  <br>
-  - 同分判定｜如遇成績相同（同分）之情況，將依較早完成報到者排名優先。
-  <br><br>
-二、個人全項總積分
-<br>
-積分換算｜各單項排名前十名者可獲得對應積分：
-<br>
-  - 第一名：10 分
-  <br>
-  - 第二名：9 分
-  <br>
-  - 以此類推.....，第十名：1 分。
-  <br>
-採計方式｜
-<br>
-  - 本賽事共分為七大類別。
-  <br>
-  - 若於同一大類別中參與多個項目並皆獲得積分，將取最高分之項目，作為該類別的最終積分。
-  <br>
-總排名與獎勵｜
-<br>
-  - 結算七大類別總積分，分數越高者排名越前。
-  <br>
-  - 總排名前三名給予獎勵。
-</p>
+                <div class="scoring-container">
+                    <div class="scoring-card theme-blue">
+                        <h3 class="scoring-title" data-i18n="score_h1">一、個人單項挑戰</h3>
+                        <div class="scoring-row">
+                            <span class="scoring-label" data-i18n="score_label_rank">排名方式</span>
+                            <span class="scoring-text" data-i18n="score_text_rank">依各項目的分數高低進行排名。</span>
+                        </div>
+                        <div class="scoring-row">
+                            <span class="scoring-label" data-i18n="score_label_reward">獎勵機制</span>
+                            <span class="scoring-text" data-i18n="score_text_reward">各單項取第一名給予獎勵。</span>
+                        </div>
+                        <div class="scoring-row">
+                            <span class="scoring-label" data-i18n="score_label_tie">同分判定</span>
+                            <span class="scoring-text" data-i18n="score_text_tie">如遇成績相同（同分）之情況，將依較早完成報到者排名優先。</span>
+                        </div>
+                    </div>
+
+                    <div class="scoring-card theme-yellow">
+                        <h3 class="scoring-title" data-i18n="score_h2">二、個人全項總積分</h3>
+                        <div class="scoring-subtitle" data-i18n="score_sub_calc">積分換算</div>
+                        <p class="scoring-desc" data-i18n="score_desc_calc">各單項排名前十名者可獲得對應積分：</p>
+                        <div class="points-grid">
+                            <div class="point-item"><span data-i18n="rank_1">第 1 名</span>：<span>10</span></div>
+                            <div class="point-item"><span data-i18n="rank_2">第 2 名</span>：<span>9</span></div>
+                            <div class="point-item" data-i18n="rank_others">...以此類推</div>
+                            <div class="point-item"><span data-i18n="rank_10">第 10 名</span>：<span>1</span></div>
+                        </div>
+
+                        <div class="scoring-subtitle" data-i18n="score_sub_method">採計方式</div>
+                        <ul class="scoring-list-style">
+                            <li data-i18n="score_li_1">本賽事共分為七大類別。</li>
+                            <li data-i18n="score_li_2">若於同一大類別中參與多個項目並皆獲得積分，將取最高分之項目，作為該類別的最終積分。</li>
+                        </ul>
+
+                        <div class="scoring-subtitle" data-i18n="score_sub_total">總排名與獎勵</div>
+                        <ul class="scoring-list-style">
+                            <li data-i18n="score_li_3">結算七大類別總積分，分數越高者排名越前。</li>
+                            <li data-i18n="score_li_4">總排名前三名給予獎勵。</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
 
-            <!-- 內容區塊 3: 賽事地圖 -->
             <div id="detail-map" class="detail-content">
-                <!-- <h3>場地配置</h3>
-                <p>"臺北科技大學-光華館4樓-400、402、404、406教室" </p> -->
-                <img src="img/map.webp" alt=地圖 class="content-img">
+                <img src="img/map.webp" alt="地圖" class="content-img">
             </div>
 
-            <!-- 內容區塊 4: 競賽規章 (移到最後) -->
             <div id="detail-participants" class="detail-content">
-                <h3>參賽資格</h3>
-                <p>一、線上報名
-                <br>
-                採表單預約制，每梯次限額 34 人。
-                <br>
-                報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱，
-                <br>
-                若沒收到，請務必於 12/26（五）前 聯繫主辦單位。
-                <br><br>
-                二、參賽須知
-                <br>
-                完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。
-                <br>
-                請務必穿著適合運動的服裝與運動鞋，以確保活動安全。
-                <br>
-                挑戰過程中請隨時留意自身身體狀況，量力而為。</p>
+                <div class="scoring-container">
+                    <div class="scoring-card theme-blue">
+                        <h3 class="scoring-title" data-i18n="rule_h1">一、線上報名</h3>
+                        <ul class="scoring-list-style">
+                            <li data-i18n="rule_li_1">採表單預約制，每梯次限額 34 人。</li>
+                            <li data-i18n="rule_li_2">報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱。</li>
+                            <li data-i18n="rule_li_3">若沒收到，請務必於 12/26（五）前 聯繫主辦單位。</li>
+                        </ul>
+                    </div>
+                    <div class="scoring-card theme-yellow">
+                        <h3 class="scoring-title" data-i18n="rule_h2">二、參賽須知</h3>
+                        <ul class="scoring-list-style">
+                            <li data-i18n="rule_li_4">完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。</li>
+                            <li data-i18n="rule_li_5">請務必穿著適合運動的服裝與運動鞋，以確保活動安全。</li>
+                            <li data-i18n="rule_li_6">挑戰過程中請隨時留意自身身體狀況，量力而為。</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
 
         <section class="section-padding section-dashed-white">
-
-         <div class="about-grid">
-        <div class="about-left">
-            <p>一、主辦單位：</p>
-            <p>二、合作單位：</p>
-        </div>
-
-        <div class="about-right">
-            <p>國立臺北科技大學 113級互動設計系</p>
-            <p>
-                尚未解鎖
-            </p>
-        </div>
-    </div>
-    <p class="about-email">EMAIL：ntut.ixd.113@gmail.com</p>
-    <br>
-    <a href="https://www.instagram.com/ntut.ixd_113?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" class="btn-primary">追蹤官方IG</a>
-    </section>
+            <div class="about-grid">
+                <div class="about-left">
+                    <p data-i18n="footer_host">一、主辦單位：</p>
+                    <p data-i18n="footer_co">二、合作單位：</p>
+                </div>
+                <div class="about-right">
+                    <p data-i18n="footer_dept">國立臺北科技大學 113級互動設計系</p>
+                    <p data-i18n="footer_locked">尚未解鎖</p>
+                </div>
+            </div>
+            <p class="about-email">EMAIL：ntut.ixd.113@gmail.com</p>
+            <br>
+            <a href="https://www.instagram.com/ntut.ixd_113" class="btn-primary" data-i18n="btn_ig">追蹤官方IG</a>
+        </section>
     </div>
     
-
-
-    <!-- =========================
-         2. 排行榜 (Leaderboard) - 左側導覽版
-    ========================== -->
     <div id="view-leaderboard" class="page-view">
         <header class="leaderboard-header">
-            <h1>即時排行榜</h1>
+            <h1 data-i18n="lb_title">即時排行榜</h1>
         </header>
 
         <div class="leaderboard-main-area">
             <div id="leaderboard-tabs-container">
-                <button data-sheet="七大項總錦標" class="lb-tab active">七大項總錦標</button>
-                <button data-sheet="第一組分數計算" class="lb-tab">培根行動</button>
-                <button data-sheet="第二組分數計算" class="lb-tab">PECOPECO</button>
-                <button data-sheet="第三組分數計算" class="lb-tab">SOS.SOS</button>
-                <button data-sheet="第四組分數計算" class="lb-tab">流汗吧！健美詠者</button>
-                <button data-sheet="第五組分數計算" class="lb-tab">企色戰隊</button>
-                <button data-sheet="第六組分數計算" class="lb-tab">不是．鴿們</button>
-                <button data-sheet="第七組分數計算" class="lb-tab">老娘不幹了</button>
-                <button data-sheet="第八組分數計算" class="lb-tab">賽馬郎</button>
-                <button data-sheet="第九組分數計算" class="lb-tab">溫水煮青蛙</button>
-                <button data-sheet="第十組分數計算" class="lb-tab">超派拍對</button>
-                <button data-sheet="第十一組分數計算" class="lb-tab">翻身</button>
-                <button data-sheet="第十二組分數計算" class="lb-tab">hurry down</button>
-                <button data-sheet="第十三組分數計算" class="lb-tab">重生之我在神界當牛馬</button>
-                <button data-sheet="第十四組分數計算" class="lb-tab">Baa Hind the Door</button>
-                <button data-sheet="第十五組分數計算" class="lb-tab">Legend of the rower</button>
-                <button data-sheet="第十六組分數計算" class="lb-tab">Legend of MUAY THAI</button>
-                <button data-sheet="第十七組分數計算" class="lb-tab">THE STONE FLOWER</button>
+                <button data-sheet="七大項總錦標" class="lb-tab active" data-i18n="lb_all">七大項總錦標</button>
+                <button data-sheet="第一組分數計算" class="lb-tab" data-i18n="g1_name">培根行動</button>
+                <button data-sheet="第二組分數計算" class="lb-tab" data-i18n="g2_name">PECOPECO</button>
+                <button data-sheet="第三組分數計算" class="lb-tab" data-i18n="g3_name">SOS.SOS</button>
+                <button data-sheet="第四組分數計算" class="lb-tab" data-i18n="g4_name">流汗吧！健美詠者</button>
+                <button data-sheet="第五組分數計算" class="lb-tab" data-i18n="g5_name">企色戰隊</button>
+                <button data-sheet="第六組分數計算" class="lb-tab" data-i18n="g6_name">不是．鴿們</button>
+                <button data-sheet="第七組分數計算" class="lb-tab" data-i18n="g7_name">老娘不幹了</button>
+                <button data-sheet="第八組分數計算" class="lb-tab" data-i18n="g8_name">賽馬郎</button>
+                <button data-sheet="第九組分數計算" class="lb-tab" data-i18n="g9_name">溫水煮青蛙</button>
+                <button data-sheet="第十組分數計算" class="lb-tab" data-i18n="g10_name">超派拍對</button>
+                <button data-sheet="第十一組分數計算" class="lb-tab" data-i18n="g11_name">翻身</button>
+                <button data-sheet="第十二組分數計算" class="lb-tab" data-i18n="g12_name">hurry down</button>
+                <button data-sheet="第十三組分數計算" class="lb-tab" data-i18n="g13_name">重生之我在神界當牛馬</button>
+                <button data-sheet="第十四組分數計算" class="lb-tab" data-i18n="g14_name">Baa Hind the Door</button>
+                <button data-sheet="第十五組分數計算" class="lb-tab" data-i18n="g15_name">Legend of the rower</button>
+                <button data-sheet="第十六組分數計算" class="lb-tab" data-i18n="g16_name">Legend of MUAY THAI</button>
+                <button data-sheet="第十七組分數計算" class="lb-tab" data-i18n="g17_name">THE STONE FLOWER</button>
             </div>
-
-            <div id="leaderboard-data">載入中...</div>
+            <div id="leaderboard-data" data-i18n="lb_loading">載入中...</div>
         </div>
-
         <div style="height: 80px;"></div>
     </div>
 
 
-    <!-- =========================
-         3. 參賽組別 (Groups)
-    ========================== -->
     <div id="view-groups" class="page-view">
         <div class="section-padding">
-            <h2>運動項目</h2>
-            <!-- <p class="desc-text">共 17 組隊伍參與本次賽事</p> -->
-
+            <h2 data-i18n="nav_sports">運動項目</h2>
             <div class="groups-grid">
-                <!-- #1 -->
                 <div class="group-card">
                     <span class="group-badge">G1</span>
                     <img src="img/1.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>培根行動</h3>
-                        <p>專注力</p>
+                        <h3 data-i18n="g1_name">培根行動</h3>
+                        <p data-i18n="cat_focus">專注力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>《培根行動 Project Bacon》是一款結合 節奏判定 × 動作揮擊 的反應型遊戲，改編自經典童話《三隻小豬》，玩家將扮演大野狼，在混亂又充滿節奏感的攻防中，突破三隻小豬的連續攻擊。</p>
-                            <br>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g1_desc">《培根行動 Project Bacon》是一款結合 節奏判定 × 動作揮擊 的反應型遊戲...</p>
                             <hr>
-                            <br>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>睡美人的肝臟設計師｜陳孝宣</p>
                             <p>壞巫婆的假牙設計師｜楊依韻</p>
                             <p>白雪公主的腋毛設計師｜王政諺</p>
                             <p>神仙教母的帽子設計師｜陳家蓁</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>宋兆祥</p>
-                            <br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #2 -->
                 <div class="group-card">
                     <span class="group-badge">G2</span>
                     <img src="img/2.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>PECOPECO</h3>
-                        <p>反應力</p>
+                        <h3 data-i18n="g2_name">PECOPECO</h3>
+                        <p data-i18n="cat_reaction">反應力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>《PECOPECO》是一款可愛互動反應遊戲！玩家手持鳳梨酥，抓準台灣黑熊、石虎與藍鵲張嘴的時機，快速餵食提升好感度，30 秒內收服牠們成為好夥伴吧！</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g2_desc">《PECOPECO》是一款可愛互動反應遊戲！玩家手持鳳梨酥...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>腦袋空空設計師｜徐郁銓</p>
                             <p>吃個桃桃設計師｜郭純希</p>
                             <p>綠茶多多設計師｜牧彩香</p>
                             <p>人好睏睏設計師｜黃俊凱</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>宋兆祥</p>
-                            <br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
-                    
                 </div>
-                
-                <!-- #3 -->
+
                 <div class="group-card">
                     <span class="group-badge">G3</span>
                     <img src="img/3.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>SOS.SOS</h3>
-                        <p>敏捷力</p>
+                        <h3 data-i18n="g3_name">SOS.SOS</h3>
+                        <p data-i18n="cat_agility">敏捷力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>以高速婆婆傳說改編，考驗敏捷反應力。玩家需要一邊左右閃避來車，一邊操作皮拉提斯環拍下高速婆婆的清晰身影。各位窮苦超屁的大學生們，快來看看誰能拍到最清晰的瞬間、賺取最高的賞金吧！</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g3_desc">以高速婆婆傳說改編，考驗敏捷反應力...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>青箭口香糖 #牛逼 U呢體程式設計師｜謝瑋庭</p>
                             <p>巧克力香蕉 #超頂軟硬體連接設計師｜莊婷伃</p>
                             <p>芝士大漢堡 #要拼主視覺美術設計師｜林科余</p>
                             <p>自清的橘子 #超扯點子王硬體設計師｜羅至侑</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>王明道</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #4 -->
                 <div class="group-card">
                     <span class="group-badge">G4</span>
                     <img src="img/4.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>流汗吧！健美詠者</h3>
-                        <p>耐力</p>
+                        <h3 data-i18n="g4_name">流汗吧！健美詠者</h3>
+                        <p data-i18n="cat_endurance">耐力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>拔起你的石中劍，打爆邪惡法師梅林，一起甩出汗水💦與肌肉💪‼️
-                            <br>
-                            成為健美詠者吧‼️</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g4_desc">拔起你的石中劍，打爆邪惡法師梅林...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>大總裁介面設計師｜陳心愉</p>
                             <p>女強人程式設計師｜林岱妍</p>
                             <p>女秘書美術設計師｜賴星妍</p>
                             <p>小女人音效設計師｜洪雅恩</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>簡明哲</p>
-                            <br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #5 -->
                 <div class="group-card">
                     <span class="group-badge">G5</span>
                     <img src="img/5.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>企色戰隊</h3>
-                        <p>專注力</p>
+                        <h3 data-i18n="g5_name">企色戰隊</h3>
+                        <p data-i18n="cat_focus">專注力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>你說的對🗣️👍，但是《企色戰隊》🐧🐧🐧是由Group5️⃣自主研發💡的一款節奏類🎵有氧運動遊戲🦵🦵。遊戲發生在一個被稱作「南極🥶」的大陸🌍，某一天，漁船🚢撞擊冰山💥🧊漏出有毒物質😱☣️，部分企鵝變成殭屍🧟⁉️。你🫵將成為助力💪「企鵝戰隊」🐧🩵的神秘力量😏，在「☠️致命殭屍節奏🎶」與「💨有氧驅動踏板👣🔘」之間操控「企鵝機甲🦾🤖」發射水炮💦💦，和企鵝們一起擊敗殭屍👊😡，找回失散的平靜🤗🤗——同時，逐步👣👣發掘「企鵝」的美好🐧❤️🐧💚🐧💙。</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g5_desc">你說的對🗣️👍，但是《企色戰隊》...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>林紫琪、韋宥筠、賴詠彤、李承祐</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>鄭建文</p>
-
                         </div>
                     </div>
                 </div>
 
-                <!-- #6 -->
                 <div class="group-card">
                     <span class="group-badge">G6</span>
                     <img src="img/6.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>不是．鴿們</h3>
-                        <p>智力</p>
+                        <h3 data-i18n="g6_name">不是．鴿們</h3>
+                        <p data-i18n="cat_intellect">智力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>「鴿們就靠你了！」 變身諾亞方舟上的鴿子，努力拍動翅膀，小心閃避障礙，在洪水中找到那根代表希望的橄欖枝吧！</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g6_desc">「鴿們就靠你了！」 變身諾亞方舟上的鴿子...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>不會美術的美術設計鴿｜范諭暄</p>
                             <p>諾亞轉生為程式設計鴿｜夏宇柔</p>
                             <p>準備轉職當PM的設計鴿｜楊康媞</p>
                             <p>做翅膀的勞力員設計鴿｜時瑋甯</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>王明道</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #7 -->
                 <div class="group-card">
                     <span class="group-badge">G7</span>
                     <img src="img/7.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>老娘不幹了</h3>
-                        <p>爆發力</p>
+                        <h3 data-i18n="g7_name">老娘不幹了</h3>
+                        <p data-i18n="cat_explosive">爆發力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>在長期被霸總壓迫的職場中，秘書選擇不再忍耐。<br>
-                            本作品以誇張卻熟悉的職場情境為背景，邀請你化身為「決定離職的秘書」，透過丟擲文件的動作，釋放累積已久的壓力。</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g7_desc">在長期被霸總壓迫的職場中，秘書選擇不再忍耐...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>林妤安、蔡珺瑶、趙於萱、鄭儀嘉</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>宋兆祥</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #8 -->
                 <div class="group-card">
                     <span class="group-badge">G8</span>
                     <img src="img/8.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>賽馬郎</h3>
-                        <p>敏捷力</p>
+                        <h3 data-i18n="g8_name">賽馬郎</h3>
+                        <p data-i18n="cat_agility">敏捷力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>一直跑一直跳 一直動手接金幣水果滿分 變帥潮逼逼馬 變成最盟最帥最最快的賽馬郎</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g8_desc">一直跑一直跳 一直動手接金幣水果滿分...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>謀摳林程式設計師｜宋浤銘</p>
                             <p>真的假的視覺設計師｜江庭真</p>
                             <p>國文唐師建模師｜陳彥均</p>
                             <p>互動金采源企劃構想師｜陳婉琦</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>鄭建文</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #9 -->
                 <div class="group-card">
                     <span class="group-badge">G9</span>
                     <img src="img/9.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>溫水煮青蛙</h3>
-                        <p>智力</p>
+                        <h3 data-i18n="g9_name">溫水煮青蛙</h3>
+                        <p data-i18n="cat_intellect">智力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>野外求生的第三天到達了飢餓邊緣，在這極限30秒內，持續打氣來煮熟青蛙吧，請小心被牠察覺到你的意圖並逃走！</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g9_desc">野外求生的第三天到達了飢餓邊緣...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>陳靖元、謝昀珊、曾于軒、周鈺倍</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>簡明哲</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #10 -->
                 <div class="group-card">
                     <span class="group-badge">G10</span>
                     <img src="img/10.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>超派拍對</h3>
-                        <p>反應力</p>
+                        <h3 data-i18n="g10_name">超派拍對</h3>
+                        <p data-i18n="cat_reaction">反應力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>身為一名充滿熱情的魔法烘焙師，本來要做出完美的派 🍓🥧，卻在施法時……用了錯誤的魔法咒語 😱✨！ 結果……派 爆走啦！！！ 🧨🤯<br>派變成超派(super pie)居然瘋狂開始朝我丟水果 🍌🍍🍉🍇🍓！！！<br>ㄚㄚㄚㄚ~~ 物痾痾痾物物～～不要再砸了啦！！😭😭<br>再丟下去我這派就 真的不太妙了 🍰💥<br>沒辦法……只好使出這招了 💪🔥<br>👉 水果全反擊！！ 🍓🍋🍉💥<br>準備好讓水果 飛來飛去 🍊✈️🍍✈️<br>展現你的反擊之力吧！！💥🧙‍♂️🎉<br></p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g10_desc">身為一名充滿熱情的魔法烘焙師，本來要做出完美的派...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>超派正しくない魔女殺手程式設計師｜莊惟喆</p>
                             <p>超派壽司女郎草莓惡魔粉碎機主視覺設計師｜孫翊瑄</p>
                             <p>超派超絕牛馬剉冰製造機3D設計師 ｜賴柏佑</p>
                             <p>超派魔音穿腦大肉丸實景設計師｜高婉媃</p>
                             <p>超派異域風情陽春麵老闆美術設計師｜楊春春</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>簡明哲</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- #11 -->
                 <div class="group-card">
                     <span class="group-badge">G11</span>
                     <img src="img/11.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>翻身</h3>
-                        <p>敏捷力</p>
+                        <h3 data-i18n="g11_name">翻身</h3>
+                        <p data-i18n="cat_agility">敏捷力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>人生的結果是已知的，那要怎麼創造未知的過程<br>
-                            玩家將扮演一隻鹹魚，藉由翻身運動來翻面掙扎，表達自己不甘於現狀的心態</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g11_desc">人生的結果是已知的，那要怎麼創造未知的過程...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>縫縫補補的設計總監｜張煒茹</p>
                             <p>夢想成為鹹魚的角色動畫設計師｜孔奕寧</p>
                             <p>&lt;&lt;是淑儀也是蘇怡的書宜aka不放棄程式設計師&gt;&gt;｜楊書宜</p>
                             <p>超級貓咪視覺設計師｜柯佩岑</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>簡明哲</p>
-                            <br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #12 -->
                 <div class="group-card">
                     <span class="group-badge">G12</span>
                     <img src="img/12.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>hurry down</h3>
-                        <p>協調力</p>
+                        <h3 data-i18n="g12_name">hurry down</h3>
+                        <p data-i18n="cat_coordination">協調力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>愛麗絲在逃離紅心皇后的追捕時，意外跌入了神秘的魔法空間！？<br>
-                            在這重力與方向全都失序的空間，她必須努力穩住身體，閃避四面而來的危險與追兵。<br>
-                            抓緊平衡、勇敢前進，讓愛麗絲逃離紅心皇后的魔掌吧！</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g12_desc">愛麗絲在逃離紅心皇后的追捕時，意外跌入了神秘的魔法空間...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>陳宜靜、李安中、黃智恒、蘇奕菲</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>鄭建文</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #13 -->
                 <div class="group-card">
                     <span class="group-badge">G13</span>
                     <img src="img/13.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>重生之我在神界當牛馬</h3>
-                        <p>耐力</p>
+                        <h3 data-i18n="g13_name">重生之我在神界當牛馬</h3>
+                        <p data-i18n="cat_endurance">耐力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>這是一個不公平的工作啊<br>
-                                欸不是<br>
-                                我一隻都沒有漏然後判我輸喔<br>
-                                被我拿斧頭打到的死樵夫贏喔<br>
-                                有沒有邏輯啊不是啊 <br>
-                                我把他打到頭破掉 這樣算我輸喔<br>
-                                他亂丟我 我一隻都沒有少ㄟ<br>
-                                啊這樣算我輸喔 <br>
-                                你們裁判怎麼判的啦<br>
-                                好啦 我要回家了啦<br>
-                                辭呈送給你啦 乞丐
-                            </p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g13_desc">這是一個不公平的工作啊...<br>欸不是...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>木匠阿黃/互動設計｜蔣易珊</p>
                             <p>木匠阿綠/程式設計｜何美玲</p>
                             <p>木匠阿紅/美術設計｜陳怡亘</p>
                             <p>斧頭本斧/美術設計｜呂妍</p>
                             <br>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>王明道</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #14 -->
                 <div class="group-card">
                     <span class="group-badge">G14</span>
                     <img src="img/14.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>Baa Hind the Door</h3>
-                        <p>專注力</p>
+                        <h3 data-i18n="g14_name">Baa Hind the Door</h3>
+                        <p data-i18n="cat_focus">專注力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>面對狡猾的大野狼不斷從四面八方闖入，你必須眼明手快，將牠阻擋在門外！每一次成功守護，都離小羊的安全更近一步🐑🏠<br>
-                            你，能守護到最後嗎？</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g14_desc">面對狡猾的大野狼不斷從四面八方闖入...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>林筱婕、盧佩雲、吳欣祈、吳千佳</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>宋兆祥</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #15 -->
                 <div class="group-card">
                     <span class="group-badge">G15</span>
                     <img src="img/15.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>Legend of the rower</h3>
-                        <p>爆發力</p>
+                        <h3 data-i18n="g15_name">Legend of the rower</h3>
+                        <p data-i18n="cat_explosive">爆發力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>Inspired by the iconic leg-rowing of Inlay Lake’s Intha fishermen, this game turns tradition into a fast-paced fitness challenge. Balance, row, and chase the thrill of catching as many fish as you can before time runs out.
-</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g15_desc">Inspired by the iconic leg-rowing of Inlay Lake’s Intha fishermen...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>Aein Kyawt Han、Anujin Bazardargia、Aye Pyae Pyae Khin、Jintapa Laipitaksin、Katriela Nicoline</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>韓秉軒</p>
-                            <br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #16 -->
                 <div class="group-card">
                     <span class="group-badge">G16</span>
                     <img src="img/16.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>Legend of MUAY THAI</h3>
-                        <p>協調力</p>
+                        <h3 data-i18n="g16_name">Legend of MUAY THAI</h3>
+                        <p data-i18n="cat_coordination">協調力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>Our project is inspired by the story of the Muay Thai legend Nai Khanom Tom. <br>Players must coordinate elbow and leg movements to punch the correct buttons in order to defeat the opponent. 
-                            <br>Within 30 seconds, the more points the player punches, the higher their ranking will be.</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g16_desc">Our project is inspired by the story of the Muay Thai legend Nai Khanom Tom...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>丁玉寶珍、Gwynne Purnama、Ratchapakorn Thanwised、Jesslyn Boediono Goenawan、AZZRA RIENOV FAHLIVI</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>韓秉軒</p>
-                            <br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
 
-                <!-- #17 -->
                 <div class="group-card">
                     <span class="group-badge">G17</span>
                     <img src="img/17.webp" alt="隊伍圖片" class="group-img">
                     <div class="group-info">
-                        <h3>THE STONE FLOWER:THE MASTER'S EDGE
-                        </h3>
-                        <p>智力</p>
+                        <h3 data-i18n="g17_name">THE STONE FLOWER</h3>
+                        <p data-i18n="cat_intellect">智力</p>
                     </div>
                     <div class="group-body">
                         <div class="group-content-inner">
-                            <div class="detail-tag">組別介紹</div>
-                            <p>Inspired by the folklore of The Stone Flower, this game turns the art of stone carving into an engaging mastery challenge. Break through the stone wall, refine your skills, and uncover beauty hidden within the rock. Only true masters can carve the perfect Stone Flower.</p>
+                            <div class="detail-tag" data-i18n="label_intro">組別介紹</div>
+                            <p data-i18n="g17_desc">Inspired by the folklore of The Stone Flower...</p>
                             <hr>
-                            <div class="detail-tag">組員</div>
+                            <div class="detail-tag" data-i18n="label_members">組員</div>
                             <p>陳小清、Leanne Garcia、Emiliia Malkova、Khuat Thi Khanh Linh、PHAM LAN HUONG</p>
-                            <div class="detail-tag">指導老師</div>
+                            <div class="detail-tag" data-i18n="label_advisor">指導老師</div>
                             <p>韓秉軒</p>
-                            <br><br><br><br><br><br><br><br><br><br>
+                            <br><br><br>
                         </div>
                     </div>
                 </div>
@@ -646,82 +660,69 @@
         <div style="height: 80px;"></div>
     </div>
 
-    <!-- 🔥 新增：過場動畫遮罩 -->
-    <div id="transition-overlay">
-        <div class="spinner"></div>
-    </div>
 
-
-    <!-- =========================
-         底部導覽列
-    ========================== -->
     <nav class="bottom-nav">
         <button class="nav-btn active" data-view="view-home">
             <img src="img/iii.webp" class="nav-icon" alt="賽事介紹">
-            <span class="text">賽事介紹</span>
+            <span class="text" data-i18n="nav_info">賽事介紹</span>
         </button>
         
         <button class="nav-btn" data-view="view-groups">
             <img src="img/oio.webp" class="nav-icon" alt="項目">
-            <span class="text">運動項目</span>
+            <span class="text" data-i18n="nav_sports">運動項目</span>
         </button>
         
         <button class="nav-btn" data-view="view-leaderboard">
             <img src="img/ooo.webp" class="nav-icon" alt="排行榜">
-            <span class="text">排行榜</span>
+            <span class="text" data-i18n="nav_rank">排行榜</span>
         </button>
     </nav>
 
     <div id="clone-overlay" class="overlay-hidden">
-    
         <div class="overlay-scroll-container">
             <div class="overlay-card">
-                
                 <div class="overlay-slider-wrapper">
-    <div class="overlay-slider-track">
-        </div>
-
-    <div class="overlay-image-counter">1/1</div>
-
-    <div class="overlay-expand-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M15 3h6v6"></path>
-        <path d="M21 3l-7 7"></path>
-        
-        <path d="M9 21H3v-6"></path>
-        <path d="M3 21l7-7"></path>
-    </svg>
-</div>
-    
-</div>
+                    <div class="overlay-slider-track"></div>
+                    <div class="overlay-image-counter">1/1</div>
+                    <div class="overlay-expand-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M15 3h6v6"></path>
+                            <path d="M21 3l-7 7"></path>
+                            <path d="M9 21H3v-6"></path>
+                            <path d="M3 21l7-7"></path>
+                        </svg>
+                    </div>
+                </div>
                 <div class="overlay-content">
                     <div class="overlay-header">
                         <span class="overlay-badge"></span>
                         <h3 class="overlay-title"></h3>
                         <p class="overlay-desc"></p>
                     </div>
-                    
                     <div class="overlay-body"></div> 
                 </div>
             </div>
         </div>
-
         <div class="overlay-bottom-close">
             <div class="bouncing-arrow"></div>
-            <span class="close-text">點擊關閉</span>
+            <span class="close-text" data-i18n="close_btn">點擊關閉</span>
         </div>
     </div>
 
     <div id="fullscreen-lightbox">
         <div class="lightbox-close">✕</div>
         <div class="lightbox-counter">1/1</div>
-        <div class="lightbox-track">
-            </div>
+        <div class="lightbox-track"></div>
     </div>
+
+    <div id="transition-overlay"><div class="spinner"></div></div>
+
+    <button id="lang-btn" onclick="toggleLanguage()">
+        <span class="lang-text">EN</span>
+    </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-
     <script src="main.js"></script>
 </body>
 </html>
