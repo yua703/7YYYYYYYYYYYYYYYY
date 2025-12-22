@@ -153,11 +153,23 @@ function renderList(data, sheetName) {
             lastScore = rawScore;
         }
 
-        // 動畫延遲：讓名單依序滑入 (i * 0.05s)
+        // ==========================================
+        // 🔥 修改這裡：根據排名決定要加什麼 Class
+        // ==========================================
+        let rankClass = "";
+        if (rank === 1) {
+            rankClass = "rank-1";
+        } else if (rank === 2) {
+            rankClass = "rank-2";
+        } else if (rank === 3) {
+            rankClass = "rank-3";
+        }
+
         const delay = i * 0.05;
 
+        // 🔥 修改這裡：把 ${rankClass} 加到 class="..." 裡面
         return `
-            <div class="lb-player" style="animation-delay: ${delay}s">
+            <div class="lb-player ${rankClass}" style="animation-delay: ${delay}s">
                 <span class="lb-rank-num">#${rank}</span>
                 <span class="lb-player-name">${pName}</span>
                 <span class="lb-player-num">${pNumber}</span>

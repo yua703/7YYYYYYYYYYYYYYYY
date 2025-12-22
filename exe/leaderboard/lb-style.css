@@ -122,16 +122,33 @@ body {
 }
 
 /* 前三名特別樣式 */
-.lb-player:nth-child(1) .lb-rank-num { color: #d4af37; font-size: 1.5rem; } /* 金 */
-.lb-player:nth-child(2) .lb-rank-num { color: #c0c0c0; font-size: 1.4rem; } /* 銀 */
-.lb-player:nth-child(3) .lb-rank-num { color: #cd7f32; font-size: 1.3rem; } /* 銅 */
+/* 第一名 (金) */
+.lb-player.rank-1 .lb-rank-num {
+    color: #d4af37;
+    font-size: 2rem;
+}
+
+/* 第二名 (銀) */
+.lb-player.rank-2 .lb-rank-num {
+    color: #c0c0c0;
+    font-size: 1.8rem;
+}
+
+/* 第三名 (銅) */
+.lb-player.rank-3 .lb-rank-num {
+    color: #cd7f32;
+    font-size: 1.6rem;
+}
 
 .lb-player:nth-child(odd) { background-color: #f9f9f9; }
 
 .lb-rank-num {
-    font-family: 'Permanent Marker', cursive;
+    font-family: "Arial Black", "Impact", sans-serif;
+    
     text-align: center;
-    font-weight: bold;
+    font-weight: 900; /* 極粗 */
+    font-style: italic; /* 傾斜更有動感 */
+    letter-spacing: -1px; /* 字距緊一點 */
     color: #4882A6;
 }
 
