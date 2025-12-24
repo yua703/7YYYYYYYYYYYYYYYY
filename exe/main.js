@@ -253,7 +253,7 @@ async function updateLeaderboard(sheetName) {
     }
 
     try {
-        const res = await fetch(sheetBase + encodeURIComponent(sheetName) + "?t=" + Date.now());
+        const res = await fetch(sheetBase + encodeURIComponent(sheetName), { cache: "no-cache" });
         
         if (!res.ok) throw new Error("網路回應錯誤");
         

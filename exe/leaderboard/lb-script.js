@@ -96,7 +96,9 @@ async function loadCategory(index) {
 
     try {
         // 加時間戳記防止快取
-        const res = await fetch(`${SHEET_BASE}${encodeURIComponent(target.sheet)}?t=${Date.now()}`);
+        const res = await fetch(`${SHEET_BASE}${encodeURIComponent(target.sheet)}`, {
+    cache: 'no-cache'
+});
         if (!res.ok) throw new Error("API Error");
         
         const rawData = await res.json();

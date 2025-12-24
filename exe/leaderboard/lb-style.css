@@ -125,7 +125,7 @@ body {
 /* 第一名 (金) */
 .lb-player.rank-1 .lb-rank-num {
     color: #d4af37;
-    font-size: 2rem;
+    font-size: 1.8rem;
 }
 
 /* 第二名 (銀) */
@@ -137,7 +137,7 @@ body {
 /* 第三名 (銅) */
 .lb-player.rank-3 .lb-rank-num {
     color: #cd7f32;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
 }
 
 .lb-player:nth-child(odd) { background-color: #f9f9f9; }
