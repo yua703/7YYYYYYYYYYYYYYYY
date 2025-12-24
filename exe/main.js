@@ -932,7 +932,7 @@ const translations = {
 
         // Footer
         'footer_host': 'Organizer:', 'footer_co': 'Co-organizer:',
-        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Locked', 'btn_ig': 'Follow Instagram',
+        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'To Be Determined', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
         'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
