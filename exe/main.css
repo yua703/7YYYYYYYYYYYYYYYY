@@ -1389,3 +1389,111 @@ body.lock-scroll .bottom-nav {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+/* =========================================
+   🔥 新增：電腦版輪播左右導覽按鈕
+   ========================================= */
+/* 確保父容器是相對定位，讓按鈕可以絕對定位 */
+.overlay-slider-wrapper {
+    position: relative; 
+}
+
+/* 按鈕通用樣式 */
+.slider-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); /* 垂直置中 */
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.3); /* 半透明黑色背景 */
+    color: white;
+    border: none;
+    border-radius: 50%; /* 圓形按鈕 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 10; /* 確保在圖片上面 */
+    transition: background-color 0.3s, opacity 0.3s;
+    opacity: 0; /* 預設隱藏，有滑鼠時才顯示 */
+    pointer-events: none; /* 隱藏時不擋住點擊 */
+}
+
+/* 滑鼠移入區塊時顯示按鈕 */
+.overlay-slider-wrapper:hover .slider-nav-btn {
+    opacity: 1;
+    pointer-events: all;
+}
+
+/* 滑鼠移到按鈕上時加深背景 */
+.slider-nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* 左側按鈕位置 */
+.prev-btn {
+    left: 10px;
+}
+
+/* 右側按鈕位置 */
+.next-btn {
+    right: 10px;
+}
+
+/* 在手機版 (觸控裝置) 隱藏這兩個按鈕，因為手機用滑的比較順 */
+@media (pointer: coarse) {
+    .slider-nav-btn {
+        display: none !important;
+    }
+}
+/* =========================================
+   🔥 新增：全螢幕模式左右按鈕樣式
+   ========================================= */
+.lightbox-nav-btn {
+    position: fixed; /* 固定在螢幕上 */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;  /* 比詳情頁的按鈕大一點 */
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.1); /* 淡淡的白色背景 */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1002; /* 確保在圖片上層 (Lightbox track 是 1001) */
+    transition: all 0.3s ease;
+}
+
+.lightbox-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-50%) scale(1.1); /* 滑鼠移過去稍微放大 */
+}
+
+/* 左邊按鈕 */
+.lightbox-nav-btn.prev-btn {
+    left: 30px;
+}
+
+/* 右邊按鈕 */
+.lightbox-nav-btn.next-btn {
+    right: 30px;
+}
+
+/* 手機版隱藏 (因為手機用滑的比較快) */
+@media (pointer: coarse) {
+    .lightbox-nav-btn {
+        display: none !important;
+    }
+}
+/* =========================================
+   🔥 修正：時程表內文間距 (時間與事項分開)
+   ========================================= */
+.sch-sub-row span {
+    margin-left: 15px; /* 這裡控制距離大小，你可以改成 20px 或更大 */
+    
+    /* (選用) 如果想要中間有一條淺灰色的分隔線，把下面這兩行註解打開 */
+    /* padding-left: 15px; */
+    /* border-left: 2px solid #ddd; */
+}

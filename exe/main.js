@@ -348,7 +348,7 @@ function stopLeaderboardUpdate() {
 
 
 // ==========================================
-// 5. 組別展開功能 (含多圖滑動 & 全螢幕) - Bug修復版
+// 5. 組別展開功能 (含多圖滑動、全螢幕、電腦版按鈕) - 完整修復版
 // ==========================================
 
 // 🔥 設定：每一組的照片清單
@@ -365,9 +365,6 @@ const GROUP_GALLERY = {
     "G12": ["img/12.webp","img/12 (1).webp", "img/12 (2).webp","img/12 (3).webp"],
     "G13": ["img/13.webp","img/13 (1).webp", "img/13 (2).webp", "img/13 (3).webp"],
     "G14": ["img/14.webp","img/14 (1).webp", "img/14 (2).webp", "img/14 (3).webp"],
-
-
-
     // 其他沒寫的組別，程式會自動預設只有一張封面圖
 };
 
@@ -383,8 +380,11 @@ const overlayCloseBtns = overlay.querySelectorAll('.overlay-bottom-close');
 // 滑動相關元素
 const sliderTrack = overlay.querySelector('.overlay-slider-track');
 const sliderCounter = overlay.querySelector('.overlay-image-counter');
+// 🔥 新增：選取左右按鈕
+const prevBtn = overlay.querySelector('.prev-btn');
+const nextBtn = overlay.querySelector('.next-btn');
 
-// 🔥 核心修正：將 Index 變數統一管理，不要讓 enableSwipe 自己私藏
+// 🔥 核心修正：將 Index 變數統一管理
 let currentImages = []; 
 let currentSlideIndex = 0; 
 
@@ -409,7 +409,6 @@ function openOverlay(card) {
     if (GROUP_GALLERY[badgeText]) {
         currentImages = GROUP_GALLERY[badgeText];
     } else {
-        // 預設只有一張圖
         currentImages = [originalImgSrc];
     }
 
@@ -426,6 +425,16 @@ function openOverlay(card) {
     currentSlideIndex = 0; 
     updateCounter(sliderCounter, 1, currentImages.length);
     sliderTrack.style.transform = `translateX(0px)`; 
+
+    // 🔥 新增邏輯：如果只有一張圖，就隱藏左右按鈕
+    if (currentImages.length <= 1) {
+        prevBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+    } else {
+        // 恢復顯示 (因為 CSS 設定了 hover 才顯示，這裡用空白字串讓它回到 CSS 控制狀態)
+        prevBtn.style.display = '';
+        nextBtn.style.display = '';
+    }
 
     // 5. 顯示 Overlay
     if(overlayScrollContainer) overlayScrollContainer.scrollTop = 0;
@@ -455,7 +464,50 @@ function updateCounter(element, current, total) {
     element.innerText = `${current}/${total}`;
 }
 
-// --- 功能 D: 通用滑動邏輯 (修正版：恢復即時拖曳感 + 方向鎖定) ---
+// --- 🔥 新增功能 G: 電腦版按鈕切換邏輯 ---
+// 專門用來處理 Overlay 的按鈕點擊
+function changeOverlaySlide(direction) {
+    const total = currentImages.length;
+    if (total <= 1) return; // 只有一張圖就不做事
+
+    if (direction === 'next') {
+        if (currentSlideIndex < total - 1) {
+            currentSlideIndex++;
+        }
+    } else if (direction === 'prev') {
+        if (currentSlideIndex > 0) {
+            currentSlideIndex--;
+        }
+    }
+
+    // 計算位置並移動
+    const width = sliderTrack.offsetWidth;
+    const currentTranslate = currentSlideIndex * -width;
+    
+    sliderTrack.style.transition = 'transform 0.3s ease-out';
+    sliderTrack.style.transform = `translateX(${currentTranslate}px)`;
+    
+    // 更新計數器
+    updateCounter(sliderCounter, currentSlideIndex + 1, total);
+
+    // 動畫結束後移除 transition
+    setTimeout(() => {
+        sliderTrack.style.transition = 'none';
+    }, 300);
+}
+
+// 綁定按鈕事件
+prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); // 防止點到圖片觸發全螢幕
+    changeOverlaySlide('prev');
+});
+nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    changeOverlaySlide('next');
+});
+
+
+// --- 功能 D: 通用滑動邏輯 (手機觸控用) ---
 function enableSwipe(trackElement, counterElement, isLightbox = false) {
     let startX = 0;
     let startY = 0;
@@ -463,24 +515,22 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
     let prevTranslate = 0;
     let isDragging = false;
     let animationID;
-    let isHorizontal = null; // 用來鎖定方向
+    let isHorizontal = null; 
 
-    // 觸控開始
     trackElement.addEventListener('touchstart', (e) => {
         startX = e.touches[0].clientX;
         startY = e.touches[0].clientY;
         isDragging = true;
-        isHorizontal = null; // 重置方向
+        isHorizontal = null; 
         
-        // 🔥 修正點 1：動畫迴圈要立刻啟動，不能等方向判斷
         animationID = requestAnimationFrame(animation);
         
         if(!isLightbox) {
+            // 如果是 Overlay，起始位置要根據當前的 Index 計算
             prevTranslate = currentSlideIndex * -trackElement.offsetWidth;
         }
     }, { passive: false });
 
-    // 觸控移動
     trackElement.addEventListener('touchmove', (e) => {
         if (!isDragging) return;
 
@@ -489,33 +539,29 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
         const diffX = currentX - startX;
         const diffY = currentY - startY;
 
-        // 判斷方向 (只在第一次移動時判斷)
         if (isHorizontal === null) {
             if (Math.abs(diffX) > Math.abs(diffY)) {
-                isHorizontal = true; // 鎖定為水平
+                isHorizontal = true; 
             } else {
-                isHorizontal = false; // 鎖定為垂直
+                isHorizontal = false; 
             }
         }
 
-        // 如果是水平滑動
         if (isHorizontal) {
-            if (e.cancelable) e.preventDefault(); // 禁止網頁上下捲動
-            currentTranslate = prevTranslate + diffX; // 🔥 這裡會持續更新位置
+            if (e.cancelable) e.preventDefault(); 
+            currentTranslate = prevTranslate + diffX; 
         }
         
     }, { passive: false });
 
-    // 觸控結束
     trackElement.addEventListener('touchend', () => {
         isDragging = false;
         cancelAnimationFrame(animationID);
 
-        // 只有在水平滑動模式下，才計算換頁
         if (isHorizontal) {
             const movedBy = currentTranslate - prevTranslate;
             const threshold = 50; 
-
+            // 這裡使用外部的 currentSlideIndex 和 currentImages
             if (movedBy < -threshold && currentSlideIndex < currentImages.length - 1) {
                 currentSlideIndex += 1;
             } else if (movedBy > threshold && currentSlideIndex > 0) {
@@ -523,31 +569,23 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
             }
         }
         
-        // 無論如何都要歸位 (吸附效果)
         setPositionByIndex();
     });
 
-    // 🔥 修正點 2：動畫迴圈邏輯優化
     function animation() {
-        if(isDragging) {
-            // 只有在確定是「水平滑動」時，才更新圖片位置
-            if(isHorizontal) {
-                setSliderPosition(currentTranslate);
-            }
-            // 迴圈繼續跑，直到手指放開
+        if(isDragging && isHorizontal) {
+            setSliderPosition(currentTranslate);
             requestAnimationFrame(animation);
         }
     }
 
-    // 設定位置 (拖曳中：無動畫，跟隨手指)
     function setSliderPosition(pos) {
         trackElement.style.transform = `translateX(${pos}px)`;
     }
 
-    // 設定位置 (放開後：有動畫，吸附到定位)
+    // 觸控結束後的歸位函式
     function setPositionByIndex() {
         const width = trackElement.offsetWidth;
-        // 重新計算正確位置
         currentTranslate = currentSlideIndex * -width;
         
         trackElement.style.transition = 'transform 0.3s ease-out';
@@ -561,64 +599,138 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
     }
 }
 
-// 啟用詳情頁的滑動
+// 啟用詳情頁的觸控滑動
 enableSwipe(sliderTrack, sliderCounter, false);
 
 
-// --- 功能 E: 全螢幕 Lightbox 邏輯 ---
+// --- 功能 E: 全螢幕 Lightbox 邏輯 (含左右按鈕) ---
+
+// 1. 選取全螢幕按鈕
+const lbPrevBtn = lightbox.querySelector('.prev-btn');
+const lbNextBtn = lightbox.querySelector('.next-btn');
+
+// 2. 全域變數管理目前張數
+let currentLightboxIndex = 0;
+
 function openLightbox(startIndex) {
+    // 初始化圖片
     initSlider(lightboxTrack, currentImages, 'lightbox-img');
+    
+    // 設定起始位置
+    currentLightboxIndex = startIndex;
+    updateLightboxPosition(false); // false = 不要動畫 (直接定位)
+    
+    // 檢查按鈕顯示狀態
+    checkLightboxButtons();
+
     lightbox.classList.add('active');
     
-    // 全螢幕使用獨立的 index，不干擾詳情頁
-    setupLightboxSwipe(startIndex);
+    // 啟動滑動偵測
+    setupLightboxSwipe();
 }
 
-function setupLightboxSwipe(initialIndex) {
-    let index = initialIndex; // 全螢幕內部的獨立變數
+// 更新位置與計數器
+function updateLightboxPosition(enableTransition = true) {
+    const width = window.innerWidth;
+    const translate = currentLightboxIndex * -width;
+    
+    if (enableTransition) {
+        lightboxTrack.style.transition = 'transform 0.3s ease-out';
+    } else {
+        lightboxTrack.style.transition = 'none';
+    }
+    
+    lightboxTrack.style.transform = `translateX(${translate}px)`;
+    updateCounter(lightboxCounter, currentLightboxIndex + 1, currentImages.length);
+    
+    // 動畫跑完後清掉 transition，避免視窗縮放時怪怪的
+    if (enableTransition) {
+        setTimeout(() => {
+            lightboxTrack.style.transition = 'none';
+        }, 300);
+    }
+}
+
+// 檢查按鈕是否需要顯示 (只有一張圖就不用按鈕)
+function checkLightboxButtons() {
+    if (currentImages.length <= 1) {
+        lbPrevBtn.style.display = 'none';
+        lbNextBtn.style.display = 'none';
+    } else {
+        lbPrevBtn.style.display = ''; // 恢復 CSS 設定 (flex)
+        lbNextBtn.style.display = '';
+    }
+}
+
+// 按鈕點擊事件處理
+function changeLightboxSlide(direction) {
+    const total = currentImages.length;
+    if (total <= 1) return;
+
+    if (direction === 'next') {
+        if (currentLightboxIndex < total - 1) {
+            currentLightboxIndex++;
+        } else {
+            // (選用) 如果想要循環播放，可以把下面這行註解打開
+            // currentLightboxIndex = 0; 
+        }
+    } else if (direction === 'prev') {
+        if (currentLightboxIndex > 0) {
+            currentLightboxIndex--;
+        } else {
+            // (選用) 循環播放
+            // currentLightboxIndex = total - 1;
+        }
+    }
+    updateLightboxPosition(true);
+}
+
+// 綁定按鈕事件
+lbPrevBtn.onclick = (e) => { e.stopPropagation(); changeLightboxSlide('prev'); };
+lbNextBtn.onclick = (e) => { e.stopPropagation(); changeLightboxSlide('next'); };
+
+// 滑動邏輯 (Refactored to use global index)
+function setupLightboxSwipe() {
     let startX = 0;
     let isDragging = false;
     
-    // 初始化位置
-    const width = window.innerWidth;
-    lightboxTrack.style.transition = 'none'; // 避免開啟時有動畫
-    lightboxTrack.style.transform = `translateX(${-index * width}px)`;
-    updateCounter(lightboxCounter, index + 1, currentImages.length);
+    // 移除舊的監聽器 (避免重複綁定)，這是一個好習慣，但為了簡化，我們假設每次 openLightbox 都不會造成記憶體洩漏太嚴重，
+    // 或者使用 on-event 覆蓋。這裡我們用最簡單的方式：
+    // 因為 lightboxTrack 是一直存在的 DOM，我們只要在外部綁定一次就好，
+    // 但因為 `currentImages` 會變，所以這段邏輯保持在這裡沒問題，
+    // 只要確保變數引用的是最新的 currentLightboxIndex。
 
-    lightboxTrack.addEventListener('touchstart', e => {
+    lightboxTrack.ontouchstart = (e) => {
         startX = e.touches[0].clientX;
         isDragging = true;
         lightboxTrack.style.transition = 'none';
-    });
+    };
 
-    lightboxTrack.addEventListener('touchmove', e => {
+    lightboxTrack.ontouchmove = (e) => {
         if (!isDragging) return;
         const diff = e.touches[0].clientX - startX;
         const width = window.innerWidth;
-        const translate = (index * -width) + diff;
+        const translate = (currentLightboxIndex * -width) + diff;
         lightboxTrack.style.transform = `translateX(${translate}px)`;
-        e.preventDefault(); 
-    }, { passive: false });
+        e.preventDefault(); // 防止全螢幕時還能上下捲動網頁
+    };
 
-    lightboxTrack.addEventListener('touchend', e => {
+    lightboxTrack.ontouchend = (e) => {
         isDragging = false;
         const endX = e.changedTouches[0].clientX;
         const diff = endX - startX;
-        const width = window.innerWidth;
-
-        if (diff < -50 && index < currentImages.length - 1) {
-            index++;
-        } else if (diff > 50 && index > 0) {
-            index--;
+        
+        // 判斷滑動距離是否足夠換頁 (門檻 50px)
+        if (diff < -50 && currentLightboxIndex < currentImages.length - 1) {
+            currentLightboxIndex++;
+        } else if (diff > 50 && currentLightboxIndex > 0) {
+            currentLightboxIndex--;
         }
 
-        lightboxTrack.style.transition = 'transform 0.3s ease';
-        lightboxTrack.style.transform = `translateX(${index * -width}px)`;
-        updateCounter(lightboxCounter, index + 1, currentImages.length);
-    });
+        updateLightboxPosition(true);
+    };
 }
 
-// 關閉全螢幕
 lightboxClose.addEventListener('click', () => {
     lightbox.classList.remove('active');
 });
@@ -630,7 +742,6 @@ function closeOverlay() {
         overlay.classList.add('overlay-hidden');
         document.body.classList.remove('lock-scroll');
         
-        // 關閉時也保險歸零一次
         currentSlideIndex = 0;
         sliderTrack.style.transform = `translateX(0px)`;
     }, 300);
@@ -716,9 +827,11 @@ const translations = {
         'rule_li_4': '完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。',
         'rule_li_5': '請務必穿著適合運動的服裝與運動鞋，以確保活動安全。',
         'rule_li_6': '挑戰過程中請隨時留意自身身體狀況，量力而為。',
+        'note_title': '【注意事項】',
+        'note_content': '提醒有任何身體不適、心臟病、高血壓、頸部或背部問題、孕婦者不宜參與。<br>請參賽者留意自身健康狀況，若感到不適，建議不要勉強參加。如仍決定參與，請自行承擔相關風險。<br><br>＊本活動為互動系113級二年級上學期專題展，其各項科技運動遊戲屬於前期測試＊<br>＊若有不盡人意的地方，還請多海涵＊',
 
         // Footer
-        'footer_host': '一、主辦單位：', 'footer_co': '二、合作單位：',
+        'footer_host': '主辦單位：', 'footer_co': '合作單位：',
         'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '尚未解鎖', 'btn_ig': '追蹤官方IG',
 
         // 排行榜
@@ -814,13 +927,15 @@ const translations = {
         'rule_li_4': 'Upon registration, receive a "wristband" for scoring. Return it upon exit.',
         'rule_li_5': 'Please wear sportswear and sports shoes for safety.',
         'rule_li_6': 'Pay attention to your physical condition during the challenge.',
+        'note_title': '【Notice】',
+        'note_content': 'Participants with physical discomfort, heart disease, high blood pressure, neck/back problems, or pregnancy are advised not to participate.<br>Please monitor your health condition. If you feel unwell, do not force yourself. Participation is at your own risk.<br><br>*This event is the Sophomore Project Exhibition of NTUT Interaction Design Class 113. All tech-sports games are in the prototype testing phase.*<br>*We appreciate your understanding for any imperfections.*',
 
         // Footer
-        'footer_host': '1. Organizer:', 'footer_co': '2. Co-organizer:',
+        'footer_host': 'Organizer:', 'footer_co': 'Co-organizer:',
         'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Locked', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
-        'lb_title': 'Live Leaderboard', 'lb_loading': 'Loading...', 'lb_all': 'Overall Championship',
+        'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Overall Championship',
 
         // Categories & Labels
         'cat_focus': 'Focus', 'cat_reaction': 'Reaction', 'cat_agility': 'Agility', 'cat_endurance': 'Endurance',
