@@ -884,10 +884,10 @@ const translations = {
         'close_btn': 'Tap to Close',
         
         // Home
-        'about_title': 'About Event',
+        'about_title': 'About the Event',
         'home_brand': '【ExErcise】Tech × Sports',
-        'home_slogan': 'Breaking tradition, redefining sports with technology.',
-        'home_desc': 'No matter what kind of warrior you are, there is a battlefield for you here.<br>Ready to challenge the limit? Come unleash your potential with your partners!',
+        'home_slogan': 'Through breaking tradition, we redefine competitive sports with technology.',
+        'home_desc': 'No matter what kind of warrior you are, there is a battlefield for you here.<br>Are you ready to challenge your limits? Come unleash your potential with your companions!',
         'event_items': '7 Competition Events',
         'detail_title': 'Event Details',
 
@@ -904,17 +904,17 @@ const translations = {
         'rest_noon': 'Lunch Break', 'rest_short': 'Short Break', 'event_closing': 'Closing Ceremony', 'event_photo': 'Group Photo',
 
         // Scoring
-        'score_h1': '1. Individual Challenge',
+        'score_h1': '1. Seventeen Exercises Championships',
         'score_label_rank': 'Ranking', 'score_text_rank': 'Ranked by score.',
-        'score_label_reward': 'Rewards', 'score_text_reward': 'Top 1 in each item gets a reward.',
-        'score_label_tie': 'Tie-breaker', 'score_text_tie': 'In case of a tie, priority is given to those who registered earlier.',
-        'score_h2': '2. Total Integrated Score',
-        'score_sub_calc': 'Points', 'score_desc_calc': 'Top 10 in each item get points:',
+        'score_label_reward': 'Winners and Rewards', 'score_text_reward': 'First in each competition gets a prize.',
+        'score_label_tie': 'In Case of a Tie', 'score_text_tie': 'In case of a tie, priority is given to the one who registered in the earlier batch.',
+        'score_h2': '2. Collective Score Tournament',
+        'score_sub_calc': 'Points Definition', 'score_desc_calc': 'Top 10 in each exercise get points:',
         'rank_1': '1st', 'rank_2': '2nd', 'rank_others': '...and so on', 'rank_10': '10th',
-        'score_sub_method': 'Calculation',
+        'score_sub_method': 'Score Calculation',
         'score_li_1': 'There are 7 categories in total.',
-        'score_li_2': 'If you participate in multiple items within the same category, only the highest score counts.',
-        'score_sub_total': 'Total Ranking',
+        'score_li_2': 'If you participate in multiple competitions within the same category, only the highest score is counted.',
+        'score_sub_total': 'Ranking and Winners',
         'score_li_3': 'Sum of points from 7 categories. Higher score ranks higher.',
         'score_li_4': 'Top 3 overall get rewards.',
 
@@ -922,20 +922,20 @@ const translations = {
         'rule_h1': '1. Online Registration',
         'rule_li_1': 'Reservation only. 34 people per batch.',
         'rule_li_2': 'A confirmation email will be sent within 2 days after registration.',
-        'rule_li_3': 'If not received, please contact us by 12/26 (Fri).',
-        'rule_h2': '2. Notice',
-        'rule_li_4': 'Upon registration, receive a "wristband" for scoring. Return it upon exit.',
-        'rule_li_5': 'Please wear sportswear and sports shoes for safety.',
-        'rule_li_6': 'Pay attention to your physical condition during the challenge.',
+        'rule_li_3': 'If nothing was received, please contact us by 12/26 (Fri).',
+        'rule_h2': '2. Competition Guidelines',
+        'rule_li_4': 'Upon registration, you will receive a "wristband" for scoring. Please return it upon exit.',
+        'rule_li_5': 'Please wear appropriate clothing, like sportswear and sports shoes for your safety.',
+        'rule_li_6': 'Remember to pay attention to your physical condition during the challenge.',
         'note_title': '【Notice】',
-        'note_content': 'Participants with physical discomfort, heart disease, high blood pressure, neck/back problems, or pregnancy are advised not to participate.<br>Please monitor your health condition. If you feel unwell, do not force yourself. Participation is at your own risk.<br><br>*This event is the Sophomore Project Exhibition of NTUT Interaction Design Class 113. All tech-sports games are in the prototype testing phase.*<br>*We appreciate your understanding for any imperfections.*',
+        'note_content': 'Participants with physical discomfort, heart disease, high blood pressure, neck/back problems, or are pregnant are not advised to participate.<br>Please monitor your health. If you feel unwell, do not force yourself. Participation is at your own risk.<br><br>*This event is the Sophomore Project Exhibition of NTUT Interaction Design Class 113. All tech-sports games are in the prototype testing phase.*<br>*We appreciate your understanding for any imperfections.*',
 
         // Footer
         'footer_host': 'Organizer:', 'footer_co': 'Co-organizer:',
         'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Locked', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
-        'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Overall Championship',
+        'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
 
         // Categories & Labels
         'cat_focus': 'Focus', 'cat_reaction': 'Reaction', 'cat_agility': 'Agility', 'cat_endurance': 'Endurance',
@@ -969,7 +969,7 @@ const translations = {
         'g17_desc': 'Inspired by the folklore of The Stone Flower, this game turns the art of stone carving into an engaging mastery challenge. Break through the stone wall, refine your skills, and uncover beauty hidden within the rock. Only true masters can carve the perfect Stone Flower.',
         // 🔥 新增：排行榜欄位
         'lb_rank_col': 'Rank',
-        'lb_name_col': 'Name',
+        'lb_name_col': 'Nickname',
         'lb_num_col': 'ID',
         'lb_score_col': 'Score',
         'lb_total_col': 'Total',
