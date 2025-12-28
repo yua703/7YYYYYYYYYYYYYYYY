@@ -169,3 +169,63 @@ body {
     color: #888;
     font-size: 1.2rem;
 }
+/* =========================================
+   🔥 新增：右下角固定 QR Code 樣式
+   ========================================= */
+.qr-code-fixed-box {
+    position: fixed; /* 固定定位，不隨頁面捲動 */
+    bottom: 30px;    /* 距離底部 30px */
+    right: 30px;     /* 距離右側 30px */
+    background-color: #ffffff; /* 白色背景確保好掃描 */
+    padding: 15px;   /* 內距，讓圖片不要貼邊 */
+    border-radius: 16px; /* 圓角設計 */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* 強烈的陰影讓它浮起來 */
+    text-align: center; /* 文字置中 */
+    z-index: 100;    /* 確保在最上層 */
+    /* 稍微傾斜一點點增加動態感 (選用) */
+    /* transform: rotate(-2deg); */ 
+}
+
+/* QR Code 圖片容器 (確保是正方形) */
+.qr-img-wrapper {
+    width: 130px;  /* 設定寬度 (可自行調整大小) */
+    height: 130px; /* 設定高度跟寬度一樣 */
+    background: #f0f0f0; /* 圖片載入前的暫時背景色 */
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 10px; /* 與下方文字的距離 */
+}
+
+/* QR Code 圖片本體 */
+.qr-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 填滿容器 */
+    display: block; /* 消除圖片底部預設留白 */
+}
+
+/* 下方提示文字 */
+.qr-label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #4882A6; /* 使用你的主題藍色 */
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+/* --- 針對小螢幕的優化 (選用) --- */
+/* 如果螢幕高度比較矮，稍微縮小一點避免擋到太多資料 */
+@media (max-height: 700px) {
+    .qr-code-fixed-box {
+        bottom: 15px;
+        right: 15px;
+        padding: 10px;
+    }
+    .qr-img-wrapper {
+        width: 100px;
+        height: 100px;
+    }
+    .qr-label {
+        font-size: 0.9rem;
+    }
+}
