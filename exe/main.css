@@ -1497,3 +1497,13 @@ body.lock-scroll .bottom-nav {
     /* padding-left: 15px; */
     /* border-left: 2px solid #ddd; */
 }
+/* =========================================
+   🔥 修正：計分方法 - 「以此類推」樣式統一
+   ========================================= */
+/* 針對擁有 data-i18n="rank_others" 的那個格子特別設定 */
+.point-item[data-i18n="rank_others"] {
+    color: #4882A6 !important;  /* 強制改成主題深藍色 */
+    font-weight: bold !important; /* 強制加粗 */
+    font-family: inherit;         /* 確保字體跟別人一樣 */
+    opacity: 1;                   /* 確保不透明 */
+}
