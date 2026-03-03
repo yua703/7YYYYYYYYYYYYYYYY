@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>賽事現場報到系統</title>
+  <style>
+    body { font-family: "微軟正黑體", sans-serif; text-align: center; margin-top: 50px; background-color: #f4f4f9; }
+    .container { background: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); display: inline-block; }
+    input { padding: 10px; font-size: 16px; border: 1px solid #ccc; border-radius: 5px; outline: none; margin: 5px 0; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; background-color: #007BFF; color: white; border: none; border-radius: 5px; margin-top: 10px; }
+    button:hover { background-color: #0056b3; }
+    #result { margin-top: 20px; font-weight: bold; font-size: 18px; }
+    
+    /* 手環區域預設隱藏 */
+    #wristbandSection { display: none; margin-top: 20px; padding-top: 20px; border-top: 1px dashed #ccc; }
+    .success-btn { background-color: #28a745; }
+    .success-btn:hover { background-color: #218838; }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>賽事現場報到系統</h2>
+    
+    <div>
+      <p>請輸入參賽者姓名：</p>
+      <input type="text" id="nameInput" placeholder="例如：王小明">
+      <button onclick="checkRegistration()">查詢名單</button>
+    </div>
+
+    <div id="result"></div>
+
+    <div id="wristbandSection">
+      <p>確認為參賽者！請輸入發放的手環編號：</p>
+      <input type="text" id="wristbandInput" placeholder="例如：A001">
+      <br>
+      <button class="success-btn" onclick="submitWristband()">確認發放並寫入系統</button>
+    </div>
+  </div>
+
+  <script>
+    // ⚠️ 貼上你的 GAS 網址
+    const gasUrl = 'https://script.google.com/macros/s/AKfycbxaPgm7FCWLkyXYEbzWAq3qX2V8bbG8FnoKhIoogrvI4gAX_CIdyHAo0UgoHWA3rv5N/exec'; 
+    let currentConfirmedName = ""; // 用來記住剛剛查詢成功的名字
+
+    // 查詢功能
+    function checkRegistration() {
+      const name = document.getElementById('nameInput').value.trim();
+      const resultDiv = document.getElementById('result');
+      const wristbandSection = document.getElementById('wristbandSection');
+      
+      if (!name) {
+        resultDiv.innerHTML = "請先輸入姓名喔！";
+        resultDiv.style.color = "red";
+        return;
+      }
+
+      resultDiv.innerHTML = "資料查詢中，請稍候...";
+      resultDiv.style.color = "#666";
+      wristbandSection.style.display = "none"; // 查詢時先隱藏手環區
+
+      // 注意網址後面多加了 action=check
+      fetch(`${gasUrl}?action=check&name=${name}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.found) {
+            resultDiv.innerHTML = `✅ 查詢成功！「${name}」在名單內。`;
+            resultDiv.style.color = "green";
+            
+            // 記住名字並顯示手環輸入框
+            currentConfirmedName = name;
+            wristbandSection.style.display = "block";
+            document.getElementById('wristbandInput').value = ""; // 清空手環輸入框
+            document.getElementById('wristbandInput').focus();
+          } else {
+            resultDiv.innerHTML = `❌ 找不到「${name}」的資料。`;
+            resultDiv.style.color = "red";
+          }
+        })
+        .catch(error => {
+          resultDiv.innerHTML = "系統發生錯誤，請稍後再試。";
+          console.error('Error:', error);
+        });
+    }
+
+    // 寫入手環編號功能
+    function submitWristband() {
+      const wristband = document.getElementById('wristbandInput').value.trim();
+      const resultDiv = document.getElementById('result');
+      const wristbandSection = document.getElementById('wristbandSection');
+
+      if (!wristband) {
+        alert("請輸入手環編號！");
+        return;
+      }
+
+      resultDiv.innerHTML = "手環編號寫入中，請稍候...";
+      resultDiv.style.color = "#666";
+      
+      // 注意網址後面換成了 action=update，並把姓名跟手環編號一起傳過去
+      fetch(`${gasUrl}?action=update&name=${currentConfirmedName}&wristband=${wristband}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            resultDiv.innerHTML = `🎉 報到完成！「${currentConfirmedName}」的手環編號 (${wristband}) 已寫入系統。`;
+            resultDiv.style.color = "blue";
+            wristbandSection.style.display = "none"; // 寫入成功後隱藏手環區
+            document.getElementById('nameInput').value = ""; // 清空姓名框，準備接待下一位
+          } else {
+            resultDiv.innerHTML = "❌ 寫入失敗，請確認資料後重試。";
+            resultDiv.style.color = "red";
+          }
+        })
+        .catch(error => {
+          resultDiv.innerHTML = "寫入時發生錯誤，請稍後再試。";
+          console.error('Error:', error);
+        });
+    }
+  </script>
+
+</body>
+</html>
