@@ -1032,3 +1032,19 @@ function applyTranslations() {
         }
     });
 }
+// ==========================================
+// 🔥 新增：啟動畫面控制 (Splash Screen Control)
+// ==========================================
+window.addEventListener('load', () => {
+    const splash = document.getElementById('splash-screen');
+    
+    // 為了美觀，即便載入很快也強制讓它顯示 1.2 秒
+    setTimeout(() => {
+        splash.classList.add('fade-out');
+        
+        // 動畫結束後完全從 DOM 移除（選用，可避免擋住點擊）
+        setTimeout(() => {
+            splash.style.display = 'none';
+        }, 600);
+    }, 1200); 
+});
