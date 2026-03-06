@@ -3,8 +3,12 @@
 // ==========================================
 const menuBtn = document.getElementById('menu-btn');
 const fullMenu = document.getElementById('full-menu');
-const menuLinks = document.querySelectorAll('.menu-link, .desktop-link, .header-logo');const newLangBtn = document.getElementById('new-lang-btn');
+const menuLinks = document.querySelectorAll('.mega-link, .desktop-link, .header-logo');
+
+/* 🔥 就是漏了下面這兩行，把它們補回來！ */
+const newLangBtn = document.getElementById('new-lang-btn');
 const pages = document.querySelectorAll('.page-view');
+
 let leaderboardInterval = null;
 
 // --- A. 漢堡按鈕開關邏輯 ---
