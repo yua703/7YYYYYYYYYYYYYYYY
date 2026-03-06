@@ -3,8 +3,7 @@
 // ==========================================
 const menuBtn = document.getElementById('menu-btn');
 const fullMenu = document.getElementById('full-menu');
-const menuLinks = document.querySelectorAll('.menu-link');
-const newLangBtn = document.getElementById('new-lang-btn');
+const menuLinks = document.querySelectorAll('.menu-link, .desktop-link, .header-logo');const newLangBtn = document.getElementById('new-lang-btn');
 const pages = document.querySelectorAll('.page-view');
 let leaderboardInterval = null;
 
@@ -964,6 +963,6 @@ window.addEventListener('load', () => {
         // 動畫結束後完全從 DOM 移除（選用，可避免擋住點擊）
         setTimeout(() => {
             splash.style.display = 'none';
-        }, 600);
-    }, 1200); 
+        }, 400);
+    }, 500); 
 });
