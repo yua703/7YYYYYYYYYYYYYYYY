@@ -43,17 +43,17 @@ img {
 /* --- 1. 頂部固定列 --- */
 .top-header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 10px;
+    /* 👇 修改這兩個數值來控制左右比例 */
+    left: 2.5%;  /* 靠左留 2.5% */
+    width: 95%;  /* 總寬度 95%，左右就會各空出 2.5% */
     height: 70px;
-    background-color: #f0f0f0; /* 配合你全站的淺灰底色 */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     z-index: 10002;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
 }
 /* 🔥 2. 當漢堡變成叉叉時的魔法 */
 .top-header:has(.header-menu-btn.open) {
@@ -76,7 +76,7 @@ body {
     align-items: center;
 }
 .header-logo img {
-    height: 35px; /* 控制 Logo 高度，防止圖檔過大撐破畫面 */
+    height: 50px; /* 控制 Logo 高度，防止圖檔過大撐破畫面 */
     width: auto;
 }
 
@@ -91,9 +91,11 @@ body {
 .header-lang-btn {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     background-color: transparent;
-    color: #6666FF; /* 你的紫色 */
-    border: 2px solid #6666FF;
-    padding: 6px 16px;
+    background-color: #98CDF9; 
+    color: #6666FF;
+    border: none; /* 刪除原本的紫色外框 */
+    box-shadow: none; /* ❌ 這裡我們刪除陰影，確保按鈕整齊、不變形 */
+    padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.9rem;
     cursor: pointer;
@@ -162,6 +164,20 @@ body {
 
 /* --- 🖥️ 電腦版排版切換 (大於 1024px 時變成橫向三欄) --- */
 @media (min-width: 1024px) {
+
+    .top-header {
+        /* 👇 這裡控制電腦版下來多少，例如 30px 會比手機版更下面 */
+        top: 20px; 
+        left: 50%;
+        transform: translateX(-50%); 
+        
+        /* 寬度維持 95%，但最大不超過 1200px */
+        width: 95%;  
+        max-width: 1200px;
+
+        padding: 0 40px; /* 增加內部 Logo 與按鈕的左右邊距 */
+        border-radius: 20px
+    }
     .mega-menu-container {
         flex-direction: row; /* 變成左右橫排 */
         align-items: flex-start; /* 靠上對齊 */
@@ -1532,65 +1548,68 @@ body.lock-scroll {
 }
 
 /* =========================================
-   🔥 啟動畫面樣式 (Splash Screen)
-   ========================================= */
+   /* --- 啟動畫面 (Splash Screen) --- *=========================================*/
 #splash-screen {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #6666FF; /* 你的主題藍色 */
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: #f0f0f0; /* 配合你全站的淺灰色背景 */
+    z-index: 20000; /* 排在選單(10000)前面 */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10000; /* 必須是最高層級，蓋過導覽列 */
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
-/* 內容容器 */
-.splash-content {
-    text-align: center;
-    color: #f0f0f0;
-}
-
-/* Logo 文字樣式 */
-.splash-logo {
-    font-size: 3rem;
-    font-weight: 900;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-    animation: pulse 2s infinite ease-in-out;
-}
-
-/* 載入中動畫圈圈 */
-.splash-loader {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(255, 255, 255, 0.3);
-    border-top: 3px solid #f0f0f0;
-    border-radius: 50%;
-    margin: 0 auto 15px;
-    animation: spin 1s linear infinite;
-}
-
-.splash-text {
-    font-size: 0.9rem;
-    letter-spacing: 2px;
-    opacity: 0.8;
-}
-
-/* 動畫：Logo 呼吸感 */
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.05); opacity: 0.8; }
-}
-
-/* 隱藏狀態 */
 #splash-screen.fade-out {
     opacity: 0;
     visibility: hidden;
 }
+
+.splash-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 讓內容物全部置中 */
+    justify-content: center;
+}
+
+.splash-logo {
+    /* --- 📱 手機版預設 (由小螢幕開始) --- */
+    width: 35vw;       /* 使用螢幕寬度的 35%，會隨螢幕大小自動縮放 */
+    max-width: 120px;  /* 但在手機上最大不要超過 120px */
+    height: auto;
+    margin-bottom: 25px;
+    display: block;
+}
+
+/* --- 🖥️ 電腦版單獨加大 (大於 1024px 時) --- */
+@media (min-width: 1024px) {
+    .splash-logo {
+        max-width: 250px; /* 這裡你可以自由調整你想要的「大圖」尺寸 */
+    }
+}
+.splash-loader {
+    border: 5px solid #d3d3d3; /* 配合淺色底 */
+    border-top: 5px solid #6666FF; /* 你的紫色 */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 15px;
+}
+
+.splash-text {
+    color: #6666FF; /* 排行榜文字改成你的紫色 */
+    font-size: 1rem;
+    font-weight: bold;
+}
+
 
 
 /* =========================================
@@ -1653,9 +1672,8 @@ body.lock-scroll {
 
     /* 來自：修正：過場動畫遮罩 */
     #transition-overlay {
-        max-width: 600px;
-        left: 50%;
-        transform: translateX(-50%);
+        width: 100%;  /* 👈 它原本就是全螢幕 */
+        height: 100%;
     }
 
     /* 來自：美化電腦版的捲軸 */
@@ -1673,10 +1691,6 @@ body.lock-scroll {
         background: rgba(0,0,0,0.4);
     }
 
-    /* 來自：電腦版調整 (啟動畫面 Logo 放大) */
-    .splash-logo {
-        font-size: 5rem;
-    }
 }
 
 

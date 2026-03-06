@@ -81,10 +81,10 @@ if (newLangBtn) {
         setTimeout(() => {
             if (currentLang === 'zh') {
                 currentLang = 'en';
-                newLangBtn.innerText = '🌐 中文'; // 切成英文後，按鈕顯示中文選項
+                newLangBtn.innerText = '中文'; // 切成英文後，按鈕顯示中文選項
             } else {
                 currentLang = 'zh';
-                newLangBtn.innerText = '🌐 English';
+                newLangBtn.innerText = 'EN';
             }
 
             // 執行翻譯
