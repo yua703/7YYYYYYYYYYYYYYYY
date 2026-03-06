@@ -23,10 +23,7 @@ html, body {
     
     font-family: "Noto Sans TC", sans-serif;
     color: #333;
-    
-    /* 確保圖片貼底，不要有預設的底部留白 */
-    padding-bottom: 0;
-    background-color: #f0f0f0;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* 確保所有圖片不會比螢幕寬 */
@@ -47,7 +44,7 @@ img {
     /* 👇 修改這兩個數值來控制左右比例 */
     left: 2.5%;  /* 靠左留 2.5% */
     width: 95%;  /* 總寬度 95%，左右就會各空出 2.5% */
-    height: 70px;
+    height: 80px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -66,9 +63,6 @@ img {
     pointer-events: none; /* 隱藏後不能被點擊 */
 }
 /* 確保網頁內容不會被 fixed 的 header 蓋住 */
-body {
-    padding-top: 70px; 
-}
 
 /* --- 2. 左側 Logo 設定 --- */
 .header-logo {
@@ -76,7 +70,7 @@ body {
     align-items: center;
 }
 .header-logo img {
-    height: 50px; /* 控制 Logo 高度，防止圖檔過大撐破畫面 */
+    height: 80px; /* 控制 Logo 高度，防止圖檔過大撐破畫面 */
     width: auto;
 }
 
@@ -172,9 +166,10 @@ body {
         transform: translateX(-50%); 
         
         /* 寬度維持 95%，但最大不超過 1200px */
-        width: 95%;  
-        max-width: 1200px;
+        width: 96%;  
+        max-width: 1400px;
 
+        height: 90px;
         padding: 0 40px; /* 增加內部 Logo 與按鈕的左右邊距 */
         border-radius: 20px
     }
@@ -367,9 +362,8 @@ body {
    ========================================= */
 .full-color-block {
     /* 1. 基礎尺寸與顏色 */
-    width: 100vw;
-    height: 100vh;
-    height: 100dvh;
+    width: 100%;
+    min-height: 100dvh;
     background-color: #6666FF;
     color: #f0f0f0;
     
@@ -380,12 +374,6 @@ body {
     align-items: center;
     text-align: center;
 
-    /* 3. 🔥 關鍵：破出電腦版 800px 容器限制 */
-    position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
     box-sizing: border-box;
 
     /* 4. 🔥 新增：下方圓角 (手機電腦皆有效) */
@@ -394,6 +382,8 @@ body {
     
     /* 🔥 新增：這行用來推開下方的空間，製造白色縫隙 */
     margin-bottom: 20px; 
+    padding-top: 100px; 
+    box-sizing: border-box; /* 確保 padding 不會撐爆高度 */
 }
 /* =========================================
    🔥 新增：下方內容底座 (A-B-A 對比漸層 + 上方圓角)
@@ -1592,6 +1582,10 @@ body.lock-scroll {
 @media (min-width: 1024px) {
     .splash-logo {
         max-width: 250px; /* 這裡你可以自由調整你想要的「大圖」尺寸 */
+    }
+    .full-color-block {
+        /* 電腦版：導覽列高 90px + 位移 20px + 呼吸空間 40px = 150px */
+        padding-top: 150px; 
     }
 }
 .splash-loader {
