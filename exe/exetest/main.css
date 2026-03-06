@@ -1,4 +1,13 @@
 /* =========================================
+   引入自訂像素字體 (Cubic 11)
+   ========================================= */
+@font-face {
+    font-family: 'Cubic11';
+    src: url('fonts/Cubic_11.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/* =========================================
    1. 全域設定 (防止破版關鍵)
    ========================================= */
 * {
@@ -26,7 +35,138 @@ img {
     height: auto;
     display: block;
 }
+/* =========================================
+   🔥 全新：右上角漢堡按鈕與全螢幕選單
+   ========================================= */
 
+/* --- 1. 右上角漢堡按鈕 --- */
+.menu-toggle-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    background-color: #4882A6; /* 主題藍色 */
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    z-index: 10001; /* 必須比選單層還要高 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.menu-toggle-btn:hover {
+    background-color: #E7AC4A; /* 滑鼠移過去變黃橘色 */
+}
+
+/* 漢堡按鈕的這三條線 */
+.hamburger-line {
+    width: 24px;
+    height: 3px;
+    background-color: #ffffff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+/* 按鈕點擊展開後的「X」狀態 */
+.menu-toggle-btn.open .hamburger-line:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.menu-toggle-btn.open .hamburger-line:nth-child(2) {
+    opacity: 0; /* 中間那條隱藏 */
+}
+.menu-toggle-btn.open .hamburger-line:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* --- 2. 滿版選單覆蓋層 --- */
+.fullscreen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    background-color: rgba(43, 72, 92, 0.95); /* 深藍色半透明底 */
+    backdrop-filter: blur(8px); /* 背景模糊特效 */
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* 預設隱藏，使用透明度漸變 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+/* 顯示選單 */
+.fullscreen-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- 3. 選單內部排版 --- */
+.menu-nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.menu-link {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 2rem;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 4px;
+    transition: all 0.2s ease;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+}
+
+.menu-link.active {
+    color: #E7AC4A; /* 當前頁面亮黃色 */
+    text-shadow: 2px 2px 0px #000;
+}
+
+.menu-link:hover {
+    transform: scale(1.1);
+    color: #E7AC4A;
+}
+
+.menu-divider {
+    width: 60%;
+    border: none;
+    height: 2px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 10px 0;
+}
+
+/* --- 4. 語言切換按鈕整合 --- */
+.menu-lang-btn {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.2rem;
+    background: transparent;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+.menu-lang-btn:hover {
+    background-color: #E7AC4A;
+    border-color: #E7AC4A;
+    color: #333;
+}
 
 /* =========================================
    2. 頁面切換動畫
@@ -192,44 +332,6 @@ img {
 }
 
 
-/* =========================================
-   4. 七大項目無限輪播 (純圖片版)
-   ========================================= */
-.carousel-container {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    
-    /* 防止選取文字影響體驗 */
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-/* 🔥 關鍵：這一塊絕對不能動，它負責讓東西橫著排 */
-.carousel-track {
-    display: flex;         /* 讓內容橫向排列 */
-    gap: 20px;             /* 圖片之間的距離 */
-    will-change: transform; 
-}
-
-/* 修改這裡：把卡片變成透明、無框 */
-.carousel-item {
-    width: 160px;       
-    max-width: 70vw;    
-    flex-shrink: 0; 
-    background: transparent; 
-    box-shadow: none;
-    padding: 0;
-    border-radius: 0; 
-    text-align: center;
-}
-
-/* 修改圖片：把圓角加在圖片上 */
-.carousel-item img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;   
-}
 
 /* =========================================
    5. 賽事細節分頁 (滑動背景 + 不換行版)
@@ -455,63 +557,6 @@ img {
 }
 .lb-player { background: #ffffff; /* 統一使用 #ffffff */ }
 
-/* =========================================
-   7. 底部固定導覽列 (手機優化版)
-   ========================================= */
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: auto;
-    min-height: 70px; 
-    background: #ffffff; /* 統一使用 #ffffff */
-    box-shadow: 0 -4px 10px rgba(0,0,0,0.2);
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    z-index: 999;
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-top: 5px; 
-}
-
-.nav-btn {
-    background: none;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: #aaa; 
-    font-size: 11px; 
-    cursor: pointer;
-    width: 70px;
-    height: 55px;
-    border-radius: 14px; 
-    transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
-    transform: scale(0.95); 
-    opacity: 0.7; 
-}
-
-/* 自訂底部導覽列 ICON 圖片設定 */
-.nav-icon {
-    width: 40px;   /* 寬度固定 */
-    height: 40px;  /* 高度固定 */
-    margin-bottom: -3px; /* 維持原本的間距 */
-    object-fit: contain; 
-    display: block; 
-    transition: all 0.3s ease;
-}
-
-/* 點選狀態 */
-.nav-btn.active {
-    background-color: #e6f2fa; 
-    color: #4882A6; 
-    font-weight: bold;
-    transform: scale(1.15); 
-    opacity: 1;
-    box-shadow: 0 3px 6px rgba(0,120,212, 0.15);
-}
 
 /* =========================================
    8. 組別頁面樣式 (滿版展開版)
@@ -831,10 +876,7 @@ body.lock-scroll {
     -webkit-overflow-scrolling: auto;
 }
 
-/* 隱藏導覽列 (維持不變) */
-body.lock-scroll .bottom-nav { 
-    display: none !important; 
-}
+
 
 .detail-tag {
     /* 1. 佈局設定 */
@@ -1291,111 +1333,27 @@ body.lock-scroll .bottom-nav {
 
 /* 設定 h2 標題樣式 */
 .section-padding h2 {
-    font-size: 1.8rem;      /* 字體大一點 */
-    font-weight: 900;       /* 特粗體，更有份量 */
-    color: #4882A6;         /* 主題藍色 */
-    text-align: center;     /* 置中 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif; /* 🔥 1. 套用像素字體 */
+    font-weight: normal;    /* 🔥 2. 關鍵修正：像素字體千萬不能加粗，必須用 normal */
+    font-size: 2rem;      /* 字體大一點 */
+    color: #f0f0f0;         /* 主題藍色 */
+
+    text-shadow: 
+        2px 2px 0px #333333;   /* 第一層陰影：深灰色，做出硬邊厚度 */
+        
+    text-align: left;
     margin-bottom: 30px;    /* 與下方內容的距離 */
-    letter-spacing: 2px;    /* 字距微寬，更有氣勢 */
+    margin-left: 20px;
+
+    /* 🔥 3. 必加：關閉平滑化，讓像素顆粒保持邊緣銳利 */
+    -webkit-font-smoothing: none;
+    font-smooth: never;
     
-    position: relative;     /* 為了定位裝飾線 */
-    display: table;         /* 讓寬度剛好包住文字 */
-    margin-left: auto;      /* 置中技巧 */
-    margin-right: auto;
-}
-
-/* 黃色斜切底線裝飾 */
-.section-padding h2::after {
-    content: '';
-    display: block;
-    width: 100%;            /* 跟文字一樣寬 */
-    height: 8px;            /* 線條厚度 */
-    background-color: rgba(240, 208, 128, 0.6); /* 半透明黃色 */
+    display: inline-block; 
     
-    position: absolute;
-    bottom: 5px;            /* 稍微蓋到文字下方 */
-    left: -5px;             /* 稍微往左偏，製造錯位感 */
-    z-index: -1;            /* 放在文字後面 */
-    
-    transform: skewX(-20deg); /* 🔥 關鍵：斜切效果，增加速度感 */
 }
 
-/* =========================================
-   🔥 新增：語言切換按鈕
-   ========================================= */
-#lang-btn {
-    position: fixed;
-    top: 20px;          /* 距離頂部 20px */
-    right: 20px;        /* 距離右邊 20px */
-    width: 45px;
-    height: 45px;
-    background-color: #333; /*深色背景 */
-    color: #fff;
-    border: 2px solid #fff;
-    border-radius: 50%;     /* 圓形 */
-    font-weight: bold;
-    font-family: sans-serif;
-    cursor: pointer;
-    z-index: 1000;          /* 確保在最上層 */
-    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-#lang-btn:hover {
-    background-color: #FFA500; /* 滑鼠移過去變橘色 */
-    transform: scale(1.1);
-}
-
-/* 確保按鈕內的文字置中 */
-.lang-text {
-    font-size: 0.9rem;
-    pointer-events: none;
-}
-
-/* 按鈕通用樣式 */
-.slider-nav-btn {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%); /* 垂直置中 */
-    width: 40px;
-    height: 40px;
-    background-color: rgba(0, 0, 0, 0.3); /* 半透明黑色背景 */
-    color: white;
-    border: none;
-    border-radius: 50%; /* 圓形按鈕 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 10; /* 確保在圖片上面 */
-    transition: background-color 0.3s, opacity 0.3s;
-    opacity: 0; /* 預設隱藏，有滑鼠時才顯示 */
-    pointer-events: none; /* 隱藏時不擋住點擊 */
-}
-
-/* 滑鼠移入區塊時顯示按鈕 */
-.overlay-slider-wrapper:hover .slider-nav-btn {
-    opacity: 1;
-    pointer-events: all;
-}
-
-/* 滑鼠移到按鈕上時加深背景 */
-.slider-nav-btn:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-}
-
-/* 左側按鈕位置 */
-.prev-btn {
-    left: 10px;
-}
-
-/* 右側按鈕位置 */
-.next-btn {
-    right: 10px;
-}
 
 /* =========================================
    🔥 修正：時程表內文間距 (時間與事項分開)
@@ -1495,13 +1453,6 @@ body.lock-scroll .bottom-nav {
     .welcome-content p {
         font-size: 1.8rem;
     }
-    /* 🔥 新增：確保漸層是滿的，但內容維持 800px 置中不跑版 */
-    .gradient-bottom-block > section {
-        max-width: 800px;
-        margin: 0 auto;
-        /* 移除 section 原本可能有的背景，讓漸層透出來 */
-        background-color: transparent; 
-    }
 
     /* 來自：網頁背景 */
     body {
@@ -1516,24 +1467,11 @@ body.lock-scroll .bottom-nav {
     #view-home, 
     #view-leaderboard, 
     #view-groups {
-        max-width: 800px;  
         width: 100%;
-        margin: 0 auto;    
         min-height: 100vh; 
         position: relative;
     }
 
-    /* 來自：修正：底部導覽列 */
-    .bottom-nav {
-        max-width: 600px; 
-        width: 100%;
-        left: 50%;        
-        transform: translateX(-50%); 
-        bottom: 20px;     
-        border-radius: 50px; 
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3); 
-        padding-bottom: 5px; 
-    }
 
     /* 來自：修正：展開後的卡片 */
     .group-card.active {
