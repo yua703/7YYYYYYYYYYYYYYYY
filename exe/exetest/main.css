@@ -396,51 +396,100 @@ img {
 }
 
 /* =========================================
-   🔥 區塊 2：關於本次賽事 (雙欄圖文排版)
+   🔥 區塊 2：關於本次賽事 (白底小圓角卡片 + 歪斜排版)
    ========================================= */
 .intro-event-section {
-    background-color: transparent;
+    position: relative; /* 讓背景散落圖案可以絕對定位 */
     width: 100%;
-    padding: 20px 20px 60px 20px;
+    padding: 40px 20px 80px 20px;
+    overflow: hidden; /* 防止圖案超出螢幕導致破版 */
+    z-index: 1;
 }
 
-.event-row {
-    display: flex;
-    flex-direction: column; /* 手機預設上下堆疊 */
-    gap: 30px;
+
+
+/* --- 背景散落小圖案 --- */
+.bg-deco {
+    position: absolute;
+    opacity: 0.5; /* 半透明才不會搶走白框風采 */
+    z-index: -1;  /* 藏在白框的後面 */
+}
+.deco-a { top: 5%; right: -5%; width: 80px; transform: rotate(15deg); }
+.deco-b { bottom: 15%; left: 2%; width: 100px; transform: rotate(-25deg); }
+.deco-c { top: 40%; left: -10px; width: 60px; transform: rotate(45deg); }
+
+/* --- 白色小圓角容器 --- */
+.event-white-box {
+    background-color: rgba(255, 255, 255, 0.95); /* 🌟 微透白底，讓底下漸層隱約透出 */
+    border-radius: 20px; /* 🌟 小圓角 */
+    padding: 30px 20px 20px 20px;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* 柔和陰影增加卡片浮現感 */
+    position: relative;
 }
 
-.event-left, .event-right {
-    flex: 1;
+/* --- 標題 (左上) --- */
+.event-title {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.8rem;
+    color: #4882A6; /* 白底配深藍色標題最清楚 */
+    margin-bottom: 25px;
+    text-align: left;
+    text-shadow: none; /* 白底不需要文字陰影 */
+}
+
+/* --- 內容排版 (手機預設為上下堆疊) --- */
+.event-content-layout {
     display: flex;
     flex-direction: column;
+    gap: 30px;
 }
 
-.text-event p {
-    font-size: 1rem;
+/* --- 圖片區域 --- */
+.event-visuals {
+    position: relative;
+    width: 85%;
+    margin: 0 auto; /* 手機版圖片置中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event-main-img {
+    width: 100%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 12px;
+    transform: rotate(-4deg); /* 🌟 圖片微微歪斜 */
+    box-shadow: 4px 6px 15px rgba(0,0,0,0.15); /* 讓歪斜圖片有立體感 */
+}
+
+.event-sub-img {
+    position: absolute;
+    bottom: -15px;
+    left: -20px; /* 🌟 左邊再加的一張小圖 */
+    width: 70px;
+    transform: rotate(12deg); 
+    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+}
+
+/* --- 文字區域 --- */
+.event-text p {
+    font-size: 0.95rem;
     line-height: 1.8;
-    color: #f0f0f0;
-    margin-bottom: 20px;
+    color: #444; /* 配合白底使用深灰字 */
     text-align: justify;
 }
 
-.image-event {
-    background-color: #eef2f5;
-    border-radius: 16px;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.image-event img {
-    max-width: 40%; /* 換真圖時改回 100% 加上 object-fit: cover */
-    height: auto;
+/* --- 右下角小字 --- */
+.event-footer-note {
+    text-align: right;
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 30px;
+    letter-spacing: 1px;
 }
 
 
@@ -1548,6 +1597,52 @@ body.lock-scroll {
    🖥️ 電腦版面優化總整理 (Desktop Optimization)
    ========================================= */
 @media (min-width: 1024px) {
+    .intro-event-section {
+        padding: 60px 0 100px 0;
+    }
+
+    .event-white-box {
+        padding: 50px 60px 30px 60px;
+        /* 🌟 利用外距把整個白框往右推，對齊上方 Logo！ */
+        margin-left: 180px; 
+        margin-right: 40px;
+        width: auto; 
+    }
+
+    .event-title {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+    }
+
+    /* 電腦版變成左右雙欄 */
+    .event-content-layout {
+        flex-direction: row;
+        align-items: flex-start; /* 靠上對齊 */
+        gap: 60px;
+    }
+
+    .event-visuals {
+        flex: 1;
+        margin: 0;
+        margin-top: 10px; /* 稍微往下推，錯開文字視覺 */
+    }
+    .event-main-img {
+        max-width: 400px; /* 電腦版圖片放大 */
+    }
+    .event-sub-img {
+        width: 100px;
+        bottom: -30px;
+        left: -40px;
+    }
+
+    .event-text {
+        flex: 1.2; /* 文字區域給多一點空間 */
+    }
+    .event-text p {
+        font-size: 1.1rem;
+    }
+
+
     /* 🌟 電腦版：互動設計系 (調整上下留白) */
     .intro-ixd-section {
         padding-top: 30px; 
@@ -1557,37 +1652,10 @@ body.lock-scroll {
         font-size: 1rem; /* 電腦版文字稍微放大 */
     }
 
-    /* 🌟 電腦版：關於本次賽事 (左右並排、對齊 Logo) */
-    .intro-event-section {
-        padding: 40px 0 80px 0;
+    .hero-bottom-bar {
+        /* 如果想讓整列往上提，可以加 margin-top 或減少最外層的 padding */
+        padding-bottom: 10px; /* 🌟 減少底部的 Padding，箭頭就會看起來往下一點 */
     }
-    
-    .event-row {
-        flex-direction: row; 
-        gap: 60px;
-        align-items: center; /* 讓文字與圖片垂直置中 */
-        
-        /* 精準對齊上方 Logo 的密碼 */
-        width: 100%;
-        max-width: 1600px; 
-        margin: 0 auto; 
-        padding-left: 180px; 
-        padding-right: 40px; 
-        box-sizing: border-box;
-    }
-    
-    .text-event {
-        max-width: 550px;    /* 限制內文寬度，不貼邊緣 */
-        padding-right: 40px; 
-    }
-    .text-event p {
-        font-size: 1.1rem;
-    }
-    
-    .image-event {
-        width: 85%; /* 圖片寬度微縮 */
-    }
-
 
     /* --- 1. 頂部導覽列與圖片 --- */
     .top-header {
@@ -1689,11 +1757,11 @@ body.lock-scroll {
         margin: 4px auto;    /* 🌟 極小縫隙 */
     }
 
+
     /* =========================================
        🌟 核心對齊重構計畫 (Visual Anchor)
        ========================================= */
     .section-padding h2,
-    .intro-event-section h2,
     .section-about .desc-text,  
     .detail-tabs,        
     .groups-grid,        
@@ -1785,7 +1853,7 @@ body.lock-scroll {
     /* 2. 🌟 電腦版專屬：左側大圖往上移 */
     .hero-main-logo img {
         /* 你在這裡改 -80px、-100px，都只會在電腦上生效！ */
-        transform: translateY(-80px); 
+        transform: translateY(-150px) rotate(-3deg);
     }
 
     /* 3. 🌟 電腦版專屬：右側角色往上移 */
@@ -1902,6 +1970,7 @@ body.lock-scroll {
 .hero-main-logo {
     flex: 1.2; 
     opacity: 0;
+    margin-left: -100px;
     /* 🌟 改回原本的節奏：總長 1.5s，前 25% 快速閃現 */
     animation: glitchRevealFlex 1.5s cubic-bezier(0.25, 1, 0.5, 1) 2.2s forwards;
 }
@@ -1941,10 +2010,27 @@ body.lock-scroll {
 }
 
 /* 個別位置與進場時間 (維持原本的節奏) */
-.deco-1 { top: 10%; right: 15%; width: 80px; animation-delay: 2.8s; }
-.deco-2 { bottom: 10%; left: 20%; width: 70px; animation-delay: 3.0s; }
-.deco-3 { bottom: 20%; right: 5%; width: 60px; animation-delay: 2.9s; }
-.deco-4 { top: 30%; left: 35%; width: 40px; animation-delay: 3.1s; }
+.deco-1 { 
+    top: 5%; 
+    right: 10%; 
+    width: 200px; 
+    animation-delay: 2.8s; 
+}
+.deco-2 { 
+    bottom: 5%; 
+    left: 9%; 
+    width: 180px; 
+    animation-delay: 3.0s; 
+    transform: rotate(-18deg);
+
+}
+.deco-3 { 
+    bottom: 20%; 
+    right: 5%; 
+    width: 130px; 
+    animation-delay: 2.9s; 
+    transform: rotate(20deg);
+}
 
 /* --- 5. 底部資訊列 --- */
 .hero-bottom-bar {
@@ -1965,8 +2051,8 @@ body.lock-scroll {
 
 /* 箭頭樣式 */
 .pixel-down-arrow {
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     animation: bouncePixel 2s infinite;
 }
 
@@ -2011,15 +2097,59 @@ body.lock-scroll {
    🎬 將原本的 @keyframes cleanPopIn 替換成這個
    ========================================= */
 @keyframes sharpReveal {
-    /* 從縮小 85% 且往下偏移 15px 的位置開始 */
+    /* 從下方 15px 處透明進場 */
     0% { 
         opacity: 0; 
-        transform: scale(0.85) translateY(15px); 
+        translate: 0 15px; 
     }
-    /* 乾淨俐落地回到原始大小與位置 */
+    /* 回到原位並完全顯示 */
     100% { 
         opacity: 1; 
-        transform: scale(1) translateY(0); 
+        translate: 0 0; 
+    }
+}
+/* =========================================
+   🌟 新增：Welcome 文字下方彈跳箭頭樣式
+   ========================================= */
+
+/* 箭頭的容器，負責定位和動畫 */
+.welcome-bouncing-arrow-wrap {
+    display: flex;
+    justify-content: flex-start; /* 🌟 靠左對齊，與 Welcome 文字齊平 */
+    align-items: center;
+    margin-top: 15px; /* 🌟 距離 Welcome 文字下方 15px (可依需求調整) */
+    
+    /* 🌟 加入彈跳動畫：名稱 bounceWelcomeArrow，時長 2秒，無限循環 */
+    animation: bounceWelcomeArrow 2s infinite;
+}
+
+/* 箭頭 SVG 本體，負責大小和顏色 */
+.welcome-pixel-arrow {
+    width: 24px;   /* 🌟 箭頭大小 (可依需求調整) */
+    height: 24px;
+    
+    /* 🌟 顏色設定為螢光綠 */
+    stroke: #ACE02D !important; 
+    
+    /* 增加一點外陰影，讓螢光綠在紫色上更立體 (選用) */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+/* =========================================
+   🎬 定義彈跳動畫 Keyframes
+   ========================================= */
+@keyframes bounceWelcomeArrow {
+    /* 0%, 20%, 50%, 80%, 100% 時回到原位 */
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    /* 40% 時往上彈 10px */
+    40% {
+        transform: translateY(-10px);
+    }
+    /* 60% 時往上彈 5px (造成回彈效果) */
+    60% {
+        transform: translateY(-5px);
     }
 }
 /* =========================================
@@ -2052,10 +2182,35 @@ body.lock-scroll {
         margin-top: 10px;
     }
     
-    .hero-main-logo { order: 1; } 
+    .hero-main-logo { 
+        order: 1; 
+        margin-left: 0px;
+        margin-top: 10px;
+    } 
     .hero-character { order: 2; margin-top: -30px; } 
     
-    .deco-3, .deco-4 { display: none; } 
-    .deco-1 { top: 5%; right: 5%; width: 60px; }
-    .deco-2 { bottom: 25%; left: 5%; width: 60px; }
+    .deco-1 { display: none; } 
+    .deco-3 { 
+        top: 5%; 
+        right: -10%; 
+        width: 130px; 
+    }
+    .deco-2 { 
+        bottom: 30%; 
+        left: -15%; 
+        width: 130px; 
+    }
+
+    /* 手機版排版為垂直，箭頭需要置中 */
+    .welcome-bouncing-arrow-wrap {
+        justify-content: center; /* 🌟 核心修正：手機版置中對齊 */
+        margin-top: 20px;       /* 🌟 增加一點上方距離 */
+    }
+    
+    .welcome-pixel-arrow {
+        width: 20px; /* 🌟 手機版稍微縮小一點 */
+        height: 20px;
+    }
 }
+
+
