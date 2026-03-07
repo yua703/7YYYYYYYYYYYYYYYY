@@ -1614,34 +1614,67 @@ body.lock-scroll {
         margin-bottom: 30px;
     }
 
-    /* 電腦版變成左右雙欄 */
-    .event-content-layout {
-        flex-direction: row;
-        align-items: flex-start; /* 靠上對齊 */
-        gap: 60px;
-    }
+    /* --- 內容排版 (全新左文右圖 + 爆炸背景) --- */
+.event-content-layout {
+    display: flex;
+    flex-direction: column; /* 手機版預設上下堆疊 */
+    gap: 30px;
+}
 
-    .event-visuals {
-        flex: 1;
-        margin: 0;
-        margin-top: 10px; /* 稍微往下推，錯開文字視覺 */
-    }
-    .event-main-img {
-        max-width: 400px; /* 電腦版圖片放大 */
-    }
-    .event-sub-img {
-        width: 100px;
-        bottom: -30px;
-        left: -40px;
-    }
+/* 左側區域 (文字 + 底部小圖) */
+.event-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-    .event-text {
-        flex: 1.2; /* 文字區域給多一點空間 */
-    }
-    .event-text p {
-        font-size: 1.1rem;
-    }
+.event-text p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #444; 
+    text-align: justify;
+}
 
+/* 新的左下長條小圖樣式 */
+.event-sub-img {
+    width: 100%;
+    max-width: 250px; /* 控制小圖的最大寬度 */
+    height: auto;
+    display: block;
+}
+
+/* 右側區域 (爆炸背景 + 歪斜主圖) */
+.event-right-col {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0; /* 預留上下空間給圖形 */
+}
+
+/* 預留的藍色爆炸圖背景 (在主圖後方) */
+.event-explosion-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120%; /* 讓背景圖超出主圖大小 */
+    max-width: 400px;
+    z-index: 1; /* 藏在底下 */
+}
+
+/* 前方的主圖 */
+.event-main-img {
+    position: relative;
+    z-index: 2; /* 浮在爆炸圖前面 */
+    width: 85%;
+    max-width: 320px;
+    height: auto;
+    border-radius: 12px;
+    rotate: 12deg; /* 🌟 依據參考圖，向右歪斜 12度 */
+    box-shadow: 4px 6px 15px rgba(0,0,0,0.15);
+}
 
     /* 🌟 電腦版：互動設計系 (調整上下留白) */
     .intro-ixd-section {
@@ -1690,6 +1723,11 @@ body.lock-scroll {
         text-decoration: none;
         color: #f0f0f0; 
         transition: color 0.3s;
+        text-shadow: 
+            -1px -1px 0 #6666FF,  
+             1px -1px 0 #6666FF,
+            -1px  1px 0 #6666FF,
+             1px  1px 0 #6666FF;
     }
 
     .desktop-link:hover, 
@@ -2185,7 +2223,7 @@ body.lock-scroll {
     .hero-main-logo { 
         order: 1; 
         margin-left: 0px;
-        margin-top: -60px;
+        margin-top: -40px;
         rotate: 6deg;
     } 
     .hero-character { order: 2; margin-top: -30px; } 
