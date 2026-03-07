@@ -95,7 +95,63 @@ if (newLangBtn) {
         }, 500); 
     });
 }
+/* =========================================
+   🔥 跑馬燈自動無限循環 (完美無縫雙等份版)
+   ========================================= */
+function initMarquee() {
+    const scroller = document.querySelector('.pixel-ticker-scroller');
+    if (!scroller) return;
 
+    // 🌟 手機防閃保護：如果寬度沒變（例如只是上下滑動造成網址列縮放），就不重新計算
+    if (scroller.dataset.initialized === 'true' && window.innerWidth === parseInt(scroller.dataset.lastWidth)) {
+        return;
+    }
+
+    // 抓取 HTML 中原始的那一組文字
+    let inner = scroller.querySelector('.scroller-inner');
+    if (!inner) return;
+
+    // 暫時清空容器，只保留原始組件來計算寬度
+    scroller.innerHTML = '';
+    scroller.appendChild(inner);
+
+    const itemWidth = inner.offsetWidth;
+    const screenWidth = window.innerWidth;
+
+    // 計算填滿「一個螢幕寬度」所需要的複製次數
+    const neededCopies = Math.max(1, Math.ceil(screenWidth / itemWidth));
+
+    // 創建「前半段」(Half 1)
+    const half1 = document.createElement('div');
+    half1.style.display = 'flex';
+    half1.style.flexShrink = '0';
+    for (let i = 0; i < neededCopies; i++) {
+        half1.appendChild(inner.cloneNode(true));
+    }
+
+    // 創建「後半段」(Half 2) - 完全複製前半段
+    const half2 = half1.cloneNode(true);
+    half2.setAttribute('aria-hidden', 'true'); // 讓語音朗讀器忽略後半段
+
+    // 將兩半放回捲動容器中
+    scroller.innerHTML = '';
+    scroller.appendChild(half1);
+    scroller.appendChild(half2);
+
+    // 標記完成並記錄當前寬度
+    scroller.dataset.initialized = 'true';
+    scroller.dataset.lastWidth = window.innerWidth;
+}
+
+// 網頁載入時執行
+document.addEventListener('DOMContentLoaded', initMarquee);
+
+// 視窗縮放時防抖動執行
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(initMarquee, 200);
+});
 // ==========================================
 // 2. 賽事細節分頁 (滑動背景 + 內容切換 修復版)
 // ==========================================
