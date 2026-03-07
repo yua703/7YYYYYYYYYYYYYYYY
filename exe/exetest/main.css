@@ -440,12 +440,6 @@ img {
     text-shadow: none; /* 白底不需要文字陰影 */
 }
 
-/* --- 內容排版 (手機預設為上下堆疊) --- */
-.event-content-layout {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-}
 
 /* --- 圖片區域 --- */
 .event-visuals {
@@ -475,13 +469,6 @@ img {
     filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
 }
 
-/* --- 文字區域 --- */
-.event-text p {
-    font-size: 0.95rem;
-    line-height: 1.8;
-    color: #444; /* 配合白底使用深灰字 */
-    text-align: justify;
-}
 
 /* --- 右下角小字 --- */
 .event-footer-note {
@@ -1614,19 +1601,7 @@ body.lock-scroll {
         margin-bottom: 30px;
     }
 
-    /* --- 內容排版 (全新左文右圖 + 爆炸背景) --- */
-.event-content-layout {
-    display: flex;
-    flex-direction: column; /* 手機版預設上下堆疊 */
-    gap: 30px;
-}
 
-/* 左側區域 (文字 + 底部小圖) */
-.event-left-col {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
 
 .event-text p {
     font-size: 0.95rem;
@@ -1635,47 +1610,51 @@ body.lock-scroll {
     text-align: justify;
 }
 
-/* 新的左下長條小圖樣式 */
-.event-sub-img {
-    width: 100%;
-    max-width: 250px; /* 控制小圖的最大寬度 */
-    height: auto;
-    display: block;
-}
-
-/* 右側區域 (爆炸背景 + 歪斜主圖) */
-.event-right-col {
-    position: relative;
-    width: 100%;
+/* --- 內容排版 (基礎設定，手機預設為上下堆疊) --- */
+.event-content-layout {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 0; /* 預留上下空間給圖形 */
+    flex-direction: column; 
+    gap: 40px; /* 手機版上下區塊的間距 */
 }
+/* =========================================
+       🖥️ 電腦版：關於本次賽事 (強制左右排版)
+       ========================================= */
+    .event-content-layout {
+        flex-direction: row; /* 🌟 核心：強制水平排列 */
+        align-items: center; /* 左右欄垂直居中對齊 */
+        gap: 60px;           /* 左右欄之間的間距 */
+    }
 
-/* 預留的藍色爆炸圖背景 (在主圖後方) */
-.event-explosion-bg {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 120%; /* 讓背景圖超出主圖大小 */
-    max-width: 400px;
-    z-index: 1; /* 藏在底下 */
-}
+    /* 左側文字與小圖欄 */
+    .event-left-col {
+        flex: 1.2; /* 給文字區域多一點空間 */
+        gap: 30px;
+        padding-right: 20px;
+    }
 
-/* 前方的主圖 */
-.event-main-img {
-    position: relative;
-    z-index: 2; /* 浮在爆炸圖前面 */
-    width: 85%;
-    max-width: 320px;
-    height: auto;
-    border-radius: 12px;
-    rotate: 12deg; /* 🌟 依據參考圖，向右歪斜 12度 */
-    box-shadow: 4px 6px 15px rgba(0,0,0,0.15);
-}
+    .event-text p {
+        font-size: 1.1rem;
+    }
 
+    .event-sub-img {
+        max-width: 280px; /* 電腦版小圖稍微放大 */
+        margin: 0;        /* 靠左對齊，不再置中 */
+    }
+
+    /* 右側大圖與裝飾圖欄 */
+    .event-right-col {
+        flex: 1; 
+        padding: 0;
+    }
+
+    .event-explosion-bg {
+        max-width: 500px; /* 電腦版裝飾圖放大 */
+    }
+
+    .event-main-img {
+        max-width: 400px; /* 電腦版主大圖放大 */
+        rotate: 15deg;    /* 電腦版歪斜角度可以稍微大一點 */
+    }
     /* 🌟 電腦版：互動設計系 (調整上下留白) */
     .intro-ixd-section {
         padding-top: 30px; 

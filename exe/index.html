@@ -7,234 +7,365 @@
     <link rel="stylesheet" href="main.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
 </head>
-<body>
+    <body>
+
+<header class="top-header">
+    <a href="#" class="header-logo" data-target="view-home">
+        <img src="img/exelogo.webp" alt="ExErcise Logo">
+    </a>
+
+    <div class="header-right">
+        <nav class="desktop-nav">
+            <a href="#" class="desktop-link active" data-target="view-home" data-i18n="nav_info">首頁介紹</a>
+            <a href="#" class="desktop-link" data-target="view-groups" data-i18n="nav_sports">運動項目</a>
+            <a href="#" class="desktop-link" data-target="view-leaderboard" data-i18n="lb_title">即時排行榜</a>
+        </nav>
+
+        <button class="header-lang-btn" id="new-lang-btn">EN</button>
+
+        <button class="header-menu-btn" id="menu-btn">
+            <div class="hamburger-box">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </div>
+            </button>
+    </div>
+</header>
+
+<div class="fullscreen-menu" id="full-menu">
+    <div class="mega-menu-container">
+
+        <div class="mega-col-links">           
+            <a href="#" class="mega-link active" data-target="view-home" data-i18n="nav_info">首頁資訊</a>
+            <a href="#" class="mega-link" data-target="view-groups" data-i18n="nav_sports">運動項目</a>
+            <a href="#" class="mega-link" data-target="view-leaderboard" data-i18n="lb_title">即時排行榜</a>
+
+        </div>
+                <div class="mega-col-cards">
+            <p class="mega-card-title">● 精彩亮點</p>
+            <div class="mega-card-grid">
+                <div class="mega-card">
+                    <img src="img/exelogo.webp" alt="Card 1">
+                    <p>互動體感</p>
+                </div>
+                <div class="mega-card">
+                    <img src="img/exelogo.webp" alt="Card 2">
+                    <p>戰況排行</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mega-col-info">
+            <img src="img/exelogo.webp" alt="Logo" class="mega-logo">
+            <h3 class="mega-brand-name">【ExErcise】</h3>
+            <p class="mega-address">
+                國立臺北科技大學<br>
+                互動設計系 113級
+            </p>
+            <p class="mega-copyright">© 2026 ExErcise.</p>
+        </div>
+    </div>
+</div>
+
+        <div id="splash-screen">
+        <div class="splash-content">
+            <img src="img/exelogo.webp" alt="ExErcise Logo" class="splash-logo">            <div class="splash-loader"></div>
+            <p class="splash-text">Loading… Opening the .exe file</p>
+        </div>
+    </div>
+    
 
     <div id="view-home" class="page-view active">
-        <div class="para-container">
-        <img src="img/aaa.webp" alt="首頁橫幅" class="hero-static-img">
-        </div>
-        <section class="section-padding section-about">
-            <h2 data-i18n="about_title">關於本次賽事</h2>
-            
-            <div class="about-feature-box">
-                <div class="about-header">
-                    <h3><span class="brand-highlight" data-i18n="home_brand">【ExErcise】科技 × 運動賽事</span></h3>
-                </div>
-                <div class="about-body">
-                    <p class="core-slogan" data-i18n="home_slogan">
-                        打破傳統，我們用科技重新定義運動競技。
-                    </p>
-                    <p class="intro-text" data-i18n="home_desc">
-                        無論你是哪類猛將，這裡都有屬於你的戰場。<br>
-                        準備好挑戰極限了嗎？快來與夥伴一同釋放自己的潛能吧！
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding bg-gray">
-            <h2 data-i18n="event_items">七大競賽項目</h2>
-            <div class="carousel-container" id="events-carousel">
-                <div class="carousel-track">
-                    <div class="carousel-item"><img src="img/76.webp" alt="耐力"></div>
-                    <div class="carousel-item"><img src="img/71.webp" alt="爆發力"></div>
-                    <div class="carousel-item"><img src="img/74.webp" alt="反應力"></div>
-                    <div class="carousel-item"><img src="img/77.webp" alt="專注力"></div>
-                    <div class="carousel-item"><img src="img/75.webp" alt="敏捷力"></div>
-                    <div class="carousel-item"><img src="img/73.webp" alt="協調力"></div>
-                    <div class="carousel-item"><img src="img/72.webp" alt="智力"></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding">
-            <h2 data-i18n="detail_title">賽事細節</h2>
-            
-            <div class="detail-tabs">
-                <div class="tab-indicator"></div>
-                <button class="detail-tab-btn active" data-target="detail-time" data-i18n="tab_schedule">時程表</button>
-                <button class="detail-tab-btn" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
-                <button class="detail-tab-btn" data-target="detail-map" data-i18n="tab_map">賽事地圖</button>
-                <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
-            </div>
-
-            <div id="detail-time" class="detail-content active">
-                <div class="schedule-list">
-                    <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
-                        <div class="sch-header">
-                            <span class="sch-time">08:20~10:10</span>
-                            <span class="sch-event" data-i18n="batch_1">第一梯次</span>
-                            <span class="sch-arrow">▼</span>
-                        </div>
-                        <div class="sch-body">
-                            <div class="sch-sub-row">08:20~08:35 <span data-i18n="act_reg_1">第一梯次報到</span></div>
-                            <div class="sch-sub-row">08:35~08:40 <span data-i18n="act_warm_1">第一梯次熱身</span></div>
-                            <div class="sch-sub-row">08:40~10:10 <span data-i18n="act_play_1">第一梯次體驗遊玩</span></div>
-                        </div>
-                    </div>
-                    <div class="schedule-group bg-dark-yellow" onclick="toggleSchedule(this)">
-                        <div class="sch-header">
-                            <span class="sch-time">10:10~12:00</span>
-                            <span class="sch-event" data-i18n="batch_2">第二梯次</span>
-                            <span class="sch-arrow">▼</span>
-                        </div>
-                        <div class="sch-body">
-                            <div class="sch-sub-row">10:10~10:25 <span data-i18n="act_reg_2">第二梯次報到</span></div>
-                            <div class="sch-sub-row">10:25~10:30 <span data-i18n="act_warm_2">第二梯次熱身</span></div>
-                            <div class="sch-sub-row">10:30~12:00 <span data-i18n="act_play_2">第二梯次體驗遊玩</span></div>
-                        </div>
-                    </div>
-                    <div class="schedule-row rest">
-                        <span class="sch-time">12:00~13:00</span>
-                        <span class="sch-event" data-i18n="rest_noon">午休</span>
-                    </div>
-                    <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
-                        <div class="sch-header">
-                            <span class="sch-time">13:10~15:00</span>
-                            <span class="sch-event" data-i18n="batch_3">第三梯次</span>
-                            <span class="sch-arrow">▼</span>
-                        </div>
-                        <div class="sch-body">
-                            <div class="sch-sub-row">13:10~13:25 <span data-i18n="act_reg_3">第三梯次報到</span></div>
-                            <div class="sch-sub-row">13:25~13:30 <span data-i18n="act_warm_3">第三梯次熱身</span></div>
-                            <div class="sch-sub-row">13:30~15:00 <span data-i18n="act_play_3">第三梯次體驗遊玩</span></div>
-                        </div>
-                    </div>
-                    <div class="schedule-group bg-dark-yellow" onclick="toggleSchedule(this)">
-                        <div class="sch-header">
-                            <span class="sch-time">15:00~16:50</span>
-                            <span class="sch-event" data-i18n="batch_4">第四梯次</span>
-                            <span class="sch-arrow">▼</span>
-                        </div>
-                        <div class="sch-body">
-                            <div class="sch-sub-row">15:00~15:15 <span data-i18n="act_reg_4">第四梯次報到</span></div>
-                            <div class="sch-sub-row">15:15~15:20 <span data-i18n="act_warm_4">第四梯次熱身</span></div>
-                            <div class="sch-sub-row">15:20~16:50 <span data-i18n="act_play_4">第四梯次體驗遊玩</span></div>
-                        </div>
-                    </div>
-                    <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
-                        <div class="sch-header">
-                            <span class="sch-time">16:50~18:40</span>
-                            <span class="sch-event" data-i18n="batch_5">第五梯次</span>
-                            <span class="sch-arrow">▼</span>
-                        </div>
-                        <div class="sch-body">
-                            <div class="sch-sub-row">16:50~17:05 <span data-i18n="act_reg_5">第五梯次報到</span></div>
-                            <div class="sch-sub-row">17:05~17:10 <span data-i18n="act_warm_5">第五梯次熱身</span></div>
-                            <div class="sch-sub-row">17:10~18:40 <span data-i18n="act_play_5">第五梯次體驗遊玩</span></div>
-                        </div>
-                    </div>
-                    <div class="schedule-row rest">
-                        <span class="sch-time">18:40~18:45</span>
-                        <span class="sch-event" data-i18n="rest_short">休息片刻</span>
-                    </div>
-                    <div class="schedule-row end">
-                        <span class="sch-time">18:45~19:15</span>
-                        <span class="sch-event" data-i18n="event_closing">頒獎閉幕</span>
-                    </div>
-                    <div class="schedule-row end">
-                        <span class="sch-time">19:15~19:20</span>
-                        <span class="sch-event" data-i18n="event_photo">全體大合照</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="detail-scoring" class="detail-content">
-                <div class="scoring-container">
-                    <div class="scoring-card theme-blue">
-                        <h3 class="scoring-title" data-i18n="score_h1">一、個人單項挑戰</h3>
-                        <div class="scoring-row">
-                            <span class="scoring-label" data-i18n="score_label_rank">排名方式</span>
-                            <span class="scoring-text" data-i18n="score_text_rank">依各項目的分數高低進行排名。</span>
-                        </div>
-                        <div class="scoring-row">
-                            <span class="scoring-label" data-i18n="score_label_reward">獎勵機制</span>
-                            <span class="scoring-text" data-i18n="score_text_reward">各單項取第一名給予獎勵。</span>
-                        </div>
-                        <div class="scoring-row">
-                            <span class="scoring-label" data-i18n="score_label_tie">同分判定</span>
-                            <span class="scoring-text" data-i18n="score_text_tie">如遇成績相同（同分）之情況，將依較早完成報到者排名優先。</span>
-                        </div>
-                    </div>
-
-                    <div class="scoring-card theme-yellow">
-                        <h3 class="scoring-title" data-i18n="score_h2">二、個人全項總積分</h3>
-                        <div class="scoring-subtitle" data-i18n="score_sub_calc">積分換算</div>
-                        <p class="scoring-desc" data-i18n="score_desc_calc">各單項排名前十名者可獲得對應積分：</p>
-                        <div class="points-grid">
-                            <div class="point-item"><span data-i18n="rank_1">第 1 名</span>：<span>10</span></div>
-                            <div class="point-item"><span data-i18n="rank_2">第 2 名</span>：<span>9</span></div>
-                            <div class="point-item" data-i18n="rank_others">...以此類推</div>
-                            <div class="point-item"><span data-i18n="rank_10">第 10 名</span>：<span>1</span></div>
-                        </div>
-
-                        <div class="scoring-subtitle" data-i18n="score_sub_method">採計方式</div>
-                        <ul class="scoring-list-style">
-                            <li data-i18n="score_li_1">本賽事共分為七大類別。</li>
-                            <li data-i18n="score_li_2">若於同一大類別中參與多個項目並皆獲得積分，將取最高分之項目，作為該類別的最終積分。</li>
-                        </ul>
-
-                        <div class="scoring-subtitle" data-i18n="score_sub_total">總排名與獎勵</div>
-                        <ul class="scoring-list-style">
-                            <li data-i18n="score_li_3">結算七大類別總積分，分數越高者排名越前。</li>
-                            <li data-i18n="score_li_4">總排名前三名給予獎勵。</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <div id="detail-map" class="detail-content">
-                <img src="img/map.webp" alt="地圖" class="content-img">
-            </div>
-
-            <div id="detail-participants" class="detail-content">
-                <div class="scoring-container">
-                    <div class="scoring-card theme-blue">
-                        <h3 class="scoring-title" data-i18n="rule_h1">一、線上報名</h3>
-                        <ul class="scoring-list-style">
-                            <li data-i18n="rule_li_1">採表單預約制，每梯次限額 34 人。</li>
-                            <li data-i18n="rule_li_2">報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱。</li>
-                            <li data-i18n="rule_li_3">若沒收到，請務必於 12/26（五）前 聯繫主辦單位。</li>
-                        </ul>
-                    </div>
-                    <div class="scoring-card theme-yellow">
-                        <h3 class="scoring-title" data-i18n="rule_h2">二、參賽須知</h3>
-                        <ul class="scoring-list-style">
-                            <li data-i18n="rule_li_4">完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。</li>
-                            <li data-i18n="rule_li_5">請務必穿著適合運動的服裝與運動鞋，以確保活動安全。</li>
-                            <li data-i18n="rule_li_6">挑戰過程中請隨時留意自身身體狀況，量力而為。</li>
-                        </ul>
-                        <div style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 15px;">
-                            <h4 style="color: #d32f2f; margin-bottom: 10px;" data-i18n="note_title">【注意事項】</h4>
-                            <p style="font-size: 0.9rem; line-height: 1.6; color: #555;" data-i18n="note_content">
-                                提醒有任何身體不適、心臟病、高血壓、頸部或背部問題、孕婦者不宜參與。<br>
-                                請參賽者留意自身健康狀況，若感到不適，建議不要勉強參加。如仍決定參與，請自行承擔相關風險。<br>
-                                <br>
-                                ＊本活動為互動系113級二年級上學期專題展，其各項科技運動遊戲屬於前期測試＊<br>
-                                ＊若有不盡人意的地方，還請多海涵＊
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-padding section-dashed-white">
-            <div class="about-grid">
-                <div class="about-left">
-                    <p data-i18n="footer_host">主辦單位：</p>
-                    <p data-i18n="footer_co">合作單位：</p>
-                </div>
-                <div class="about-right">
-                    <p data-i18n="footer_dept">國立臺北科技大學 113級互動設計系</p>
-                    <p data-i18n="footer_locked">尚未解鎖</p>
-                </div>
-            </div>
-            <p class="about-email">EMAIL：ntut.ixd.113@gmail.com</p>
-            <br>
-            <a href="https://www.instagram.com/ntut.ixd_113" class="btn-primary" data-i18n="btn_ig">追蹤官方IG</a>
-        </section>
+        
+<section class="full-color-block hero-grid-layout">
+    <div class="hero-top-bar">
+        <div class="ht-item text-left">A TECH x SPORTS STUDIO</div>
+        <div class="ht-item text-right">EXERCISE 2.0</div>
     </div>
+
+    <div class="hero-divider-line"></div>
+
+    <div class="hero-main-content">
+        <div class="welcome-text-group">
+                <p class="welcome-mini-text" data-i18n="hero_welcome_1">Welcome to the</p>
+                <p class="welcome-mini-text" data-i18n="hero_welcome_2">Exercise Exhibition</p>
+                
+            </div>
+        
+        <div class="hero-visual-wrapper">
+            
+            <div class="hero-main-logo">
+                <img src="img/exeword.webp" alt="Main Logo">
+            </div>
+
+            <div class="hero-character">
+                <img src="img/exelogo.webp" alt="TV Character">
+            </div>
+        </div>
+
+        <img src="img/s3.webp" class="deco-icon deco-1" alt="Star">
+        
+        <img src="img/s1.webp" class="deco-icon deco-2" alt="Green Climber">
+        
+        <img src="img/s4.webp" class="deco-icon deco-3" alt="Blue Jumper">
+        
+    </div>
+
+    <div class="hero-bottom-bar">
+        <div class="hb-item text-left">
+            <p>WE ARE BUILDING AN<br>INTERACTIVE FUTURE</p>
+        </div>
+        <div class="hb-item hb-center">
+            <p>WE ARE A CREATIVE TEAM.<br>EXPLORING PIONEERING TECHNOLOGY.</p>
+        </div>
+        <div class="hb-item text-right">
+            <svg class="pixel-down-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 4v16M19 13l-7 7-7-7"/>
+            </svg>
+        </div>
+    </div>
+</section>        
+<div class="pixel-ticker-wrap">
+            <div class="pixel-ticker-scroller">
+                <div class="scroller-inner">
+                    <span>EXERCISE 2.0</span>
+                    <span>NTUT IXD 113</span>
+                </div>
+            </div>
+        </div>
+        
+    <div class="gradient-bottom-block">
+            
+            <section class="intro-ixd-section">
+                <h2 class="ixd-green-title">互動設計系</h2>
+                <div class="text-ixd">
+                    <p>互動設計系（Interaction Design）致力於探索人類與科技之間的無限可能。<br>我們不僅學習程式語言與視覺設計，更深耕於「使用者體驗（UX）」與「使用者介面（UI）」。</p>
+                </div>
+            </section>
+
+            <section class="intro-event-section">
+                
+                <img src="img/exelogo.webp" class="bg-deco deco-a" alt="deco">
+                <img src="img/exelogo.webp" class="bg-deco deco-b" alt="deco">
+                <img src="img/exelogo.webp" class="bg-deco deco-c" alt="deco">
+
+                <div class="event-white-box">
+                    <h2 class="event-title">關於本次賽事</h2>
+                    
+                    <div class="event-content-layout">
+                        <div class="event-left-col">
+                            <div class="event-text">
+                                <p>
+                                    【ExErcise】科技 × 運動賽事將帶領玩家進入前所未有的感官世界。我們融合了最新的體感偵測技術與遊戲化設計，打破傳統運動的枯燥乏味。<br><br>
+                                    在這裡，每一次揮擊、每一次跳躍，都會轉化為螢幕上炫目的光影與分數。無論你是健身狂人，還是只想流點汗的遊戲玩家，都能找到屬於自己的挑戰節奏。準備好解鎖你的隱藏潛能了嗎？
+                                </p>
+                            </div>
+                            <img src="img/exelogo.webp" class="event-sub-img" alt="Event Sub">
+                        </div>
+                        
+                        <div class="event-right-col">
+                            <img src="img/ty2.webp" class="event-explosion-bg" alt="Decoration Background">
+                            <img src="img/exelogo.webp" class="event-main-img" alt="Event Main">
+                        </div>
+                    </div>
+
+                    <div class="event-footer-note">
+                        * 實際體驗依現場設備與個人體能狀況為主
+                    </div>
+                </div>
+            </section>
+
+
+            <section class="section-padding">
+                <h2 data-i18n="detail_title">賽事細節</h2>
+                
+                <div class="detail-tabs">
+                    <div class="tab-indicator"></div>
+                    <button class="detail-tab-btn active" data-target="detail-time" data-i18n="tab_schedule">時程表</button>
+                    <button class="detail-tab-btn" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
+                    <button class="detail-tab-btn" data-target="detail-map" data-i18n="tab_map">賽事地圖</button>
+                    <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
+                </div>
+
+                <div id="detail-time" class="detail-content active">
+                    <div class="schedule-list">
+                        <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
+                            <div class="sch-header">
+                                <span class="sch-time">08:20~10:10</span>
+                                <span class="sch-event" data-i18n="batch_1">第一梯次</span>
+                                <span class="sch-arrow">▼</span>
+                            </div>
+                            <div class="sch-body">
+                                <div class="sch-sub-row">08:20~08:35 <span data-i18n="act_reg_1">第一梯次報到</span></div>
+                                <div class="sch-sub-row">08:35~08:40 <span data-i18n="act_warm_1">第一梯次熱身</span></div>
+                                <div class="sch-sub-row">08:40~10:10 <span data-i18n="act_play_1">第一梯次體驗遊玩</span></div>
+                            </div>
+                        </div>
+                        <div class="schedule-group bg-dark-yellow" onclick="toggleSchedule(this)">
+                            <div class="sch-header">
+                                <span class="sch-time">10:10~12:00</span>
+                                <span class="sch-event" data-i18n="batch_2">第二梯次</span>
+                                <span class="sch-arrow">▼</span>
+                            </div>
+                            <div class="sch-body">
+                                <div class="sch-sub-row">10:10~10:25 <span data-i18n="act_reg_2">第二梯次報到</span></div>
+                                <div class="sch-sub-row">10:25~10:30 <span data-i18n="act_warm_2">第二梯次熱身</span></div>
+                                <div class="sch-sub-row">10:30~12:00 <span data-i18n="act_play_2">第二梯次體驗遊玩</span></div>
+                            </div>
+                        </div>
+                        <div class="schedule-row rest">
+                            <span class="sch-time">12:00~13:00</span>
+                            <span class="sch-event" data-i18n="rest_noon">午休</span>
+                        </div>
+                        <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
+                            <div class="sch-header">
+                                <span class="sch-time">13:10~15:00</span>
+                                <span class="sch-event" data-i18n="batch_3">第三梯次</span>
+                                <span class="sch-arrow">▼</span>
+                            </div>
+                            <div class="sch-body">
+                                <div class="sch-sub-row">13:10~13:25 <span data-i18n="act_reg_3">第三梯次報到</span></div>
+                                <div class="sch-sub-row">13:25~13:30 <span data-i18n="act_warm_3">第三梯次熱身</span></div>
+                                <div class="sch-sub-row">13:30~15:00 <span data-i18n="act_play_3">第三梯次體驗遊玩</span></div>
+                            </div>
+                        </div>
+                        <div class="schedule-group bg-dark-yellow" onclick="toggleSchedule(this)">
+                            <div class="sch-header">
+                                <span class="sch-time">15:00~16:50</span>
+                                <span class="sch-event" data-i18n="batch_4">第四梯次</span>
+                                <span class="sch-arrow">▼</span>
+                            </div>
+                            <div class="sch-body">
+                                <div class="sch-sub-row">15:00~15:15 <span data-i18n="act_reg_4">第四梯次報到</span></div>
+                                <div class="sch-sub-row">15:15~15:20 <span data-i18n="act_warm_4">第四梯次熱身</span></div>
+                                <div class="sch-sub-row">15:20~16:50 <span data-i18n="act_play_4">第四梯次體驗遊玩</span></div>
+                            </div>
+                        </div>
+                        <div class="schedule-group bg-light-yellow" onclick="toggleSchedule(this)">
+                            <div class="sch-header">
+                                <span class="sch-time">16:50~18:40</span>
+                                <span class="sch-event" data-i18n="batch_5">第五梯次</span>
+                                <span class="sch-arrow">▼</span>
+                            </div>
+                            <div class="sch-body">
+                                <div class="sch-sub-row">16:50~17:05 <span data-i18n="act_reg_5">第五梯次報到</span></div>
+                                <div class="sch-sub-row">17:05~17:10 <span data-i18n="act_warm_5">第五梯次熱身</span></div>
+                                <div class="sch-sub-row">17:10~18:40 <span data-i18n="act_play_5">第五梯次體驗遊玩</span></div>
+                            </div>
+                        </div>
+                        <div class="schedule-row rest">
+                            <span class="sch-time">18:40~18:45</span>
+                            <span class="sch-event" data-i18n="rest_short">休息片刻</span>
+                        </div>
+                        <div class="schedule-row end">
+                            <span class="sch-time">18:45~19:15</span>
+                            <span class="sch-event" data-i18n="event_closing">頒獎閉幕</span>
+                        </div>
+                        <div class="schedule-row end">
+                            <span class="sch-time">19:15~19:20</span>
+                            <span class="sch-event" data-i18n="event_photo">全體大合照</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="detail-scoring" class="detail-content">
+                    <div class="scoring-container">
+                        <div class="scoring-card theme-blue">
+                            <h3 class="scoring-title" data-i18n="score_h1">一、個人單項挑戰</h3>
+                            <div class="scoring-row">
+                                <span class="scoring-label" data-i18n="score_label_rank">排名方式</span>
+                                <span class="scoring-text" data-i18n="score_text_rank">依各項目的分數高低進行排名。</span>
+                            </div>
+                            <div class="scoring-row">
+                                <span class="scoring-label" data-i18n="score_label_reward">獎勵機制</span>
+                                <span class="scoring-text" data-i18n="score_text_reward">各單項取第一名給予獎勵。</span>
+                            </div>
+                            <div class="scoring-row">
+                                <span class="scoring-label" data-i18n="score_label_tie">同分判定</span>
+                                <span class="scoring-text" data-i18n="score_text_tie">如遇成績相同（同分）之情況，將依較早完成報到者排名優先。</span>
+                            </div>
+                        </div>
+
+                        <div class="scoring-card theme-yellow">
+                            <h3 class="scoring-title" data-i18n="score_h2">二、個人全項總積分</h3>
+                            <div class="scoring-subtitle" data-i18n="score_sub_calc">積分換算</div>
+                            <p class="scoring-desc" data-i18n="score_desc_calc">各單項排名前十名者可獲得對應積分：</p>
+                            <div class="points-grid">
+                                <div class="point-item"><span data-i18n="rank_1">第 1 名</span>：<span>10</span></div>
+                                <div class="point-item"><span data-i18n="rank_2">第 2 名</span>：<span>9</span></div>
+                                <div class="point-item" data-i18n="rank_others">...以此類推</div>
+                                <div class="point-item"><span data-i18n="rank_10">第 10 名</span>：<span>1</span></div>
+                            </div>
+
+                            <div class="scoring-subtitle" data-i18n="score_sub_method">採計方式</div>
+                            <ul class="scoring-list-style">
+                                <li data-i18n="score_li_1">本賽事共分為七大類別。</li>
+                                <li data-i18n="score_li_2">若於同一大類別中參與多個項目並皆獲得積分，將取最高分之項目，作為該類別的最終積分。</li>
+                            </ul>
+
+                            <div class="scoring-subtitle" data-i18n="score_sub_total">總排名與獎勵</div>
+                            <ul class="scoring-list-style">
+                                <li data-i18n="score_li_3">結算七大類別總積分，分數越高者排名越前。</li>
+                                <li data-i18n="score_li_4">總排名前三名給予獎勵。</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="detail-map" class="detail-content">
+                    <img src="img/map.webp" alt="地圖" class="content-img">
+                </div>
+
+                <div id="detail-participants" class="detail-content">
+                    <div class="scoring-container">
+                        <div class="scoring-card theme-blue">
+                            <h3 class="scoring-title" data-i18n="rule_h1">一、線上報名</h3>
+                            <ul class="scoring-list-style">
+                                <li data-i18n="rule_li_1">採表單預約制，每梯次限額 34 人。</li>
+                                <li data-i18n="rule_li_2">報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱。</li>
+                                <li data-i18n="rule_li_3">若沒收到，請務必於 12/26（五）前 聯繫主辦單位。</li>
+                            </ul>
+                        </div>
+                        <div class="scoring-card theme-yellow">
+                            <h3 class="scoring-title" data-i18n="rule_h2">二、參賽須知</h3>
+                            <ul class="scoring-list-style">
+                                <li data-i18n="rule_li_4">完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。</li>
+                                <li data-i18n="rule_li_5">請務必穿著適合運動的服裝與運動鞋，以確保活動安全。</li>
+                                <li data-i18n="rule_li_6">挑戰過程中請隨時留意自身身體狀況，量力而為。</li>
+                            </ul>
+                            <div style="margin-top: 20px; border-top: 1px dashed #ccc; padding-top: 15px;">
+                                <h4 style="color: #d32f2f; margin-bottom: 10px;" data-i18n="note_title">【注意事項】</h4>
+                                <p style="font-size: 0.9rem; line-height: 1.6; color: #555;" data-i18n="note_content">
+                                    提醒有任何身體不適、心臟病、高血壓、頸部或背部問題、孕婦者不宜參與。<br>
+                                    請參賽者留意自身健康狀況，若感到不適，建議不要勉強參加。如仍決定參與，請自行承擔相關風險。<br>
+                                    <br>
+                                    ＊本活動為互動系113級二年級上學期專題展，其各項科技運動遊戲屬於前期測試＊<br>
+                                    ＊若有不盡人意的地方，還請多海涵＊
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding section-dashed-white">
+                <div class="about-grid">
+                    <div class="about-left">
+                        <p data-i18n="footer_host">主辦單位：</p>
+                        <p data-i18n="footer_co">合作單位：</p>
+                    </div>
+                    <div class="about-right">
+                        <p data-i18n="footer_dept">國立臺北科技大學 113級互動設計系</p>
+                        <p data-i18n="footer_locked">尚未解鎖</p>
+                    </div>
+                </div>
+                <p class="about-email">EMAIL：ntut.ixd.113@gmail.com</p>
+                <br>
+                <a href="https://www.instagram.com/ntut.ixd_113" class="btn-primary" data-i18n="btn_ig">追蹤官方IG</a>
+            </section>
+            </div>
+        </div>
     
     <div id="view-leaderboard" class="page-view">
         <header class="leaderboard-header">
@@ -670,24 +801,6 @@
         <div style="height: 80px;"></div>
     </div>
 
-
-    <nav class="bottom-nav">
-        <button class="nav-btn active" data-view="view-home">
-            <img src="img/iii.webp" class="nav-icon" alt="賽事介紹">
-            <span class="text" data-i18n="nav_info">賽事介紹</span>
-        </button>
-        
-        <button class="nav-btn" data-view="view-groups">
-            <img src="img/oio.webp" class="nav-icon" alt="項目">
-            <span class="text" data-i18n="nav_sports">運動項目</span>
-        </button>
-        
-        <button class="nav-btn" data-view="view-leaderboard">
-            <img src="img/ooo.webp" class="nav-icon" alt="排行榜">
-            <span class="text" data-i18n="nav_rank">排行榜</span>
-        </button>
-    </nav>
-
     <div id="clone-overlay" class="overlay-hidden">
         <div class="overlay-scroll-container">
             <div class="overlay-card">
@@ -758,9 +871,6 @@
 
     <div id="transition-overlay"><div class="spinner"></div></div>
 
-    <button id="lang-btn" onclick="toggleLanguage()">
-        <span class="lang-text">EN</span>
-    </button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
