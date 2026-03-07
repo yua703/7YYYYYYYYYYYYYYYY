@@ -1951,10 +1951,12 @@ body.lock-scroll {
 
 /* WELCOME 文字設定 */
 .welcome-text-group {
-    padding-top: 20px;
+    position: absolute; /* 🌟 關鍵：讓它浮空，脫離圖片的影響 */
+    top: 20px;          /* 🌟 距離上方白線的距離，數字越小越靠上 */
+    left: 0;            /* 緊貼左側 */
     text-align: left;
-    position: relative;
     z-index: 20; 
+    padding-top: 0;     /* 把多餘的內距歸零 */
 }
 .welcome-mini-text {
     font-size: 0.85rem;
@@ -2195,18 +2197,24 @@ body.lock-scroll {
     
     .hero-visual-wrapper {
         flex-direction: column; 
-        gap: 20px;
-        margin-top: 10px;
-    }
-    
+        gap: 10px;
+    }    
     .hero-main-logo { 
         order: 1; 
-        margin-left: 0px;
-        margin-top: -40px;
-        rotate: 6deg;
+        margin-left: -40px;
+        margin-top: -60px;
+        rotate: -6deg;
     } 
-    .hero-character { order: 2; margin-top: -30px; } 
-    
+    .hero-character { 
+        order: 2; 
+        margin-top: -20px; 
+    } 
+    /* 👇 新增或修改這段：手機版專屬的圖片控制 */
+    .hero-character img {
+        /* 🌟 手機版放大/縮小 (1 是原大小，1.2 是放大，0.8 是縮小) */
+        /* 同時可以控制手機版的上下位移 (translateY) 和 旋轉 (rotate) */
+        transform: scale(1.8) translateY(-25px) rotate(25deg); 
+    }
     .deco-1 { display: none; } 
     .deco-3 { 
         top: 3%; 
@@ -2214,9 +2222,9 @@ body.lock-scroll {
         width: 130px; 
     }
     .deco-2 { 
-        bottom: 40%; 
-        left: -15%; 
-        width: 130px; 
+        bottom: 43%; 
+        left: -20%; 
+        width: 150px; 
     }
 
     /* 手機版排版為垂直，箭頭需要置中 */
