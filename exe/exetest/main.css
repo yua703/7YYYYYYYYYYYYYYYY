@@ -2185,18 +2185,19 @@ body.lock-scroll {
     .hero-main-logo { 
         order: 1; 
         margin-left: 0px;
-        margin-top: 10px;
+        margin-top: -60px;
+        rotate: 6deg;
     } 
     .hero-character { order: 2; margin-top: -30px; } 
     
     .deco-1 { display: none; } 
     .deco-3 { 
-        top: 5%; 
+        top: 3%; 
         right: -10%; 
         width: 130px; 
     }
     .deco-2 { 
-        bottom: 30%; 
+        bottom: 40%; 
         left: -15%; 
         width: 130px; 
     }
