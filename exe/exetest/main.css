@@ -357,18 +357,6 @@ img {
     white-space: nowrap;      
 }
 
-/* 📱 手機版微調 */
-@media (max-width: 768px) {
-    .pixel-ticker-wrap {
-        width: 95%;           
-        margin: 6px auto; 
-        padding: 8px 0;
-        border-radius: 16px;
-    }
-    .scroller-inner span { font-size: 1rem; }
-    .ticker-dot { margin: 0 20px; }
-    .pixel-ticker-scroller { animation-duration: 15s; } 
-}
 /* =========================================
    2. 頁面切換動畫
    ========================================= */
@@ -385,6 +373,102 @@ img {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* =========================================
+   🔥 區塊 1：互動設計系 (純置中排版)
+   ========================================= */
+.intro-ixd-section {
+    background-color: transparent;
+    width: 100%;
+    max-width: 900px; /* 限制寬度讓文字不至於太長 */
+    margin: 0 auto;
+    padding: 60px 20px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.title-ixd {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-weight: normal;
+    font-size: 2.5rem; /* 讓主標題稍微大一點 */
+    color: #C7FF3C;    /* 螢光綠 */
+    text-shadow: 2px 2px 0px #333333;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    margin-bottom: 25px;
+    line-height: 1.3;
+}
+
+.text-ixd p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: #f0f0f0;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   🔥 區塊 2：關於本次賽事 (雙欄圖文排版)
+   ========================================= */
+.intro-event-section {
+    background-color: transparent;
+    width: 100%;
+    padding: 20px 20px 60px 20px;
+}
+
+.event-row {
+    display: flex;
+    flex-direction: column; /* 手機預設上下堆疊 */
+    gap: 30px;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.event-left, .event-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-event {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-weight: normal;
+    font-size: 2rem;
+    color: #f0f0f0;    /* 維持白色 */
+    text-shadow: 2px 2px 0px #333333;
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+    margin-bottom: 25px;
+    line-height: 1.3;
+    text-align: left;
+}
+
+.text-event p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #f0f0f0;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.image-event {
+    background-color: #eef2f5;
+    border-radius: 16px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.image-event img {
+    max-width: 40%; /* 換真圖時改回 100% 加上 object-fit: cover */
+    height: auto;
+}
+
+
 
 /* =========================================
    3. 首頁區域 (Hero Section)
@@ -497,15 +581,6 @@ img {
     padding: 40px 20px;
 }
 
-/* =========================================
-   🔥 新增：關於本次賽事 (專屬設定區)
-   ========================================= */
-
-.section-about .desc-text {
-    color: #333;  
-    font-size: 1rem; 
-    line-height: 1.8; 
-}
 
 
 /* =========================================
@@ -1490,6 +1565,46 @@ body.lock-scroll {
    🖥️ 電腦版面優化總整理 (Desktop Optimization)
    ========================================= */
 @media (min-width: 1024px) {
+    /* 🌟 電腦版：互動設計系 (調整上下留白) */
+    .intro-ixd-section {
+        padding-top: 80px; 
+        padding-bottom: 40px;
+    }
+    .text-ixd p {
+        font-size: 1.15rem; /* 電腦版文字稍微放大 */
+    }
+
+    /* 🌟 電腦版：關於本次賽事 (左右並排、對齊 Logo) */
+    .intro-event-section {
+        padding: 40px 0 80px 0;
+    }
+    
+    .event-row {
+        flex-direction: row; 
+        gap: 60px;
+        align-items: center; /* 讓文字與圖片垂直置中 */
+        
+        /* 精準對齊上方 Logo 的密碼 */
+        width: 100%;
+        max-width: 1600px; 
+        margin: 0 auto; 
+        padding-left: 180px; 
+        padding-right: 40px; 
+        box-sizing: border-box;
+    }
+    
+    .text-event {
+        max-width: 550px;    /* 限制內文寬度，不貼邊緣 */
+        padding-right: 40px; 
+    }
+    .text-event p {
+        font-size: 1.1rem;
+    }
+    
+    .image-event {
+        width: 85%; /* 圖片寬度微縮 */
+    }
+
 
     /* --- 1. 頂部導覽列與圖片 --- */
     .top-header {
@@ -1672,8 +1787,6 @@ body.lock-scroll {
         border-radius: 4px;
     }
     ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.4); }
-
-    @media (min-width: 1024px) {
     
 /* 1. 電腦版實色底調整 (加大上方空間) */
     .full-color-block.hero-grid-layout {
@@ -1699,7 +1812,7 @@ body.lock-scroll {
 
     /* ...保留你電腦版其他的設定... */
 }
-}
+
 
 /* =========================================
    📱 手機觸控裝置優化 (獨立偵測區塊)
@@ -1929,6 +2042,16 @@ body.lock-scroll {
    📱 手機版微調 (確保被正確包覆)
    ========================================= */
 @media (max-width: 768px) {
+    .pixel-ticker-wrap {
+        width: 95%;           
+        margin: 6px auto; 
+        padding: 8px 0;
+        border-radius: 16px;
+    }
+    .scroller-inner span { font-size: 1rem; }
+    .ticker-dot { margin: 0 20px; }
+    .pixel-ticker-scroller { animation-duration: 15s; } 
+
     .hero-grid-layout { padding: 100px 20px 30px 20px; }
     .hero-top-bar { flex-direction: row; font-size: 0.7rem; }
     .hero-bottom-bar { 
