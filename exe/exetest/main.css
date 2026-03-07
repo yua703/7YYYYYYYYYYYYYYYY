@@ -381,28 +381,16 @@ img {
     width: 100%;
     max-width: 900px; /* 限制寬度讓文字不至於太長 */
     margin: 0 auto;
-    padding: 60px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
 }
 
-.title-ixd {
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-weight: normal;
-    font-size: 2.5rem; /* 讓主標題稍微大一點 */
-    color: #C7FF3C;    /* 螢光綠 */
-    text-shadow: 2px 2px 0px #333333;
-    -webkit-font-smoothing: none;
-    font-smooth: never;
-    margin-bottom: 25px;
-    line-height: 1.3;
-}
-
 .text-ixd p {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 0.95rem;
+    line-height: 1.5;
     color: #f0f0f0;
     margin-bottom: 15px;
 }
@@ -429,19 +417,6 @@ img {
     flex: 1;
     display: flex;
     flex-direction: column;
-}
-
-.title-event {
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-weight: normal;
-    font-size: 2rem;
-    color: #f0f0f0;    /* 維持白色 */
-    text-shadow: 2px 2px 0px #333333;
-    -webkit-font-smoothing: none;
-    font-smooth: never;
-    margin-bottom: 25px;
-    line-height: 1.3;
-    text-align: left;
 }
 
 .text-event p {
@@ -1473,8 +1448,9 @@ body.lock-scroll {
     color: #555; 
 }
 
-
-.section-padding h2 {
+.section-padding h2,
+.intro-event-section h2,
+.intro-ixd-section h2 {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-weight: normal;
     font-size: 2rem;
@@ -1489,6 +1465,13 @@ body.lock-scroll {
     padding-left: 20px; 
     margin-bottom: 30px;
     text-align: left;
+}
+/* 🌟 互動設計系專屬：只改顏色與置中，其他全吃上面的 h2 設定 */
+.ixd-green-title {
+    color: #C7FF3C !important;
+    text-align: center !important;
+    padding-left: 0 !important; /* 抵銷掉 h2 預設的左邊距，確保完美置中 */
+    margin-bottom: 15px !important;
 }
 
 .sch-sub-row span {
@@ -1567,11 +1550,11 @@ body.lock-scroll {
 @media (min-width: 1024px) {
     /* 🌟 電腦版：互動設計系 (調整上下留白) */
     .intro-ixd-section {
-        padding-top: 80px; 
+        padding-top: 30px; 
         padding-bottom: 40px;
     }
     .text-ixd p {
-        font-size: 1.15rem; /* 電腦版文字稍微放大 */
+        font-size: 1rem; /* 電腦版文字稍微放大 */
     }
 
     /* 🌟 電腦版：關於本次賽事 (左右並排、對齊 Logo) */
@@ -1710,6 +1693,7 @@ body.lock-scroll {
        🌟 核心對齊重構計畫 (Visual Anchor)
        ========================================= */
     .section-padding h2,
+    .intro-event-section h2,
     .section-about .desc-text,  
     .detail-tabs,        
     .groups-grid,        
