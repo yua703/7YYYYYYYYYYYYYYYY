@@ -2217,9 +2217,10 @@ body.lock-scroll {
     }
     .deco-1 { display: none; } 
     .deco-3 { 
-        top: 3%; 
-        right: -10%; 
+        top: 55%; 
+        right: -13%; 
         width: 130px; 
+        rotate: 25deg;
     }
     .deco-2 { 
         bottom: 43%; 
