@@ -1870,13 +1870,13 @@ body.lock-scroll {
     /* 2. 🌟 電腦版專屬：左側大圖往上移 */
     .hero-main-logo img {
         /* 你在這裡改 -80px、-100px，都只會在電腦上生效！ */
-        transform: translateY(-150px) rotate(-3deg);
+        transform: scale(1) translateY(-110px) rotate(-3deg);
     }
 
-    /* 3. 🌟 電腦版專屬：右側角色往上移 */
     .hero-character img {
-        /* 只在電腦上生效！ */
-        transform: translateY(-20px); 
+        /* 🌟 電腦版放大 (假設你想在電腦上放得特別大，比如 1.5倍) */
+        /* 同時控制電腦版的上下位移和旋轉 */
+        transform: scale(1.8) translateX(-140px) translateY(0px) rotate(30deg); 
     }
 
     /* ...保留你電腦版其他的設定... */
