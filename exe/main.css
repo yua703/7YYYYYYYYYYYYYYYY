@@ -434,7 +434,7 @@ img {
 .event-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.8rem;
-    color: #4882A6; /* 白底配深藍色標題最清楚 */
+    color: #6666FF; /* 白底配深藍色標題最清楚 */
     margin-bottom: 25px;
     text-align: left;
     text-shadow: none; /* 白底不需要文字陰影 */
@@ -1596,7 +1596,7 @@ body.lock-scroll {
     }
 
     .event-title {
-        font-size: 2.2rem;
+        font-size: 2rem;
         margin-bottom: 30px;
     }
     /* 🌟 電腦版專屬漸層 */
@@ -1825,7 +1825,7 @@ body.lock-scroll {
        ========================================= */
     .section-padding h2,
     .section-about .desc-text,  
-    .detail-tabs,        
+    .game-details-wrapper,
     .groups-grid,        
     .scoring-container,   
     .schedule-list,      
@@ -1925,6 +1925,153 @@ body.lock-scroll {
     }
 
     /* ...保留你電腦版其他的設定... */
+    /* =========================================
+       🎮 電腦版：遊戲主機風格賽事細節 
+       ========================================= */
+
+    /* 大容器：設定為 Flex 左右排版，對齊靠上 */
+    .game-details-wrapper {
+        display: flex;
+        align-items: flex-start; /* 🌟 關鍵：內容靠上對齊 */
+        gap: 50px; /* ↔️ 調整：左右兩區的距離 */
+        padding-top: 40px; /* ↕️ 調整：整體跟上方的距離 */
+    }
+
+    /* 🕹️ 左側：選擇面板大容器 (不設背景，只設寬度) */
+    .game-left-panel {
+        flex: 1; /* 佔比較小 */
+        max-width: 350px; /* 📏 限制左側寬度 */
+        display: flex;
+        flex-direction: column;
+        gap: 15px; /* 白框跟紫色搖桿的距離 */
+    }
+
+    /* ⬜ 左側：白色選擇框 */
+    .game-choice-box {
+        background-color: #ffffff;
+        border-radius: 16px; /* 🌟 圓角 */
+        padding: 30px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        
+        /* 🌟 殺掉所有干擾：重置原本在 section-dashed-white 裡面對 h2 的全域設定 */
+        position: relative;
+    }
+
+    /* 白框內的標題 */
+    .game-choice-title {
+        font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+        font-size: 2rem;       /* 🌟 對齊 event-title 電腦版大小 */
+        color: #6666FF;          /* 🌟 對齊 event-title 的深藍色 */
+        text-shadow: none;       /* 🌟 白底不加陰影，保持乾淨 */
+        text-align: left;
+        margin-bottom: 30px;     /* 🌟 對齊下方的距離 */
+        padding-left: 0 !important; 
+        margin-left: 0px; 
+    }
+
+    /* 選項按鈕列表 (移除原本的 detail-tabs 樣式，重新定義) */
+    .game-tabs-list {
+        display: flex;
+        flex-direction: column; /* 🌟 縱向堆疊 */
+        gap: 10px; /* 按鈕之間的距離 */
+        background: transparent; /* 移除原本的灰色背景 */
+        padding: 0;
+        border-radius: 0;
+    }
+
+    /* 基礎按鈕樣式 (未選取狀態) */
+    .game-tabs-list .detail-tab-btn {
+        width: 100%;
+        background: transparent; /* 預設透明 */
+        color: #666; /* 灰色字 */
+        font-size: 0.9rem; /* 🌟 字變小 */
+        padding: 15px 20px;
+        border-radius: 8px; /* 小圓角 */
+        justify-content: flex-start; /* 字靠左 */
+        font-weight: normal;
+        transition: all 0.2s ease;
+        border: none;
+    }
+
+    /* 🟢 按鈕選取狀態 (Active) */
+    .game-tabs-list .detail-tab-btn.active {
+        background-color: #C7FF3C !important; /* 🌟 整塊變成螢光綠滿版 */
+        color: #333 !important; /* 🌟 字變成深色，且粗體 */
+        font-weight: bold !important;
+        font-size: 1.1rem !important; /* 🌟 字變大 */
+        box-shadow: 0 4px 10px rgba(199, 255, 60, 0.3); /* 綠色光暈 */
+    }
+    /* =========================================
+       🎮 電腦版：新的白框內像素箭頭樣式 (新增)
+       ========================================= */
+
+    /* 1. 白框內的箭頭容器：負責在底部水平置中 */
+    .game-choice-arrows-wrap {
+        display: flex;
+        justify-content: space-between; /* 🌟 讓箭頭分開在左右兩側，像參考圖一樣 */
+        align-items: center;
+        margin-top: 40px; /* ↕️ 與上方列表的距離 */
+        padding: 0 10px;
+        width: 100%;
+    }
+
+    /* 2. 基礎按鈕設定 */
+    .pixel-ctrl-btn {
+        background-color: #6666FF;
+        border: 2px solid #6666FF; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
+        border-radius: 8px;
+        width: 70px; /* 按鈕加寬 */
+        height: 50px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        padding: 0;
+        color: #f0f0f0; /* 預設紫藍色 */
+    }
+
+    /* 3. 按鈕滑過 (Hover) 的綠色點亮效果 */
+    .pixel-ctrl-btn:hover {
+        background-color: #C7FF3C;
+        border-color: #6666FF; /* 邊框亮起 */
+        color: #6666FF;        /* 箭頭亮起 */
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
+    }
+
+    /* 4. 強制控制 SVG 像素渲染 */
+    .pixel-ctrl-btn svg {
+        width: 40px; 
+        height: 40px;
+        shape-rendering: crispedges; /* 🌟 關鍵：讓像素點保持絕對銳利的直角 */
+    }
+
+
+    /* 📺 右側：內容顯示區 */
+    .game-right-content {
+        flex: 1.8; /* 佔比最大 */
+        background-color: rgba(255, 255, 255, 0.9); /* 🌟 微透白底框 */
+        border-radius: 20px; /* 大圓角 */
+        padding: 40px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        min-height: 500px; /* 📏 確保內容區有個基本高度，看起來比左邊高 */
+        
+        /* 🌟 重置原本的全域內縮，讓裡面的卡片或地圖可以滿版 */
+        padding-left: 40px !important; 
+        padding-right: 40px !important;
+    }
+
+    /* 內容區內部的細節修正 */
+    .detail-content {
+        padding-top: 0; /* 移除原本的 top padding */
+    }
+    .content-img {
+        border-radius: 12px; /* 地圖加圓角 */
+    }
+
+    /* 原本手機版的 tab-indicator 在電腦版要強制隱藏 */
+    .tab-indicator { display: none !important; }
 }
 
 

@@ -178,76 +178,99 @@ window.addEventListener('resize', () => {
     resizeTimeout = setTimeout(initMarquee, 200);
 });
 // ==========================================
-// 2. 賽事細節分頁 (滑動背景 + 內容切換 修復版)
+// 2. 賽事細節分頁 (縱向按鈕 + 搖桿切換 加強版)
 // ==========================================
 const detailBtns = document.querySelectorAll('.detail-tab-btn');
 const detailContents = document.querySelectorAll('.detail-content');
-const tabIndicator = document.querySelector('.tab-indicator');
+// 🔥 新增：選取搖桿按鈕
+const prevDetailBtn = document.getElementById('prev-detail-btn');
+const nextDetailBtn = document.getElementById('next-detail-btn');
 
-// 移動滑動塊的函式
-function moveIndicator(targetBtn) {
-    if (!targetBtn || !tabIndicator) return;
+// --- 功能 A: 核心切換函式 ---
+function switchDetailTab(targetBtn) {
+    if (!targetBtn) return;
 
-    // 1. 計算目標按鈕相對於父容器的位置
-    const left = targetBtn.offsetLeft;
-    const width = targetBtn.offsetWidth;
+    // 1. 取得目標內容 ID
+    const targetId = targetBtn.dataset.target;
+    const targetDiv = document.getElementById(targetId);
 
-    // 2. 設定滑動塊的寬度與位置
-    tabIndicator.style.width = `${width}px`;
-    tabIndicator.style.transform = `translateX(${left}px)`; 
+    if (!targetDiv) {
+        console.error("找不到內容區塊 ID: " + targetId);
+        return;
+    }
+
+    // 2. 按鈕狀態切換 (這會觸發 CSS 的螢光綠背景、字體變大)
+    detailBtns.forEach(b => b.classList.remove('active'));
+    targetBtn.classList.add('active');
+
+    // 3. 內容切換
+    detailContents.forEach(content => content.classList.remove('active'));
+    targetDiv.classList.add('active');
 }
 
-// 初始化：頁面載入時，把滑塊移到目前的 active 按鈕上
-function initTabs() {
+
+// --- 功能 B: 初始化函式 ---
+function initDetailTabs() {
+    // 移除原本舊版的 moveIndicator 呼叫
     const activeBtn = document.querySelector('.detail-tab-btn.active');
     if (activeBtn) {
-        moveIndicator(activeBtn);
-        
-        // 確保對應的內容也是顯示的
-        const targetId = activeBtn.dataset.target;
-        const targetDiv = document.getElementById(targetId);
-        if (targetDiv) {
-            detailContents.forEach(c => c.classList.remove('active'));
-            targetDiv.classList.add('active');
-        }
+        switchDetailTab(activeBtn); // 強制執行一次切換邏輯，確保 CSS 選取狀態正確
     }
 }
 
-// 監聽視窗大小改變 (RWD)：重新計算位置，避免跑版
-window.addEventListener('resize', () => {
-    const activeBtn = document.querySelector('.detail-tab-btn.active');
-    if (activeBtn) moveIndicator(activeBtn);
-});
+// 監聽網頁載入
+window.addEventListener('load', initDetailTabs);
+// 視窗縮放 (RWD)：舊版的對齊邏輯在 CSS 處理，這裡不需要 moveIndicator，但可以保留 init 確保狀態
+window.addEventListener('resize', initDetailTabs);
 
-// 頁面載入完成後執行初始化
-window.addEventListener('load', initTabs);
 
-// 按鈕點擊事件
+// --- 功能 C: 監聽原本按鈕的點擊 ---
 detailBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        // 1. 按鈕狀態切換 (字體變色)
-        detailBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // 2. 移動藍色背景塊 (解決卡頓關鍵)
-        moveIndicator(btn);
-
-        // 3. 內容切換 (解決內容不見的問題)
-        // 先把所有內容藏起來
-        detailContents.forEach(content => content.classList.remove('active'));
-        
-        // 再把目標內容顯示出來
-        const targetId = btn.dataset.target;
-        const targetDiv = document.getElementById(targetId);
-        
-        if (targetDiv) {
-            targetDiv.classList.add('active');
-        } else {
-            console.error("找不到 ID 為 " + targetId + " 的區塊，請檢查 HTML");
-        }
+        switchDetailTab(btn); // 點擊直接切換
     });
 });
 
+
+// --- 🔥 功能 D: 監聽紫色搖桿的切換 (新增) ---
+
+// 切換的邏輯：找出下一個按鈕
+function navigateDetailTabs(direction) {
+    // 1. 先找出目前是哪個按鈕被選取 (active)
+    const currentActiveBtn = document.querySelector('.detail-tab-btn.active');
+    
+    // 將所有按鈕轉換成陣列，方便尋找 Index
+    const btnsArray = Array.from(detailBtns);
+    const currentIndex = btnsArray.indexOf(currentActiveBtn);
+    let targetIndex;
+
+    if (direction === 'next') {
+        // 下一個，如果到最後一個就循環回第一個
+        targetIndex = (currentIndex + 1) % btnsArray.length;
+    } else if (direction === 'prev') {
+        // 上一個，如果到第一個就循環到最後一個
+        targetIndex = (currentIndex - 1 + btnsArray.length) % btnsArray.length;
+    }
+
+    // 2. 找到目標按鈕，並觸發切換
+    const targetBtn = btnsArray[targetIndex];
+    if (targetBtn) {
+        switchDetailTab(targetBtn);
+    }
+}
+
+// 綁定搖桿按鈕事件
+if (prevDetailBtn && nextDetailBtn) {
+    // 上一個 (左箭頭)
+    prevDetailBtn.addEventListener('click', () => {
+        navigateDetailTabs('prev');
+    });
+
+    // 下一個 (右箭頭)
+    nextDetailBtn.addEventListener('click', () => {
+        navigateDetailTabs('next');
+    });
+}
 
 
 

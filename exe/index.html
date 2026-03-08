@@ -180,15 +180,34 @@
 
 
             <section class="section-padding">
-                <h2 data-i18n="detail_title">賽事細節</h2>
-                
-                <div class="detail-tabs">
-                    <div class="tab-indicator"></div>
-                    <button class="detail-tab-btn active" data-target="detail-time" data-i18n="tab_schedule">時程表</button>
-                    <button class="detail-tab-btn" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
-                    <button class="detail-tab-btn" data-target="detail-map" data-i18n="tab_map">賽事地圖</button>
-                    <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
-                </div>
+                <div class="game-details-wrapper">
+    
+    <div class="game-left-panel">
+        <div class="game-choice-box">
+            <h2 class="game-choice-title" data-i18n="detail_title">賽事細節</h2>
+            
+            <div class="game-tabs-list">
+                <button class="detail-tab-btn active" data-target="detail-time" data-i18n="tab_schedule">時程表</button>
+                <button class="detail-tab-btn" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
+                <button class="detail-tab-btn" data-target="detail-map" data-i18n="tab_map">賽事地圖</button>
+                <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
+            </div>
+
+            <div class="game-choice-arrows-wrap">
+                <button class="pixel-ctrl-btn" id="prev-detail-btn" aria-label="上一個分頁">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6h2v2h-2V6zm-2 2h2v2H8V8zm-2 2h2v2H6v-2zm-2 2h14v2H4v-2zm2 2h2v2H6v-2zm2 2h2v2H8v-2zm2 2h2v2h-2v-2z"/>
+                    </svg>
+                </button>
+
+                <button class="pixel-ctrl-btn" id="next-detail-btn" aria-label="下一個分頁">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 6h2v2h-2V6zm2 2h2v2h-2V8zm2 2h2v2h-2v-2zm-12 2h16v2H4v-2zm12 2h2v2h-2v-2zm-2 2h2v2h-2v-2zm-2 2h2v2h-2v-2z"/>
+                    </svg>
+                </button>
+            </div>
+            
+        </div> </div> <div class="game-right-content">
 
                 <div id="detail-time" class="detail-content active">
                     <div class="schedule-list">
@@ -348,6 +367,8 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                </div>
                 </div>
             </section>
 
