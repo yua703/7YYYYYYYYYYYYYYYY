@@ -278,8 +278,11 @@ img {
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     transition: border-color 0.3s;
     cursor: pointer;
-}
-.mega-card:hover {
+
+    /* 🌟 新增這兩行：徹底殺死連結的預設樣式 */
+    text-decoration: none; /* 刪除底線 */
+    color: inherit;        /* 讓文字顏色繼承原本的 #333，不要變藍色 */
+}.mega-card:hover {
     border-color: #C7FF3C; 
 }
 .mega-card img {
