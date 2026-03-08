@@ -271,6 +271,30 @@ if (prevDetailBtn && nextDetailBtn) {
         navigateDetailTabs('next');
     });
 }
+// ==========================================
+// 🌟 新增：Day 1 / Day 2 時程表日期切換邏輯
+// ==========================================
+const dayTabBtns = document.querySelectorAll('.day-tab-btn');
+const dayContents = document.querySelectorAll('.day-content');
+
+dayTabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // 1. 移除所有日期按鈕的 active 狀態
+        dayTabBtns.forEach(b => b.classList.remove('active'));
+        // 2. 移除所有日期內容的 active 狀態
+        dayContents.forEach(c => c.classList.remove('active'));
+
+        // 3. 把點擊的按鈕加上 active
+        btn.classList.add('active');
+        
+        // 4. 找到對應的內容區塊 (day1 或 day2) 並顯示
+        const targetDayId = btn.dataset.day;
+        const targetContent = document.getElementById(targetDayId);
+        if (targetContent) {
+            targetContent.classList.add('active');
+        }
+    });
+});
 
 
 
