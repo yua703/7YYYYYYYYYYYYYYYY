@@ -1489,7 +1489,7 @@ body.lock-scroll {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-weight: normal;
     font-size: 2rem;
-    color: #f0f0f0;
+    color: #6666FF;
     text-shadow: 2px 2px 0px #333333;
     -webkit-font-smoothing: none;
     font-smooth: never;
@@ -1604,7 +1604,7 @@ body.lock-scroll {
 
 .event-text p {
     font-size: 0.95rem;
-    line-height: 1.1;
+    line-height: 1.8;
     color: #444; 
     text-align: justify;
 }
@@ -1640,6 +1640,7 @@ body.lock-scroll {
 
     .event-text p {
         font-size: 1.1rem;
+        line-height: 1.8;
     }
 
     .event-sub-img {
@@ -2270,7 +2271,70 @@ body.lock-scroll {
     .welcome-pixel-arrow {
         width: 20px; /* 🌟 手機版稍微縮小一點 */
         height: 20px;
+
     }
+    /* =========================================
+   📱 關於本次賽事 - 手機版獨立控制台 
+   ========================================= */
+
+/* 🛡️ 1. 左側文字區 (層級最高，絕對不被遮) */
+.event-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative; /* 🌟 把飛走的小圖抓回來的關鍵 */
+    z-index: 10;        /* 🌟 防護罩全開：層級最高，星星絕對遮不到它 */
 }
 
+/* 🖼️ 2. 手機版：左下角小圖 (幽靈定位，不影響白底) */
+.event-sub-img {
+    position: absolute;
+    z-index: 2;         /* 在白底之上 */
+    width: 200px;       /* 📏 大小 */
+    
+    /* 🕹️ 控制搖桿 (手機版) */
+    bottom: -100px;      /* ↕️ 負數往下，正數往上 */
+    left: 250px;         /* ↔️ 負數往左，正數往右 */
+    rotate: 30deg;      /* 🔄 旋轉角度 */
+}
 
+/* 🌟 3. 右側大框 (星星的活動範圍) */
+.event-right-col {
+    position: relative; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 0; 
+}
+
+/* ⭐ 4. 手機版：星星背景 (幽靈定位，不影響白底) */
+.event-explosion-bg {
+    position: absolute;
+    z-index: 1;         /* 🌟 層級最低！乖乖躲在所有東西後面 */
+    width: 240px;       /* 📏 大小 */
+    
+    /* 🕹️ 控制搖桿 (手機版) */
+    top: 94%;           /* ↕️ 數字越大越往下 (預設 50% 是正中間) */
+    right: 45%;          /* ↔️ 數字越大越往右 */
+    transform: translate(-50%, -50%); /* ⚠️ 這行是維持中心點用的，不要刪 */
+    rotate: 20deg;      /* 🔄 旋轉角度 */
+}
+
+/* 🎯 5. 手機版：主大圖 EXE 2.0 (實體定位，控制白底) */
+.event-main-img {
+    position: relative; 
+    z-index: 5;         /* 🌟 在星星(1)上面，但在文字(10)下面 */
+    width: 100%;
+    max-width: 500px;   /* 📏 大小 */
+    border-radius: 6px; 
+    
+    /* 🕹️ 控制搖桿 (手機版) */
+    margin-top: 20px;  /* ↕️ 負數往上拉，並且會把白底縮小！ */
+    margin-left: 0px;   /* ↔️ 負數往左，正數往右 */
+    rotate: 5deg;       /* 🔄 旋轉角度 */
+    
+    aspect-ratio: 16 / 9; 
+    object-fit: cover; 
+}
+    }
