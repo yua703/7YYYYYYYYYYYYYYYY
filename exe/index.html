@@ -185,7 +185,7 @@
     <div class="game-left-panel">
         <div class="game-choice-box">
             <h2 class="game-choice-title" data-i18n="detail_title">賽事細節</h2>
-            
+            <div id="mobile-tab-display" class="mobile-tab-display">時程表</div>
             <div class="game-tabs-list">
                 <button class="detail-tab-btn active" data-target="detail-time" data-i18n="tab_schedule">時程表</button>
                 <button class="detail-tab-btn" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
@@ -210,175 +210,119 @@
         </div> </div> <div class="game-right-content">
 
                 <div id="detail-time" class="detail-content active">
-                    
-                    <div class="day-tabs-container">
-                        <button class="day-tab-btn active" data-day="day1">Day 1 (12/27)</button>
-                        <button class="day-tab-btn" data-day="day2">Day 2 (12/28)</button>
-                    </div>
+    
+    <div class="day-tabs-container">
+        <button class="day-tab-btn active" data-day="day1">Day 1 (3/28)</button>
+        <button class="day-tab-btn" data-day="day2">Day 2 (3/29)</button>
+    </div>
 
-                    <div id="day1" class="day-content active">
-                        <div class="schedule-list">
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">08:20~10:10</span>
-                                    <span class="sch-event" data-i18n="batch_1">第一梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">08:20~08:35 <span data-i18n="act_reg_1">第一梯次報到</span></div>
-                                    <div class="sch-sub-row">08:35~08:40 <span data-i18n="act_warm_1">第一梯次熱身</span></div>
-                                    <div class="sch-sub-row">08:40~10:10 <span data-i18n="act_play_1">第一梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">10:10~12:00</span>
-                                    <span class="sch-event" data-i18n="batch_2">第二梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">10:10~10:25 <span data-i18n="act_reg_2">第二梯次報到</span></div>
-                                    <div class="sch-sub-row">10:25~10:30 <span data-i18n="act_warm_2">第二梯次熱身</span></div>
-                                    <div class="sch-sub-row">10:30~12:00 <span data-i18n="act_play_2">第二梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-row rest">
-                                <span class="sch-time">12:00~13:00</span>
-                                <span class="sch-event" data-i18n="rest_noon">午休</span>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">13:10~15:00</span>
-                                    <span class="sch-event" data-i18n="batch_3">第三梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">13:10~13:25 <span data-i18n="act_reg_3">第三梯次報到</span></div>
-                                    <div class="sch-sub-row">13:25~13:30 <span data-i18n="act_warm_3">第三梯次熱身</span></div>
-                                    <div class="sch-sub-row">13:30~15:00 <span data-i18n="act_play_3">第三梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">15:00~16:50</span>
-                                    <span class="sch-event" data-i18n="batch_4">第四梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">15:00~15:15 <span data-i18n="act_reg_4">第四梯次報到</span></div>
-                                    <div class="sch-sub-row">15:15~15:20 <span data-i18n="act_warm_4">第四梯次熱身</span></div>
-                                    <div class="sch-sub-row">15:20~16:50 <span data-i18n="act_play_4">第四梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">16:50~18:40</span>
-                                    <span class="sch-event" data-i18n="batch_5">第五梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">16:50~17:05 <span data-i18n="act_reg_5">第五梯次報到</span></div>
-                                    <div class="sch-sub-row">17:05~17:10 <span data-i18n="act_warm_5">第五梯次熱身</span></div>
-                                    <div class="sch-sub-row">17:10~18:40 <span data-i18n="act_play_5">第五梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-row rest">
-                                <span class="sch-time">18:40~18:45</span>
-                                <span class="sch-event" data-i18n="rest_short">休息片刻</span>
-                            </div>
-                            <div class="schedule-row end">
-                                <span class="sch-time">18:45~19:15</span>
-                                <span class="sch-event" data-i18n="event_closing">頒獎閉幕</span>
-                            </div>
-                            <div class="schedule-row end">
-                                <span class="sch-time">19:15~19:20</span>
-                                <span class="sch-event" data-i18n="event_photo">全體大合照</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="day2" class="day-content">
-                        <div class="schedule-list">
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">08:20~10:10</span>
-                                    <span class="sch-event" data-i18n="batch_1">第一梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">08:20~08:35 <span data-i18n="act_reg_1">第一梯次報到</span></div>
-                                    <div class="sch-sub-row">08:35~08:40 <span data-i18n="act_warm_1">第一梯次熱身</span></div>
-                                    <div class="sch-sub-row">08:40~10:10 <span data-i18n="act_play_1">第一梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">10:10~12:00</span>
-                                    <span class="sch-event" data-i18n="batch_2">第二梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">10:10~10:25 <span data-i18n="act_reg_2">第二梯次報到</span></div>
-                                    <div class="sch-sub-row">10:25~10:30 <span data-i18n="act_warm_2">第二梯次熱身</span></div>
-                                    <div class="sch-sub-row">10:30~12:00 <span data-i18n="act_play_2">第二梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-row rest">
-                                <span class="sch-time">12:00~13:00</span>
-                                <span class="sch-event" data-i18n="rest_noon">午休</span>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">13:10~15:00</span>
-                                    <span class="sch-event" data-i18n="batch_3">第三梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">13:10~13:25 <span data-i18n="act_reg_3">第三梯次報到</span></div>
-                                    <div class="sch-sub-row">13:25~13:30 <span data-i18n="act_warm_3">第三梯次熱身</span></div>
-                                    <div class="sch-sub-row">13:30~15:00 <span data-i18n="act_play_3">第三梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">15:00~16:50</span>
-                                    <span class="sch-event" data-i18n="batch_4">第四梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">15:00~15:15 <span data-i18n="act_reg_4">第四梯次報到</span></div>
-                                    <div class="sch-sub-row">15:15~15:20 <span data-i18n="act_warm_4">第四梯次熱身</span></div>
-                                    <div class="sch-sub-row">15:20~16:50 <span data-i18n="act_play_4">第四梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-group" onclick="toggleSchedule(this)">
-                                <div class="sch-header">
-                                    <span class="sch-time">16:50~18:40</span>
-                                    <span class="sch-event" data-i18n="batch_5">第五梯次</span>
-                                    <span class="sch-arrow">▼</span>
-                                </div>
-                                <div class="sch-body">
-                                    <div class="sch-sub-row">16:50~17:05 <span data-i18n="act_reg_5">第五梯次報到</span></div>
-                                    <div class="sch-sub-row">17:05~17:10 <span data-i18n="act_warm_5">第五梯次熱身</span></div>
-                                    <div class="sch-sub-row">17:10~18:40 <span data-i18n="act_play_5">第五梯次體驗遊玩</span></div>
-                                </div>
-                            </div>
-                            <div class="schedule-row rest">
-                                <span class="sch-time">18:40~18:45</span>
-                                <span class="sch-event" data-i18n="rest_short">休息片刻</span>
-                            </div>
-                            <div class="schedule-row end">
-                                <span class="sch-time">18:45~19:15</span>
-                                <span class="sch-event" data-i18n="event_closing">頒獎閉幕</span>
-                            </div>
-                            <div class="schedule-row end">
-                                <span class="sch-time">19:15~19:20</span>
-                                <span class="sch-event" data-i18n="event_photo">全體大合照</span>
-                            </div>
-                        </div>
-                    </div>
+    <div id="day1" class="day-content active"> <div class="schedule-list">
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">10:45~12:45</span>
+                    <span class="sch-event">第一梯次</span>
+                    <span class="sch-arrow">▼</span>
                 </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">10:45~11:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">11:00~12:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">12:45~14:45</span>
+                    <span class="sch-event">第二梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">12:45~13:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">13:00~14:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">14:45~16:45</span>
+                    <span class="sch-event">第三梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">14:45~15:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">15:00~16:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">16:45~18:45</span>
+                    <span class="sch-event">第四梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">16:45~17:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">17:00~18:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">18:45~20:45</span>
+                    <span class="sch-event">第五梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">18:45~19:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">19:00~20:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="day2" class="day-content"> <div class="schedule-list">
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">10:45~12:45</span>
+                    <span class="sch-event">第一梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">10:45~11:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">11:00~12:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">12:45~14:45</span>
+                    <span class="sch-event">第二梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">12:45~13:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">13:00~14:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">14:45~16:45</span>
+                    <span class="sch-event">第三梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">14:45~15:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">15:00~16:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+            <div class="schedule-group" onclick="toggleSchedule(this)">
+                <div class="sch-header">
+                    <span class="sch-time">16:45~18:45</span>
+                    <span class="sch-event">第四梯次</span>
+                    <span class="sch-arrow">▼</span>
+                </div>
+                <div class="sch-body">
+                    <div class="sch-sub-row">16:45~17:00 <span>熱身報到</span></div>
+                    <div class="sch-sub-row">17:00~18:45 <span>遊玩時間</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
                 <div id="detail-scoring" class="detail-content">
                     <div class="scoring-container">
                         <div class="scoring-card theme-blue">
@@ -424,7 +368,7 @@
                 </div>
 
                 <div id="detail-map" class="detail-content">
-                    <img src="img/map.webp" alt="地圖" class="content-img">
+                    <img src="img/exelogo.webp" alt="地圖" class="content-img">
 
                     <div class="map-lock-overlay">尚未解鎖</div>
                 </div>

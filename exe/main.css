@@ -1336,10 +1336,6 @@ body.lock-scroll {
     color: #6666FF; 
     opacity: 0.7;
 }
-.schedule-row.end { 
-    background-color: #6666FF; /* 紫色實底代表重要時刻 */
-    color: #ffffff; 
-}
 
 .sch-time { 
     width: 35%; 
@@ -1351,69 +1347,57 @@ body.lock-scroll {
     padding-left: 15px; 
     border-left: 2px solid rgba(102, 102, 255, 0.3); /* 分隔直線 */
 }
-.schedule-row.end .sch-event {
-    border-left-color: rgba(255, 255, 255, 0.4);
-}
+
 .sch-sub-row span {
     margin-left: 15px; 
 }
 
 /* =========================================
-   🌟 新增：Day 1 / Day 2 日期切換按鈕樣式 (源頭：電腦版左右排版)
+   🌟 Day 1 / Day 2 日期切換按鈕樣式 (源頭：手機版上下堆疊)
    ========================================= */
-
-/* 🌟 直接在源頭宣告：時程表的大外框是左右排版 */
 #detail-time.active {
-    display: flex;
-    align-items: flex-start;
-    gap: 40px;
+    display: block; /* 手機版：上下正常排版 */
     width: 100%;
 }
 
-/* 左側：按鈕區改成直式堆疊 */
+/* 手機版：按鈕並排在上方 */
 .day-tabs-container {
     display: flex;
-    flex-direction: column; /* 🌟 這裡直接寫直向堆疊 */
-    width: 180px;           /* 🌟 固定左邊的寬度 */
-    flex-shrink: 0;
-    gap: 15px;
+    flex-direction: row; /* 手機版：橫向並排 */
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 20px;
 }
 
-/* 左側：按鈕本身 */
+/* 按鈕本體 */
 .day-tab-btn {
     background: transparent;
     border: 2px solid #6666FF;
     color: #6666FF;
-    padding: 12px 24px;      /* 把按鈕稍微加高一點比較好看 */
+    padding: 10px 15px; /* 手機版稍小一點 */
     border-radius: 30px;
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-size: 1rem;
+    font-size: 0.95rem;
     cursor: pointer;
     transition: all 0.3s ease;
-    width: 100%;             /* 🌟 讓按鈕填滿 180px 的寬度 */
+    flex: 1; /* 🌟 讓兩個按鈕在手機上平分一半寬度 */
     text-align: center;
 }
 
-.day-tab-btn:hover {
-    background: rgba(102, 102, 255, 0.1);
-}
-
+.day-tab-btn:hover { background: rgba(102, 102, 255, 0.1); }
 .day-tab-btn.active {
     background: #6666FF;
     color: #ffffff;
     box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
 }
 
-/* 右側：時程表內容區 */
 .day-content {
     display: none;
-    flex: 1;                 /* 🌟 讓內容區自動佔滿右邊剩下的所有空間 */
     width: 100%;
     animation: fadeIn 0.3s ease;
 }
-.day-content.active {
-    display: block;
-}
+.day-content.active { display: block; }
 /* =========================================
    🔥 新增：計分方法美化 (卡片風格)
    ========================================= */
@@ -1636,12 +1620,139 @@ body.lock-scroll {
     font-weight: bold;
 }
 
+/* =========================================
+   📱 手機版：遊戲主機風格賽事細節 (基礎排版)
+   ========================================= */
+.game-details-wrapper {
+    display: flex;
+    flex-direction: column; /* 手機版上下堆疊 */
+    gap: 20px;
+    padding: 10px 20px;
+}
 
+.game-left-panel {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.game-choice-box {
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 25px 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+.game-choice-title {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.8rem;
+    color: #6666FF;
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* 🌟 手機版：上方大綠色顯示框 */
+.mobile-tab-display {
+    background-color: #C7FF3C;
+    color: #333;
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 10px rgba(199, 255, 60, 0.2);
+    font-weight: bold;
+}
+
+/* 🌟 手機版：下方選項變成 4 個並排 */
+.game-tabs-list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+/* 🌟 手機版：小選項基礎樣式 (灰色無框) */
+.game-tabs-list .detail-tab-btn {
+    background: transparent;
+    color: #888;
+    font-size: 0.8rem;
+    padding: 8px 2px;
+    border: 2px solid transparent; /* 預留框線空間防抖動 */
+    border-radius: 20px; 
+    text-align: center;
+    white-space: nowrap;
+    flex: 1;
+}
+
+/* 🌟 手機版：小選項被選中時 (只有綠色外框) */
+.game-tabs-list .detail-tab-btn.active {
+    background-color: transparent !important; /* 確保沒有底色 */
+    border-color: #C7FF3C !important;         /* 亮起綠色框線 */
+    color: #555 !important;
+    font-weight: bold !important;
+    font-size: 0.8rem !important;             /* 絕對不放大 */
+    box-shadow: none !important;
+}
+/* 手機版：紫色箭頭區 */
+.game-choice-arrows-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.pixel-ctrl-btn {
+    background-color: #6666FF;
+    border: 2px solid #6666FF;
+    border-radius: 8px;
+    width: 60px;     /* 手機版按鈕稍小一點 */
+    height: 45px;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+}
+
+.pixel-ctrl-btn svg {
+    width: 24px;
+    height: 24px;
+    shape-rendering: crispedges;
+}
+
+/* 5. 右側內容區 (手機版變成下方內容) */
+.game-right-content {
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    
+    /* 🌟 核心修正：固定高度並加上捲軸，保護漸層背景不變形 */
+    height: 60vh;
+    min-height: 450px;
+    max-height: 650px;
+    overflow-y: auto;
+}
+
+/* 手機版專屬捲軸美化 */
+.game-right-content::-webkit-scrollbar { width: 6px; }
+.game-right-content::-webkit-scrollbar-track { background: transparent; margin: 10px 0; }
+.game-right-content::-webkit-scrollbar-thumb { background: rgba(102, 102, 255, 0.3); border-radius: 10px; }
 
 /* =========================================
    🖥️ 電腦版面優化總整理 (Desktop Optimization)
    ========================================= */
 @media (min-width: 1024px) {
+    /* 確保電腦版絕對不會出現這個手機的大綠框 */
+    .mobile-tab-display {
+        display: none !important;
+    }
     .intro-event-section {
         padding: 60px 0 100px 0;
     }
@@ -1990,11 +2101,11 @@ body.lock-scroll {
     /* 大容器：設定為 Flex 左右排版，對齊靠上 */
     .game-details-wrapper {
         display: flex;
-        align-items: flex-start; /* 🌟 關鍵：內容靠上對齊 */
-        gap: 50px; /* ↔️ 調整：左右兩區的距離 */
-        padding-top: 40px; /* ↕️ 調整：整體跟上方的距離 */
+        flex-direction: row;     /* 🌟 讓大容器改回左右並排 */
+        align-items: flex-start; 
+        gap: 50px; 
+        padding-top: 40px; 
     }
-
     /* 🕹️ 左側：選擇面板大容器 (不設背景，只設寬度) */
     .game-left-panel {
         flex: 1; /* 佔比較小 */
@@ -2049,6 +2160,7 @@ body.lock-scroll {
         font-weight: normal;
         transition: all 0.2s ease;
         border: none;
+        order: 0;
     }
 
     /* 🟢 按鈕選取狀態 (Active) */
@@ -2058,6 +2170,8 @@ body.lock-scroll {
         font-weight: bold !important;
         font-size: 1.1rem !important; /* 🌟 字變大 */
         box-shadow: 0 4px 10px rgba(199, 255, 60, 0.3); /* 綠色光暈 */
+        order: 0 !important; /* 🌟 確保電腦版按鈕不亂跳 */
+        border: none !important; /* 👇 補上這行，抵銷手機版的綠色邊框 */
     }
     /* =========================================
        🎮 電腦版：新的白框內像素箭頭樣式 (新增)
@@ -2084,7 +2198,6 @@ body.lock-scroll {
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.2s ease;
         padding: 0;
         color: #f0f0f0; /* 預設紫藍色 */
     }
@@ -2094,7 +2207,6 @@ body.lock-scroll {
         background-color: #C7FF3C;
         border-color: #6666FF; /* 邊框亮起 */
         color: #6666FF;        /* 箭頭亮起 */
-        transform: scale(1.05);
         box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
     }
 
@@ -2149,6 +2261,32 @@ body.lock-scroll {
         margin: 0 auto;       /* 🌟 關鍵 2：左右外距設為 auto，強制完美置中！ */
         max-width: 100%;      /* 確保圖片再大也不會撐破右邊的白框 */
         height: auto;         /* 保持圖片比例 */
+    }
+    /* =========================================
+       🎮 電腦版：時程表左右分欄排版 (極淨狀態切換)
+       ========================================= */
+    #detail-time.active {
+        display: flex;            /* 電腦版：轉為左右排版 */
+        align-items: flex-start;
+        gap: 40px;
+    }
+
+    .day-tabs-container {
+        flex-direction: column;   /* 電腦版：按鈕轉為直向堆疊 */
+        width: 180px;             /* 電腦版：固定寬度 */
+        flex-shrink: 0;
+        margin-bottom: 0;
+    }
+
+    .day-tab-btn {
+        padding: 12px 24px;       /* 電腦版：按鈕加大 */
+        font-size: 1rem;
+        flex: none;               /* 取消手機版的平分寬度 */
+        width: 100%;              /* 填滿 180px */
+    }
+
+    .day-content {
+        flex: 1;                  /* 右側內容佔滿剩餘空間 */
     }
 }
 

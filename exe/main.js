@@ -1090,3 +1090,21 @@ window.addEventListener('load', () => {
         }, 400);
     }, 500); 
 });
+// ==========================================
+// 🌟 手機版：同步「大綠色方塊」的文字
+// ==========================================
+function syncMobileTabText() {
+    const activeBtn = document.querySelector('.game-tabs-list .detail-tab-btn.active');
+    const mobileDisplay = document.getElementById('mobile-tab-display');
+    
+    if (activeBtn && mobileDisplay) {
+        mobileDisplay.textContent = activeBtn.textContent;
+    }
+}
+
+// 監聽點擊，同步文字
+document.querySelectorAll('.detail-tab-btn, .pixel-ctrl-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        setTimeout(syncMobileTabText, 50); 
+    });
+});
