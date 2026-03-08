@@ -523,8 +523,8 @@ img {
     background: linear-gradient(
         to bottom, 
         #6666FF 0%,      
-        #6666FF 30%,     
-        #C7FF3C 35%,     
+        #6666FF 27%,     
+        #C7FF3C 33%,     
         #C7FF3C 65%,     
         #6666FF 70%,     
         #6666FF 100%     
@@ -1599,8 +1599,19 @@ body.lock-scroll {
         font-size: 2.2rem;
         margin-bottom: 30px;
     }
-
-
+    /* 🌟 電腦版專屬漸層 */
+    .gradient-bottom-block {
+        /* 你可以改變方向 (例如 to right, 或者是 45deg) */
+        /* 也可以改變顏色佔比，讓它在寬螢幕上看起來更平衡 */
+        background: linear-gradient(
+            to bottom,        /* 如果想改斜的，可以改成 135deg */
+            #6666FF 0%,      
+            #6666FF 25%,      /* 電腦版可能紫色的比例需要少一點 */
+            #C7FF3C 35%,     
+            #C7FF3C 60%,     
+            #6666FF 80%,     
+            #6666FF 100%     
+        );}
 
 .event-text p {
     font-size: 0.95rem;
