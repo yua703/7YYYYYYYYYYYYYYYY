@@ -526,8 +526,8 @@ img {
         #6666FF 27%,     
         #C7FF3C 33%,     
         #C7FF3C 65%,     
-        #6666FF 70%,     
-        #6666FF 100%     
+        #C7FF3C 70%,     
+        #C7FF3C 100%     
     );
     
     /* 🌟 圓角修正：不要那麼圓 */
@@ -1664,7 +1664,6 @@ body.lock-scroll {
 .mobile-tab-display {
     background-color: #C7FF3C;
     color: #333;
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.2rem;
     text-align: center;
     padding: 15px;
@@ -1787,8 +1786,8 @@ body.lock-scroll {
             #6666FF 25%,      /* 電腦版可能紫色的比例需要少一點 */
             #C7FF3C 35%,     
             #C7FF3C 60%,     
-            #6666FF 80%,     
-            #6666FF 100%     
+            #C7FF3C 80%,     
+            #C7FF3C 100%     
         );}
 
 .event-text p {
