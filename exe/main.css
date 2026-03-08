@@ -414,14 +414,14 @@ img {
     opacity: 0.5; /* 半透明才不會搶走白框風采 */
     z-index: -1;  /* 藏在白框的後面 */
 }
-.deco-a { top: 5%; right: -5%; width: 80px; transform: rotate(15deg); }
-.deco-b { bottom: 15%; left: 2%; width: 100px; transform: rotate(-25deg); }
-.deco-c { top: 40%; left: -10px; width: 60px; transform: rotate(45deg); }
+.deco-a { top: -5%; right: 0%; width: 300px; transform: rotate(50deg); }
+.deco-b { bottom: 15%; left: 2%; width: 200px; transform: rotate(-25deg); }
+.deco-c { top: 20%; left: -50px; width: 130px; transform: rotate(45deg); }
 
 /* --- 白色小圓角容器 --- */
 .event-white-box {
     background-color: rgba(255, 255, 255, 0.95); /* 🌟 微透白底，讓底下漸層隱約透出 */
-    border-radius: 20px; /* 🌟 小圓角 */
+    border-radius: 10px; /* 🌟 小圓角 */
     padding: 30px 20px 20px 20px;
     width: 100%;
     max-width: 1200px;
@@ -438,6 +438,12 @@ img {
     margin-bottom: 25px;
     text-align: left;
     text-shadow: none; /* 白底不需要文字陰影 */
+
+    /* 🌟 1. 殺掉源頭干擾：強制抵銷全域設定的 20px 內距 */
+    padding-left: 0 !important; 
+    
+    /* 🌟 2. 獨立控制：修改這個數值來控制標題與左邊白底的距離 */
+    margin-left: 0px;  /* (正數往右推，負數往左拉) */
 }
 
 
@@ -453,30 +459,23 @@ img {
 
 .event-main-img {
     width: 100%;
-    max-width: 320px;
+    max-width: 500px;
     height: auto;
-    border-radius: 12px;
+    border-radius: 6px;
     transform: rotate(-4deg); /* 🌟 圖片微微歪斜 */
-    box-shadow: 4px 6px 15px rgba(0,0,0,0.15); /* 讓歪斜圖片有立體感 */
+
+    /* 1. 設定長寬比例 (寬度 / 高度) */
+        width: 100%;            /* 讓它填滿 max-width 設定的寬度 */
+        aspect-ratio: 16 / 9;   /* 🌟 隨你改！16/9 是長方形，4/3 比較方，2/3 是直式長方形 */
+        object-fit: cover;      /* 🌟 關鍵防護：強制裁切多餘部分，保證圖片絕對不會被拉伸變形！ */
 }
 
 .event-sub-img {
     position: absolute;
     bottom: -15px;
     left: -20px; /* 🌟 左邊再加的一張小圖 */
-    width: 70px;
+    width: 200px;
     transform: rotate(12deg); 
-    filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
-}
-
-
-/* --- 右下角小字 --- */
-.event-footer-note {
-    text-align: right;
-    font-size: 0.75rem;
-    color: #999;
-    margin-top: 30px;
-    letter-spacing: 1px;
 }
 
 
@@ -1589,7 +1588,7 @@ body.lock-scroll {
     }
 
     .event-white-box {
-        padding: 50px 60px 30px 60px;
+        padding:40px 60px 30px 40px;
         /* 🌟 利用外距把整個白框往右推，對齊上方 Logo！ */
         margin-left: 180px; 
         margin-right: 40px;
@@ -1605,7 +1604,7 @@ body.lock-scroll {
 
 .event-text p {
     font-size: 0.95rem;
-    line-height: 1.8;
+    line-height: 1.1;
     color: #444; 
     text-align: justify;
 }
@@ -1619,17 +1618,24 @@ body.lock-scroll {
 /* =========================================
        🖥️ 電腦版：關於本次賽事 (強制左右排版)
        ========================================= */
+    /* 🌟 控制「左邊文字區」與「右邊圖片區」的距離 */
     .event-content-layout {
-        flex-direction: row; /* 🌟 核心：強制水平排列 */
-        align-items: center; /* 左右欄垂直居中對齊 */
-        gap: 60px;           /* 左右欄之間的間距 */
+        display: flex !important;       
+        flex-direction: row !important; 
+        align-items: flex-start !important; /* 👈 關鍵修改：靠上對齊 */
+        /* 👇 修改這個：數字越大，左右兩邊離得越遠 */
+        gap: 60px;           
     }
 
-    /* 左側文字與小圖欄 */
+    /* 🌟 控制「左邊文字區」內部的設定 */
     .event-left-col {
-        flex: 1.2; /* 給文字區域多一點空間 */
+        flex: 1.2; 
+        /* 👇 修改這個：控制上方文字跟「左下角小圖」的上下距離 */
         gap: 30px;
+        /* 👇 修改這個：讓文字右邊多一點留白，不要太貼近右邊的圖 */
         padding-right: 20px;
+        position: relative; 
+        z-index: 10;
     }
 
     .event-text p {
@@ -1637,23 +1643,50 @@ body.lock-scroll {
     }
 
     .event-sub-img {
-        max-width: 280px; /* 電腦版小圖稍微放大 */
-        margin: 0;        /* 靠左對齊，不再置中 */
+        position: absolute;
+        max-width: 200px; /* 電腦版小圖稍微放大 */
+        bottom: -150%;
+        right: -10%;
+        rotate: -20deg;
+        transform: translate(-50%, -50%);
+
     }
 
-    /* 右側大圖與裝飾圖欄 */
     .event-right-col {
         flex: 1; 
-        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start; /* 讓內容靠上 */
+        padding: 0;              
+        position: relative;      /* 👈 關鍵防護罩：確保星星只在這個框框裡飄 */
     }
-
     .event-explosion-bg {
-        max-width: 500px; /* 電腦版裝飾圖放大 */
+        position: absolute;
+        max-width: 380px; 
+        width: 120%;
+        
+        /* 📍 它預設在右邊區域的正中心 */
+        top: 110%;
+        left: -10%;
+        rotate: 20deg;
+        transform: translate(-50%, -50%);
+        
+        
+        z-index: 1; /* 它層級是 1，剛才文字設 10，所以星星一定在字後面 */
     }
 
     .event-main-img {
-        max-width: 400px; /* 電腦版主大圖放大 */
-        rotate: 15deg;    /* 電腦版歪斜角度可以稍微大一點 */
+        position: relative; /* 實體定位 */
+        z-index: 2;         /* 浮在星星上面 */
+        max-width: 500px;   /* 調整大圖大小 */
+        rotate: 7deg;      /* 大圖歪斜 */
+        
+        /* 👇 調整這兩個數值，來移動大圖和控制白底 */
+        margin-top: -10px;  /* 負數往上移，並把白底縮小 */
+        margin-left: 100px;   /* 控制左右位置 */
+        
+        border-radius: 6px;
+        transform: scale(1.2);
     }
     /* 🌟 電腦版：互動設計系 (調整上下留白) */
     .intro-ixd-section {
