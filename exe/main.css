@@ -1341,15 +1341,23 @@ body.lock-scroll {
     width: 35%; 
     font-family: 'Roboto', sans-serif; 
 }
-.sch-event { 
-    width: 60%; 
-    text-align: left; 
-    padding-left: 15px; 
-    border-left: 2px solid rgba(102, 102, 255, 0.3); /* 分隔直線 */
+/* 🌟 時程表：重新設定右側標題區 (改用虛擬元素畫線) */
+.sch-event {
+    width: 60%;
+    text-align: left;
+    display: flex;      /* 🌟 讓內容也能用 flex 對齊 */
+    align-items: center; /* 🌟 確保內容垂直置中 */
+    position: relative;
 }
 
-.sch-sub-row span {
-    margin-left: 15px; 
+/* 🌟 這就是那條「置中」的分割線 */
+.sch-event::before {
+    content: "";
+    width: 2px;         /* 線的寬度 */
+    height: 18px;       /* 🌟 關鍵：設定線的高度，不要撐滿，就會看起來置中了 */
+    background-color: rgba(102, 102, 255, 0.3); /* 線的顏色 */
+    margin-right: 15px; /* 線跟文字（第一梯次）的距離 */
+    display: inline-block;
 }
 
 /* =========================================
@@ -2710,6 +2718,9 @@ body.lock-scroll {
     
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
+}
+.sch-event {
+    left: 5%;
 }
 .deco-a { display: none; }
 .deco-b { bottom: 35%; left: 350px; width: 150px; transform: rotate(10deg); }
