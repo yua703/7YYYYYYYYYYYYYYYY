@@ -920,51 +920,109 @@ img {
 }
 
 /* =========================================
-   10. 關於我們 (白色虛線風格 - 內縮版)
+   10. 底部資訊 (全紫色一體成型版)
    ========================================= */
-.section-dashed-white {
-    background-color: #333;
-    color: #f0f0f0; 
-    text-align: center;
+/* 🌟 讓最外層的大容器直接變成紫色，並加上頂部圓角 */
+.site-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #6666FF;    /* 🌟 整塊變成主題紫色 */
+    border-radius: 24px 24px 0 0; /* 🌟 頂部圓角 */
+    margin-top: 40px;
+    color: #f0f0f0;
+}
+
+/* 🟣 上半部：資訊與按鈕區 */
+.footer-purple-block {
+    padding: 50px 30px 0px 30px;  /* 調整內距，讓上下融合 */
+    text-align: left;             
     position: relative;
-    padding-bottom: 100px;
-}
-.section-dashed-white p {
-    font-size: 13px; 
-}
-.section-dashed-white .about-grid {
-    display: inline-flex;
-    gap: 24px;
-    text-align: left;    
-    margin: 20px auto;
-    align-items: flex-start;
 }
 
-.section-dashed-white .about-left p {
-    margin: 4px 0;
-    white-space: nowrap;  
+/* 左上角 Logo */
+.footer-logo {
+    width: 120px;
+    height: auto;
+    margin-bottom: 5px;
+    padding: 5px;                 
+    border-radius: 4px;
 }
 
-.section-dashed-white .about-right p {
-    margin: 4px 0;
+/* 品牌名稱 */
+.footer-brand-name {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.4rem;
+    margin-bottom: 25px;
+    margin-left: -8px;            
 }
 
-.section-dashed-white .about-email {
-    margin-bottom: 50px;
+/* 資訊排版 (主辦/合作) */
+.footer-info-grid {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+    line-height: 1.8;
 }
+
+/* 標題變成螢光綠 */
+.footer-info-left p {
+    color: #C7FF3C;               
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* 內容維持白色 */
+.footer-info-right p {
+    color: #f0f0f0;
+}
+
+/* 信箱 */
+.footer-email {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+}
+
+/* 🌟 靜態白線裝飾 */
+.footer-static-line {
+    width: 100%;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.5); /* 稍微半透明的白線，更有質感 */
+    margin-top: 40px;
+}
+
+/* 🌟 橘色按鈕 (共用元件) */
 .btn-primary {
     display: inline-block;
-    padding: 10px 22px;
-    background-color: #E7AC4A; 
-    color: #f0f0f0; 
+    padding: 10px 24px;
+    background-color: #C7FF3C; 
+    color: #6666FF; 
     text-decoration: none;
-    font-size: 15px;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: bold;
     border-radius: 8px;
-    margin-bottom: 50px;
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
 
+/* 🟣 下半部：卡片連結區 (移除灰底，融入紫底) */
+.footer-gray-block {
+    padding: 30px 30px 80px 30px; /* 齊平左右 30px 內距，留出下方 80px 空間 */
+    text-align: left;             
+}
+
+/* 小標題 */
+.footer-card-title {
+    font-size: 1rem;
+    color: #C7FF3C;               /* 🌟 因為背景變紫了，標題改成螢光綠！ */
+    font-weight: bold;
+    margin-bottom: 15px;
+}
 /* =========================================
    11. 過場動畫 (Page Transition)
    ========================================= */
@@ -2297,6 +2355,35 @@ body.lock-scroll {
 
     .day-content {
         flex: 1;                  /* 右側內容佔滿剩餘空間 */
+    }
+    /* =========================================
+       🖥️ 電腦版：底部資訊 (左右雙欄排版)
+       ========================================= */
+    .site-footer {
+        flex-direction: row;        /* 🌟 關鍵：強制改為左右並排 */
+        justify-content: center;    /* 🌟 讓左右兩區塊往畫面中間集中 */
+        align-items: flex-start;    /* 🌟 讓兩邊的頂部對齊 */
+        gap: 120px;                 /* 🌟 控制左右兩邊的間距 (可依喜好調整) */
+        padding: 80px 40px;         /* 🌟 電腦版上下留白加大 */
+    }
+
+    /* 歸零左側區塊的內距，並限制寬度 */
+    .footer-purple-block {
+        padding: 0; 
+        flex: 1;
+        max-width: 400px;
+    }
+
+    /* 歸零右側區塊的內距，並限制寬度 */
+    .footer-gray-block {
+        padding: 0; 
+        flex: 1;
+        max-width: 500px;
+    }
+
+    /* 🌟 電腦版設計圖沒有這條白線，所以把它隱藏起來 */
+    .footer-static-line {
+        display: none;
     }
 }
 
