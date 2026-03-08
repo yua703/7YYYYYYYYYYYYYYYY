@@ -1,19 +1,28 @@
 /* =========================================
-   🔥 強制重整後回到最上方 (強制版)
+   🔥 強制重整後回到最上方 (手機電腦通吃終極版)
    ========================================= */
 // 1. 關閉瀏覽器預設的「記住捲動位置」功能
 if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual';
 }
 
-// 2. 確保在頁面與所有資源載入完成後執行回到頂部
-window.addEventListener('load', function() {
-    // 稍微延遲一點點，避免與其他載入事件衝突
-    setTimeout(function() {
-        window.scrollTo(0, 0);
-    }, 10);
-});
+// 2. 獨立寫一個強制回頂部的函數，多管齊下
+function forceScrollToTop() {
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;             // 專治手機版 Safari
+    document.documentElement.scrollTop = 0;  // 專治手機版 Chrome
+}
 
+// 3. 第一道防線：DOM 結構一出來就先推回去
+document.addEventListener('DOMContentLoaded', forceScrollToTop);
+
+// 4. 第二道防線：等所有圖片跟資源都載入完，再強制推一次
+window.addEventListener('load', function() {
+    forceScrollToTop();
+    
+    // 🌟 第三道防線：給手機版瀏覽器 100 毫秒的緩衝時間，確保它不會又滑下去
+    setTimeout(forceScrollToTop, 100);
+});
 // ==========================================
 // 1. 漢堡選單、導覽切換與多語言整合 (全新版)
 // ==========================================

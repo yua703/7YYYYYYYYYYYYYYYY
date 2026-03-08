@@ -2337,4 +2337,8 @@ body.lock-scroll {
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
 }
+.deco-a { display: none; }
+.deco-b { bottom: 35%; left: 350px; width: 150px; transform: rotate(10deg); }
+.deco-c { top: 10%; left: -50px; width: 120px; transform: rotate(45deg); }
+
     }
