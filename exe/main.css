@@ -664,14 +664,9 @@ img {
    6. 排行榜 (Leaderboard) - 左側垂直選單版
    ========================================= */
 .leaderboard-header {
-    background-image: url('img/eeeee.webp'); 
-    background-size: cover;    
-    background-position: center; 
-    background-repeat: no-repeat;
-    color: #32617f;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    background-color: transparent; /* 🌟 刪除所有 background-image 設定，改為透明/乾淨底色 */
+    padding: 40px 20px 0 20px;     /* 🌟 頂部留出一小條空白 (40px) */
+    text-align: left;              /* 🌟 標題改為靠左 */
     position: relative;
     z-index: 10;
 }
@@ -1597,7 +1592,8 @@ body.lock-scroll {
 
 .section-padding h2,
 .intro-event-section h2,
-.intro-ixd-section h2 {
+.intro-ixd-section h2,
+.leaderboard-header h1 {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-weight: normal;
     font-size: 2rem;
@@ -2066,7 +2062,8 @@ body.lock-scroll {
     .game-details-wrapper,
     .groups-grid,        
     .scoring-container,   
-    .welcome-content p {
+    .welcome-content p,
+    .leaderboard-header h1{
         
         width: 100%;
         max-width: 1600px; 
@@ -2079,9 +2076,11 @@ body.lock-scroll {
         box-sizing: border-box; 
     }
 
+    /* 🌟 電腦版：運動項目改為固定 3 欄 (不再即時運算，效能最順) */
     .groups-grid {
         display: grid; 
-        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+        grid-template-columns: repeat(3, 1fr); /* 🌟 強制切成 3 等份，不使用動態 minmax */
+        gap: 30px;                             /* 電腦版間距拉大一點 */
     }
 
     /* ✅ 修正 3：組別展開頁面對齊 --- */
