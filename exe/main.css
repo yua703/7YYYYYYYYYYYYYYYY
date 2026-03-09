@@ -97,7 +97,7 @@ img {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     background-color: transparent;
     background-color: #98CDF9; 
-    color: #6666FF;
+    color: #3643BA;
     border: none; 
     box-shadow: none; 
     padding: 8px 16px;
@@ -139,7 +139,7 @@ img {
 .hamburger-line {
     width: 18px;
     height: 3px;
-    background-color: #6666FF; 
+    background-color: #3643BA; 
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -182,7 +182,7 @@ img {
 
 /* 🌟 漢堡內的連結滑過效果 (紫色 + 你要的位移) */
 .mega-link:hover, .mega-link.active {
-    color: #6666FF; 
+    color: #3643BA; 
     transform: translate(5px, -2px); 
 }
 
@@ -268,7 +268,7 @@ img {
 }
 .mega-card-title {
     font-size: 0.95rem;
-    color: #6666FF; 
+    color: #3643BA; 
     font-weight: bold;
 }
 .mega-card-grid {
@@ -353,7 +353,7 @@ img {
 .scroller-inner span {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif; 
     font-size: 2rem;         
-    color: #6666FF;           
+    color: #3643BA;           
     font-weight: bold;
     letter-spacing: 1px;      
 
@@ -443,7 +443,7 @@ img {
 .event-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.8rem;
-    color: #6666FF; /* 白底配深藍色標題最清楚 */
+    color: #3643BA; /* 白底配深藍色標題最清楚 */
     margin-bottom: 25px;
     text-align: left;
     text-shadow: none; /* 白底不需要文字陰影 */
@@ -499,7 +499,7 @@ img {
     width: 100%;
     /* 配合下方緊湊排版，首頁高度微調 */
     min-height: 90dvh; 
-    background-color: #6666FF;
+    background-color: #3643BA;
     color: #f0f0f0;
     
     display: flex;
@@ -531,8 +531,8 @@ img {
     
     background: linear-gradient(
         to bottom, 
-        #6666FF 0%,      
-        #6666FF 27%,     
+        #3643BA 0%,      
+        #3643BA 27%,     
         #C7FF3C 33%,     
         #C7FF3C 65%,     
         #C7FF3C 70%,     
@@ -622,7 +622,7 @@ img {
     top: 4px;
     bottom: 4px; 
     left: 0; 
-    background-color: #6666FF;
+    background-color: #3643BA;
     /* 🌟 圓角修正：微圓角 */
     border-radius: 8px;
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s ease;
@@ -707,11 +707,11 @@ img {
     flex-shrink: 0;
     border: none;       
     background: transparent;
-    border-bottom: 0.5px solid #6666FF;
+    border-bottom: 0.5px solid #3643BA;
     padding: 7px 10px 0 25px; 
     text-align: left;
     font-size: 13px;
-    color: #6666FF;
+    color: #3643BA;
     font-weight: 500;
     line-height: 1.3;
     white-space: normal;
@@ -732,8 +732,8 @@ img {
     left: 0;
     width: 32px;
     height: 25px;
-    background-color: #6666FF; 
-    color: #f0f0f0;
+    background-color: #d3d3d3; 
+    color: #eef2f5;
     clip-path: polygon(0 0, 100% 0, 0 100%);
     display: flex;
     padding-top: 3px;   
@@ -748,7 +748,7 @@ img {
 }
 
 .lb-tab.active {
-    background: #E7AC4A; 
+    background: #3643BA; 
     color: #f0f0f0;
     font-weight: bold;
     border-bottom: none;
@@ -758,8 +758,8 @@ img {
 }
 
 .lb-tab.active:not(:first-child)::before {
-    background-color:#f0f0f0; 
-    color: #E7AC4A;          
+    background-color:#C7FF3C; 
+    color: #3643BA;          
 }
 
 .lb-tab:first-child {
@@ -790,13 +790,13 @@ img {
     font-size: 0.85rem;
     color: #666;
     font-weight: bold;
-    border-bottom: 2px solid #6666FF;
+    border-bottom: 2px solid #3643BA;
     position: sticky; 
     top: 0;
     z-index: 5;
 }
 
-.lb-rank { font-weight: bold; color: #6666FF; text-align: left; font-size: 0.9rem; }
+.lb-rank { font-weight: bold; color: #3643BA; text-align: left; font-size: 0.9rem; }
 .lb-name { 
     font-weight: bold; color: #888; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; 
@@ -804,7 +804,7 @@ img {
 }
 .lb-number { color: #888; font-size: 0.8rem; text-align: right; }
 .lb-score { 
-    font-weight: bold; color: #6666FF; text-align: right; 
+    font-weight: bold; color: #3643BA; text-align: right; 
     white-space: nowrap; overflow: hidden; font-size: 0.9rem;
 }
 .lb-player { background: #f0f0f0; }
@@ -869,7 +869,7 @@ img {
     z-index: 10;
 }
 .group-info h3 { 
-    font-size: 1rem; margin-bottom: 5px; color: #6666FF; 
+    font-size: 1rem; margin-bottom: 5px; color: #3643BA; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .group-info p {
@@ -894,7 +894,7 @@ img {
     align-items: center;
     gap: 8px;
     background-color: rgba(255, 255, 255, 0.95);
-    color: #6666FF;             /* 你的主題紫色 */
+    color: #3643BA;             /* 你的主題紫色 */
     padding: 8px 16px 8px 12px;
     border-radius: 30px;
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
@@ -919,7 +919,7 @@ img {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #6666FF;    /* 🌟 整塊變成主題紫色 */
+    background-color: #3643BA;    /* 🌟 整塊變成主題紫色 */
     border-radius: 24px 24px 0 0; /* 🌟 頂部圓角 */
     margin-top: 40px;
     color: #f0f0f0;
@@ -990,7 +990,7 @@ img {
     display: inline-block;
     padding: 10px 24px;
     background-color: #C7FF3C; 
-    color: #6666FF; 
+    color: #3643BA; 
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
@@ -1044,7 +1044,7 @@ img {
     width: 50px;
     height: 50px;
     border: 5px solid #f0f0f0; 
-    border-top: 5px solid #6666FF; 
+    border-top: 5px solid #3643BA; 
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -1106,7 +1106,7 @@ img {
 }
 
 .overlay-header { padding: 20px 20px 0 20px; }
-.overlay-title { font-size: 1.8rem; font-weight: bold; color: #6666FF; margin-bottom: 5px; }
+.overlay-title { font-size: 1.8rem; font-weight: bold; color: #3643BA; margin-bottom: 5px; }
 .overlay-desc {
     font-size: 1rem; 
     color: #666;
@@ -1119,7 +1119,7 @@ img {
     padding-right: 20px;
     display: block;
 }
-.overlay-badge { display: inline-block; background: #6666FF; color: #f0f0f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
+.overlay-badge { display: inline-block; background: #3643BA; color: #f0f0f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
 .overlay-body { padding: 0 20px 20px 20px; color: #333; line-height: 1.6; }
 
 
@@ -1303,7 +1303,7 @@ body.lock-scroll {
 /* 🌟 統一設定：白底、紫框、圓角 */
 .schedule-group, .schedule-row {
     background-color: #ffffff; 
-    border: 2px solid #6666FF; /* 紫色框線 */
+    border: 2px solid #3643BA; /* 紫色框線 */
     border-radius: 12px; 
     overflow: hidden;    
     transition: all 0.3s ease;
@@ -1321,7 +1321,7 @@ body.lock-scroll {
     padding: 15px 20px;
     font-size: 1rem;
     font-weight: bold;
-    color: #6666FF; /* 🌟 紫色字 */
+    color: #3643BA; /* 🌟 紫色字 */
     position: relative;
 }
 
@@ -1329,7 +1329,7 @@ body.lock-scroll {
     margin-left: auto; 
     font-size: 0.9rem;
     transition: transform 0.3s ease;
-    color: #6666FF;
+    color: #3643BA;
 }
 
 /* 展開的內容區域 */
@@ -1376,8 +1376,8 @@ body.lock-scroll {
 }
 .schedule-row.rest { 
     background-color: transparent; 
-    border: 2px dashed #6666FF; /* 虛線框代表休息 */
-    color: #6666FF; 
+    border: 2px dashed #3643BA; /* 虛線框代表休息 */
+    color: #3643BA; 
     opacity: 0.7;
 }
 
@@ -1425,8 +1425,8 @@ body.lock-scroll {
 /* 按鈕本體 */
 .day-tab-btn {
     background: transparent;
-    border: 2px solid #6666FF;
-    color: #6666FF;
+    border: 2px solid #3643BA;
+    color: #3643BA;
     padding: 10px 15px; /* 手機版稍小一點 */
     border-radius: 30px;
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
@@ -1439,7 +1439,7 @@ body.lock-scroll {
 
 .day-tab-btn:hover { background: rgba(102, 102, 255, 0.1); }
 .day-tab-btn.active {
-    background: #6666FF;
+    background: #3643BA;
     color: #ffffff;
     box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
 }
@@ -1482,7 +1482,7 @@ body.lock-scroll {
 
 .scoring-title {
     font-size: 1.2rem;
-    color: #6666FF; 
+    color: #3643BA; 
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 2px dashed rgba(72, 130, 166, 0.2); 
@@ -1550,7 +1550,7 @@ body.lock-scroll {
 }
 .point-item span {
     font-weight: bold;
-    color: #6666FF;
+    color: #3643BA;
     margin-left: 5px;
 }
 
@@ -1570,7 +1570,7 @@ body.lock-scroll {
     content: '•';
     position: absolute;
     left: 0;
-    color: #6666FF; 
+    color: #3643BA; 
     font-weight: bold;
 }
 
@@ -1585,7 +1585,7 @@ body.lock-scroll {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-weight: normal;
     font-size: 2rem;
-    color: #6666FF;
+    color: #5d69da;
     text-shadow: 2px 2px 0px #333333;
     -webkit-font-smoothing: none;
     font-smooth: never;
@@ -1610,7 +1610,7 @@ body.lock-scroll {
 }
 
 .point-item[data-i18n="rank_others"] {
-    color: #6666FF !important;  
+    color: #3643BA !important;  
     font-weight: bold !important; 
     font-family: inherit;        
     opacity: 1;                  
@@ -1659,7 +1659,7 @@ body.lock-scroll {
 
 .splash-loader {
     border: 5px solid #d3d3d3; 
-    border-top: 5px solid #6666FF; 
+    border-top: 5px solid #3643BA; 
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -1668,7 +1668,7 @@ body.lock-scroll {
 }
 
 .splash-text {
-    color: #6666FF; 
+    color: #3643BA; 
     font-size: 1rem;
     font-weight: bold;
 }
@@ -1700,7 +1700,7 @@ body.lock-scroll {
 .game-choice-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.8rem;
-    color: #6666FF;
+    color: #3643BA;
     margin-bottom: 20px;
     text-align: left;
 }
@@ -1758,8 +1758,8 @@ body.lock-scroll {
 }
 
 .pixel-ctrl-btn {
-    background-color: #6666FF;
-    border: 2px solid #6666FF;
+    background-color: #3643BA;
+    border: 2px solid #3643BA;
     border-radius: 8px;
     width: 60px;     /* 手機版按鈕稍小一點 */
     height: 45px;
@@ -1827,8 +1827,8 @@ body.lock-scroll {
         /* 也可以改變顏色佔比，讓它在寬螢幕上看起來更平衡 */
         background: linear-gradient(
             to bottom,        /* 如果想改斜的，可以改成 135deg */
-            #6666FF 0%,      
-            #6666FF 25%,      /* 電腦版可能紫色的比例需要少一點 */
+            #3643BA 0%,      
+            #3643BA 25%,      /* 電腦版可能紫色的比例需要少一點 */
             #C7FF3C 35%,     
             #C7FF3C 60%,     
             #C7FF3C 80%,     
@@ -1970,10 +1970,10 @@ body.lock-scroll {
         color: #f0f0f0; 
         transition: color 0.3s;
         text-shadow: 
-            -1px -1px 0 #6666FF,  
-             1px -1px 0 #6666FF,
-            -1px  1px 0 #6666FF,
-             1px  1px 0 #6666FF;
+            -1px -1px 0 #3643BA,  
+             1px -1px 0 #3643BA,
+            -1px  1px 0 #3643BA,
+             1px  1px 0 #3643BA;
     }
 
     .desktop-link:hover, 
@@ -2175,7 +2175,7 @@ body.lock-scroll {
     .game-choice-title {
         font-family: 'Cubic11', "Noto Sans TC", sans-serif;
         font-size: 2rem;       /* 🌟 對齊 event-title 電腦版大小 */
-        color: #6666FF;          /* 🌟 對齊 event-title 的深藍色 */
+        color: #3643BA;          /* 🌟 對齊 event-title 的深藍色 */
         text-shadow: none;       /* 🌟 白底不加陰影，保持乾淨 */
         text-align: left;
         margin-bottom: 30px;     /* 🌟 對齊下方的距離 */
@@ -2234,8 +2234,8 @@ body.lock-scroll {
 
     /* 2. 基礎按鈕設定 */
     .pixel-ctrl-btn {
-        background-color: #6666FF;
-        border: 2px solid #6666FF; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
+        background-color: #3643BA;
+        border: 2px solid #3643BA; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
         border-radius: 8px;
         width: 70px; /* 按鈕加寬 */
         height: 50px;
@@ -2250,8 +2250,8 @@ body.lock-scroll {
     /* 3. 按鈕滑過 (Hover) 的綠色點亮效果 */
     .pixel-ctrl-btn:hover {
         background-color: #C7FF3C;
-        border-color: #6666FF; /* 邊框亮起 */
-        color: #6666FF;        /* 箭頭亮起 */
+        border-color: #3643BA; /* 邊框亮起 */
+        color: #3643BA;        /* 箭頭亮起 */
         box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
     }
 
@@ -2382,7 +2382,7 @@ body.lock-scroll {
     width: 100%;
     min-height: 100vh;      
     min-height: 100dvh;     
-    background-color: #6666FF;
+    background-color: #3643BA;
     margin-bottom: 8px;   
     display: flex;
     flex-direction: column;
@@ -2816,7 +2816,7 @@ body.lock-scroll {
 
     /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
     .top-header.solid-purple {
-        background-color: #6666FF; /* 變成紫色實底 */
+        background-color: #3643BA; /* 變成紫色實底 */
         box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一點陰影區隔內容 */
         /* 👇 新增這四行：強制滿版，殺掉所有懸浮白邊 */
         top: 0 !important;
@@ -2882,7 +2882,7 @@ body.lock-scroll {
     /* 🌟 像素字體設定 */
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 3rem;       /* 🌟 字要大才有張力 */
-    color: #6666FF;       /* 使用主題紫色 */
+    color: #3643BA;       /* 使用主題紫色 */
     font-weight: bold;
     letter-spacing: 5px;  /* 稍微拉開字距 */
     text-shadow: 2px 2px 0px rgba(102, 102, 255, 0.2); /* 加上淡淡的像素陰影 */
