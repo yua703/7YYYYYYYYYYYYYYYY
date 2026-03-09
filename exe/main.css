@@ -822,6 +822,7 @@ img {
     overflow: hidden;
     cursor: pointer;
     position: relative;
+    content-visibility: auto;
     
     transition: transform 0.3s ease, box-shadow 0.3s ease; 
     
@@ -2813,6 +2814,62 @@ body.lock-scroll {
 .deco-a { display: none; }
 .deco-b { bottom: 35%; left: 350px; width: 150px; transform: rotate(10deg); }
 .deco-c { top: 10%; left: -50px; width: 120px; transform: rotate(45deg); }
+}
+@media (max-width: 1023px) {
+    /* =========================================
+       📱 手機版專屬：動態導覽列標題
+       ========================================= */
+    /* 🌟 1. 懸浮在正中間的標題 (絕對定位，保證不擠壓左右元素) */
+    .header-mobile-title {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 30px;
+        margin-left: -70px;
+        font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+        color: #f0f0f0;
+        font-size: 1.3rem;       /* 字體稍微縮小 */
+        white-space: nowrap;     /* 防止換行 */
+        text-shadow: 2px 2px 0px #333333; /* 保留像素陰影風格 */
+        pointer-events: none;    /* 防止干擾點擊 */
+        display: none;           /* 預設隱藏 */
+    }
+
+    /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
+    .top-header.solid-purple {
+        background-color: #6666FF; /* 變成紫色實底 */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一點陰影區隔內容 */
+        /* 👇 新增這四行：強制滿版，殺掉所有懸浮白邊 */
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        border-radius: 0 !important; /* 確保邊角是方正的貼齊螢幕 */
+    }
+    .top-header.solid-purple .header-mobile-title {
+        display: block; /* 顯示中間的標題 */
+    }
+
+    /* 漢堡選單打開時，隱藏標題避免畫面太亂 */
+    .top-header:has(.header-menu-btn.open) .header-mobile-title {
+        opacity: 0;
+    }
+
+    /* 🌟 3. 隱藏原本在頁面裡的大標題，並調整上方留白以防被導覽列遮住 */
+    /* 運動項目頁面 */
+    #view-groups .section-padding > h2 {
+        display: none !important; /* 殺掉原本的「運動項目」大字 */
+    }
+    #view-groups .section-padding {
+        padding-top: 100px; /* 把內容往下推，讓出導覽列的空間 */
+    }
+
+    /* 即時排行榜頁面 */
+    #view-leaderboard .leaderboard-header h1 {
+        display: none !important; /* 殺掉原本的「即時排行榜」大字 */
+    }
+    .leaderboard-header {
+        padding-top: 100px; /* 把內容往下推，讓出導覽列的空間 */
+    }
 }
 
 /* =========================================

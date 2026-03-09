@@ -1108,3 +1108,45 @@ document.querySelectorAll('.detail-tab-btn, .pixel-ctrl-btn').forEach(btn => {
         setTimeout(syncMobileTabText, 50); 
     });
 });
+// ==========================================
+// 🌟 手機版：動態導覽列背景與標題
+// ==========================================
+function updateMobileHeader() {
+    const header = document.querySelector('.top-header');
+    const mobileTitle = document.getElementById('header-mobile-title');
+    const activePage = document.querySelector('.page-view.active'); // 抓取當前顯示的頁面
+
+    if (activePage && window.innerWidth <= 1023) {
+        const pageId = activePage.id;
+        
+        // 如果是「運動項目」或「排行榜」，加上紫色底跟標題
+        if (pageId === 'view-groups') {
+            header.classList.add('solid-purple');
+            if (mobileTitle) mobileTitle.textContent = '運動項目';
+        } else if (pageId === 'view-leaderboard') {
+            header.classList.add('solid-purple');
+            if (mobileTitle) mobileTitle.textContent = '即時排行榜';
+        } else {
+            // 首頁或其他頁面，拔掉紫色底跟標題
+            header.classList.remove('solid-purple');
+            if (mobileTitle) mobileTitle.textContent = '';
+        }
+    } else {
+        // 如果是電腦版，強制清除手機版的特效
+        header.classList.remove('solid-purple');
+    }
+}
+
+// 1. 網頁剛載入時執行一次
+updateMobileHeader();
+
+// 2. 當視窗大小改變時執行 (防止手機轉向或拉縮視窗出Bug)
+window.addEventListener('resize', updateMobileHeader);
+
+// 3. 綁定所有會切換頁面的按鈕 (包含漢堡選單內的連結)
+document.querySelectorAll('[data-target]').forEach(link => {
+    link.addEventListener('click', () => {
+        // 稍微延遲 50 毫秒，等待原本切換頁面的 JS 執行完畢後再更新 Header
+        setTimeout(updateMobileHeader, 50);
+    });
+});
