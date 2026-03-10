@@ -40,19 +40,18 @@ img {
 /* --- 1. 頂部固定列 --- */
 .top-header {
     position: fixed;
-    top: 10px;
-    /* 👇 修改這兩個數值來控制左右比例 */
-    left: 2.5%;  /* 靠左留 2.5% */
-    width: 95%;  /* 總寬度 95%，左右就會各空出 2.5% */
+    top: 0;           /* 殺掉上方留白 */
+    left: 0;          /* 殺掉左側留白 */
+    width: 100%;      /* 強制 100% 滿版 */
     height: 80px;
+    background-color: #3643BA; /* 統一加上紫色底色 */
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
     z-index: 10002;
     transition: all 0.3s ease;
-}
-/* 🌟 隱藏導覽列的狀態 (往上滑出螢幕並變透明) */
+}/* 🌟 隱藏導覽列的狀態 (往上滑出螢幕並變透明) */
 .top-header.header-hidden {
     transform: translateY(-120%); /* 往上推離畫面 */
     opacity: 0;
@@ -1936,19 +1935,13 @@ body.lock-scroll {
         padding-bottom: 10px; /* 🌟 減少底部的 Padding，箭頭就會看起來往下一點 */
     }
 
-    /* --- 1. 頂部導覽列與圖片 --- */
+/* --- 1. 頂部導覽列與圖片 --- */
     .top-header {
-        top: 0; 
-        left: 50%;
-        transform: translateX(-50%); 
-        width: 98%;  
-        max-width: 1600px;
-        height: 90px; 
-        padding: 0 40px; 
-        /* 🌟 圓角修正：微圓角 */
-        border-radius: 0 0 16px 16px; 
+        height: 90px;
+        padding: 0 40px;
+        /* 已經移除 left、transform、width、max-width 與 border-radius */
+        /* 它會自動繼承步驟一的滿版與紫色底色設定 */
     }
-
     .header-logo img {
         height: 90px; 
         width: auto;
@@ -2816,13 +2809,8 @@ body.lock-scroll {
 
     /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
     .top-header.solid-purple {
-        background-color: #3643BA; /* 變成紫色實底 */
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* 加一點陰影區隔內容 */
-        /* 👇 新增這四行：強制滿版，殺掉所有懸浮白邊 */
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        border-radius: 0 !important; /* 確保邊角是方正的貼齊螢幕 */
+        /* 只保留陰影來增加立體感即可，底色與滿版已在源頭設定好 */
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
     }
     .top-header.solid-purple .header-mobile-title {
         opacity: 1;
