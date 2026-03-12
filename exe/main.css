@@ -1990,6 +1990,14 @@ body.lock-scroll {
     .scoring-card {
         flex: 1;                  /* 確保兩邊等寬 */
     }
+    /* 🌟 電腦版專屬微調：只針對「計分方法」改變左右比例，不影響競賽辦法 */
+    #detail-scoring .scoring-card:first-child {
+        flex: 1;    /* 左邊 (單項挑戰) 維持基本的 1 份寬度 */
+    }
+    
+    #detail-scoring .scoring-card:last-child {
+        flex: 1.6;  /* 🌟 右邊 (全項總積分) 放大成 1.6 份寬度！你可以自由修改這個數字 (如 1.5 或 1.8) 來決定它要多寬 */
+    }
 
     /* 🎮 電腦版：個人全項總積分內部 (再切分成左右雙欄) */
     .scoring-two-col {
@@ -2015,7 +2023,6 @@ body.lock-scroll {
     .section-about .desc-text,  
     .game-details-wrapper,
     .groups-grid,        
-    .scoring-container,   
     .welcome-content p,
     .leaderboard-header h1{
         
