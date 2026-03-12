@@ -56,27 +56,31 @@ menuLinks.forEach(link => {
         e.preventDefault();
         const targetId = link.dataset.target;
         const targetPage = document.getElementById(targetId);
-        
+
         if (!targetPage) return;
 
-            // 🌟 核心修改：如果點擊的是「當前已經在的頁面」(例如已經在首頁又點了 Logo)
-            // 不要罷工，而是讓他平滑滾動到最上方！
-            if (targetPage.classList.contains('active')) {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-                
-                // 順手關閉手機版的滿版選單（如果有打開的話）
-                menuBtn.classList.remove('open');
-                fullMenu.classList.remove('active');
-                document.body.style.overflow = '';
-                return; 
-            }
+        // 🌟 新增：只要使用者點擊進入「排行榜」，就自動幫他抓取最新資料！
+        if (targetId === 'view-leaderboard') {
+            updateLeaderboard(currentSheet);
+        }
+
+        // 🌟 核心修改：如果點擊的是「當前已經在的頁面」，不要罷工，讓他平滑滾動到最上方！
+        if (targetPage.classList.contains('active')) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // 順手關閉手機版的滿版選單
+            menuBtn.classList.remove('open');
+            fullMenu.classList.remove('active');
+            document.body.style.overflow = '';
+            return; 
+        }
 
         const transitionOverlay = document.getElementById('transition-overlay');
 
-        // 🌟 1. 顯示短短的 Loading 動畫 (只針對這三個大頁面)
+        // 1. 顯示短短的 Loading 動畫
         if (transitionOverlay) transitionOverlay.classList.add('active');
 
-        // 2. 處理導覽列 UI 狀態與關閉漢堡選單 (這部分瞬間做完)
+        // 2. 處理導覽列 UI 狀態與關閉漢堡選單
         menuLinks.forEach(l => l.classList.remove('active'));
         document.querySelectorAll(`[data-target="${targetId}"]`).forEach(el => {
             el.classList.add('active');
@@ -85,10 +89,10 @@ menuLinks.forEach(link => {
         fullMenu.classList.remove('active');
         document.body.style.overflow = ''; 
 
-        // 🌟 優先觸發手機版紫色導覽列更新 (讓它不卡頓)
+        // 優先觸發手機版紫色導覽列更新
         if(typeof updateMobileHeader === 'function') updateMobileHeader(targetId);
 
-        // 3. 延遲 300 毫秒，等畫面被轉圈圈遮住時，偷偷切換底下厚重的圖片內容
+        // 3. 延遲 300 毫秒切換內容
         setTimeout(() => {
             pages.forEach(page => page.classList.remove('active'));
             targetPage.classList.add('active');
@@ -97,12 +101,11 @@ menuLinks.forEach(link => {
             // 4. 內容切換完成，拿掉 Loading 遮罩
             setTimeout(() => {
                 if (transitionOverlay) transitionOverlay.classList.remove('active');
-            }, 50); // 稍微緩衝 50 毫秒，讓手機渲染更平滑
+            }, 50); 
 
-        }, 300); // ⏱️ 這裡控制動畫長度：300 毫秒 (0.3秒)
+        }, 300); 
     });
 });
-
 // --- C. 全新語言切換邏輯 (綁定漢堡選單內的按鈕) ---
 if (newLangBtn) {
     newLangBtn.addEventListener('click', () => {
@@ -444,7 +447,6 @@ function stopLeaderboardUpdate() {
         console.log("排行榜監聽暫停");
     }
 }
-
 
 // ==========================================
 // 5. 組別展開功能 (含隱藏導覽列功能)
@@ -1086,3 +1088,6 @@ function updateMobileHeader(targetId = null) {
 // 網頁剛載入與視窗縮放時執行
 updateMobileHeader();
 window.addEventListener('resize', () => updateMobileHeader());
+
+// 👇 🌟 把它搬到最底端：確保翻譯字典都載入完畢後，才執行第一次排行榜抓取！
+updateLeaderboard(currentSheet);
