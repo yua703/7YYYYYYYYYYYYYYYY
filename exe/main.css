@@ -1381,26 +1381,26 @@ body.lock-scroll {
 }
 
 .sch-time { 
-    width: 35%; 
     font-family: 'Roboto', sans-serif; 
-}
-/* 🌟 時程表：重新設定右側標題區 (改用虛擬元素畫線) */
-.sch-event {
-    width: 60%;
-    text-align: left;
-    display: flex;      /* 🌟 讓內容也能用 flex 對齊 */
-    align-items: center; /* 🌟 確保內容垂直置中 */
-    position: relative;
+    flex-shrink: 0; /* 🌟 防護罩：保護時間文字，絕對不允許被擠壓換行或破版 */
 }
 
-/* 🌟 這就是那條「置中」的分割線 */
+.sch-event {
+    text-align: left;
+    display: flex;      
+    align-items: center; 
+    flex: 1;            /* 🌟 自動填滿剩下的空間，取代死板的 60% */
+}
+
 .sch-event::before {
     content: "";
-    width: 2px;         /* 線的寬度 */
-    height: 18px;       /* 🌟 關鍵：設定線的高度，不要撐滿，就會看起來置中了 */
-    background-color: rgba(102, 102, 255, 0.3); /* 線的顏色 */
-    margin-right: 15px; /* 線跟文字（第一梯次）的距離 */
+    width: 2px;         
+    height: 18px;       
+    background-color: rgba(102, 102, 255, 0.3); 
+    margin-left: 12px;  /* 🌟 與左邊時間文字保持安全距離 */
+    margin-right: 15px; /* 🌟 與右邊標題保持安全距離 */
     display: inline-block;
+    flex-shrink: 0;     /* 🌟 防護罩：線條本身絕對不能被擠到變形 */
 }
 
 /* =========================================
@@ -2730,9 +2730,6 @@ body.lock-scroll {
     
     aspect-ratio: 16 / 9; 
     object-fit: cover; 
-}
-.sch-event {
-    left: 5%;
 }
 .deco-a { display: none; }
 .deco-b { bottom: 35%; left: 350px; width: 150px; transform: rotate(10deg); }
