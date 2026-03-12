@@ -830,19 +830,18 @@ const translations = {
         'score_li_2': '若於同一大類別中參與多個項目並皆獲得積分，將取最高分之項目，作為該類別的最終積分。',
         'score_sub_total': '總排名與獎勵',
         'score_li_3': '結算七大類別總積分，分數越高者排名越前。',
-        'score_li_4': '總排名前三名給予獎勵。',
 
         // 競賽辦法
         'rule_h1': '一、線上報名',
-        'rule_li_1': '採表單預約制，每梯次限額 34 人。',
+        'rule_li_1': '採表單預約制，每梯次限額 20 人。',
         'rule_li_2': '報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱。',
-        'rule_li_3': '若沒收到，請務必於 12/26（五）前 聯繫主辦單位。',
+        'rule_li_3': '若沒收到，請務必於 3/14（四）前 聯繫主辦單位。',
         'rule_h2': '二、參賽須知',
         'rule_li_4': '完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。',
         'rule_li_5': '請務必穿著適合運動的服裝與運動鞋，以確保活動安全。',
         'rule_li_6': '挑戰過程中請隨時留意自身身體狀況，量力而為。',
         'note_title': '【注意事項】',
-        'note_content': '提醒有任何身體不適、心臟病、高血壓、頸部或背部問題、孕婦者不宜參與。<br>請參賽者留意自身健康狀況，若感到不適，建議不要勉強參加。如仍決定參與，請自行承擔相關風險。<br><br>＊本活動為互動系113級二年級上學期專題展，其各項科技運動遊戲屬於前期測試＊<br>＊若有不盡人意的地方，還請多海涵＊',
+        'note_content': '提醒有任何身體不適、心臟病、高血壓、頸部或背部問題、孕婦者不宜參與。<br>請參賽者留意自身健康狀況，若感到不適，建議不要勉強參加。如仍決定參與，請自行承擔相關風險。',
 
         // Footer
         'footer_host': '主辦單位：', 'footer_co': '合作單位：',
@@ -930,19 +929,18 @@ const translations = {
         'score_li_2': 'If you participate in multiple competitions within the same category, only the highest score is counted.',
         'score_sub_total': 'Ranking and Winners',
         'score_li_3': 'Sum of points from 7 categories. Higher score ranks higher.',
-        'score_li_4': 'Top 3 overall get rewards.',
 
         // Rules
         'rule_h1': '1. Online Registration',
-        'rule_li_1': 'Reservation only. 34 people per batch.',
+        'rule_li_1': 'Reservation only. 20 people per batch.',
         'rule_li_2': 'A confirmation email will be sent within 2 days after registration.',
-        'rule_li_3': 'If nothing was received, please contact us by 12/26 (Fri).',
+        'rule_li_3': 'If nothing was received, please contact us by 3/14 (Thu).',
         'rule_h2': '2. Competition Guidelines',
         'rule_li_4': 'Upon registration, you will receive a "wristband" for scoring. Please return it upon exit.',
         'rule_li_5': 'Please wear appropriate clothing, like sportswear and sports shoes for your safety.',
         'rule_li_6': 'Remember to pay attention to your physical condition during the challenge.',
         'note_title': '【Notice】',
-        'note_content': 'Participants with physical discomfort, heart disease, high blood pressure, neck/back problems, or are pregnant are not advised to participate.<br>Please monitor your health. If you feel unwell, do not force yourself. Participation is at your own risk.<br><br>*This event is the Sophomore Project Exhibition of NTUT Interaction Design Class 113. All tech-sports games are in the prototype testing phase.*<br>*We appreciate your understanding for any imperfections.*',
+        'note_content': 'Participants with physical discomfort, heart disease, high blood pressure, neck/back problems, or are pregnant are not advised to participate.<br>Please monitor your health. If you feel unwell, do not force yourself. Participation is at your own risk.',
 
         // Footer
         'footer_host': 'Organizer:', 'footer_co': 'Co-organizer:',

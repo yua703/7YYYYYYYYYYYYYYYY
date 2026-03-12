@@ -1450,133 +1450,178 @@ body.lock-scroll {
 }
 .day-content.active { display: block; }
 /* =========================================
-   🔥 新增：計分方法美化 (卡片風格)
+   🔥 更新：計分方法與競賽辦法美化 (科技電競風格)
    ========================================= */
+/* 大容器配置 */
 .scoring-container {
-    max-width: 600px;
+    max-width: 800px; /* 稍微放寬一點，讓內文不擁擠 */
     margin: 0 auto;
-    padding: 0 5px;
+    padding: 0 10px;
     display: flex;
     flex-direction: column;
-    gap: 20px; 
+    gap: 30px; 
 }
 
+/* 統一卡片外觀：白底、俐落陰影、左側科技感粗線條 */
 .scoring-card {
-    /* 🌟 圓角修正：微圓角 */
-    border-radius: 12px; 
-    padding: 25px 20px;
-    border: 2px solid transparent;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px 40px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    border-left: 8px solid #3643BA; /* 取代原本的淡藍/淡黃，改用統一紫色強調 */
+    position: relative;
+    overflow: hidden;
 }
 
-.scoring-card.theme-blue {
-    background-color: #ebf7fc; 
-    border-color: #C0E4F1;    
-}
-
-.scoring-card.theme-yellow {
-    background-color: #fbfade; 
-    border-color: #F5F39D;    
-}
-
+/* 標題：套用像素字體，改為靠左對齊 */
 .scoring-title {
-    font-size: 1.2rem;
-    color: #3643BA; 
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px dashed rgba(72, 130, 166, 0.2); 
-    text-align: center;
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.5rem;
+    color: #3643BA;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f0f0f0; /* 乾淨的實線取代原本的虛線 */
+    text-align: left;
 }
 
+/* 橫向資料列 (例如：排名方式、獎勵機制) */
 .scoring-row {
     display: flex;
-    margin-bottom: 12px;
+    margin-bottom: 18px;
     align-items: flex-start;
 }
+
+/* 標籤設計：變成像遊戲 UI 裡面的 Tag */
 .scoring-label {
     flex-shrink: 0;
     font-weight: bold;
-    color: #555;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-right: 8px;
+    background-color: #3643BA;
+    color: #C7FF3C; /* 紫底綠字，對比強烈 */
+    padding: 6px 14px;
+    border-radius: 6px;
+    margin-right: 15px;
     font-size: 0.9rem;
-}
-.scoring-text {
-    font-size: 0.95rem;
-    color: #444;
-    line-height: 1.5;
+    letter-spacing: 1px;
 }
 
-.scoring-subtitle {
-    font-weight: bold;
-    color: #d97706; 
-    margin-top: 15px;
-    margin-bottom: 5px;
+.scoring-text {
     font-size: 1rem;
+    color: #444;
+    line-height: 1.7;
+    padding-top: 4px; /* 讓文字跟標籤視覺上對齊 */
+}
+
+/* 次標題 (例如：積分換算、採計方式) */
+.scoring-subtitle {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-weight: bold;
+    color: #333;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 1.1rem;
     display: flex;
     align-items: center;
 }
+
+/* 次標題前的小裝飾 */
 .scoring-subtitle::before {
     content: '';
     display: inline-block;
     width: 6px;
-    height: 16px;
-    background-color: #d97706;
-    margin-right: 8px;
-    border-radius: 3px;
+    height: 18px;
+    background-color: #C7FF3C; /* 螢光綠裝飾 */
+    margin-right: 10px;
+    border-radius: 2px;
 }
 
 .scoring-desc {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666;
-    margin-bottom: 8px;
+    margin-bottom: 15px;
+    line-height: 1.6;
 }
 
+/* 積分面板：改成電子計分板的風格 */
 .points-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 15px;
-}
-.point-item {
-    background-color: rgba(255,255,255,0.6);
-    padding: 5px 10px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    color: #555;
-    text-align: center;
-}
-.point-item span {
-    font-weight: bold;
-    color: #3643BA;
-    margin-left: 5px;
+    gap: 12px;
+    margin-bottom: 25px;
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
 }
 
+.point-item {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    color: #555;
+    display: flex;
+    justify-content: space-between; /* 讓名次靠左，分數靠右 */
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.point-item span {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 900;
+    color: #3643BA;
+    font-size: 1.2rem;
+}
+
+/* 修改條列式樣式，使用科技感的箭頭 */
 .scoring-list-style {
     list-style: none;
-    padding-left: 5px;
+    padding-left: 0;
 }
+
 .scoring-list-style li {
     position: relative;
-    padding-left: 15px;
-    margin-bottom: 6px;
-    font-size: 0.95rem;
+    padding-left: 24px;
+    margin-bottom: 12px;
+    font-size: 1rem;
     color: #444;
-    line-height: 1.5;
+    line-height: 1.7;
 }
+
+/* 條列式的自訂科技感箭頭 */
 .scoring-list-style li::before {
-    content: '•';
+    content: '▸';
     position: absolute;
     left: 0;
+    top: -1px;
     color: #3643BA; 
+    font-size: 1.2rem;
     font-weight: bold;
 }
 
-.theme-yellow .scoring-list-style li::before {
-    color: #555; 
+/* 特別處理「...以此類推」的文字狀態 */
+.point-item[data-i18n="rank_others"] {
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    color: #888 !important;
+    font-weight: normal !important;
 }
 
+/* 競賽辦法中的注意事項紅色區塊美化 */
+#detail-participants .scoring-card div[style*="border-top"] {
+    border-top: 2px dashed rgba(54, 67, 186, 0.2) !important;
+    margin-top: 30px !important;
+    padding-top: 20px !important;
+    background-color: #fff5f5; /* 微微的紅底示警 */
+    padding: 20px;
+    border-radius: 8px;
+}
+#detail-participants .scoring-card h4[style*="color"] {
+    font-family: 'Cubic11', sans-serif;
+    color: #e53935 !important; /* 更明亮的紅色 */
+    letter-spacing: 1px;
+}
 .section-padding h2,
 .intro-event-section h2,
 .intro-ixd-section h2,
