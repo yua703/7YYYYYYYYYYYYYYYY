@@ -1454,173 +1454,78 @@ body.lock-scroll {
    ========================================= */
 /* 大容器配置 */
 .scoring-container {
-    width: 100%;       /* 完全撐滿右側的內容區 */
-    max-width: none;   /* 解除寬度限制 */
-    margin: 0;
-    padding: 0;
+    width: 100%;       
     display: flex;
-    flex-direction: column; /* 手機版預設為上下堆疊 */
-    gap: 40px; 
+    flex-direction: column; /* 📱 關鍵修復1：手機版強制上下堆疊 */
+    gap: 30px; 
     text-align: left;
 }
 
-/* 統一卡片外觀：移除框中框，回歸純淨文字區塊 */
 .scoring-card {
-    /* 已徹底刪除 background、border-left、box-shadow 與 padding */
     position: relative;
     width: 100%;
 }
 
-/* 標題：套用像素字體，改為靠左對齊 */
 .scoring-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.5rem;
     color: #3643BA;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 2px solid #f0f0f0; /* 乾淨的實線取代原本的虛線 */
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0; 
     text-align: left;
 }
 
-/* 橫向資料列 (例如：排名方式、獎勵機制) */
-.scoring-row {
-    display: flex;
-    margin-bottom: 18px;
-    justify-content: flex-start;
-    align-items: flex-start;
-}
 
-/* 標籤設計：變成像遊戲 UI 裡面的 Tag */
-.scoring-label {
-    flex-shrink: 0;
-    font-weight: bold;
-    background-color: #3643BA;
-    color: #C7FF3C; /* 紫底綠字，對比強烈 */
-    padding: 6px 14px;
-    border-radius: 6px;
-    margin-right: 15px;
-    font-size: 0.9rem;
-    letter-spacing: 1px;
-}
+/* 📱 手機版：總積分內部的左右兩塊，強制上下堆疊 */
+.scoring-two-col { display: flex; flex-direction: column; gap: 20px; }
 
-.scoring-text {
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.7;
-    padding-top: 4px; /* 讓文字跟標籤視覺上對齊 */
-}
-
-/* 次標題 (例如：積分換算、採計方式) */
 .scoring-subtitle {
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-family: 'Cubic11', sans-serif;
     font-weight: bold;
     color: #333;
-    margin-top: 30px;
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.05rem;
     display: flex;
     align-items: center;
 }
+.scoring-subtitle::before { content: ''; width: 6px; height: 16px; background-color: #C7FF3C; margin-right: 8px; border-radius: 2px; }
+.scoring-desc { font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5; }
 
-/* 次標題前的小裝飾 */
-.scoring-subtitle::before {
-    content: '';
-    display: inline-block;
-    width: 6px;
-    height: 18px;
-    background-color: #C7FF3C; /* 螢光綠裝飾 */
-    margin-right: 10px;
-    border-radius: 2px;
-}
-
-.scoring-desc {
-    font-size: 0.95rem;
-    color: #666;
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
-/* 積分面板：改成電子計分板的風格 */
+/* 🌟 關鍵修復3：縮小版電子計分板 */
 .points-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    margin-bottom: 25px;
+    gap: 6px; /* 縮小間距 */
+    margin-bottom: 20px;
     background-color: #f8f9fa;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 8px; /* 縮小灰底框 */
+    border-radius: 8px;
 }
 
 .point-item {
     background-color: #ffffff;
     border: 1px solid #eee;
-    padding: 6px 10px;
+    padding: 5px 8px; /* 縮小白卡片內距 */
     border-radius: 6px;
-    font-size: 0.5rem;
+    font-size: 0.8rem; /* 名次文字縮小 */
     color: #555;
     display: flex;
-    justify-content: space-between; /* 讓名次靠左，分數靠右 */
+    justify-content: space-between; 
     align-items: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.point-item span {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 900;
-    color: #3643BA;
-    font-size: 1rem;
-}
+.point-item span { font-family: 'Roboto', sans-serif; font-weight: 900; color: #3643BA; font-size: 0.95rem; } /* 分數縮小 */
+.point-item[data-i18n="rank_others"] { justify-content: center; background-color: transparent; border: none; box-shadow: none; color: #888 !important; font-weight: normal !important; }
 
-/* 修改條列式樣式，使用科技感的箭頭 */
-.scoring-list-style {
-    list-style: none;
-    padding-left: 0;
-}
+.scoring-list-style { list-style: none; padding-left: 0; }
+.scoring-list-style li { position: relative; padding-left: 20px; margin-bottom: 10px; font-size: 0.95rem; color: #444; line-height: 1.6; }
+.scoring-list-style li::before { content: '▸'; position: absolute; left: 0; top: 0; color: #3643BA; font-size: 1.2rem; font-weight: bold; }
 
-.scoring-list-style li {
-    position: relative;
-    padding-left: 24px;
-    margin-bottom: 12px;
-    font-size: 1rem;
-    color: #444;
-    line-height: 1.7;
-}
-
-/* 條列式的自訂科技感箭頭 */
-.scoring-list-style li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    top: -1px;
-    color: #3643BA; 
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-/* 特別處理「...以此類推」的文字狀態 */
-.point-item[data-i18n="rank_others"] {
-    justify-content: center;
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-    color: #888 !important;
-    font-weight: normal !important;
-}
-
-/* 競賽辦法中的注意事項紅色區塊美化 */
-#detail-participants .scoring-card div[style*="border-top"] {
-    border-top: 2px dashed rgba(54, 67, 186, 0.2) !important;
-    margin-top: 30px !important;
-    padding-top: 20px !important;
-    background-color: #fff5f5; /* 微微的紅底示警 */
-    padding: 20px;
-    border-radius: 8px;
-}
-#detail-participants .scoring-card h4[style*="color"] {
-    font-family: 'Cubic11', sans-serif;
-    color: #e53935 !important; /* 更明亮的紅色 */
-    letter-spacing: 1px;
-}
+#detail-participants .scoring-card div[style*="border-top"] { border-top: 2px dashed rgba(54, 67, 186, 0.2) !important; margin-top: 20px !important; padding-top: 15px !important; background-color: #fff5f5; padding: 15px; border-radius: 8px; }
+#detail-participants .scoring-card h4 { font-family: 'Cubic11', sans-serif; color: #e53935 !important; letter-spacing: 1px; font-size: 1rem; }
 .section-padding h2,
 .intro-event-section h2,
 .intro-ixd-section h2,
@@ -1820,45 +1725,18 @@ body.lock-scroll {
     shape-rendering: crispedges;
 }
 
-/* 📺 右側：內容顯示區 */
-    .game-right-content {
-        flex: 1.8; 
-        background-color: #ffffff; 
-        border-radius: 20px; 
-        padding: 40px;
-        
-        /* 🌟 核心修改：移除電腦版的固定高度與內部捲軸，讓內容完整向下展開 */
-        height: auto;             
-        min-height: 600px;        
-        max-height: none;         
-        overflow-y: visible;         
-        
-        padding-left: 40px !important; 
-        padding-right: 40px !important;
-    }
-
-    /* 🎮 電腦版：計分方法與競賽辦法並排 (左右雙欄) */
-    .scoring-container {
-        flex-direction: row;      
-        align-items: flex-start;  
-        gap: 60px;                
-    }
-    .scoring-card {
-        flex: 1;                  
-    }
-
-    /* 🎮 電腦版：個人全項總積分內部 (再切分成左右雙欄) */
-    .scoring-two-col {
-        flex-direction: row; /* 電腦版改為左右並排 */
-        align-items: flex-start;
-        gap: 30px; /* 左右欄的間距 */
-    }
-    .scoring-col-left {
-        flex: 1;
-    }
-    .scoring-col-right {
-        flex: 1.2; /* 讓文字較多的右邊（採計方式）稍微寬一點點，視覺更平衡 */
-    }
+/* 📺 右側：內容顯示區 (手機版源頭) */
+.game-right-content {
+    flex: 1.8; 
+    background-color: #ffffff; 
+    border-radius: 20px; 
+    padding: 40px; /* 🧹 順手把原本底下的 !important 刪掉，回歸乾淨寫法 */
+    
+    /* 👇 這裡鎖定手機版高度，讓內容乖乖待在框裡，多出來的就變捲軸 */
+    height: 500px;             
+    min-height: 400px;         
+    overflow-y: auto;          
+}
 
 /* =========================================
    🖥️ 電腦版面優化總整理 (Desktop Optimization)
@@ -2100,6 +1978,9 @@ body.lock-scroll {
     /* =========================================
        🎮 電腦版：計分方法與競賽辦法並排 (左右雙欄)
        ========================================= */
+    /* =========================================
+       🎮 電腦版：計分方法與競賽辦法並排 (左右雙欄)
+       ========================================= */
     .scoring-container {
         flex-direction: row;      /* 改變源頭：從上下堆疊變成左右並排 */
         align-items: flex-start;  /* 讓左右兩邊的內容對齊頂部 */
@@ -2107,8 +1988,24 @@ body.lock-scroll {
     }
     
     .scoring-card {
-        flex: 1;                  /* 讓左右兩欄完美平分 50% / 50% 寬度 */
+        flex: 1;                  /* 確保兩邊等寬 */
     }
+
+    /* 🎮 電腦版：個人全項總積分內部 (再切分成左右雙欄) */
+    .scoring-two-col {
+        flex-direction: row;      /* 電腦版改為左右並排 */
+        align-items: flex-start;
+        gap: 30px; 
+    }
+    
+    .scoring-col-left {
+        flex: 1;
+    }
+    
+    .scoring-col-right {
+        flex: 1.2;                /* 右邊文字較多，給多一點空間 */
+    }
+
 
 
     /* =========================================
@@ -2332,39 +2229,12 @@ body.lock-scroll {
     }
 
 
-    /* 📺 右側：內容顯示區 */
-    .game-right-content {
-        flex: 1.8; 
-        background-color: #ffffff; 
-        border-radius: 20px; 
-        padding: 40px;
-        
-        /* 🌟 核心修改：固定高度與內部捲動 */
-        height: 72vh;             /* 📏 固定為螢幕高度的 72%，剛好約一頁大小 */
-        min-height: 600px;        /* 📏 最低高度防線，避免螢幕太扁時擠壓 */
-        max-height: 800px;        /* 📏 最高高度防線，避免在大螢幕上太長 */
-        overflow-y: auto;         /* 🌟 內容超過時，自動產生內部捲軸 */
-        
-        padding-left: 40px !important; 
-        padding-right: 40px !important;
-    }
-
-    /* 🌟 新增：美化右側內容區的專屬內部捲軸 */
-    .game-right-content::-webkit-scrollbar {
-        width: 8px; /* 捲軸寬度 */
-    }
-    .game-right-content::-webkit-scrollbar-track {
-        background: transparent; /* 軌道透明 */
-        margin: 20px 0;          /* 讓捲軸上下留一點空隙，不要貼齊圓角 */
-    }
-    .game-right-content::-webkit-scrollbar-thumb {
-        background: rgba(102, 102, 255, 0.3); /* 使用主題淡紫色 */
-        border-radius: 10px;     /* 捲軸圓角 */
-    }
-    .game-right-content::-webkit-scrollbar-thumb:hover {
-        background: rgba(102, 102, 255, 0.6); /* 滑鼠移過去變深 */
-    }
-
+/* 📺 右側：內容顯示區 (電腦版設定) */
+.game-right-content {
+    height: 72vh;             
+    min-height: 600px;        
+    max-height: 800px;        
+}
     /* 內容區內部的細節修正 */
     .detail-content {
         padding-top: 0; /* 移除原本的 top padding */
