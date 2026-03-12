@@ -1346,6 +1346,7 @@ body.lock-scroll {
     border-top: 1px dashed rgba(102, 102, 255, 0.3); /* 內部的分隔線也用淡紫色 */
     display: flex;
     align-items: center;
+    white-space: nowrap;
 }
 .sch-sub-row::before {
     content: "•";
@@ -1390,6 +1391,7 @@ body.lock-scroll {
     display: flex;      
     align-items: center; 
     flex: 1;            /* 🌟 自動填滿剩下的空間，取代死板的 60% */
+    white-space: nowrap;
 }
 
 .sch-event::before {
@@ -2734,6 +2736,30 @@ body.lock-scroll {
 .deco-a { display: none; }
 .deco-b { bottom: 35%; left: 350px; width: 150px; transform: rotate(10deg); }
 .deco-c { top: 10%; left: -50px; width: 120px; transform: rotate(45deg); }
+/* 👇 🌟 新增：針對手機版的時程表與內容進行瘦身！ */
+    
+    /* 1. 調整大標題列的左右內距，讓出更多空間 */
+    .sch-header {
+        padding: 12px 10px; /* 原本是 15px 20px，左右縮小為 10px */
+        font-size: 0.95rem; /* 字體稍微縮小一點點 */
+    }
+
+    /* 2. 縮小那條佔位的分割線 */
+    .sch-event::before {
+        margin-left: 8px;   /* 減少與時間的距離 */
+        margin-right: 10px; /* 減少與標題的距離 */
+    }
+
+    /* 3. 調整展開後的內部選項 */
+    .sch-sub-row {
+        padding: 10px 15px; /* 原本左右是 25px，縮小為 15px */
+        font-size: 0.85rem; /* 內文字體微調 */
+    }
+    /* 👇 🌟 新增：針對手機版的右側白框，減少左右內距 */
+    .game-right-content {
+        padding-left: 20px !important;  /* 原本是 40px，縮減一半 */
+        padding-right: 20px !important; /* 讓出更多空間給裡面的文字 */
+    }
 }
 @media (max-width: 1023px) {
     /* =========================================
