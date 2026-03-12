@@ -2765,25 +2765,30 @@ body.lock-scroll {
     /* =========================================
        📱 手機版專屬：動態導覽列標題
        ========================================= */
-    /* 🌟 1. 懸浮在正中間的標題 (絕對定位，保證不擠壓左右元素) */
+/* 🌟 1. 懸浮在正中間的標題 (安全區置中法) */
     .header-mobile-title {
         position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        top: 30px;
-        margin-left: -70px;
+        
+        /* 👇 這裡就是你控制標題跟 Logo 距離的搖桿！你可以依喜好微調數字 */
+        left: 110px;   /* 留給左邊 Logo 的安全距離 (覺得太遠可改成 90px，太近改 120px) */
+        right: 130px;  
+        top: 50%;      
+        transform: translateY(-50%);
+        
+        text-align: left; /* 🌟 關鍵修改：從 center 改成 left，讓它貼著左邊的安全線！ */
+        
         font-family: 'Cubic11', "Noto Sans TC", sans-serif;
         color: #f0f0f0;
-        font-size: 1.3rem;       /* 字體稍微縮小 */
-        white-space: nowrap;     /* 防止換行 */
-        text-shadow: 2px 2px 0px #333333; /* 保留像素陰影風格 */
-        pointer-events: none;    /* 防止干擾點擊 */
+        font-size: 1.2rem;       
+        white-space: nowrap;     
+        overflow: hidden;        
+        text-overflow: ellipsis; 
+        text-shadow: 2px 2px 0px #333333; 
+        pointer-events: none;    
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
-    }
-
-    /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
+    }    /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
     .top-header.solid-purple {
         /* 只保留陰影來增加立體感即可，底色與滿版已在源頭設定好 */
         box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
