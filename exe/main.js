@@ -56,9 +56,20 @@ menuLinks.forEach(link => {
         e.preventDefault();
         const targetId = link.dataset.target;
         const targetPage = document.getElementById(targetId);
+        
+        if (!targetPage) return;
 
-        // 如果點擊的是現在已經在的頁面，就不重複執行
-        if (!targetPage || targetPage.classList.contains('active')) return;
+            // 🌟 核心修改：如果點擊的是「當前已經在的頁面」(例如已經在首頁又點了 Logo)
+            // 不要罷工，而是讓他平滑滾動到最上方！
+            if (targetPage.classList.contains('active')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // 順手關閉手機版的滿版選單（如果有打開的話）
+                menuBtn.classList.remove('open');
+                fullMenu.classList.remove('active');
+                document.body.style.overflow = '';
+                return; 
+            }
 
         const transitionOverlay = document.getElementById('transition-overlay');
 
