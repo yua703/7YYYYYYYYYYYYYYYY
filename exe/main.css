@@ -1454,23 +1454,21 @@ body.lock-scroll {
    ========================================= */
 /* 大容器配置 */
 .scoring-container {
-    max-width: 800px; /* 稍微放寬一點，讓內文不擁擠 */
-    margin: 0 auto;
-    padding: 0 10px;
+    width: 100%;       /* 完全撐滿右側的內容區 */
+    max-width: none;   /* 解除寬度限制 */
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column;
-    gap: 30px; 
+    flex-direction: column; /* 手機版預設為上下堆疊 */
+    gap: 40px; 
+    text-align: left;
 }
 
-/* 統一卡片外觀：白底、俐落陰影、左側科技感粗線條 */
+/* 統一卡片外觀：移除框中框，回歸純淨文字區塊 */
 .scoring-card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 30px 40px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
-    border-left: 8px solid #3643BA; /* 取代原本的淡藍/淡黃，改用統一紫色強調 */
+    /* 已徹底刪除 background、border-left、box-shadow 與 padding */
     position: relative;
-    overflow: hidden;
+    width: 100%;
 }
 
 /* 標題：套用像素字體，改為靠左對齊 */
@@ -1488,6 +1486,7 @@ body.lock-scroll {
 .scoring-row {
     display: flex;
     margin-bottom: 18px;
+    justify-content: flex-start;
     align-items: flex-start;
 }
 
@@ -1545,19 +1544,19 @@ body.lock-scroll {
 .points-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 8px;
     margin-bottom: 25px;
     background-color: #f8f9fa;
-    padding: 15px;
+    padding: 10px;
     border-radius: 10px;
 }
 
 .point-item {
     background-color: #ffffff;
     border: 1px solid #eee;
-    padding: 10px 15px;
+    padding: 6px 10px;
     border-radius: 6px;
-    font-size: 0.95rem;
+    font-size: 0.5rem;
     color: #555;
     display: flex;
     justify-content: space-between; /* 讓名次靠左，分數靠右 */
@@ -1569,7 +1568,7 @@ body.lock-scroll {
     font-family: 'Roboto', sans-serif;
     font-weight: 900;
     color: #3643BA;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 /* 修改條列式樣式，使用科技感的箭頭 */
@@ -1821,25 +1820,45 @@ body.lock-scroll {
     shape-rendering: crispedges;
 }
 
-/* 5. 右側內容區 (手機版變成下方內容) */
-.game-right-content {
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 16px;
-    padding: 20px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    
-    /* 🌟 核心修正：固定高度並加上捲軸，保護漸層背景不變形 */
-    height: 60vh;
-    min-height: 450px;
-    max-height: 650px;
-    overflow-y: auto;
-}
+/* 📺 右側：內容顯示區 */
+    .game-right-content {
+        flex: 1.8; 
+        background-color: #ffffff; 
+        border-radius: 20px; 
+        padding: 40px;
+        
+        /* 🌟 核心修改：移除電腦版的固定高度與內部捲軸，讓內容完整向下展開 */
+        height: auto;             
+        min-height: 600px;        
+        max-height: none;         
+        overflow-y: visible;         
+        
+        padding-left: 40px !important; 
+        padding-right: 40px !important;
+    }
 
-/* 手機版專屬捲軸美化 */
-.game-right-content::-webkit-scrollbar { width: 6px; }
-.game-right-content::-webkit-scrollbar-track { background: transparent; margin: 10px 0; }
-.game-right-content::-webkit-scrollbar-thumb { background: rgba(102, 102, 255, 0.3); border-radius: 10px; }
+    /* 🎮 電腦版：計分方法與競賽辦法並排 (左右雙欄) */
+    .scoring-container {
+        flex-direction: row;      
+        align-items: flex-start;  
+        gap: 60px;                
+    }
+    .scoring-card {
+        flex: 1;                  
+    }
+
+    /* 🎮 電腦版：個人全項總積分內部 (再切分成左右雙欄) */
+    .scoring-two-col {
+        flex-direction: row; /* 電腦版改為左右並排 */
+        align-items: flex-start;
+        gap: 30px; /* 左右欄的間距 */
+    }
+    .scoring-col-left {
+        flex: 1;
+    }
+    .scoring-col-right {
+        flex: 1.2; /* 讓文字較多的右邊（採計方式）稍微寬一點點，視覺更平衡 */
+    }
 
 /* =========================================
    🖥️ 電腦版面優化總整理 (Desktop Optimization)
@@ -2077,6 +2096,18 @@ body.lock-scroll {
         border-radius: 12px;  
         padding: 4px 0;       
         margin: 4px auto;    /* 🌟 極小縫隙 */
+    }
+    /* =========================================
+       🎮 電腦版：計分方法與競賽辦法並排 (左右雙欄)
+       ========================================= */
+    .scoring-container {
+        flex-direction: row;      /* 改變源頭：從上下堆疊變成左右並排 */
+        align-items: flex-start;  /* 讓左右兩邊的內容對齊頂部 */
+        gap: 60px;                /* 左右兩欄的留白間距 */
+    }
+    
+    .scoring-card {
+        flex: 1;                  /* 讓左右兩欄完美平分 50% / 50% 寬度 */
     }
 
 
