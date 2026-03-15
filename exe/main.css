@@ -304,6 +304,23 @@ img {
     color: #333;
     text-align: center;
 }
+/* 🌟 控制替換文字後的圖片樣式 */
+.hb-center img {
+    /* 1. 讓圖片寬度最大不會超過它的容器 */
+    max-width: 100%;
+    
+    /* 2. 高度自動調整，保持圖片比例不變形 */
+    height: auto;
+    
+    /* 3. 在電腦上設定圖片的最大寬度，避免圖片太大，可以根據需求調整這個數值 */
+    /* 電腦版建議調整這個數值 */
+    width: 90px;
+    
+    /* 4. 確保圖片能正確置中 (原本的 .hb-center 應該已經在處理置中了，這裡補強一下) */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
 
 /* =========================================
@@ -2343,7 +2360,7 @@ body.lock-scroll {
     justify-content: space-between;
     width: 100%;
     max-width: 1600px;
-    margin: 0 auto;
+    margin: 15px auto 0 auto; /* 🌟 修改這行：原本是 0 auto，加上 15px 的 margin-top 把它往下推 */
     font-size: 0.85rem;
     font-weight: bold;
     letter-spacing: 2px;
@@ -2363,7 +2380,7 @@ body.lock-scroll {
     flex-shrink: 0;  /* 🌟 關鍵修復：防止在電腦版被 Flex 擠壓消失 */
     background-color: #f0f0f0;
     max-width: 1600px;
-    margin: 20px auto 0 auto;
+    margin: 8px auto 0 auto;
     animation: drawLine 1.2s cubic-bezier(0.8, 0, 0.2, 1) 1.8s forwards;
 }
 
@@ -2382,7 +2399,7 @@ body.lock-scroll {
 /* WELCOME 文字設定 */
 .welcome-text-group {
     position: absolute; /* 🌟 關鍵：讓它浮空，脫離圖片的影響 */
-    top: 20px;          /* 🌟 距離上方白線的距離，數字越小越靠上 */
+    top: 3px;          /* 🌟 距離上方白線的距離，數字越小越靠上 */
     left: 0;            /* 緊貼左側 */
     text-align: left;
     z-index: 20; 
@@ -2615,7 +2632,11 @@ body.lock-scroll {
     .ticker-dot { margin: 0 20px; }
     .pixel-ticker-scroller { animation-duration: 15s; } 
 
-    .hero-grid-layout { padding: 100px 20px 30px 20px; }
+    /* 🌟 補上 .full-color-block 增加權重，指令才會生效！ */
+    /* 80px 是上方導覽列的高度，設定 95px 剛剛好留出一點點完美的呼吸空間 */
+    .full-color-block.hero-grid-layout { 
+        padding: 80px 30px 30px; 
+    }
     .hero-top-bar { flex-direction: row; font-size: 0.7rem; }
     .hero-bottom-bar { 
         display: flex; 
