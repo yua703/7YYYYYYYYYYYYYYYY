@@ -23,6 +23,7 @@ window.addEventListener('load', function() {
     // 🌟 第三道防線：給手機版瀏覽器 100 毫秒的緩衝時間，確保它不會又滑下去
     setTimeout(forceScrollToTop, 100);
 });
+
 // ==========================================
 // 1. 漢堡選單、導覽切換與多語言整合 (全新版)
 // ==========================================
@@ -106,6 +107,7 @@ menuLinks.forEach(link => {
         }, 300); 
     });
 });
+
 // --- C. 全新語言切換邏輯 (綁定漢堡選單內的按鈕) ---
 if (newLangBtn) {
     newLangBtn.addEventListener('click', () => {
@@ -145,6 +147,7 @@ if (newLangBtn) {
         }, 500); 
     });
 }
+
 /* =========================================
    🔥 跑馬燈自動無限循環 (完美無縫雙等份版)
    ========================================= */
@@ -202,6 +205,7 @@ window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
     resizeTimeout = setTimeout(initMarquee, 200);
 });
+
 // ==========================================
 // 2. 賽事細節分頁 (縱向按鈕 + 搖桿切換 加強版)
 // ==========================================
@@ -233,7 +237,6 @@ function switchDetailTab(targetBtn) {
     targetDiv.classList.add('active');
 }
 
-
 // --- 功能 B: 初始化函式 ---
 function initDetailTabs() {
     // 移除原本舊版的 moveIndicator 呼叫
@@ -248,14 +251,12 @@ window.addEventListener('load', initDetailTabs);
 // 視窗縮放 (RWD)：舊版的對齊邏輯在 CSS 處理，這裡不需要 moveIndicator，但可以保留 init 確保狀態
 window.addEventListener('resize', initDetailTabs);
 
-
 // --- 功能 C: 監聽原本按鈕的點擊 ---
 detailBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         switchDetailTab(btn); // 點擊直接切換
     });
 });
-
 
 // --- 🔥 功能 D: 監聽紫色搖桿的切換 (新增) ---
 
@@ -296,6 +297,7 @@ if (prevDetailBtn && nextDetailBtn) {
         navigateDetailTabs('next');
     });
 }
+
 // ==========================================
 // 🌟 新增：Day 1 / Day 2 時程表日期切換邏輯
 // ==========================================
@@ -320,8 +322,6 @@ dayTabBtns.forEach(btn => {
         }
     });
 });
-
-
 
 // ==========================================
 // 4. 排行榜功能 (Leaderboard)
@@ -682,6 +682,7 @@ function enableSwipe(trackElement, counterElement, isLightbox = false) {
 }
 
 enableSwipe(sliderTrack, sliderCounter, false);
+
 // --- 功能 E: 全螢幕 Lightbox 邏輯 ---
 const lbPrevBtn = lightbox ? lightbox.querySelector('.prev-btn') : null;
 const lbNextBtn = lightbox ? lightbox.querySelector('.next-btn') : null;
@@ -779,6 +780,7 @@ cards.forEach(card => {
     card.parentNode.replaceChild(newCard, card);
     newCard.addEventListener('click', () => openOverlay(newCard));
 });
+
 // 🌟 綁定新的左上角返回按鈕
 const overlayBackBtn = document.getElementById('overlay-back-btn');
 if (overlayBackBtn) {
@@ -787,6 +789,7 @@ if (overlayBackBtn) {
         closeOverlay();
     });
 }
+
 // ==========================================
 // 6. 時程表手風琴效果 (Accordion)
 // ==========================================
@@ -801,6 +804,7 @@ function toggleSchedule(element) {
         }
     });
 }
+
 // ==========================================
 // 7. 多語言切換系統 (i18n - 完整翻譯版)
 // ==========================================
@@ -811,12 +815,14 @@ const translations = {
         'close_btn': '點擊關閉',
         
         // 首頁
-        'about_title': '關於本次賽事',
+        'event_title': '關於本次賽事',
         'home_brand': '【ExErcise】科技 × 運動賽事',
         'home_slogan': '打破傳統，我們用科技重新定義運動競技。',
         'home_desc': '無論你是哪類猛將，這裡都有屬於你的戰場。<br>準備好挑戰極限了嗎？快來與夥伴一同釋放自己的潛能吧！',
         'event_items': '七大競賽項目',
         'detail_title': '賽事細節',
+        'hero_welcome_1': '歡迎來到',
+        'hero_welcome_2': '科技x運動體適能挑戰賽',
 
         // 分頁按鈕
         'tab_schedule': '時程表', 'tab_scoring': '計分方法', 'tab_map': '賽事地圖', 'tab_rules': '競賽辦法',
@@ -845,11 +851,7 @@ const translations = {
         'score_li_3': '結算七大類別總積分，分數越高者排名越前。',
 
         // 競賽辦法
-        'rule_h1': '一、線上報名',
-        'rule_li_1': '採表單預約制，每梯次限額 20 人。',
-        'rule_li_2': '報名完成後，系統將於兩日內寄【報名確認信】至您填寫的電子信箱。',
-        'rule_li_3': '若沒收到，請務必於 3/14（四）前 聯繫主辦單位。',
-        'rule_h2': '二、參賽須知',
+        'rule_h2': '參賽須知',
         'rule_li_4': '完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處。',
         'rule_li_5': '請務必穿著適合運動的服裝與運動鞋，以確保活動安全。',
         'rule_li_6': '挑戰過程中請隨時留意自身身體狀況，量力而為。',
@@ -858,7 +860,7 @@ const translations = {
 
         // Footer
         'footer_host': '主辦單位：', 'footer_co': '合作單位：',
-        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '尚未解鎖', 'btn_ig': '追蹤官方IG',
+        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '迪卡儂 新北中和店', 'btn_ig': '追蹤官方IG',
 
         // 排行榜
         'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
@@ -893,6 +895,7 @@ const translations = {
         'g15_desc': 'Inspired by the iconic leg-rowing of Inlay Lake’s Intha fishermen, this game turns tradition into a fast-paced fitness challenge. Balance, row, and chase the thrill of catching as many fish as you can before time runs out.',
         'g16_desc': 'Our project is inspired by the story of the Muay Thai legend Nai Khanom Tom. <br>Players must coordinate elbow and leg movements to punch the correct buttons in order to defeat the opponent. <br>Within 30 seconds, the more points the player punches, the higher their ranking will be.',
         'g17_desc': 'Inspired by the folklore of The Stone Flower, this game turns the art of stone carving into an engaging mastery challenge. Break through the stone wall, refine your skills, and uncover beauty hidden within the rock. Only true masters can carve the perfect Stone Flower.',
+        
         // 🔥 新增：排行榜欄位
         'lb_rank_col': '排名',
         'lb_name_col': '暱稱',
@@ -901,7 +904,85 @@ const translations = {
         'lb_total_col': '總積分',
         'lb_no_data': '目前尚無資料',
         'lb_loading': '資料更新中...',
-        'lb_error': '讀取失敗，請檢查網路'
+        'lb_error': '讀取失敗，請檢查網路',
+
+        // 🔥 新增：全站其他遺漏翻譯
+        'mega_highlight': '● 回顧精彩亮點',
+        'mega_exe1_web': 'ExE 1.0官方網站',
+        'mega_exe1_vid': 'ExE 1.0回顧影片',
+        'mega_address': '國立臺北科技大學<br>互動設計系 113級',
+        'splash_text': 'Loading… Opening the .exe file',
+        'ht_left': '17關全能挑戰',
+        'ht_right': 'EXERCISE 2.0',
+        'hero_bottom_1': '突破關卡、獨自升級<br>一起奔向最終章',
+        'ixd_title': '互動設計系',
+        'ixd_desc': '互動設計系跨足運動科技，致力將肢體動作與感測技術深度融合。<br>讓數位科技釋放競技極限，探索體育與科技的交匯可能。',
+        'event_p1': 'ExErcise｜科技 × 運動體適能挑戰賽',
+        'event_p2': '打破傳統，我們用科技重新定義運動競技',
+        'event_p3': '這不是一般的體育活動，這是一場由科技推動的身體極限挑戰',
+        'event_p4': '如果你想知道「自己的極限在哪」',
+        'event_p5': '這場就是你的答案',
+        'day1_tab': 'Day 1 (3/28)',
+        'day2_tab': 'Day 2 (3/29)',
+        'sch_warmup': '熱身報到',
+        'sch_play': '遊玩時間',
+        'map_locked': '尚未解鎖',
+        'rule_li_7': '未滿12歲須由家長陪同參與。',
+        'footer_highlight': '● 回顧精彩亮點',
+        'btn_back': '返回',
+
+        // 🔥 新增：組別成員與指導老師 (ZH)
+        'g1_m1': '睡美人的肝臟設計師｜陳孝宣',
+        'g1_m2': '壞巫婆的假牙設計師｜楊依韻',
+        'g1_m3': '白雪公主的腋毛設計師｜王政諺',
+        'g1_m4': '神仙教母的帽子設計師｜陳家蓁',
+        'g2_m1': '腦袋空空設計師｜徐郁銓',
+        'g2_m2': '吃個桃桃設計師｜郭純希',
+        'g2_m3': '綠茶多多設計師｜牧彩香',
+        'g2_m4': '人好睏睏設計師｜黃俊凱',
+        'g3_m1': '青箭口香糖 #牛逼 U呢體程式設計師｜謝瑋庭',
+        'g3_m2': '巧克力香蕉 #超頂軟硬體連接設計師｜莊婷伃',
+        'g3_m3': '芝士大漢堡 #要拼主視覺美術設計師｜林科余',
+        'g3_m4': '自清的橘子 #超扯點子王硬體設計師｜羅至侑',
+        'g4_m1': '大總裁介面設計師｜陳心愉',
+        'g4_m2': '女強人程式設計師｜林岱妍',
+        'g4_m3': '女秘書美術設計師｜賴星妍',
+        'g4_m4': '小女人音效設計師｜洪雅恩',
+        'g5_m1': '林紫琪、韋宥筠、賴詠彤、李承祐',
+        'g6_m1': '不會美術的美術設計鴿｜范諭暄',
+        'g6_m2': '諾亞轉生為程式設計鴿｜夏宇柔',
+        'g6_m3': '準備轉職當PM的設計鴿｜楊康媞',
+        'g6_m4': '做翅膀的勞力員設計鴿｜時瑋甯',
+        'g7_m1': '林妤安、蔡珺瑶、趙於萱、鄭儀嘉',
+        'g8_m1': '謀摳林程式設計師｜宋浤銘',
+        'g8_m2': '真的假的視覺設計師｜江庭真',
+        'g8_m3': '國文唐師建模師｜陳彥均',
+        'g8_m4': '互動金采源企劃構想師｜陳婉琦',
+        'g9_m1': '陳靖元、謝昀珊、曾于軒、周鈺倍',
+        'g10_m1': '超派正しくない魔女殺手程式設計師｜莊惟喆',
+        'g10_m2': '超派壽司女郎草莓惡魔粉碎機主視覺設計師｜孫翊瑄',
+        'g10_m3': '超派超絕牛馬剉冰製造機3D設計師 ｜賴柏佑',
+        'g10_m4': '超派魔音穿腦大肉丸實景設計師｜高婉媃',
+        'g10_m5': '超派異域風情陽春麵老闆美術設計師｜楊春春',
+        'g11_m1': '縫縫補補的設計總監｜張煒茹',
+        'g11_m2': '夢想成為鹹魚的角色動畫設計師｜孔奕寧',
+        'g11_m3': '&lt;&lt;是淑儀也是蘇怡的書宜aka不放棄程式設計師&gt;&gt;｜楊書宜',
+        'g11_m4': '超級貓咪視覺設計師｜柯佩岑',
+        'g12_m1': '陳宜靜、李安中、黃智恒、蘇奕菲',
+        'g13_m1': '木匠阿黃/互動設計｜蔣易珊',
+        'g13_m2': '木匠阿綠/程式設計｜何美玲',
+        'g13_m3': '木匠阿紅/美術設計｜陳怡亘',
+        'g13_m4': '斧頭本斧/美術設計｜呂妍',
+        'g14_m1': '林筱婕、盧佩雲、吳欣祈、吳千佳',
+        'g15_m1': 'Aein Kyawt Han、Anujin Bazardargia、Aye Pyae Pyae Khin、Jintapa Laipitaksin、Katriela Nicoline',
+        'g16_m1': '丁玉寶珍、Gwynne Purnama、Ratchapakorn Thanwised、Jesslyn Boediono Goenawan、AZZRA RIENOV FAHLIVI',
+        'g17_m1': '陳小清、Leanne Garcia、Emiliia Malkova、Khuat Thi Khanh Linh、PHAM LAN HUONG',
+
+        'adv_sung': '宋兆祥',
+        'adv_wang': '王明道',
+        'adv_chien': '簡明哲',
+        'adv_cheng': '鄭建文',
+        'adv_han': '韓秉軒'
     },
     
     'en': {
@@ -910,12 +991,14 @@ const translations = {
         'close_btn': 'Tap to Close',
         
         // Home
-        'about_title': 'About the Event',
+        'event_title': 'About the Event',
         'home_brand': '【ExErcise】Tech × Sports',
         'home_slogan': 'Through breaking tradition, we redefine competitive sports with technology.',
         'home_desc': 'No matter what kind of warrior you are, there is a battlefield for you here.<br>Are you ready to challenge your limits? Come unleash your potential with your companions!',
         'event_items': '7 Competition Events',
         'detail_title': 'Event Details',
+        'hero_welcome_1': 'Welcome to',
+        'hero_welcome_2': 'Tech × Sports Fitness Challenge',
 
         // Tabs
         'tab_schedule': 'Schedule', 'tab_scoring': 'Scoring', 'tab_map': 'Map', 'tab_rules': 'Rules',
@@ -944,10 +1027,6 @@ const translations = {
         'score_li_3': 'Sum of points from 7 categories. Higher score ranks higher.',
 
         // Rules
-        'rule_h1': '1. Online Registration',
-        'rule_li_1': 'Reservation only. 20 people per batch.',
-        'rule_li_2': 'A confirmation email will be sent within 2 days after registration.',
-        'rule_li_3': 'If nothing was received, please contact us by 3/14 (Thu).',
         'rule_h2': '2. Competition Guidelines',
         'rule_li_4': 'Upon registration, you will receive a "wristband" for scoring. Please return it upon exit.',
         'rule_li_5': 'Please wear appropriate clothing, like sportswear and sports shoes for your safety.',
@@ -957,7 +1036,7 @@ const translations = {
 
         // Footer
         'footer_host': 'Organizer:', 'footer_co': 'Co-organizer:',
-        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'To Be Determined', 'btn_ig': 'Follow Instagram',
+        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Decathlon New Taipei Zhonghe Store', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
         'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
@@ -992,6 +1071,7 @@ const translations = {
         'g15_desc': 'Inspired by the iconic leg-rowing of Inlay Lake’s Intha fishermen, this game turns tradition into a fast-paced fitness challenge. Balance, row, and chase the thrill of catching as many fish as you can before time runs out.',
         'g16_desc': 'Our project is inspired by the story of the Muay Thai legend Nai Khanom Tom. <br>Players must coordinate elbow and leg movements to punch the correct buttons in order to defeat the opponent. <br>Within 30 seconds, the more points the player punches, the higher their ranking will be.',
         'g17_desc': 'Inspired by the folklore of The Stone Flower, this game turns the art of stone carving into an engaging mastery challenge. Break through the stone wall, refine your skills, and uncover beauty hidden within the rock. Only true masters can carve the perfect Stone Flower.',
+        
         // 🔥 新增：排行榜欄位
         'lb_rank_col': 'Rank',
         'lb_name_col': 'Nickname',
@@ -1000,12 +1080,89 @@ const translations = {
         'lb_total_col': 'Total',
         'lb_no_data': 'No Data Available',
         'lb_loading': 'Updating...',
-        'lb_error': 'Load Error'
+        'lb_error': 'Load Error',
+
+        // 🔥 新增：全站其他遺漏翻譯 (EN)
+        'mega_highlight': '● Past Highlights',
+        'mega_exe1_web': 'ExE 1.0 Official Website',
+        'mega_exe1_vid': 'ExE 1.0 Recap Video',
+        'mega_address': 'National Taipei University of Technology<br>Interaction Design Class of 113',
+        'splash_text': 'Loading… Opening the .exe file',
+        'ht_left': '17-Stage Challenge',
+        'ht_right': 'EXERCISE 2.0',
+        'hero_bottom_1': 'Break through levels, upgrade yourself<br>Sprint to the final chapter together',
+        'ixd_title': 'Interaction Design',
+        'ixd_desc': 'The Department of Interaction Design steps into sports technology, dedicated to deeply integrating physical movements with sensing technology.<br>Unleashing competitive limits through digital technology, exploring the intersection of sports and tech.',
+        'event_p1': 'ExErcise｜Tech × Sports Fitness Challenge',
+        'event_p2': 'Breaking traditions, redefining athletic competition with technology',
+        'event_p3': 'This is not an ordinary sports event, but a physical limit challenge driven by tech',
+        'event_p4': 'If you want to know "where your limits lie"',
+        'event_p5': 'This is your answer',
+        'day1_tab': 'Day 1 (3/28)',
+        'day2_tab': 'Day 2 (3/29)',
+        'sch_warmup': 'Warm-up & Check-in',
+        'sch_play': 'Gameplay',
+        'map_locked': 'Locked',
+        'rule_li_7': 'Children under 12 must be accompanied by parents.',
+        'footer_highlight': '● Past Highlights',
+        'btn_back': 'Back',
+
+        // 🔥 新增：組別成員與指導老師 (EN)
+        'g1_m1': 'Sleeping Beauty\'s Liver Designer | Chen Hsiao-Hsuan',
+        'g1_m2': 'Wicked Witch\'s Denture Designer | Yang Yi-Yun',
+        'g1_m3': 'Snow White\'s Armpit Hair Designer | Wang Cheng-Yen',
+        'g1_m4': 'Fairy Godmother\'s Hat Designer | Chen Chia-Chen',
+        'g2_m1': 'Empty-headed Designer | Hsu Yu-Chuan',
+        'g2_m2': 'Eating a Peach Designer | Kuo Chun-Hsi',
+        'g2_m3': 'Green Tea Yakult Designer | Mu Tsai-Hsiang',
+        'g2_m4': 'Super Sleepy Designer | Huang Chun-Kai',
+        'g3_m1': 'Doublemint Gum #Awesome Unity Programmer | Hsieh Wei-Ting',
+        'g3_m2': 'Chocolate Banana #Top-Tier Hardware Integrator | Chuang Ting-Yu',
+        'g3_m3': 'Cheese Burger #Tryhard Visual Artist | Lin Ke-Yu',
+        'g3_m4': 'Innocent Orange #Ridiculous Hardware Designer | Lo Chih-Yu',
+        'g4_m1': 'Big Boss UI Designer | Chen Hsin-Yu',
+        'g4_m2': 'Strong Woman Programmer | Lin Tai-Yen',
+        'g4_m3': 'Secretary Art Designer | Lai Hsing-Yen',
+        'g4_m4': 'Little Woman Sound Designer | Hung Ya-En',
+        'g5_m1': 'Lin Tzu-Chi, Wei You-Yun, Lai Yung-Tung, Li Cheng-Yu',
+        'g6_m1': 'Art Designer Pigeon Who Can\'t Draw | Fan Yu-Hsuan',
+        'g6_m2': 'Noah Reincarnated as Programmer Pigeon | Hsia Yu-Jou',
+        'g6_m3': 'Designer Pigeon Switching to PM | Yang Kang-Ti',
+        'g6_m4': 'Laborer Pigeon Making Wings | Shih Wei-Ning',
+        'g7_m1': 'Lin Yu-An, Tsai Chun-Yao, Chao Yu-Hsuan, Cheng Yi-Chia',
+        'g8_m1': 'Impossible Programmer | Sung Hung-Ming',
+        'g8_m2': 'For Real Visual Designer | Chiang Ting-Chen',
+        'g8_m3': 'Chinese Teacher Modeler | Chen Yen-Chun',
+        'g8_m4': 'Interactive Concept Planner | Chen Wan-Chi',
+        'g9_m1': 'Chen Ching-Yuan, Hsieh Yun-Shan, Tseng Yu-Hsuan, Chou Yu-Pei',
+        'g10_m1': 'Super Pie Incorrect Witch Killer Programmer | Chuang Wei-Che',
+        'g10_m2': 'Super Pie Sushi Girl Strawberry Crusher Designer | Sun Yi-Hsuan',
+        'g10_m3': 'Super Pie Ultimate Shaved Ice Machine 3D Designer | Lai Po-You',
+        'g10_m4': 'Super Pie Ear-Piercing Meatball Prop Designer | Kao Wan-Jou',
+        'g10_m5': 'Super Pie Exotic Plain Noodle Boss Art Designer | Yang Chun-Chun',
+        'g11_m1': 'Stitching & Mending Design Director | Chang Wei-Ju',
+        'g11_m2': 'Character Animator Dreaming of Being a Salted Fish | Kung Yi-Ning',
+        'g11_m3': '&lt;&lt;Shu-Yi aka The Programmer Who Never Gives Up&gt;&gt; | Yang Shu-Yi',
+        'g11_m4': 'Super Cat Visual Designer | Ke Pei-Tsen',
+        'g12_m1': 'Chen Yi-Ching, Li An-Chung, Huang Chih-Heng, Su Yi-Fei',
+        'g13_m1': 'Carpenter Yellow / Interaction Design | Chiang Yi-Shan',
+        'g13_m2': 'Carpenter Green / Programming | He Mei-Ling',
+        'g13_m3': 'Carpenter Red / Art Design | Chen Yi-Hsuan',
+        'g13_m4': 'The Axe Itself / Art Design | Lu Yen',
+        'g14_m1': 'Lin Hsiao-Chieh, Lu Pei-Yun, Wu Hsin-Chi, Wu Chien-Chia',
+        'g15_m1': 'Aein Kyawt Han, Anujin Bazardargia, Aye Pyae Pyae Khin, Jintapa Laipitaksin, Katriela Nicoline',
+        'g16_m1': 'Dinh Ngoc Bao Tran, Gwynne Purnama, Ratchapakorn Thanwised, Jesslyn Boediono Goenawan, AZZRA RIENOV FAHLIVI',
+        'g17_m1': 'Chen Xiao-Qing, Leanne Garcia, Emiliia Malkova, Khuat Thi Khanh Linh, PHAM LAN HUONG',
+
+        'adv_sung': 'Sung Chao-Hsiang',
+        'adv_wang': 'Wang Ming-Dao',
+        'adv_chien': 'Chien Ming-Che',
+        'adv_cheng': 'Cheng Chien-Wen',
+        'adv_han': 'Han Ping-Hsuan'
     }
 };
 
 let currentLang = 'zh';
-
 
 function applyTranslations() {
     const elements = document.querySelectorAll('[data-i18n]');
