@@ -816,10 +816,6 @@ const translations = {
         
         // 首頁
         'event_title': '關於本次賽事',
-        'home_brand': '【ExErcise】科技 × 運動賽事',
-        'home_slogan': '打破傳統，我們用科技重新定義運動競技。',
-        'home_desc': '無論你是哪類猛將，這裡都有屬於你的戰場。<br>準備好挑戰極限了嗎？快來與夥伴一同釋放自己的潛能吧！',
-        'event_items': '七大競賽項目',
         'detail_title': '賽事細節',
         'hero_welcome_1': '歡迎來到',
         'hero_welcome_2': '科技x運動體適能挑戰賽',
@@ -992,10 +988,6 @@ const translations = {
         
         // Home
         'event_title': 'About the Event',
-        'home_brand': '【ExErcise】Tech × Sports',
-        'home_slogan': 'Through breaking tradition, we redefine competitive sports with technology.',
-        'home_desc': 'No matter what kind of warrior you are, there is a battlefield for you here.<br>Are you ready to challenge your limits? Come unleash your potential with your companions!',
-        'event_items': '7 Competition Events',
         'detail_title': 'Event Details',
         'hero_welcome_1': 'Welcome to',
         'hero_welcome_2': 'Tech × Sports Fitness Challenge',

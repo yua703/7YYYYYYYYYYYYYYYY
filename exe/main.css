@@ -455,22 +455,19 @@ img {
     position: relative;
 }
 
-/* --- 標題 (左上) --- */
-.event-title {
+/* 🌟 統一「關於本次賽事」與「賽事細節」的白框大標題 */
+/* 透過 "父容器 + 子容器" 的寫法提升權重，完全不需要 !important 就能壓制全域設定！ */
+.event-white-box .event-title,
+.game-choice-box .game-choice-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-size: 1.8rem;
-    color: #3643BA; /* 白底配深藍色標題最清楚 */
+    font-size: 1.5rem;
+    color: #3643BA;       /* 強制統一深藍色 */
+    text-shadow: none;    /* 強制殺掉黑色陰影 */
     margin-bottom: 25px;
     text-align: left;
-    text-shadow: none; /* 白底不需要文字陰影 */
-
-    /* 🌟 1. 殺掉源頭干擾：強制抵銷全域設定的 20px 內距 */
-    padding-left: 0 !important; 
-    
-    /* 🌟 2. 獨立控制：修改這個數值來控制標題與左邊白底的距離 */
-    margin-left: 0px;  /* (正數往右推，負數往左拉) */
+    padding-left: 0;      /* 殺掉全域的 20px 錯位內距 */
+    margin-left: 0;
 }
-
 
 /* --- 圖片區域 --- */
 .event-visuals {
@@ -1564,12 +1561,13 @@ body.lock-scroll {
     margin-bottom: 30px;
     text-align: left;
 }
-/* 🌟 互動設計系專屬：只改顏色與置中，其他全吃上面的 h2 設定 */
-.ixd-green-title {
-    color: #C7FF3C !important;
-    text-align: center !important;
-    padding-left: 0 !important; /* 抵銷掉 h2 預設的左邊距，確保完美置中 */
-    margin-bottom: 15px !important;
+.intro-ixd-section .ixd-green-title {
+    color: #C7FF3C;
+    text-align: center;
+    padding-left: 0; 
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    text-shadow: none;
 }
 
 .sch-sub-row span {
@@ -1647,7 +1645,7 @@ body.lock-scroll {
     display: flex;
     flex-direction: column; /* 手機版上下堆疊 */
     gap: 20px;
-    padding: 10px 20px;
+    padding: 10px 0px;
 }
 
 .game-left-panel {
@@ -1662,14 +1660,6 @@ body.lock-scroll {
     border-radius: 16px;
     padding: 25px 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-}
-
-.game-choice-title {
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-size: 1.8rem;
-    color: #3643BA;
-    margin-bottom: 20px;
-    text-align: left;
 }
 
 /* 🌟 手機版：上方大綠色顯示框 */
@@ -1761,6 +1751,14 @@ body.lock-scroll {
    🖥️ 電腦版面優化總整理 (Desktop Optimization)
    ========================================= */
 @media (min-width: 1024px) {
+    .intro-ixd-section .ixd-green-title {
+        font-size: 2rem; /* 👈 在這裡設定電腦版要多大，它就不會再受手機版影響了！ */
+    }
+    .section-padding,
+    .leaderboard-header {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
     /* 確保電腦版絕對不會出現這個手機的大綠框 */
     .mobile-tab-display {
         display: none !important;
@@ -1777,10 +1775,6 @@ body.lock-scroll {
         width: auto; 
     }
 
-    .event-title {
-        font-size: 2rem;
-        margin-bottom: 30px;
-    }
     /* 🌟 電腦版專屬漸層 */
     .gradient-bottom-block {
         /* 你可以改變方向 (例如 to right, 或者是 45deg) */
@@ -1839,7 +1833,7 @@ body.lock-scroll {
     .event-sub-img {
         position: absolute;
         max-width: 200px; /* 電腦版小圖稍微放大 */
-        bottom: -150%;
+        bottom: -180px;
         right: -10%;
         rotate: -20deg;
         transform: translate(-50%, -50%);
@@ -2047,7 +2041,7 @@ body.lock-scroll {
         
         width: 100%;
         max-width: 1600px; 
-        margin-left: auto;
+        margin-left: 0;
         margin-right: auto;
         
         padding-left: 180px; 
@@ -2163,16 +2157,11 @@ body.lock-scroll {
         position: relative;
     }
 
-    /* 白框內的標題 */
-    .game-choice-title {
-        font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-        font-size: 2rem;       /* 🌟 對齊 event-title 電腦版大小 */
-        color: #3643BA;          /* 🌟 對齊 event-title 的深藍色 */
-        text-shadow: none;       /* 🌟 白底不加陰影，保持乾淨 */
-        text-align: left;
-        margin-bottom: 30px;     /* 🌟 對齊下方的距離 */
-        padding-left: 0 !important; 
-        margin-left: 0px; 
+    /* 🌟 電腦版：統一雙胞胎標題的放大比例 */
+    .event-white-box .event-title,
+    .game-choice-box .game-choice-title {
+        font-size: 2rem;
+        margin-bottom: 30px;
     }
 
     /* 選項按鈕列表 (移除原本的 detail-tabs 樣式，重新定義) */
@@ -2781,35 +2770,46 @@ body.lock-scroll {
         padding-left: 20px !important;  /* 原本是 40px，縮減一半 */
         padding-right: 20px !important; /* 讓出更多空間給裡面的文字 */
     }
+    .hb-center img {
+        /* 你可以自由修改這個數字！
+           原本全域(電腦)是 90px。
+           如果手機版想縮小可以改 60px，想放大可以改 120px */
+        width: 90px; 
+    }
 }
 @media (max-width: 1023px) {
     /* =========================================
        📱 手機版專屬：動態導覽列標題
        ========================================= */
 /* 🌟 1. 懸浮在正中間的標題 (安全區置中法) */
+    /* 🌟 1. 懸浮在正中間的標題 (安全區置中法) */
     .header-mobile-title {
         position: absolute;
-        
-        /* 👇 這裡就是你控制標題跟 Logo 距離的搖桿！你可以依喜好微調數字 */
-        left: 110px;   /* 留給左邊 Logo 的安全距離 (覺得太遠可改成 90px，太近改 120px) */
+        left: 100px;   
         right: 130px;  
         top: 50%;      
         transform: translateY(-50%);
         
-        text-align: left; /* 🌟 關鍵修改：從 center 改成 left，讓它貼著左邊的安全線！ */
+        /* 👇 新增這行：往下推的搖桿！你可以改成 3px 或 5px 來微調它的上下位置 */
+        margin-top: 3px; 
         
+        text-align: left; 
         font-family: 'Cubic11', "Noto Sans TC", sans-serif;
         color: #f0f0f0;
-        font-size: 1.2rem;       
+        font-size: 1.4rem;       
         white-space: nowrap;     
         overflow: hidden;        
         text-overflow: ellipsis; 
-        text-shadow: 2px 2px 0px #333333; 
+        
+        /* 👇 修改這行：把陰影殺掉 */
+        text-shadow: none; 
+        
         pointer-events: none;    
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
-    }    /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
+    }
+        /* 🌟 2. 當導覽列被加上 solid-purple 時的變化 */
     .top-header.solid-purple {
         /* 只保留陰影來增加立體感即可，底色與滿版已在源頭設定好 */
         box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
