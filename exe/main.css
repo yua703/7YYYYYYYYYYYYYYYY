@@ -304,19 +304,23 @@ img {
     color: #333;
     text-align: center;
 }
-/* 🌟 控制替換文字後的圖片樣式 */
+/* 🌟 控制替換文字後的圖片樣式 (自動伸縮 + 位置微調版) */
 .hb-center img {
-    /* 1. 讓圖片寬度最大不會超過它的容器 */
+    /* 1. 基礎防護，確保不超過外框 */
     max-width: 100%;
-    
-    /* 2. 高度自動調整，保持圖片比例不變形 */
     height: auto;
     
-    /* 3. 在電腦上設定圖片的最大寬度，避免圖片太大，可以根據需求調整這個數值 */
-    /* 電腦版建議調整這個數值 */
-    width: 90px;
+    /* 👇 2. 核心魔法：讓它佔螢幕寬度的 12% (數值可自由微調) */
+    width: 40vw;
     
-    /* 4. 確保圖片能正確置中 (原本的 .hb-center 應該已經在處理置中了，這裡補強一下) */
+    /* 👇 2. 放寬防護網！讓它有空間變大變小 */
+    min-width: 50px;   /* 把底線降低，讓手機版可以縮得更小 */
+    max-width: 300px;  /* 把上限拉高，讓電腦版可以放得更大 */
+    
+    /* 👇 4. 往上提的搖桿：用負數把它往上吸 */
+    margin-top: -50px; /* 覺得不夠高就改 -20px，太高就改 -5px */
+    
+    /* 5. 確保正確置中 */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -2321,6 +2325,11 @@ body.lock-scroll {
     .footer-static-line {
         display: none;
     }
+    .hb-center img {
+        /* 原本全域(手機)可能是 -15px，我們在電腦版給它更強的上升力道 */
+        /* 數字的絕對值越大，往上飛得越高！你可以自由修改 -30px、-50px 測試 */
+        margin-top: -80px; 
+    }
 }
 
 
@@ -2639,7 +2648,27 @@ body.lock-scroll {
         text-align: center; 
     }
     .hero-bottom-bar p { text-align: center; }
-    
+    .pixel-down-arrow {
+        /* 你可以利用 margin-top 來決定它離上面的圖片有多遠 */
+        /* 數字越大，箭頭就越往下掉。你可以試試 20px, 30px, 或甚至是負數往上拉 */
+        margin-top: 100px; 
+        
+        /* 如果你不想讓它置中，想讓它靠右邊一點，可以解除註解下面這行：*/
+        /* align-self: flex-end; */
+        
+        /* 如果解除上一行的註解讓它靠右了，可以用 margin-right 把推回來一點：*/
+        /* margin-right: 20px; */
+    }
+    .pixel-down-arrow {
+        /* 1. 開啟幽靈定位魔法，它能無視 Flexbox 排版限制，也不會干擾動畫 */
+        position: relative; 
+        
+        /* 2. 👇 新的上升搖桿在這裡！ */
+        /* 使用 top 並且給負數，數字越大 (例如 -30px, -50px) 箭頭就往上飛越高！ */
+        top: -200px; 
+        
+        /* (記得把之前無效的 margin-top 刪掉，保持乾淨) */
+    }
     .hero-visual-wrapper {
         flex-direction: column; 
         gap: 10px;
@@ -2774,12 +2803,6 @@ body.lock-scroll {
     .game-right-content {
         padding-left: 20px !important;  /* 原本是 40px，縮減一半 */
         padding-right: 20px !important; /* 讓出更多空間給裡面的文字 */
-    }
-    .hb-center img {
-        /* 你可以自由修改這個數字！
-           原本全域(電腦)是 90px。
-           如果手機版想縮小可以改 60px，想放大可以改 120px */
-        width: 90px; 
     }
 }
 @media (max-width: 1023px) {
