@@ -2660,14 +2660,16 @@ body.lock-scroll {
         /* margin-right: 20px; */
     }
     .pixel-down-arrow {
-        /* 1. 開啟幽靈定位魔法，它能無視 Flexbox 排版限制，也不會干擾動畫 */
-        position: relative; 
+        /* 1. 啟動絕對定位！脫離一般排版，直接聽令於最外層容器 */
+        position: absolute; 
         
-        /* 2. 👇 新的上升搖桿在這裡！ */
-        /* 使用 top 並且給負數，數字越大 (例如 -30px, -50px) 箭頭就往上飛越高！ */
-        top: -200px; 
+        /* 2. 直接設定座標：釘在距離底部 30px、右邊 30px 的位置 */
+        bottom: 30px; 
+        right: 0px;
         
-        /* (記得把之前無效的 margin-top 刪掉，保持乾淨) */
+        /* (你可以自由調整 30px 這兩個數字來決定它要多貼齊右下角) */
+        
+        /* 因為用了 absolute，記得把 top 刪掉！ */
     }
     .hero-visual-wrapper {
         flex-direction: column; 
