@@ -1508,6 +1508,11 @@ body.lock-scroll {
 }
 .scoring-subtitle::before { content: ''; width: 6px; height: 16px; background-color: #C7FF3C; margin-right: 8px; border-radius: 2px; }
 .scoring-desc { font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5; }
+/* 👇 🌟 貼在這裡！修復「二、全項總積分」下方間距過大的問題 */
+.scoring-two-col .scoring-col-left .scoring-subtitle:first-child,
+.scoring-two-col .scoring-col-right .scoring-subtitle:first-child {
+    margin-top: 0; 
+}
 
 /* 🌟 關鍵修復3：縮小版電子計分板 */
 .points-grid {
