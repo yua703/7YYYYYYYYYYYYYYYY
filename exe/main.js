@@ -851,7 +851,7 @@ const translations = {
 
         // 競賽辦法
         'rule_h1': '參賽須知',
-        'rule_li_1': '完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處，參賽者們於競賽期間請小心保管，若有遺失或損壞，須照價賠償。',
+        'rule_li_1': '完成報到後，將發放「參賽編號手環」用於紀錄競賽成績；活動期間請妥善保管手環，並於離場時繳回服務處，參賽者們於競賽期間請小心保管，若有遺失，須照價賠償。',
         'rule_li_2': '請務必穿著適合運動的服裝與運動鞋，以確保活動安全。',
         'rule_li_3': '基於安全維護考量，12 歲以下孩童參與本活動時，請務必由監護人在旁陪同照顧。',
         'rule_li_4': '為維護賽事公平性與安全，請所有參賽者於賽前確實掌握賽事規範與各項流程細節。',
@@ -1028,7 +1028,7 @@ const translations = {
 
         // Rules
         'rule_h1': 'Competition Guidelines',
-        'rule_li_1': 'Upon check-in, a "Participant ID Wristband" will be issued to record scores. Please keep it safe and return it upon leaving. Any loss or damage will require compensation.',
+        'rule_li_1': 'Upon check-in, a "Participant ID Wristband" will be issued to record scores. Please keep it safe and return it upon leaving. Any loss will require compensation.',
         'rule_li_2': 'Please wear appropriate sportswear and sports shoes to ensure safety.',
         'rule_li_3': 'For safety reasons, children under 12 must be accompanied by a guardian.',
         'rule_li_4': 'To maintain fairness and safety, all participants must fully understand the event rules and processes before competing.',
