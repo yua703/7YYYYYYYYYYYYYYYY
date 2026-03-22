@@ -465,9 +465,13 @@ const GROUP_GALLERY = {
     "G9": ["img/9.webp","img/9 (1).webp", "img/9 (2).webp", "img/9 (3).webp", "img/9 (4).webp", "img/9 (5).webp"],
     "G10": ["img/10.webp","img/10 (1).webp", "img/10 (2).webp", "img/10 (3).webp", "img/10 (4).webp", "img/10 (5).webp"],
     "G11": ["img/11.webp","img/11 (1).webp", "img/11 (2).webp","img/11 (3).webp", "img/11 (4).webp", "img/11 (5).webp"],
-    "G12": ["img/12.webp","img/12 (1).webp", "img/12 (2).webp","img/12 (3).webp"],
-    "G13": ["img/13.webp","img/13 (1).webp", "img/13 (2).webp", "img/13 (3).webp"],
-    "G14": ["img/14.webp","img/14 (1).webp", "img/14 (2).webp", "img/14 (3).webp"]
+    "G12": ["img/12.webp","img/12 (1).webp", "img/12 (2).webp","img/12 (3).webp", "img/12 (4).webp", "img/12 (5).webp"],
+    "G13": ["img/13.webp","img/13 (1).webp", "img/13 (2).webp", "img/13 (3).webp", "img/13 (4).webp", "img/13 (5).webp"],
+    "G14": ["img/14.webp","img/14 (1).webp", "img/14 (2).webp", "img/14 (3).webp", "img/14 (4).webp", "img/14 (5).webp"],
+    "G15": ["img/15.webp","img/15 (1).webp", "img/15 (2).webp","img/15 (3).webp", "img/15 (4).webp", "img/15 (5).webp"],
+    "G16": ["img/16.webp","img/16 (1).webp", "img/16 (2).webp","img/16 (3).webp", "img/16 (4).webp", "img/16 (5).webp"],
+    "G17": ["img/17.webp","img/17 (1).webp", "img/17 (2).webp","img/17 (3).webp", "img/17 (4).webp", "img/17 (5).webp"],
+
 };
 
 // DOM 元素選取
