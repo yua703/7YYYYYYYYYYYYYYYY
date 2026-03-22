@@ -2407,6 +2407,94 @@ body.lock-scroll {
         width: 24px;
         height: 24px;
     }
+    /* 👇 🌟 核心魔法：清理卡片外觀，實作滿版、獨立滑動對分布局 */
+    .overlay-card {
+        display: flex;
+        flex-direction: row;     /* 啟動左右並排 */
+        
+        width: 100vw;            /* 🌟 核心 1：寬度佔滿整個螢幕寬 */
+        height: 100vh;           /* 🌟 核心 2：高度鎖定整個螢幕高 (重要！) */
+        max-width: 100%;         /* 取消上一版的 1200px 限制 */
+        
+        margin: 0;               /* 🌟 取消卡片外距，直接貼在螢幕邊邊 */
+        border-radius: 0;        /* 🌟 取消圓角 */
+        box-shadow: none;        /* 取消卡片立體陰影 */
+        
+        overflow: hidden;        /* 防止父容器本身出現滾動條 */
+        position: fixed;         /* 可選：如果是彈出式全螢幕，請加上這行貼在螢幕最頂部 */
+        top: 0; left: 0;         /* 配合 position: fixed 使用 */
+        z-index: 1000;           /* 配合 position: fixed 使用，確保在最上面 */
+    }
+
+    /* -------------------------------------------
+       左半邊（文字區塊）：實作內部滑動
+    ------------------------------------------- */
+    .overlay-content {
+        flex: 1;                 /* 左右各佔 1 份空間 (50%) */
+        order: 1;                /* 確保它在左邊 */
+        
+        /* 🌟 核心魔法 3：左側獨立滑動設定 */
+        overflow-y: auto;        /* 🌟 重要：啟用垂直滑動，當內容過多時 */
+        height: 100%;            /* 填滿父容器高度 */
+        
+        padding: 80px 60px;      /* 加大電腦版的 padding，看起來才不擁擠 */
+        background-color: #ffffff;
+        
+        /* 圖片中文字是頂部對齊，不要用之前設的 justify-content: center */
+        display: block; 
+    }
+
+    /* 順手修復：取消手機版為了滿版而設定的負數外距，
+       因為現在在電腦版也是滿版了，不需要這些複雜設定。 */
+    .overlay-card .overlay-desc,
+    .overlay-card .overlay-header,
+    .overlay-card .overlay-body {
+        margin: 0;
+        padding: 0;
+        box-shadow: none;
+        border-bottom: none;
+    }
+    
+    /* 文字區塊內的細節調整，確保排版好看 */
+    .overlay-content .overlay-body {
+        padding-top: 30px;
+    }
+
+    /* -------------------------------------------
+       右半邊（圖片區塊）：固定不動，按鈕在底部
+    ------------------------------------------- */
+    .overlay-slider-wrapper {
+        flex: 1;                 /* 左右各佔 1 份空間 (50%) */
+        order: 2;                /* 確保它在右邊 */
+        
+        /* 🌟 核心魔法 4：右側固定不動設定 */
+        height: 100%;            /* 填滿父容器高度 */
+        overflow: hidden;        /* 🌟 重要：防止圖片本身出現滾動條，確保它"固定" */
+        
+        position: relative;      /* 設定基準，讓底部的「加入按鈕」絕對定位在上面 */
+    }
+
+    /* 右邊圖片的顯示方式：必須滿版裁剪 */
+    .overlay-card img {
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;       /* 🌟 重要：圖片不變形，鋪滿整個右半邊，多餘部分自動裁切 */
+        object-position: center; /* 裁切時保持中間位置 */
+        z-index: 1;              /* 放在最底層 */
+    }
+
+    /* 參考圖片結構：如果你的「加入組別」按鈕是 .overlay-add-group 
+       使其固定在右半邊的底部中央 */
+    .overlay-slider-wrapper .overlay-add-group {
+        position: absolute;      /* 相對於右半邊定位 */
+        bottom: 40px;            /* 距離螢幕底部一個乾淨的距離 */
+        left: 50%;               /* 先定位到中間 */
+        transform: translateX(-50%); /* 🌟 核心魔法：精確水平置中 */
+        z-index: 10;             /* 🌟 重要：確保按鈕疊在固定圖片上面 */
+        width: calc(100% - 80px); /* 讓按鈕不要太貼兩側 */
+        box-sizing: border-box;
+    }
 }
 
 
