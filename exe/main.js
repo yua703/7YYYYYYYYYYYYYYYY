@@ -454,15 +454,17 @@ function stopLeaderboardUpdate() {
 
 // 🔥 設定：每一組的照片清單
 const GROUP_GALLERY = {
-    "G1": ["img/1.webp","img/1 (1).webp", "img/1 (2).webp", "img/1 (3).webp","img/1 (4).webp","img/1 (5).webp","img/1 (6).webp","img/1 (7).webp"],
+    "G1": ["img/1.webp","img/1 (1).webp", "img/1 (2).webp", "img/1 (3).webp","img/1 (4).webp","img/1 (5).webp","img/1 (6).webp"],
     "G2": ["img/2.webp","img/2 (1).webp", "img/2 (2).webp", "img/2 (3).webp", "img/2 (4).webp", "img/2 (5).webp"], 
     "G3": ["img/3.webp","img/3 (1).webp", "img/3 (2).webp", "img/3 (3).webp", "img/3 (4).webp", "img/3 (5).webp", "img/3 (6).webp"],
-    "G4": ["img/4.webp","img/4 (1).webp", "img/4 (2).webp", "img/4 (3).webp"],
-    "G6": ["img/6.webp","img/6 (1).webp", "img/6 (2).webp", "img/6 (3).webp"],
-    "G8": ["img/8.webp","img/8 (1).webp", "img/8 (2).webp", "img/8 (3).webp"],
-    "G9": ["img/9.webp","img/9 (1).webp", "img/9 (2).webp", "img/9 (3).webp", "img/9 (4).webp"],
-    "G10": ["img/10.webp","img/10 (1).webp", "img/10 (2).webp", "img/10 (3).webp"],
-    "G11": ["img/11.webp","img/11 (1).webp", "img/11 (2).webp"],
+    "G4": ["img/4.webp","img/4 (1).webp", "img/4 (2).webp", "img/4 (3).webp", "img/4 (4).webp", "img/4 (5).webp", "img/4 (6).webp"],
+    "G5": ["img/5.webp","img/5 (1).webp", "img/5 (2).webp", "img/5 (3).webp", "img/5 (4).webp", "img/5 (5).webp", "img/5 (6).webp"],
+    "G6": ["img/6.webp","img/6 (1).webp", "img/6 (2).webp", "img/6 (3).webp", "img/6 (4).webp", "img/6 (5).webp"], 
+    "G7": ["img/7.webp","img/7 (1).webp", "img/7 (2).webp", "img/7 (3).webp", "img/7 (4).webp", "img/7 (5).webp"], 
+    "G8": ["img/8.webp","img/8 (1).webp", "img/8 (2).webp", "img/8 (3).webp","img/8 (4).webp","img/8 (5).webp","img/8 (6).webp"],
+    "G9": ["img/9.webp","img/9 (1).webp", "img/9 (2).webp", "img/9 (3).webp", "img/9 (4).webp", "img/9 (5).webp"],
+    "G10": ["img/10.webp","img/10 (1).webp", "img/10 (2).webp", "img/10 (3).webp", "img/10 (4).webp", "img/10 (5).webp"],
+    "G11": ["img/11.webp","img/11 (1).webp", "img/11 (2).webp","img/11 (3).webp", "img/11 (4).webp", "img/11 (5).webp"],
     "G12": ["img/12.webp","img/12 (1).webp", "img/12 (2).webp","img/12 (3).webp"],
     "G13": ["img/13.webp","img/13 (1).webp", "img/13 (2).webp", "img/13 (3).webp"],
     "G14": ["img/14.webp","img/14 (1).webp", "img/14 (2).webp", "img/14 (3).webp"]
