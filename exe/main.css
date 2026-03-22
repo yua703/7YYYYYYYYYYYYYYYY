@@ -2362,22 +2362,48 @@ body.lock-scroll {
         padding: 0;
     }
 
+    /* 👇 🌟 修復電腦版左右切換按鈕的位置與失效 Bug (涵蓋外層與全螢幕) */
+    .slider-nav-btn, 
+    .lightbox-nav-btn {            /* 👈 加上這個，讓全螢幕箭頭也吃到絕對定位！ */
+        position: absolute;       
+        top: 50%;                 
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.95); 
+        border: 2px solid #3643BA; 
+        color: #3643BA;            
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 100000;           /* 🌟 把這裡多加幾個 0，確保全螢幕時也絕對在最上面 */
+        transition: all 0.2s ease;
+        padding: 0;
+    }
+
     /* 左右分開釘好 */
-    .slider-nav-btn.prev-btn {
+    .slider-nav-btn.prev-btn, 
+    .lightbox-nav-btn.prev-btn {   /* 👈 共用靠左設定 */
         left: 20px; 
     }
-    .slider-nav-btn.next-btn {
+    
+    .slider-nav-btn.next-btn, 
+    .lightbox-nav-btn.next-btn {   /* 👈 共用靠右設定 */
         right: 20px; 
     }
 
     /* 按鈕滑鼠移過去的特效 */
-    .slider-nav-btn:hover {
-        background-color: #C7FF3C; /* 變成你的螢光綠 */
-        transform: translateY(-50%) scale(1.1); /* 微微放大 */
+    .slider-nav-btn:hover, 
+    .lightbox-nav-btn:hover {      /* 👈 共用滑過變色特效 */
+        background-color: #C7FF3C; 
+        transform: translateY(-50%) scale(1.1); 
     }
 
     /* 調整箭頭 SVG 圖像的大小 */
-    .slider-nav-btn svg {
+    .slider-nav-btn svg, 
+    .lightbox-nav-btn svg {        /* 👈 共用大小設定 */
         width: 24px;
         height: 24px;
     }
