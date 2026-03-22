@@ -456,7 +456,7 @@ function stopLeaderboardUpdate() {
 const GROUP_GALLERY = {
     "G1": ["img/1.webp","img/1 (1).webp", "img/1 (2).webp", "img/1 (3).webp","img/1 (4).webp","img/1 (5).webp","img/1 (6).webp","img/1 (7).webp"],
     "G2": ["img/2.webp","img/2 (1).webp", "img/2 (2).webp", "img/2 (3).webp", "img/2 (4).webp", "img/2 (5).webp"], 
-    "G3": ["img/3.webp","img/3 (1).webp", "img/3 (2).webp", "img/3 (3).webp"],
+    "G3": ["img/3.webp","img/3 (1).webp", "img/3 (2).webp", "img/3 (3).webp", "img/3 (4).webp", "img/3 (5).webp", "img/3 (6).webp"],
     "G4": ["img/4.webp","img/4 (1).webp", "img/4 (2).webp", "img/4 (3).webp"],
     "G6": ["img/6.webp","img/6 (1).webp", "img/6 (2).webp", "img/6 (3).webp"],
     "G8": ["img/8.webp","img/8 (1).webp", "img/8 (2).webp", "img/8 (3).webp"],
