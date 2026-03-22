@@ -2264,11 +2264,23 @@ body.lock-scroll {
         padding-top: 0; /* 移除原本的 top padding */
     }
     /* 內容區內部的圖片 (地圖置中設定) */
+    /* 🌟 電腦版專屬：先讓地圖的「隱形外框」完全填滿右側白框的高度 */
+    #detail-map.active {
+        height: 100%; 
+        display: flex;
+        justify-content: center; /* 左右置中 */
+        align-items: center;     /* 上下置中 */
+    }
+
+    /* 內容區內部的圖片 (地圖置中設定) */
     .content-img {
-        display: block;       /* 🌟 關鍵 1：讓圖片變成獨立區塊 */
-        margin: 0 auto;       /* 🌟 關鍵 2：左右外距設為 auto，強制完美置中！ */
-        max-width: 100%;      /* 確保圖片再大也不會撐破右邊的白框 */
-        height: auto;         /* 保持圖片比例 */
+        display: block;       
+        margin: 0 auto;       
+        max-width: 100%;      
+        
+        /* 👇 核心魔法：限制最大高度為 100%，圖片太高時會自動等比例縮小，絕對不產生捲軸！ */
+        max-height: 100%;     
+        object-fit: contain;  /* 🌟 確保圖片怎麼縮放都不會變形 */
     }
     /* =========================================
        🎮 電腦版：時程表左右分欄排版 (極淨狀態切換)
@@ -2883,42 +2895,3 @@ body.lock-scroll {
     }
 }
 
-/* =========================================
-   🌟 [PLACEHOLDER] 尚未解鎖：更換地圖圖檔後請刪除此區塊
-   ========================================= */
-   
-/* 1. 將容器設為相對定位，供遮罩絕對定位參考 */
-#detail-map {
-    position: relative;
-    overflow: hidden; /* 確保圓角效果 */
-    border-radius: 12px;
-}
-
-/* 2. 鎖定遮罩本身：純白底、全版、完美置中 */
-.map-lock-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    
-    /* 🌟 全白背景覆蓋，並稍微透一點點點點底圖（0.98），增加質感 */
-    background-color: rgba(255, 255, 255, 0.98); 
-    
-    /* 置中設定 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-    /* 🌟 像素字體設定 */
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-size: 3rem;       /* 🌟 字要大才有張力 */
-    color: #3643BA;       /* 使用主題紫色 */
-    font-weight: bold;
-    letter-spacing: 5px;  /* 稍微拉開字距 */
-    text-shadow: 2px 2px 0px rgba(102, 102, 255, 0.2); /* 加上淡淡的像素陰影 */
-    
-    z-index: 10;          /* 🌟 強制蓋在圖片上方 */
-    pointer-events: auto; /* 確保使用者無法透過遮罩點擊到底下的圖片 */
-}
-/* [END] 🌟 [PLACEHOLDER] */
