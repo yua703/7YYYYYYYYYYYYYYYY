@@ -2342,6 +2342,45 @@ body.lock-scroll {
         /* 數字的絕對值越大，往上飛得越高！你可以自由修改 -30px、-50px 測試 */
         margin-top: -80px; 
     }
+    /* 👇 🌟 貼在這裡！修復電腦版左右切換按鈕的位置與失效 Bug */
+    .slider-nav-btn {
+        position: absolute;       /* 1. 絕對定位：脫離排版，不再被圖片推擠 */
+        top: 50%;                 /* 2. 垂直置中 */
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.95); /* 3. 美化：半透明白底 */
+        border: 2px solid #3643BA; /* 邊框 */
+        color: #3643BA;            /* 箭頭顏色 */
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;        /* 變成圓形按鈕 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        z-index: 100;              /* 🔥 核心防護：強制永遠在最上層，絕對不會點不到！ */
+        transition: all 0.2s ease;
+        padding: 0;
+    }
+
+    /* 左右分開釘好 */
+    .slider-nav-btn.prev-btn {
+        left: 20px; 
+    }
+    .slider-nav-btn.next-btn {
+        right: 20px; 
+    }
+
+    /* 按鈕滑鼠移過去的特效 */
+    .slider-nav-btn:hover {
+        background-color: #C7FF3C; /* 變成你的螢光綠 */
+        transform: translateY(-50%) scale(1.1); /* 微微放大 */
+    }
+
+    /* 調整箭頭 SVG 圖像的大小 */
+    .slider-nav-btn svg {
+        width: 24px;
+        height: 24px;
+    }
 }
 
 
