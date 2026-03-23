@@ -3046,5 +3046,23 @@ body.lock-scroll {
     .mega-col-links {
         gap: 35px !important; /* 順便把這三個大選項之間的距離拉大一點，大拇指更好點！ */
     }
+    /* 1. 殺掉上下兩個區塊之間的綠色縫隙 */
+    .game-details-wrapper {
+        gap: 0 !important;
+    }
+
+    /* 2. 上半部 (選單)：只留上面圓角，切平下面，並拿掉干擾的陰影 */
+    .game-choice-box {
+        border-radius: 20px 20px 0 0 !important;
+        box-shadow: none !important;
+        padding-bottom: 15px !important; /* 稍微縮減按鈕與下方內容的距離，更緊湊 */
+    }
+
+    /* 3. 下半部 (內容)：切平上面，只留下面圓角，完美接合！ */
+    .game-right-content {
+        border-radius: 0 0 20px 20px !important;
+        /* 幫這張合併後的「大卡片」統一加上立體陰影，質感更好 */
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
+    }
 }
 
