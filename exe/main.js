@@ -326,7 +326,7 @@ dayTabBtns.forEach(btn => {
 // ==========================================
 // 4. 排行榜功能 (Leaderboard)
 // ==========================================
-const sheetBase = "https://opensheet.elk.sh/1EdjiH8Itg6wNBf4MS9IlT-j5yYkFqR3uqo0Toic28N8/";
+const sheetBase = "https://opensheet.elk.sh/1jKqaT0NjIkqmguzRaNXV5KVFkXXOwmOE_Gt9Q9jFJJQ/";
 let currentSheet = "七大項總錦標"; 
 
 const lbTabs = document.querySelectorAll('#leaderboard-tabs-container .lb-tab');
