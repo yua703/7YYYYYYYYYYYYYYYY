@@ -1001,10 +1001,10 @@ const translations = {
         'detail_title': 'Event Details',
         'hero_welcome_1': 'Welcome to',
         'hero_welcome_2': 'Tech × Sports Fitness Challenge',
-        'event_p1': '【ExErcise 2.0】Tech Sports Fitness Challenge',
-        'event_p2': '17 Tech Stages × 30-Second Limit Challenge!',
-        'event_p3': 'Test your 7 major athletic abilities to unlock an exclusive "Fitness Report" and "AI Data Character Card".',
-        'event_p4': 'Want to know where your limits lie? NTUT IxD × Decathlon Zhonghe Store awaits your challenge!',
+        'event_p1': '【ExErcise 2.0】Tech × Sports Fitness Challenge',
+        'event_p2': 'Test your 7 major athletic abilities through 17 thirty-second challenges!',
+        'event_p3': 'Co-created by NTUT Interaction Design 113 and Decathlon Zhonghe Store.',
+        'event_p4': 'Breaking free from wearable constraints to make exercise fun. Experience a whole new way to move!',
 
         // Tabs
         'tab_schedule': 'Schedule', 'tab_scoring': 'Scoring', 'tab_map': 'Map', 'tab_rules': 'Rules',
