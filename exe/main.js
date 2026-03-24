@@ -134,6 +134,9 @@ if (newLangBtn) {
             // 執行翻譯
             if (typeof applyTranslations === 'function') applyTranslations();
 
+            // 👇 🌟 新增這行：翻譯完之後，強制叫手機版綠色大方塊重新抓取一次最新文字！
+            if (typeof syncMobileTabText === 'function') syncMobileTabText();
+
             // 若在排行榜頁面，同步更新
             if (document.getElementById('view-leaderboard').classList.contains('active')) {
                 if (typeof updateLeaderboard === 'function') updateLeaderboard(currentSheet);
