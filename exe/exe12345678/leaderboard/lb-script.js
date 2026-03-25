@@ -1,7 +1,7 @@
 // ==========================================
 // 設定區域
 // ==========================================
-const SHEET_BASE = "https://opensheet.elk.sh/1EdjiH8Itg6wNBf4MS9IlT-j5yYkFqR3uqo0Toic28N8/";
+const SHEET_BASE = "https://opensheet.elk.sh/1jKqaT0NjIkqmguzRaNXV5KVFkXXOwmOE_Gt9Q9jFJJQ/";
 const SWITCH_INTERVAL = 10000; // 每一頁停留 10 秒 (毫秒)
 
 // 定義輪播清單 (對應你的 Google Sheet 分頁名稱 與顯示名稱)
