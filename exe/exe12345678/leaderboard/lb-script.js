@@ -39,12 +39,41 @@ const domProgressBar = document.getElementById('progress-bar');
 // 核心功能
 // ==========================================
 
+// 1. 初始化
 function init() {
-    loadCategoryPair(currentIndex); 
-    startTimer();
+    showKeyVisual(); // 🌟 程式一啟動，先秀出主視覺！
 }
 
-function startTimer() {
+// 2. 顯示主視覺畫面 (停留 SWITCH_INTERVAL 後，自動進入排行榜)
+function showKeyVisual() {
+    const kvScreen = document.getElementById('key-visual-screen');
+    const kvProgressBar = document.getElementById('kv-progress-bar');
+    
+    kvScreen.classList.add('active'); // 淡入顯示主視覺
+    
+    // 重置主視覺專屬的進度條
+    if(kvProgressBar) {
+        kvProgressBar.style.transition = 'none';
+        kvProgressBar.style.width = '0%';
+        void kvProgressBar.offsetWidth;
+        kvProgressBar.style.transition = `width ${SWITCH_INTERVAL}ms linear`;
+        kvProgressBar.style.width = '100%';
+    }
+
+    // 🌟 在背後偷偷先載入第一組排行榜資料，這樣等一下過場才不會有白畫面
+    currentIndex = 0;
+    loadCategoryPair(currentIndex);
+
+    // 設定定時器：時間到就隱藏主視覺，開始播排行榜
+    if (timer) clearInterval(timer);
+    timer = setInterval(() => {
+        kvScreen.classList.remove('active'); // 淡出隱藏主視覺
+        startLeaderboardTimer();             // 啟動排行榜的輪播
+    }, SWITCH_INTERVAL);
+}
+
+// 3. 啟動排行榜的計時與進度條
+function startLeaderboardTimer() {
     domProgressBar.style.transition = 'none';
     domProgressBar.style.width = '0%';
     void domProgressBar.offsetWidth; 
@@ -53,18 +82,25 @@ function startTimer() {
 
     if (timer) clearInterval(timer);
     timer = setInterval(() => {
-        nextCategoryPair();
+        nextCategoryPair(); // 翻到下一頁
     }, SWITCH_INTERVAL);
 }
 
-// 🌟 每次跳 2 個 index (左邊一個，右邊一個)
+// 4. 切換到下一組排行榜
 function nextCategoryPair() {
     currentIndex += 2;
+    
+    // 🌟 核心魔法：如果排行榜全部播完了怎麼辦？
     if (currentIndex >= CAROUSEL_LIST.length) {
-        currentIndex = 0; 
+        // 放回主視覺，開啟新的一輪！
+        showKeyVisual();
+        return; 
     }
+
+    // 如果還沒播完，就繼續載入下一組
     loadCategoryPair(currentIndex);
     
+    // 重置排行榜自己的進度條
     domProgressBar.style.transition = 'none';
     domProgressBar.style.width = '0%';
     setTimeout(() => {

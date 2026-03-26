@@ -241,3 +241,53 @@ body {
     text-align: center;
     white-space: nowrap; 
 }
+/* =========================================
+   🔥 滿版主視覺畫面 (Key Visual)
+   ========================================= */
+#key-visual-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ebebeb;
+    z-index: 2000; /* 蓋過所有排行榜跟 QR Code */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* 預設隱藏，靠 JS 切換 active 來淡入淡出 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#key-visual-screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 主視覺圖片滿版裁切 */
+#key-visual-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* 主視覺專屬進度條 (貼在螢幕最下方) */
+.kv-progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.kv-progress-bar {
+    height: 100%;
+    background-color: #C7FF3C;
+    box-shadow: 0 0 15px rgba(199, 255, 60, 0.8);
+    width: 0%;
+}
