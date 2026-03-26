@@ -2,11 +2,11 @@
 // 設定區域
 // ==========================================
 const SHEET_BASE = "https://opensheet.elk.sh/1jKqaT0NjIkqmguzRaNXV5KVFkXXOwmOE_Gt9Q9jFJJQ/";
-const SWITCH_INTERVAL = 10000; // 每一頁停留 10 秒 (毫秒)
+const SWITCH_INTERVAL = 10000; // 每一頁停留 10 秒
 
-// 定義輪播清單 (對應你的 Google Sheet 分頁名稱 與顯示名稱)
+// 定義輪播清單 (總共 18 個項目)
 const CAROUSEL_LIST = [
-    { sheet: "七大項總錦標", title: "🏆 七大項總錦標 🏆" },
+    { sheet: "七大項總錦標", title: "七大項總錦標" },
     { sheet: "第一組分數計算", title: "G1 - 培根行動 (專注力)" },
     { sheet: "第二組分數計算", title: "G2 - PECOPECO (反應力)" },
     { sheet: "第三組分數計算", title: "G3 - SOS.SOS (敏捷力)" },
@@ -29,7 +29,7 @@ const CAROUSEL_LIST = [
 // ==========================================
 // 變數與 DOM
 // ==========================================
-let currentIndex = 0;
+let currentIndex = 0; // 🌟 現在每次會跳 2 步 (0, 2, 4...)
 let timer = null;
 const domTitle = document.getElementById('current-category-title');
 const domList = document.getElementById('leaderboard-data');
@@ -39,41 +39,32 @@ const domProgressBar = document.getElementById('progress-bar');
 // 核心功能
 // ==========================================
 
-// 1. 初始化
 function init() {
-    loadCategory(currentIndex); // 立即載入第一頁
+    loadCategoryPair(currentIndex); 
     startTimer();
 }
 
-// 2. 啟動計時器與進度條
 function startTimer() {
-    // 重置進度條動畫
     domProgressBar.style.transition = 'none';
     domProgressBar.style.width = '0%';
-    
-    // 強制重繪 (Reflow) 以重啟 CSS 動畫
     void domProgressBar.offsetWidth; 
-
-    // 設定進度條動畫時間
     domProgressBar.style.transition = `width ${SWITCH_INTERVAL}ms linear`;
     domProgressBar.style.width = '100%';
 
-    // 設定定時切換
     if (timer) clearInterval(timer);
     timer = setInterval(() => {
-        nextCategory();
+        nextCategoryPair();
     }, SWITCH_INTERVAL);
 }
 
-// 3. 切換到下一組
-function nextCategory() {
-    currentIndex++;
+// 🌟 每次跳 2 個 index (左邊一個，右邊一個)
+function nextCategoryPair() {
+    currentIndex += 2;
     if (currentIndex >= CAROUSEL_LIST.length) {
-        currentIndex = 0; // 循環回到第一個
+        currentIndex = 0; 
     }
-    loadCategory(currentIndex);
+    loadCategoryPair(currentIndex);
     
-    // 重啟進度條
     domProgressBar.style.transition = 'none';
     domProgressBar.style.width = '0%';
     setTimeout(() => {
@@ -82,35 +73,49 @@ function nextCategory() {
     }, 50);
 }
 
-// 4. 載入並渲染資料
-async function loadCategory(index) {
-    const target = CAROUSEL_LIST[index];
+// 資料過濾小幫手
+function filterData(rawData) {
+    return rawData.filter(p => {
+        const name = p.姓名 || p.Name;
+        const number = p.編號 || p.玩家號碼;
+        return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
+    });
+}
+
+// 🌟 同時抓取兩張表的資料
+async function loadCategoryPair(index) {
+    const target1 = CAROUSEL_LIST[index];
+    // 如果是單數結尾，第二張表可能會空著
+    const target2 = CAROUSEL_LIST[index + 1]; 
     
-    // 更新標題
-    domTitle.innerText = target.title;
-    
-    // 顯示載入中
-    // 技巧：只有第一次載入或是資料差異很大時才清空，避免閃爍太嚴重
-    // 這裡為了視覺效果，我們稍微清空一下並淡入
-    domList.style.opacity = '0.5';
+    // 把主標題固定為大會名稱
+    domTitle.innerText = "ExErcise2.0 賽事即時戰況";
+    domList.style.opacity = '0.3';
 
     try {
-        // 加時間戳記防止快取
-        const res = await fetch(`${SHEET_BASE}${encodeURIComponent(target.sheet)}`, {
-    cache: 'no-cache'
-});
-        if (!res.ok) throw new Error("API Error");
-        
-        const rawData = await res.json();
-        
-        // 資料過濾：確保有名字或編號
-        const data = rawData.filter(p => {
-            const name = p.姓名 || p.Name;
-            const number = p.編號 || p.玩家號碼;
-            return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
-        });
+        // 同時發送兩個 API 請求，節省時間
+        const promises = [fetch(`${SHEET_BASE}${encodeURIComponent(target1.sheet)}`, { cache: 'no-cache' })];
+        if (target2) {
+            promises.push(fetch(`${SHEET_BASE}${encodeURIComponent(target2.sheet)}`, { cache: 'no-cache' }));
+        }
 
-        renderList(data, target.sheet);
+        const responses = await Promise.all(promises);
+        for(let res of responses) {
+            if(!res.ok) throw new Error("API Error");
+        }
+
+        // 解析資料
+        const rawData1 = await responses[0].json();
+        const data1 = filterData(rawData1);
+
+        let data2 = [];
+        if (target2) {
+            const rawData2 = await responses[1].json();
+            data2 = filterData(rawData2);
+        }
+
+        // 渲染雙欄畫面
+        renderDualList(data1, target1, data2, target2);
 
     } catch (err) {
         console.error(err);
@@ -121,55 +126,35 @@ async function loadCategory(index) {
     }
 }
 
-// 5. 渲染 HTML 列表
-function renderList(data, sheetName) {
-    if (!data || data.length === 0) {
-        domList.innerHTML = `<div class="status-msg">目前尚無參賽資料</div>`;
-        return;
-    }
-
-    // 取前 20 名
-    const sorted = data.slice(0, 20);
+// 🌟 生成「單獨一欄」裡的玩家列表 HTML
+function generatePlayerHtml(data) {
+    if (!data || data.length === 0) return `<div class="status-msg">目前尚無參賽資料</div>`;
     
-    // 判斷是「總積分」還是「單項分數」
-    // 總積分通常要小數點，單項如果是整數就顯示整數
+    const sorted = data.slice(0, 10); // 左/右欄都只取前 10 名
     let lastScore = null, lastRank = 0, actualRank = 0;
 
-    const htmlString = sorted.map((p, i) => {
+    return sorted.map((p, i) => {
         actualRank++;
-        
         const pName = p.姓名 || p.Name || "-";
         const pNumber = p.編號 || p.玩家號碼 || "未知";
         
         let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
         if (isNaN(rawScore)) rawScore = 0;
-        
-        // 顯示格式：如果是整數就不要 .00
         let pScoreDisplay = Number.isInteger(rawScore) ? rawScore : rawScore.toFixed(2);
 
-        // 同分同名次邏輯
         let rank = (rawScore === lastScore) ? lastRank : actualRank;
-        
         if (rawScore !== lastScore) {
             lastRank = rank;
             lastScore = rawScore;
         }
 
-        // ==========================================
-        // 🔥 修改這裡：根據排名決定要加什麼 Class
-        // ==========================================
         let rankClass = "";
-        if (rank === 1) {
-            rankClass = "rank-1";
-        } else if (rank === 2) {
-            rankClass = "rank-2";
-        } else if (rank === 3) {
-            rankClass = "rank-3";
-        }
+        if (rank === 1) rankClass = "rank-1";
+        else if (rank === 2) rankClass = "rank-2";
+        else if (rank === 3) rankClass = "rank-3";
 
-        const delay = i * 0.05;
+        const delay = i * 0.03;
 
-        // 🔥 修改這裡：把 ${rankClass} 加到 class="..." 裡面
         return `
             <div class="lb-player ${rankClass}" style="animation-delay: ${delay}s">
                 <span class="lb-rank-num">#${rank}</span>
@@ -179,11 +164,54 @@ function renderList(data, sheetName) {
             </div>
         `;
     }).join("");
-
-    domList.innerHTML = htmlString;
 }
 
-// ==========================================
+// 🌟 將兩份資料組合成「左欄 + 右欄」
+function renderDualList(data1, target1, data2, target2) {
+    const col1Html = generatePlayerHtml(data1);
+    const scoreTitle1 = target1.sheet.includes("總錦標") ? "總積分" : "分數";
+    
+    // 左邊欄位的完整 HTML (包含小標題)
+    const headerHtml1 = `
+        <div class="col-group-title">${target1.title}</div>
+        <div class="lb-list-header" style="grid-template-columns: 60px 1fr 90px 90px; padding: 15px;">
+            <span class="col-rank">排名</span>
+            <span class="col-name">暱稱</span>
+            <span class="col-number">編號</span>
+            <span class="col-score">${scoreTitle1}</span>
+        </div>
+    `;
+
+    let col2Content = "";
+    // 如果有第二組資料才渲染右邊欄位
+    if (target2) {
+        const col2Html = generatePlayerHtml(data2);
+        const scoreTitle2 = target2.sheet.includes("總錦標") ? "總積分" : "分數";
+        col2Content = `
+            <div class="col-group-title">${target2.title}</div>
+            <div class="lb-list-header" style="grid-template-columns: 60px 1fr 90px 90px; padding: 15px;">
+                <span class="col-rank">排名</span>
+                <span class="col-name">暱稱</span>
+                <span class="col-number">編號</span>
+                <span class="col-score">${scoreTitle2}</span>
+            </div>
+            <div class="lb-col-body">${col2Html}</div>
+        `;
+    }
+
+    // 塞入 DOM
+    domList.innerHTML = `
+        <div class="lb-dual-columns">
+            <div class="lb-col">
+                ${headerHtml1}
+                <div class="lb-col-body">${col1Html}</div>
+            </div>
+            <div class="lb-col">
+                ${col2Content}
+            </div>
+        </div>
+    `;
+}
+
 // 啟動
-// ==========================================
 window.addEventListener('load', init);
