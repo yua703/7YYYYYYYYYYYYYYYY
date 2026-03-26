@@ -1,4 +1,14 @@
 /* =========================================
+   引入自訂像素字體 (Cubic 11)
+   ========================================= */
+@font-face {
+    font-family: 'Cubic11';
+    src: url('fonts/Cubic_11.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* =========================================
    全域設定
    ========================================= */
 * {
@@ -9,10 +19,10 @@
 
 body {
     font-family: "Noto Sans TC", sans-serif;
-    background-color: #f0f2f5;
+    background-color: #f0f0f0; /* 🌟 統一為主題淺灰底 */
     color: #333;
     height: 100vh;
-    overflow: hidden; /* 禁止捲動，適合展示螢幕 */
+    overflow: hidden; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -26,8 +36,9 @@ body {
     max-width: 1000px;
     height: 95vh;
     background: #ffffff;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 24px;
+    border: 4px solid #3643BA; /* 🌟 加上主題紫色粗框，更有遊戲機台感 */
+    box-shadow: 0 15px 40px rgba(54, 67, 186, 0.2); /* 紫色氛圍光暈 */
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -37,28 +48,29 @@ body {
    頂部標題區 (含進度條)
    ========================================= */
 .lb-top-header {
-    background: #4882A6;
+    background: #3643BA; /* 🌟 換成主題紫 */
     color: #ffffff;
-    padding: 20px;
+    padding: 25px 20px;
     text-align: center;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     z-index: 10;
 }
 
 .lb-top-header h1 {
-    font-size: 2rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif; /* 🌟 套用像素字體 */
+    color: #C7FF3C; /* 🌟 標題用螢光綠跳出來 */
+    font-size: 2.2rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3); /* 像素陰影 */
 }
 
 /* 進度條容器 */
 .progress-bar-container {
     width: 100%;
-    height: 6px;
-    background-color: rgba(255, 255, 255, 0.3);
-    border-radius: 3px;
+    height: 8px; /* 稍微加粗一點 */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
     overflow: hidden;
     margin-top: 10px;
 }
@@ -66,9 +78,9 @@ body {
 /* 進度條動畫 */
 .progress-bar {
     height: 100%;
-    background-color: #E7AC4A; /* 金黃色進度條 */
+    background-color: #C7FF3C; /* 🌟 換成主題螢光綠 */
+    box-shadow: 0 0 10px rgba(199, 255, 60, 0.8); /* 加上發光特效 */
     width: 0%;
-    /* 動畫在 JS 中動態重置 */
 }
 
 /* =========================================
@@ -76,13 +88,15 @@ body {
    ========================================= */
 .lb-list-header {
     display: grid;
-    grid-template-columns: 80px 1fr 100px 100px; /* 調整欄位寬度 */
+    grid-template-columns: 80px 1fr 100px 100px;
     gap: 10px;
     padding: 15px 20px;
-    background-color: #eef2f5;
-    font-weight: bold;
-    color: #555;
-    border-bottom: 2px solid #ddd;
+    background-color: #ffffff;
+    
+    /* 🌟 表頭也套用像素字體與紫色 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    color: #3643BA; 
+    border-bottom: 3px solid #3643BA; 
     font-size: 1.2rem;
 }
 
@@ -93,18 +107,21 @@ body {
 
 .lb-list-body {
     flex: 1;
-    overflow-y: auto; /* 內容過多時可滾動 */
+    overflow-y: auto; 
     padding: 10px 0;
     background-color: #fff;
 }
 
-/* 隱藏捲軸但保留功能 */
+/* 隱藏捲軸但保留功能 (修改為紫色捲軸) */
 .lb-list-body::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
 }
 .lb-list-body::-webkit-scrollbar-thumb {
-    background-color: #ccc;
-    border-radius: 3px;
+    background-color: rgba(54, 67, 186, 0.3);
+    border-radius: 4px;
+}
+.lb-list-body::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(54, 67, 186, 0.6);
 }
 
 /* 單一玩家列 */
@@ -113,7 +130,7 @@ body {
     grid-template-columns: 80px 1fr 100px 100px;
     gap: 10px;
     padding: 15px 20px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px dashed rgba(54, 67, 186, 0.2); /* 🌟 改成淡紫色虛線 */
     align-items: center;
     font-size: 1.1rem;
     transition: background 0.2s;
@@ -121,40 +138,45 @@ body {
     opacity: 0;
 }
 
-/* 前三名特別樣式 */
-/* 第一名 (金) */
-.lb-player.rank-1 .lb-rank-num {
-    color: #d4af37;
-    font-size: 1.8rem;
-}
-
-/* 第二名 (銀) */
-.lb-player.rank-2 .lb-rank-num {
-    color: #c0c0c0;
-    font-size: 1.8rem;
-}
-
-/* 第三名 (銅) */
-.lb-player.rank-3 .lb-rank-num {
-    color: #cd7f32;
-    font-size: 1.8rem;
-}
-
-.lb-player:nth-child(odd) { background-color: #f9f9f9; }
+.lb-player:nth-child(odd) { background-color: #fcfcfc; }
 
 .lb-rank-num {
-    font-family: "Arial Black", "Impact", sans-serif;
-    
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif; /* 🌟 排名數字套用像素字體 */
     text-align: center;
-    font-weight: 900; /* 極粗 */
-    font-style: italic; /* 傾斜更有動感 */
-    letter-spacing: -1px; /* 字距緊一點 */
-    color: #4882A6;
+    color: #3643BA;
+    font-size: 1.2rem;
+}
+
+/* 🌟 前三名特別樣式 (保留金銀銅，加上立體像素黑框) */
+.lb-player.rank-1 .lb-rank-num {
+    color: #FFD700;
+    font-size: 1.6rem;
+    text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333;
+}
+
+.lb-player.rank-2 .lb-rank-num {
+    color: #E0E0E0;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333;
+}
+
+.lb-player.rank-3 .lb-rank-num {
+    color: #CD7F32;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333;
 }
 
 .lb-player-name { font-weight: bold; color: #333; padding-left: 10px; }
 .lb-player-num { color: #888; text-align: center; font-size: 0.95rem; }
-.lb-player-score { font-weight: bold; color: #E7AC4A; text-align: right; padding-right: 10px; }
+
+.lb-player-score { 
+    font-family: 'Roboto', sans-serif; /* 分數用俐落的粗體 */
+    font-weight: 900; 
+    color: #3643BA; /* 🌟 換成主題紫 */
+    text-align: right; 
+    padding-right: 10px; 
+    font-size: 1.2rem;
+}
 
 /* 進場動畫 */
 @keyframes slideIn {
@@ -168,64 +190,58 @@ body {
     padding: 50px;
     color: #888;
     font-size: 1.2rem;
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
 }
+
 /* =========================================
-   🔥 新增：右下角固定 QR Code 樣式
+   🔥 右下角固定 QR Code 樣式 (大螢幕雙並排版)
    ========================================= */
 .qr-code-fixed-box {
-    position: fixed; /* 固定定位，不隨頁面捲動 */
-    bottom: 30px;    /* 距離底部 30px */
-    right: 30px;     /* 距離右側 30px */
-    background-color: #ffffff; /* 白色背景確保好掃描 */
-    padding: 15px;   /* 內距，讓圖片不要貼邊 */
-    border-radius: 16px; /* 圓角設計 */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2); /* 強烈的陰影讓它浮起來 */
-    text-align: center; /* 文字置中 */
-    z-index: 100;    /* 確保在最上層 */
-    /* 稍微傾斜一點點增加動態感 (選用) */
-    /* transform: rotate(-2deg); */ 
+    position: fixed; 
+    bottom: 30px;    
+    right: 30px;     
+    background-color: #ffffff; 
+    padding: 20px;   /* 稍微加大一點內距讓兩個 QR code 呼吸 */
+    border-radius: 16px; 
+    border: 3px solid #3643BA; /* 主題紫邊框 */
+    z-index: 100;    
+    
+    /* 👇 核心魔法：讓裡面的兩個 QR Code 橫向並排 */
+    display: flex;
+    gap: 30px;       /* 兩個 QR Code 中間的間距 */
 }
 
-/* QR Code 圖片容器 (確保是正方形) */
+/* 每個 QR Code 與文字的專屬直向小容器 */
+.qr-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 讓圖片跟文字置中對齊 */
+}
+
+/* QR Code 圖片容器 */
 .qr-img-wrapper {
-    width: 130px;  /* 設定寬度 (可自行調整大小) */
-    height: 130px; /* 設定高度跟寬度一樣 */
-    background: #f0f0f0; /* 圖片載入前的暫時背景色 */
+    width: 120px;  /* 如果覺得兩個並排太大，這裡可以改成 100px 或 110px */
+    height: 120px; 
+    background: #f0f0f0; 
     border-radius: 8px;
     overflow: hidden;
-    margin-bottom: 10px; /* 與下方文字的距離 */
+    margin-bottom: 12px; 
+    border: 1px solid #eee;
 }
 
-/* QR Code 圖片本體 */
 .qr-img-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 填滿容器 */
-    display: block; /* 消除圖片底部預設留白 */
+    object-fit: cover; 
+    display: block; 
 }
 
 /* 下方提示文字 */
 .qr-label {
-    font-size: 1rem;
-    font-weight: bold;
-    color: #4882A6; /* 使用你的主題藍色 */
-    letter-spacing: 1px;
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif; 
+    font-size: 1.1rem; /* 字稍微放大一點點，大螢幕更好讀 */
+    color: #3643BA; 
     margin: 0;
+    white-space: nowrap; /* 強制文字不換行，保持整齊 */
 }
 
-/* --- 針對小螢幕的優化 (選用) --- */
-/* 如果螢幕高度比較矮，稍微縮小一點避免擋到太多資料 */
-@media (max-height: 700px) {
-    .qr-code-fixed-box {
-        bottom: 15px;
-        right: 15px;
-        padding: 10px;
-    }
-    .qr-img-wrapper {
-        width: 100px;
-        height: 100px;
-    }
-    .qr-label {
-        font-size: 0.9rem;
-    }
-}

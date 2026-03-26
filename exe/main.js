@@ -874,7 +874,8 @@ const translations = {
         'note_content': '提醒有任何身體不適、心臟病、高血壓、頸部或背部問題、孕婦者不宜參與。<br>請參賽者留意自身健康狀況，若感到不適，建議不要勉強參加。如仍決定參與，請自行承擔相關風險。',
 
         // Footer
-        'footer_host': '主辦單位：', 'footer_co': '合作單位：',
+        'footer_host': '主辦單位：', 
+        // 'footer_co': '合作單位：',
         'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '迪卡儂 新北中和店', 'btn_ig': '追蹤官方IG',
 
         // 排行榜
@@ -1051,7 +1052,8 @@ const translations = {
         'note_content': 'Participants with physical discomfort, heart disease, high blood pressure, neck/back problems, or are pregnant are not advised to participate.<br>Please monitor your health. If you feel unwell, do not force yourself. Participation is at your own risk.',
 
         // Footer
-        'footer_host': 'Organizer:', 'footer_co': 'Co-organizer:',
+        'footer_host': 'Organizer:', 
+        // 'footer_co': 'Co-organizer:',
         'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Decathlon New Taipei Zhonghe Store', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
