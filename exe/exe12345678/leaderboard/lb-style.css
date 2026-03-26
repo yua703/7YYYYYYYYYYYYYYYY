@@ -150,7 +150,7 @@ body {
 
 .lb-col-body {
     flex: 1;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding-bottom: 20px;
 }
 
@@ -212,7 +212,6 @@ body {
     padding: 10px;   
     border-radius: 12px; 
     border: 3px solid #3643BA; 
-    box-shadow: 5px 5px 0px #C7FF3C; 
     display: flex;
     flex-direction: column;
     align-items: center;

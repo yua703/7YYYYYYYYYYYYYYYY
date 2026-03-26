@@ -130,7 +130,7 @@ async function loadCategoryPair(index) {
 function generatePlayerHtml(data) {
     if (!data || data.length === 0) return `<div class="status-msg">目前尚無參賽資料</div>`;
     
-    const sorted = data.slice(0, 10); // 左/右欄都只取前 10 名
+    const sorted = data.slice(0, 7); // 左/右欄都只取前 10 名
     let lastScore = null, lastRank = 0, actualRank = 0;
 
     return sorted.map((p, i) => {
