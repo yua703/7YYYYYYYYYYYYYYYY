@@ -906,7 +906,39 @@ img {
     height: 0; opacity: 0; padding: 0 15px;
     transition: all 0.4s ease 0.1s;
 }
+/* =========================================
+   🔒 未解鎖組別狀態 (Locked Group)
+   ========================================= */
 
+/* 未解鎖的灰底遮罩 (精準覆蓋在圖片上方) */
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px; /* 與列表圖片高度一致 */
+    background-color: rgba(30, 30, 30, 0.4); /* 壓上一層半透明暗色 */
+    backdrop-filter: grayscale(100%); /* 🌟 魔法：讓底下的彩色圖片瞬間變黑白！ */
+    -webkit-backdrop-filter: grayscale(100%); /* 支援 Safari */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4; /* 蓋在圖片上，但在右上角的標籤 (G3) 之下 */
+}
+
+/* 遮罩上的「尚未解鎖」小牌子 */
+.locked-overlay span {
+    background-color: #3643BA; /* 主題紫底 */
+    color: #f0f0f0;            /* 白字 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 0.95rem;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 2px solid #f0f0f0;
+    letter-spacing: 2px;
+    text-indent: 2px;          /* 修正字距造成的視覺偏移 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
 /* =========================================
    9. 左上角返回按鈕 (取代舊版底部關閉)
    ========================================= */
