@@ -236,8 +236,15 @@ img {
     font-size: 1.2rem;
     color: #333;
     font-weight: bold;
-}
-.mega-address, .mega-copyright {
+    
+    /* 👇 🌟 新增這行：強制套用像素字體！ */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    
+    /* (選用) 如果你覺得套用像素字體後字距太擠，可以加上這行拉開一點點 */
+    letter-spacing: 1px; 
+    margin-left: -8px;            
+
+}.mega-address, .mega-copyright {
     font-size: 0.85rem;
     color: #666;
     line-height: 1.6;
