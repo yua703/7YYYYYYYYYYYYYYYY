@@ -941,58 +941,6 @@ const translations = {
         'footer_highlight': '● 回顧精彩亮點',
         'btn_back': '返回',
 
-        // 🔥 新增：組別成員與指導老師 (ZH)
-        'g1_m1': '睡美人的肝臟設計師｜陳孝宣',
-        'g1_m2': '壞巫婆的假牙設計師｜楊依韻',
-        'g1_m3': '白雪公主的腋毛設計師｜王政諺',
-        'g1_m4': '神仙教母的帽子設計師｜陳家蓁',
-        'g2_m1': '腦袋空空設計師｜徐郁銓',
-        'g2_m2': '吃個桃桃設計師｜郭純希',
-        'g2_m3': '綠茶多多設計師｜牧彩香',
-        'g2_m4': '人好睏睏設計師｜黃俊凱',
-        'g3_m1': '青箭口香糖 #牛逼 U呢體程式設計師｜謝瑋庭',
-        'g3_m2': '巧克力香蕉 #超頂軟硬體連接設計師｜莊婷伃',
-        'g3_m3': '芝士大漢堡 #要拼主視覺美術設計師｜林科余',
-        'g3_m4': '自清的橘子 #超扯點子王硬體設計師｜羅至侑',
-        'g4_m1': '大總裁介面設計師｜陳心愉',
-        'g4_m2': '女強人程式設計師｜林岱妍',
-        'g4_m3': '女秘書美術設計師｜賴星妍',
-        'g4_m4': '小女人音效設計師｜洪雅恩',
-        'g5_m1': '林紫琪、韋宥筠、賴詠彤、李承祐',
-        'g6_m1': '不會美術的美術設計鴿｜范諭暄',
-        'g6_m2': '諾亞轉生為程式設計鴿｜夏宇柔',
-        'g6_m3': '準備轉職當PM的設計鴿｜楊康媞',
-        'g6_m4': '做翅膀的勞力員設計鴿｜時瑋甯',
-        'g7_m1': '林妤安、蔡珺瑶、趙於萱、鄭儀嘉',
-        'g8_m1': '謀摳林程式設計師｜宋浤銘',
-        'g8_m2': '真的假的視覺設計師｜江庭真',
-        'g8_m3': '國文唐師建模師｜陳彥均',
-        'g8_m4': '互動金采源企劃構想師｜陳婉琦',
-        'g9_m1': '陳靖元、謝昀珊、曾于軒、周鈺倍',
-        'g10_m1': '超派正しくない魔女殺手程式設計師｜莊惟喆',
-        'g10_m2': '超派壽司女郎草莓惡魔粉碎機主視覺設計師｜孫翊瑄',
-        'g10_m3': '超派超絕牛馬剉冰製造機3D設計師 ｜賴柏佑',
-        'g10_m4': '超派魔音穿腦大肉丸實景設計師｜高婉媃',
-        'g10_m5': '超派異域風情陽春麵老闆美術設計師｜楊春春',
-        'g11_m1': '縫縫補補的設計總監｜張煒茹',
-        'g11_m2': '夢想成為鹹魚的角色動畫設計師｜孔奕寧',
-        'g11_m3': '&lt;&lt;是淑儀也是蘇怡的書宜aka不放棄程式設計師&gt;&gt;｜楊書宜',
-        'g11_m4': '超級貓咪視覺設計師｜柯佩岑',
-        'g12_m1': '陳宜靜、李安中、黃智恒、蘇奕菲',
-        'g13_m1': '木匠阿黃/互動設計｜蔣易珊',
-        'g13_m2': '木匠阿綠/程式設計｜何美玲',
-        'g13_m3': '木匠阿紅/美術設計｜陳怡亘',
-        'g13_m4': '斧頭本斧/美術設計｜呂妍',
-        'g14_m1': '林筱婕、盧佩雲、吳欣祈、吳千佳',
-        'g15_m1': 'Aein Kyawt Han、Anujin Bazardargia、Aye Pyae Pyae Khin、Jintapa Laipitaksin、Katriela Nicoline',
-        'g16_m1': '丁玉寶珍、Gwynne Purnama、Ratchapakorn Thanwised、Jesslyn Boediono Goenawan、AZZRA RIENOV FAHLIVI',
-        'g17_m1': '陳小清、Leanne Garcia、Emiliia Malkova、Khuat Thi Khanh Linh、PHAM LAN HUONG',
-
-        'adv_sung': '宋兆祥',
-        'adv_wang': '王明道',
-        'adv_chien': '簡明哲',
-        'adv_cheng': '鄭建文',
-        'adv_han': '韓秉軒'
     },
     
     'en': {
@@ -1119,58 +1067,6 @@ const translations = {
         'footer_highlight': '● Past Highlights',
         'btn_back': 'Back',
 
-        // 🔥 新增：組別成員與指導老師 (EN)
-        'g1_m1': 'Sleeping Beauty\'s Liver Designer | Chen Hsiao-Hsuan',
-        'g1_m2': 'Wicked Witch\'s Denture Designer | Yang Yi-Yun',
-        'g1_m3': 'Snow White\'s Armpit Hair Designer | Wang Cheng-Yen',
-        'g1_m4': 'Fairy Godmother\'s Hat Designer | Chen Chia-Chen',
-        'g2_m1': 'Empty-headed Designer | Hsu Yu-Chuan',
-        'g2_m2': 'Eating a Peach Designer | Kuo Chun-Hsi',
-        'g2_m3': 'Green Tea Yakult Designer | Mu Tsai-Hsiang',
-        'g2_m4': 'Super Sleepy Designer | Huang Chun-Kai',
-        'g3_m1': 'Doublemint Gum #Awesome Unity Programmer | Hsieh Wei-Ting',
-        'g3_m2': 'Chocolate Banana #Top-Tier Hardware Integrator | Chuang Ting-Yu',
-        'g3_m3': 'Cheese Burger #Tryhard Visual Artist | Lin Ke-Yu',
-        'g3_m4': 'Innocent Orange #Ridiculous Hardware Designer | Lo Chih-Yu',
-        'g4_m1': 'Big Boss UI Designer | Chen Hsin-Yu',
-        'g4_m2': 'Strong Woman Programmer | Lin Tai-Yen',
-        'g4_m3': 'Secretary Art Designer | Lai Hsing-Yen',
-        'g4_m4': 'Little Woman Sound Designer | Hung Ya-En',
-        'g5_m1': 'Lin Tzu-Chi, Wei You-Yun, Lai Yung-Tung, Li Cheng-Yu',
-        'g6_m1': 'Art Designer Pigeon Who Can\'t Draw | Fan Yu-Hsuan',
-        'g6_m2': 'Noah Reincarnated as Programmer Pigeon | Hsia Yu-Jou',
-        'g6_m3': 'Designer Pigeon Switching to PM | Yang Kang-Ti',
-        'g6_m4': 'Laborer Pigeon Making Wings | Shih Wei-Ning',
-        'g7_m1': 'Lin Yu-An, Tsai Chun-Yao, Chao Yu-Hsuan, Cheng Yi-Chia',
-        'g8_m1': 'Impossible Programmer | Sung Hung-Ming',
-        'g8_m2': 'For Real Visual Designer | Chiang Ting-Chen',
-        'g8_m3': 'Chinese Teacher Modeler | Chen Yen-Chun',
-        'g8_m4': 'Interactive Concept Planner | Chen Wan-Chi',
-        'g9_m1': 'Chen Ching-Yuan, Hsieh Yun-Shan, Tseng Yu-Hsuan, Chou Yu-Pei',
-        'g10_m1': 'Super Pie Incorrect Witch Killer Programmer | Chuang Wei-Che',
-        'g10_m2': 'Super Pie Sushi Girl Strawberry Crusher Designer | Sun Yi-Hsuan',
-        'g10_m3': 'Super Pie Ultimate Shaved Ice Machine 3D Designer | Lai Po-You',
-        'g10_m4': 'Super Pie Ear-Piercing Meatball Prop Designer | Kao Wan-Jou',
-        'g10_m5': 'Super Pie Exotic Plain Noodle Boss Art Designer | Yang Chun-Chun',
-        'g11_m1': 'Stitching & Mending Design Director | Chang Wei-Ju',
-        'g11_m2': 'Character Animator Dreaming of Being a Salted Fish | Kung Yi-Ning',
-        'g11_m3': '&lt;&lt;Shu-Yi aka The Programmer Who Never Gives Up&gt;&gt; | Yang Shu-Yi',
-        'g11_m4': 'Super Cat Visual Designer | Ke Pei-Tsen',
-        'g12_m1': 'Chen Yi-Ching, Li An-Chung, Huang Chih-Heng, Su Yi-Fei',
-        'g13_m1': 'Carpenter Yellow / Interaction Design | Chiang Yi-Shan',
-        'g13_m2': 'Carpenter Green / Programming | He Mei-Ling',
-        'g13_m3': 'Carpenter Red / Art Design | Chen Yi-Hsuan',
-        'g13_m4': 'The Axe Itself / Art Design | Lu Yen',
-        'g14_m1': 'Lin Hsiao-Chieh, Lu Pei-Yun, Wu Hsin-Chi, Wu Chien-Chia',
-        'g15_m1': 'Aein Kyawt Han, Anujin Bazardargia, Aye Pyae Pyae Khin, Jintapa Laipitaksin, Katriela Nicoline',
-        'g16_m1': 'Dinh Ngoc Bao Tran, Gwynne Purnama, Ratchapakorn Thanwised, Jesslyn Boediono Goenawan, AZZRA RIENOV FAHLIVI',
-        'g17_m1': 'Chen Xiao-Qing, Leanne Garcia, Emiliia Malkova, Khuat Thi Khanh Linh, PHAM LAN HUONG',
-
-        'adv_sung': 'Sung Chao-Hsiang',
-        'adv_wang': 'Wang Ming-Dao',
-        'adv_chien': 'Chien Ming-Che',
-        'adv_cheng': 'Cheng Chien-Wen',
-        'adv_han': 'Han Ping-Hsuan'
     }
 };
 
@@ -1226,7 +1122,7 @@ document.querySelectorAll('.detail-tab-btn, .pixel-ctrl-btn').forEach(btn => {
     });
 });
 // ==========================================
-// 🌟 手機版：動態導覽列背景與標題 (效能優化版)
+// 🌟 手機版：動態導覽列背景與標題 (支援多國語言版)
 // ==========================================
 function updateMobileHeader(targetId = null) {
     const header = document.querySelector('.top-header');
@@ -1241,13 +1137,22 @@ function updateMobileHeader(targetId = null) {
     if (pageId && window.innerWidth <= 1023) {
         if (pageId === 'view-groups') {
             header.classList.add('solid-purple');
-            if (mobileTitle) mobileTitle.textContent = '運動項目';
+            if (mobileTitle) {
+                mobileTitle.setAttribute('data-i18n', 'nav_sports'); // 🌟 貼上翻譯標籤
+                mobileTitle.textContent = translations[currentLang]['nav_sports'];
+            }
         } else if (pageId === 'view-leaderboard') {
             header.classList.add('solid-purple');
-            if (mobileTitle) mobileTitle.textContent = '即時排行榜';
+            if (mobileTitle) {
+                mobileTitle.setAttribute('data-i18n', 'lb_title'); // 🌟 貼上翻譯標籤
+                mobileTitle.textContent = translations[currentLang]['lb_title'];
+            }
         } else {
             header.classList.remove('solid-purple');
-            if (mobileTitle) mobileTitle.textContent = '';
+            if (mobileTitle) {
+                mobileTitle.removeAttribute('data-i18n'); // 拔掉標籤
+                mobileTitle.textContent = '';
+            }
         }
     } else {
         header.classList.remove('solid-purple');
