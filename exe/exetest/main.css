@@ -720,7 +720,6 @@ img {
     overflow-x: hidden;
     flex-shrink: 0; 
     scrollbar-width: none; 
-    counter-reset: group-num;
 }
 #leaderboard-tabs-container::-webkit-scrollbar { display: none; }
 
@@ -745,12 +744,10 @@ img {
     align-items: center;
 }
 
-.lb-tab:not(:first-child) {
-    counter-increment: group-num;
-}
-
 .lb-tab:not(:first-child)::before {
-    content: counter(group-num);
+    /* 👇 🌟 核心魔法：刪掉原本的 counter，改成抓取 HTML 的 data-num 屬性 */
+    content: attr(data-num); 
+    
     position: absolute;
     top: 0;
     left: 0;
@@ -3009,6 +3006,15 @@ body.lock-scroll {
     .game-right-content {
         padding-left: 20px !important;  /* 原本是 40px，縮減一半 */
         padding-right: 20px !important; /* 讓出更多空間給裡面的文字 */
+    }
+    /* 🌟 手機版：讓三張卡片變成上下堆疊，避免太擁擠 */
+    .mega-card-grid {
+        flex-direction: column; 
+    }
+    
+    /* 讓圖片高度稍微變窄一點點，避免佔用太多螢幕空間 */
+    .mega-card img {
+        height: 80px; 
     }
 }
 @media (max-width: 1023px) {

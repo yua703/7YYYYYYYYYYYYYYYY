@@ -4,17 +4,28 @@
 const SHEET_BASE = "https://opensheet.elk.sh/1jKqaT0NjIkqmguzRaNXV5KVFkXXOwmOE_Gt9Q9jFJJQ/";
 const SWITCH_INTERVAL = 10000; // 每一頁停留 10 秒
 
-// 定義輪播清單 (2.1 專屬展出名單)
+// 定義輪播清單 (總共 18 個項目)
 const CAROUSEL_LIST = [
     { sheet: "七大項總錦標", title: "七大項總錦標" },
     { sheet: "第一組分數計算", title: "G1 - 培根行動 (專注力)" },
     { sheet: "第二組分數計算", title: "G2 - PECOPECO (反應力)" },
+    { sheet: "第三組分數計算", title: "G3 - SOS.SOS (敏捷力)" },
     { sheet: "第四組分數計算", title: "G4 - 流汗吧！健美詠者 (耐力)" },
+    { sheet: "第五組分數計算", title: "G5 - 企色戰隊 (專注力)" },
+    { sheet: "第六組分數計算", title: "G6 - 不是．鴿們 (智力)" },
     { sheet: "第七組分數計算", title: "G7 - 老娘不幹了 (爆發力)" },
+    { sheet: "第八組分數計算", title: "G8 - 賽馬郎 (敏捷力)" },
+    { sheet: "第九組分數計算", title: "G9 - 溫水煮青蛙 (智力)" },
+    { sheet: "第十組分數計算", title: "G10 - 超派拍對 (反應力)" },
     { sheet: "第十一組分數計算", title: "G11 - 翻身 (敏捷力)" },
+    { sheet: "第十二組分數計算", title: "G12 - hurry down (協調力)" },
     { sheet: "第十三組分數計算", title: "G13 - 重生之我在神界當牛馬 (耐力)" },
-    { sheet: "第十四組分數計算", title: "G14 - Baa Hind the Door (專注力)" }
+    { sheet: "第十四組分數計算", title: "G14 - Baa Hind the Door (專注力)" },
+    { sheet: "第十五組分數計算", title: "G15 - Legend of the rower (爆發力)" },
+    { sheet: "第十六組分數計算", title: "G16 - Legend of MUAY THAI (協調力)" },
+    { sheet: "第十七組分數計算", title: "G17 - THE STONE FLOWER (智力)" }
 ];
+
 // ==========================================
 // 變數與 DOM
 // ==========================================

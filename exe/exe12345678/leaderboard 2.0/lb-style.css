@@ -1,0 +1,293 @@
+/* =========================================
+   引入自訂像素字體 (Cubic 11)
+   ========================================= */
+@font-face {
+    font-family: 'Cubic11';
+    src: url('fonts/Cubic_11.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* =========================================
+   全域設定
+   ========================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Noto Sans TC", sans-serif;
+    background-color: #f0f0f0; 
+    color: #333;
+    height: 100vh;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: row;        /* 🌟 核心：改為橫向排列 */
+    justify-content: space-between; 
+    align-items: center;
+    padding: 0 2%;              /* 左右邊界留白 */
+    gap: 2%;                    /* 排行榜跟右側欄的間距 */
+}
+
+/* =========================================
+   容器佈局
+   ========================================= */
+.lb-container {
+    flex: 1;                    /* 🌟 自動佔滿左側所有剩餘空間 */
+    height: 95vh;
+    background: #ffffff;
+    border-radius: 24px;
+    border: 4px solid #3643BA; 
+    box-shadow: 0 15px 40px rgba(54, 67, 186, 0.2); 
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* =========================================
+   頂部標題區 (含進度條)
+   ========================================= */
+.lb-top-header {
+    background: #3643BA; /* 🌟 換成主題紫 */
+    color: #ffffff;
+    padding: 25px 20px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+}
+
+.lb-top-header h1 {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif; /* 🌟 套用像素字體 */
+    color: #C7FF3C; 
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.3); /* 像素陰影 */
+}
+
+/* 進度條容器 */
+.progress-bar-container {
+    width: 100%;
+    height: 8px; /* 稍微加粗一點 */
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+/* 進度條動畫 */
+.progress-bar {
+    height: 100%;
+    background-color: #C7FF3C; /* 🌟 換成主題螢光綠 */
+    box-shadow: 0 0 10px rgba(199, 255, 60, 0.8); /* 加上發光特效 */
+    width: 0%;
+}
+
+/* =========================================
+   排行榜列表樣式
+   ========================================= */
+.lb-list-header {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px 100px;
+    gap: 10px;
+    padding: 15px 20px;
+    background-color: #ffffff;
+    
+    /* 🌟 表頭也套用像素字體與紫色 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    color: #3643BA; 
+    border-bottom: 3px solid #3643BA; 
+    font-size: 1.2rem;
+}
+
+.col-rank { text-align: center; }
+.col-name { text-align: left; padding-left: 10px;}
+.col-number { text-align: center; }
+.col-score { text-align: right; padding-right: 10px;}
+
+
+/* 🌟 移除原本 lb-list-body 內建的捲軸與 padding，交給雙欄系統控制 */
+.lb-list-body {
+    flex: 1;
+    overflow: hidden; 
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+/* 🌟 新增：雙欄內部專屬的各組小標題 */
+.col-group-title {
+    background-color: #3643BA;
+    color: #ffffff;
+    text-align: center;
+    padding: 12px 10px;
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #ffffff; /* 加一條白線與下方表頭做區隔 */
+}
+/* =========================================
+   🔥 雙欄排行榜專屬排版 (由 JS 生成)
+   ========================================= */
+.lb-dual-columns {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+}
+
+.lb-col {
+    flex: 1;           /* 左右各佔 50% */
+    display: flex;
+    flex-direction: column;
+    border-right: 2px dashed rgba(54, 67, 186, 0.2); /* 兩欄中間加一條虛線分隔 */
+}
+.lb-col:last-child {
+    border-right: none; /* 右邊那一欄的右側不需要虛線 */
+}
+
+.lb-col-body {
+    flex: 1;
+    overflow-y: hidden;
+    padding-bottom: 20px;
+}
+
+/* 獨立捲軸設定 */
+.lb-col-body::-webkit-scrollbar { width: 8px; }
+.lb-col-body::-webkit-scrollbar-thumb { background-color: rgba(54, 67, 186, 0.3); border-radius: 4px; }
+.lb-col-body::-webkit-scrollbar-thumb:hover { background-color: rgba(54, 67, 186, 0.6); }
+
+/* 單一玩家列微調 (確保在雙欄內不擁擠) */
+.lb-player {
+    display: grid;
+    grid-template-columns: 60px 1fr 90px 90px; /* 稍微縮小寬度比例以適應雙欄 */
+    gap: 10px;
+    padding: 15px 15px;
+    border-bottom: 1px dashed rgba(54, 67, 186, 0.2); 
+    align-items: center;
+    font-size: 1.1rem;
+    animation: slideIn 0.5s ease forwards;
+    opacity: 0;
+}
+
+.lb-player:nth-child(odd) { background-color: #fcfcfc; }
+
+.lb-rank-num { font-family: 'Cubic11', "Noto Sans TC", sans-serif; text-align: center; color: #3643BA; font-size: 1.2rem; }
+.lb-player.rank-1 .lb-rank-num { color: #FFD700; font-size: 1.6rem; text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333; }
+.lb-player.rank-2 .lb-rank-num { color: #E0E0E0; font-size: 1.5rem; text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333; }
+.lb-player.rank-3 .lb-rank-num { color: #CD7F32; font-size: 1.4rem; text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333; }
+
+.lb-player-name { font-weight: bold; color: #333; padding-left: 5px; }
+.lb-player-num { color: #888; text-align: center; font-size: 0.95rem; }
+.lb-player-score { font-family: 'Roboto', sans-serif; font-weight: 900; color: #3643BA; text-align: right; font-size: 1.2rem; }
+
+/* 進場動畫 */
+@keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+/* 載入中/無資料文字 */
+.status-msg { text-align: center; padding: 50px; color: #888; font-size: 1.2rem; font-family: 'Cubic11', "Noto Sans TC", sans-serif; }
+
+/* =========================================
+   🔥 右側專屬側欄 & QR Code (取消固定定位，改為 Flex 佈局)
+   ========================================= */
+.right-sidebar {
+    width: 140px;       /* 🌟 側欄寬度 */
+    height: 95vh;       /* 🌟 跟排行榜一樣高 */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* 把 QR 推到最底下 */
+    flex-shrink: 0;
+}
+
+.qr-code-box {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;          /* 兩個 QR code 之間的間距 */
+}
+
+.qr-item {
+    background-color: #ffffff; 
+    padding: 10px;   
+    border-radius: 12px; 
+    border: 3px solid #3643BA; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.qr-img-wrapper {
+    width: 110px;  
+    height: 110px; 
+    background: #f0f0f0; 
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 8px; 
+    border: 1px solid #eee;
+}
+
+.qr-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.qr-label {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif; 
+    font-size: 0.9rem; 
+    color: #ffffff;             
+    background-color: #3643BA;  
+    margin: 0;
+    padding: 6px 0px;          
+    border-radius: 6px;         
+    width: 100%;                
+    text-align: center;
+    white-space: nowrap; 
+}
+/* =========================================
+   🔥 滿版主視覺畫面 (Key Visual)
+   ========================================= */
+#key-visual-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #ebebeb;
+    z-index: 2000; /* 蓋過所有排行榜跟 QR Code */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* 預設隱藏，靠 JS 切換 active 來淡入淡出 */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#key-visual-screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 主視覺圖片滿版裁切 */
+#key-visual-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+/* 主視覺專屬進度條 (貼在螢幕最下方) */
+.kv-progress-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.kv-progress-bar {
+    height: 100%;
+    background-color: #C7FF3C;
+    box-shadow: 0 0 15px rgba(199, 255, 60, 0.8);
+    width: 0%;
+}

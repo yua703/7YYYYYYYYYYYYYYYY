@@ -940,6 +940,7 @@ const translations = {
         'map_locked': '尚未解鎖',
         'footer_highlight': '● 回顧精彩亮點',
         'btn_back': '返回',
+        'mega_exe2_web': 'ExE 2.0官方網站',
 
     },
     
@@ -1066,6 +1067,7 @@ const translations = {
         'map_locked': 'Locked',
         'footer_highlight': '● Past Highlights',
         'btn_back': 'Back',
+        'mega_exe2_web': 'ExE 2.0 Official Website',
 
     }
 };

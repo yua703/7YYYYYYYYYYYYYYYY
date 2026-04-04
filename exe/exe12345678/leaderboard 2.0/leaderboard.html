@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExErcise 賽事即時戰況</title>
+    <link rel="stylesheet" href="lb-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="lb-container">
+        <header class="lb-top-header">
+            <h1 id="current-category-title">載入中...</h1>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </header>
+
+        <div id="leaderboard-data" class="lb-list-body">
+            <div class="status-msg">載入中...</div>
+        </div>
+    </div>
+
+    <div class="right-sidebar">
+        <div class="qr-code-box">
+            <div class="qr-item">
+                <div class="qr-img-wrapper">
+                    <img src="img/qr.jpg" alt="掃描瀏覽官網">
+                </div>
+                <p class="qr-label">ExE2.0官方網站</p>
+            </div>
+
+            <div class="qr-item">
+                <div class="qr-img-wrapper">
+                    <img src="img/dcn.jpg" alt="迪卡儂官方會員">
+                </div>
+                <p class="qr-label">迪卡儂官方會員</p>
+            </div>
+        </div>
+    </div>
+    <div id="key-visual-screen" class="active">
+        <img src="img/lll.webp" alt="大會主視覺">
+        
+        <div class="kv-progress-container">
+            <div class="kv-progress-bar" id="kv-progress-bar"></div>
+        </div>
+    </div>
+
+    <script src="lb-script.js"></script>
+</body>
+
+    <script src="lb-script.js"></script>
+</body>
+</html>
