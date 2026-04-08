@@ -44,7 +44,7 @@ img {
     left: 0;          /* 殺掉左側留白 */
     width: 100%;      /* 強制 100% 滿版 */
     height: 80px;
-    background-color: #3643BA; /* 統一加上紫色底色 */
+    background-color: #7C3EED; /* 統一加上紫色底色 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -96,7 +96,7 @@ img {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     background-color: transparent;
     background-color: #98CDF9; 
-    color: #3643BA;
+    color: #7C3EED;
     border: none; 
     box-shadow: none; 
     padding: 8px 16px;
@@ -106,14 +106,14 @@ img {
     transition: all 0.3s;
 }
 .header-lang-btn:hover {
-    background-color: #C7FF3C; 
-    border-color: #C7FF3C;
+    background-color: #caf549; 
+    border-color: #caf549;
     color: #333;
 }
 
 /* 漢堡按鈕 (螢光綠底色) */
 .header-menu-btn {
-    background-color: #C7FF3C; 
+    background-color: #caf549; 
     border: none;
     height: 40px;
     padding: 0 15px;
@@ -138,7 +138,7 @@ img {
 .hamburger-line {
     width: 18px;
     height: 3px;
-    background-color: #3643BA; 
+    background-color: #7C3EED; 
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -181,7 +181,7 @@ img {
 
 /* 🌟 漢堡內的連結滑過效果 (紫色 + 你要的位移) */
 .mega-link:hover, .mega-link.active {
-    color: #3643BA; 
+    color: #7C3EED; 
     transform: translate(5px, -2px); 
 }
 
@@ -274,7 +274,7 @@ img {
 }
 .mega-card-title {
     font-size: 0.95rem;
-    color: #3643BA; 
+    color: #7C3EED; 
     font-weight: bold;
 }
 .mega-card-grid {
@@ -295,7 +295,7 @@ img {
     text-decoration: none; /* 刪除底線 */
     color: inherit;        /* 讓文字顏色繼承原本的 #333，不要變藍色 */
 }.mega-card:hover {
-    border-color: #C7FF3C; 
+    border-color: #caf549; 
 }
 .mega-card img {
     width: 100%;
@@ -318,7 +318,7 @@ img {
     height: auto;
     
     /* 👇 2. 核心魔法：讓它佔螢幕寬度的 12% (數值可自由微調) */
-    width: 40vw;
+    width: 60vw;
     
     /* 👇 2. 放寬防護網！讓它有空間變大變小 */
     min-width: 50px;   /* 把底線降低，讓手機版可以縮得更小 */
@@ -380,7 +380,7 @@ img {
 .scroller-inner span {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif; 
     font-size: 2rem;         
-    color: #3643BA;           
+    color: #7C3EED;           
     font-weight: bold;
     letter-spacing: 1px;      
 
@@ -472,7 +472,7 @@ img {
 .game-choice-box .game-choice-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.5rem;
-    color: #3643BA;       /* 強制統一深藍色 */
+    color: #7C3EED;       /* 強制統一深藍色 */
     text-shadow: none;    /* 強制殺掉黑色陰影 */
     margin-bottom: 25px;
     text-align: left;
@@ -523,7 +523,7 @@ img {
     width: 100%;
     /* 配合下方緊湊排版，首頁高度微調 */
     min-height: 90dvh; 
-    background-color: #3643BA;
+    background-color: #7C3EED;
     color: #f0f0f0;
     
     display: flex;
@@ -555,12 +555,12 @@ img {
     
     background: linear-gradient(
         to bottom, 
-        #3643BA 0%,      
-        #3643BA 27%,     
-        #C7FF3C 33%,     
-        #C7FF3C 65%,     
-        #C7FF3C 70%,     
-        #C7FF3C 100%     
+        #7C3EED 0%,      
+        #7C3EED 27%,     
+        #caf549 33%,     
+        #caf549 65%,     
+        #caf549 70%,     
+        #caf549 100%     
     );
     
     /* 🌟 圓角修正：不要那麼圓 */
@@ -646,7 +646,7 @@ img {
     top: 4px;
     bottom: 4px; 
     left: 0; 
-    background-color: #3643BA;
+    background-color: #7C3EED;
     /* 🌟 圓角修正：微圓角 */
     border-radius: 8px;
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s ease;
@@ -720,7 +720,6 @@ img {
     overflow-x: hidden;
     flex-shrink: 0; 
     scrollbar-width: none; 
-    counter-reset: group-num;
 }
 #leaderboard-tabs-container::-webkit-scrollbar { display: none; }
 
@@ -731,11 +730,11 @@ img {
     flex-shrink: 0;
     border: none;       
     background: transparent;
-    border-bottom: 0.5px solid #3643BA;
+    border-bottom: 0.5px solid #7C3EED;
     padding: 7px 10px 0 25px; 
     text-align: left;
     font-size: 13px;
-    color: #3643BA;
+    color: #7C3EED;
     font-weight: 500;
     line-height: 1.3;
     white-space: normal;
@@ -745,12 +744,10 @@ img {
     align-items: center;
 }
 
-.lb-tab:not(:first-child) {
-    counter-increment: group-num;
-}
-
 .lb-tab:not(:first-child)::before {
-    content: counter(group-num);
+    /* 👇 🌟 核心魔法：刪掉原本的 counter，改成抓取 HTML 的 data-num 屬性 */
+    content: attr(data-num); 
+    
     position: absolute;
     top: 0;
     left: 0;
@@ -772,7 +769,7 @@ img {
 }
 
 .lb-tab.active {
-    background: #3643BA; 
+    background: #7C3EED; 
     color: #f0f0f0;
     font-weight: bold;
     border-bottom: none;
@@ -782,8 +779,8 @@ img {
 }
 
 .lb-tab.active:not(:first-child)::before {
-    background-color:#C7FF3C; 
-    color: #3643BA;          
+    background-color:#caf549; 
+    color: #7C3EED;          
 }
 
 .lb-tab:first-child {
@@ -814,13 +811,13 @@ img {
     font-size: 0.85rem;
     color: #666;
     font-weight: bold;
-    border-bottom: 2px solid #3643BA;
+    border-bottom: 2px solid #7C3EED;
     position: sticky; 
     top: 0;
     z-index: 5;
 }
 
-.lb-rank { font-weight: bold; color: #3643BA; text-align: left; font-size: 0.9rem; }
+.lb-rank { font-weight: bold; color: #7C3EED; text-align: left; font-size: 0.9rem; }
 .lb-name { 
     font-weight: bold; color: #888; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; 
@@ -828,7 +825,7 @@ img {
 }
 .lb-number { color: #888; font-size: 0.8rem; text-align: right; }
 .lb-score { 
-    font-weight: bold; color: #3643BA; text-align: right; 
+    font-weight: bold; color: #7C3EED; text-align: right; 
     white-space: nowrap; overflow: hidden; font-size: 0.9rem;
 }
 .lb-player { background: #f0f0f0; }
@@ -893,7 +890,7 @@ img {
     z-index: 10;
 }
 .group-info h3 { 
-    font-size: 1rem; margin-bottom: 5px; color: #3643BA; 
+    font-size: 1rem; margin-bottom: 5px; color: #7C3EED; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .group-info p {
@@ -906,7 +903,39 @@ img {
     height: 0; opacity: 0; padding: 0 15px;
     transition: all 0.4s ease 0.1s;
 }
+/* =========================================
+   🔒 未解鎖組別狀態 (Locked Group)
+   ========================================= */
 
+/* 未解鎖的灰底遮罩 (精準覆蓋在圖片上方) */
+.locked-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 140px; /* 與列表圖片高度一致 */
+    background-color: rgba(30, 30, 30, 0.4); /* 壓上一層半透明暗色 */
+    backdrop-filter: grayscale(100%); /* 🌟 魔法：讓底下的彩色圖片瞬間變黑白！ */
+    -webkit-backdrop-filter: grayscale(100%); /* 支援 Safari */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 4; /* 蓋在圖片上，但在右上角的標籤 (G3) 之下 */
+}
+
+/* 遮罩上的「尚未解鎖」小牌子 */
+.locked-overlay span {
+    background-color: #7C3EED; /* 主題紫底 */
+    color: #f0f0f0;            /* 白字 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 0.95rem;
+    padding: 6px 14px;
+    border-radius: 8px;
+    border: 2px solid #f0f0f0;
+    letter-spacing: 2px;
+    text-indent: 2px;          /* 修正字距造成的視覺偏移 */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
 /* =========================================
    9. 左上角返回按鈕 (取代舊版底部關閉)
    ========================================= */
@@ -918,7 +947,7 @@ img {
     align-items: center;
     gap: 8px;
     background-color: rgba(255, 255, 255, 0.95);
-    color: #3643BA;             /* 你的主題紫色 */
+    color: #7C3EED;             /* 你的主題紫色 */
     padding: 8px 16px 8px 12px;
     border-radius: 30px;
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
@@ -931,7 +960,7 @@ img {
 }
 
 .overlay-top-back:hover {
-    background-color: #C7FF3C;  /* 你的主題螢光綠 */
+    background-color: #caf549;  /* 你的主題螢光綠 */
     color: #333;
     transform: translateX(-3px); 
 }
@@ -943,7 +972,7 @@ img {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #3643BA;    /* 🌟 整塊變成主題紫色 */
+    background-color: #7C3EED;    /* 🌟 整塊變成主題紫色 */
     border-radius: 24px 24px 0 0; /* 🌟 頂部圓角 */
     margin-top: 40px;
     color: #f0f0f0;
@@ -984,7 +1013,7 @@ img {
 
 /* 標題變成螢光綠 */
 .footer-info-left p {
-    color: #C7FF3C;               
+    color: #caf549;               
     font-weight: bold;
     white-space: nowrap;
 }
@@ -1013,8 +1042,8 @@ img {
 .btn-primary {
     display: inline-block;
     padding: 10px 24px;
-    background-color: #C7FF3C; 
-    color: #3643BA; 
+    background-color: #caf549; 
+    color: #7C3EED; 
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
@@ -1035,7 +1064,7 @@ img {
 /* 小標題 */
 .footer-card-title {
     font-size: 1rem;
-    color: #C7FF3C;               /* 🌟 因為背景變紫了，標題改成螢光綠！ */
+    color: #caf549;               /* 🌟 因為背景變紫了，標題改成螢光綠！ */
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -1068,7 +1097,7 @@ img {
     width: 50px;
     height: 50px;
     border: 5px solid #f0f0f0; 
-    border-top: 5px solid #3643BA; 
+    border-top: 5px solid #7C3EED; 
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -1130,7 +1159,7 @@ img {
 }
 
 .overlay-header { padding: 20px 20px 0 20px; }
-.overlay-title { font-size: 1.8rem; font-weight: bold; color: #3643BA; margin-bottom: 5px; }
+.overlay-title { font-size: 1.8rem; font-weight: bold; color: #7C3EED; margin-bottom: 5px; }
 .overlay-desc {
     font-size: 1rem; 
     color: #666;
@@ -1143,7 +1172,7 @@ img {
     padding-right: 20px;
     display: block;
 }
-.overlay-badge { display: inline-block; background: #3643BA; color: #f0f0f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
+.overlay-badge { display: inline-block; background: #7C3EED; color: #f0f0f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
 .overlay-body { padding: 0 20px 20px 20px; color: #333; line-height: 1.6; }
 
 
@@ -1312,171 +1341,6 @@ body.lock-scroll {
 }
 
 /* =========================================
-   🔥 折疊式時程表樣式 (白底紫框紫字 科技風)
-   ========================================= */
-/* 🌟 時程表清單：強制滿版、強制靠左 */
-.schedule-list {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;           /* 稍微加大一點間距，看起來更舒服 */
-    padding: 0;          /* 歸零內距，讓它完美貼齊左邊對齊線 */
-    width: 100%;         /* 強制佔滿 100% 寬度 */
-    max-width: none;     /* 徹底殺掉 600px 的限制 */
-    margin: 0;           /* 取消 auto 置中，強制靠左 */
-}
-/* 🌟 統一設定：白底、紫框、圓角 */
-.schedule-group, .schedule-row {
-    background-color: #ffffff; 
-    border: 2px solid #3643BA; /* 紫色框線 */
-    border-radius: 12px; 
-    overflow: hidden;    
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(102, 102, 255, 0.1);
-}
-
-.schedule-group {
-    cursor: pointer;
-}
-
-/* 頭部文字設定：紫色字 */
-.sch-header {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-    color: #3643BA; /* 🌟 紫色字 */
-    position: relative;
-}
-
-.sch-arrow {
-    margin-left: auto; 
-    font-size: 0.9rem;
-    transition: transform 0.3s ease;
-    color: #3643BA;
-}
-
-/* 展開的內容區域 */
-.sch-body {
-    max-height: 0; 
-    overflow: hidden;
-    background-color: rgba(240, 240, 240, 0.5); /* 微微的灰底區分層次 */
-    transition: max-height 0.4s ease-out; 
-}
-
-.sch-sub-row {
-    padding: 10px 25px;
-    font-size: 0.9rem;
-    color: #555; /* 內文深灰比較好閱讀 */
-    border-top: 1px dashed rgba(102, 102, 255, 0.3); /* 內部的分隔線也用淡紫色 */
-    display: flex;
-    align-items: center;
-    white-space: nowrap;
-}
-.sch-sub-row::before {
-    content: "•";
-    margin-right: 8px;
-    color: #C7FF3C; /* 點點用螢光綠點綴 */
-    font-size: 1.2rem;
-}
-
-/* 點擊展開時的效果 */
-.schedule-group.active {
-    box-shadow: 0 6px 15px rgba(102, 102, 255, 0.2); 
-    transform: translateY(-2px); /* 微微浮起 */
-}
-.schedule-group.active .sch-body {
-    max-height: 250px; 
-}
-.schedule-group.active .sch-arrow {
-    transform: rotate(180deg); 
-    color: #C7FF3C; /* 箭頭變綠色 */
-}
-
-/* 休息與結束的獨立設定 (覆蓋成紫綠風格) */
-.schedule-row {
-    padding: 15px 20px;
-    font-size: 1rem;
-    font-weight: bold;
-}
-.schedule-row.rest { 
-    background-color: transparent; 
-    border: 2px dashed #3643BA; /* 虛線框代表休息 */
-    color: #3643BA; 
-    opacity: 0.7;
-}
-
-.sch-time { 
-    font-family: 'Roboto', sans-serif; 
-    flex-shrink: 0; /* 🌟 防護罩：保護時間文字，絕對不允許被擠壓換行或破版 */
-}
-
-.sch-event {
-    text-align: left;
-    display: flex;      
-    align-items: center; 
-    flex: 1;            /* 🌟 自動填滿剩下的空間，取代死板的 60% */
-    white-space: nowrap;
-}
-
-.sch-event::before {
-    content: "";
-    width: 2px;         
-    height: 18px;       
-    background-color: rgba(102, 102, 255, 0.3); 
-    margin-left: 12px;  /* 🌟 與左邊時間文字保持安全距離 */
-    margin-right: 15px; /* 🌟 與右邊標題保持安全距離 */
-    display: inline-block;
-    flex-shrink: 0;     /* 🌟 防護罩：線條本身絕對不能被擠到變形 */
-}
-
-/* =========================================
-   🌟 Day 1 / Day 2 日期切換按鈕樣式 (源頭：手機版上下堆疊)
-   ========================================= */
-#detail-time.active {
-    display: block; /* 手機版：上下正常排版 */
-    width: 100%;
-}
-
-/* 手機版：按鈕並排在上方 */
-.day-tabs-container {
-    display: flex;
-    flex-direction: row; /* 手機版：橫向並排 */
-    justify-content: center;
-    gap: 10px;
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-/* 按鈕本體 */
-.day-tab-btn {
-    background: transparent;
-    border: 2px solid #3643BA;
-    color: #3643BA;
-    padding: 10px 15px; /* 手機版稍小一點 */
-    border-radius: 30px;
-    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-size: 0.95rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    flex: 1; /* 🌟 讓兩個按鈕在手機上平分一半寬度 */
-    text-align: center;
-}
-
-.day-tab-btn:hover { background: rgba(102, 102, 255, 0.1); }
-.day-tab-btn.active {
-    background: #3643BA;
-    color: #ffffff;
-    box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
-}
-
-.day-content {
-    display: none;
-    width: 100%;
-    animation: fadeIn 0.3s ease;
-}
-.day-content.active { display: block; }
-/* =========================================
    🔥 更新：計分方法與競賽辦法美化 (科技電競風格)
    ========================================= */
 /* 大容器配置 */
@@ -1496,7 +1360,7 @@ body.lock-scroll {
 .scoring-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.5rem;
-    color: #3643BA;
+    color: #7C3EED;
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid #f0f0f0; 
@@ -1517,7 +1381,7 @@ body.lock-scroll {
     display: flex;
     align-items: center;
 }
-.scoring-subtitle::before { content: ''; width: 6px; height: 16px; background-color: #C7FF3C; margin-right: 8px; border-radius: 2px; }
+.scoring-subtitle::before { content: ''; width: 6px; height: 16px; background-color: #caf549; margin-right: 8px; border-radius: 2px; }
 .scoring-desc { font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5; }
 /* 👇 🌟 貼在這裡！修復「二、全項總積分」下方間距過大的問題 */
 .scoring-two-col .scoring-col-left .scoring-subtitle:first-child,
@@ -1549,12 +1413,12 @@ body.lock-scroll {
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.point-item span { font-family: 'Roboto', sans-serif; font-weight: 900; color: #3643BA; font-size: 0.95rem; } /* 分數縮小 */
+.point-item span { font-family: 'Roboto', sans-serif; font-weight: 900; color: #7C3EED; font-size: 0.95rem; } /* 分數縮小 */
 .point-item[data-i18n="rank_others"] { justify-content: center; background-color: transparent; border: none; box-shadow: none; color: #888 !important; font-weight: normal !important; }
 
 .scoring-list-style { list-style: none; padding-left: 0; }
 .scoring-list-style li { position: relative; padding-left: 20px; margin-bottom: 10px; font-size: 0.95rem; color: #444; line-height: 1.6; }
-.scoring-list-style li::before { content: '▸'; position: absolute; left: 0; top: 0; color: #3643BA; font-size: 1.2rem; font-weight: bold; }
+.scoring-list-style li::before { content: '▸'; position: absolute; left: 0; top: 0; color: #7C3EED; font-size: 1.2rem; font-weight: bold; }
 
 #detail-participants .scoring-card div[style*="border-top"] { border-top: none !important; margin-top: 20px !important; padding-top: 15px !important; background-color: #fff5f5; padding: 15px; border-radius: 8px; }
 #detail-participants .scoring-card h4 { font-family: 'Cubic11', sans-serif; color: #e53935 !important; letter-spacing: 1px; font-size: 1rem; }
@@ -1578,7 +1442,7 @@ body.lock-scroll {
     text-align: left;
 }
 .intro-ixd-section .ixd-green-title {
-    color: #C7FF3C;
+    color: #caf549;
     text-align: center;
     padding-left: 0; 
     margin-bottom: 15px;
@@ -1591,7 +1455,7 @@ body.lock-scroll {
 }
 
 .point-item[data-i18n="rank_others"] {
-    color: #3643BA !important;  
+    color: #7C3EED !important;  
     font-weight: bold !important; 
     font-family: inherit;        
     opacity: 1;                  
@@ -1640,7 +1504,7 @@ body.lock-scroll {
 
 .splash-loader {
     border: 5px solid #d3d3d3; 
-    border-top: 5px solid #3643BA; 
+    border-top: 5px solid #7C3EED; 
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -1649,7 +1513,7 @@ body.lock-scroll {
 }
 
 .splash-text {
-    color: #3643BA; 
+    color: #7C3EED; 
     font-size: 1rem;
     font-weight: bold;
 }
@@ -1680,7 +1544,7 @@ body.lock-scroll {
 
 /* 🌟 手機版：上方大綠色顯示框 */
 .mobile-tab-display {
-    background-color: #C7FF3C;
+    background-color: #caf549;
     color: #333;
     font-size: 1.2rem;
     text-align: center;
@@ -1715,7 +1579,7 @@ body.lock-scroll {
 /* 🌟 手機版：小選項被選中時 (只有綠色外框) */
 .game-tabs-list .detail-tab-btn.active {
     background-color: transparent !important; /* 確保沒有底色 */
-    border-color: #C7FF3C !important;         /* 亮起綠色框線 */
+    border-color: #caf549 !important;         /* 亮起綠色框線 */
     color: #555 !important;
     font-weight: bold !important;
     font-size: 0.8rem !important;             /* 絕對不放大 */
@@ -1731,8 +1595,8 @@ body.lock-scroll {
 }
 
 .pixel-ctrl-btn {
-    background-color: #3643BA;
-    border: 2px solid #3643BA;
+    background-color: #7C3EED;
+    border: 2px solid #7C3EED;
     border-radius: 8px;
     width: 60px;     /* 手機版按鈕稍小一點 */
     height: 45px;
@@ -1797,12 +1661,12 @@ body.lock-scroll {
         /* 也可以改變顏色佔比，讓它在寬螢幕上看起來更平衡 */
         background: linear-gradient(
             to bottom,        /* 如果想改斜的，可以改成 135deg */
-            #3643BA 0%,      
-            #3643BA 25%,      /* 電腦版可能紫色的比例需要少一點 */
-            #C7FF3C 35%,     
-            #C7FF3C 60%,     
-            #C7FF3C 80%,     
-            #C7FF3C 100%     
+            #7C3EED 0%,      
+            #7C3EED 25%,      /* 電腦版可能紫色的比例需要少一點 */
+            #caf549 35%,     
+            #caf549 60%,     
+            #caf549 80%,     
+            #caf549 100%     
         );}
 
 .event-text p {
@@ -1934,15 +1798,15 @@ body.lock-scroll {
         color: #f0f0f0; 
         transition: color 0.3s;
         text-shadow: 
-            -1px -1px 0 #3643BA,  
-             1px -1px 0 #3643BA,
-            -1px  1px 0 #3643BA,
-             1px  1px 0 #3643BA;
+            -1px -1px 0 #7C3EED,  
+             1px -1px 0 #7C3EED,
+            -1px  1px 0 #7C3EED,
+             1px  1px 0 #7C3EED;
     }
 
     .desktop-link:hover, 
     .desktop-link.active {
-        color: #C7FF3C; 
+        color: #caf549; 
         transform: translate(5px, -2px); 
     }
 
@@ -2207,7 +2071,7 @@ body.lock-scroll {
 
     /* 🟢 按鈕選取狀態 (Active) */
     .game-tabs-list .detail-tab-btn.active {
-        background-color: #C7FF3C !important; /* 🌟 整塊變成螢光綠滿版 */
+        background-color: #caf549 !important; /* 🌟 整塊變成螢光綠滿版 */
         color: #333 !important; /* 🌟 字變成深色，且粗體 */
         font-weight: bold !important;
         font-size: 1.1rem !important; /* 🌟 字變大 */
@@ -2231,8 +2095,8 @@ body.lock-scroll {
 
     /* 2. 基礎按鈕設定 */
     .pixel-ctrl-btn {
-        background-color: #3643BA;
-        border: 2px solid #3643BA; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
+        background-color: #7C3EED;
+        border: 2px solid #7C3EED; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
         border-radius: 8px;
         width: 70px; /* 按鈕加寬 */
         height: 50px;
@@ -2246,9 +2110,9 @@ body.lock-scroll {
 
     /* 3. 按鈕滑過 (Hover) 的綠色點亮效果 */
     .pixel-ctrl-btn:hover {
-        background-color: #C7FF3C;
-        border-color: #3643BA; /* 邊框亮起 */
-        color: #3643BA;        /* 箭頭亮起 */
+        background-color: #caf549;
+        border-color: #7C3EED; /* 邊框亮起 */
+        color: #7C3EED;        /* 箭頭亮起 */
         box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
     }
 
@@ -2269,51 +2133,6 @@ body.lock-scroll {
     /* 內容區內部的細節修正 */
     .detail-content {
         padding-top: 0; /* 移除原本的 top padding */
-    }
-    /* 內容區內部的圖片 (地圖置中設定) */
-    /* 🌟 電腦版專屬：先讓地圖的「隱形外框」完全填滿右側白框的高度 */
-    #detail-map.active {
-        height: 100%; 
-        display: flex;
-        justify-content: center; /* 左右置中 */
-        align-items: center;     /* 上下置中 */
-    }
-
-    /* 內容區內部的圖片 (地圖置中設定) */
-    .content-img {
-        display: block;       
-        margin: 0 auto;       
-        max-width: 100%;      
-        
-        /* 👇 核心魔法：限制最大高度為 100%，圖片太高時會自動等比例縮小，絕對不產生捲軸！ */
-        max-height: 100%;     
-        object-fit: contain;  /* 🌟 確保圖片怎麼縮放都不會變形 */
-    }
-    /* =========================================
-       🎮 電腦版：時程表左右分欄排版 (極淨狀態切換)
-       ========================================= */
-    #detail-time.active {
-        display: flex;            /* 電腦版：轉為左右排版 */
-        align-items: flex-start;
-        gap: 40px;
-    }
-
-    .day-tabs-container {
-        flex-direction: column;   /* 電腦版：按鈕轉為直向堆疊 */
-        width: 180px;             /* 電腦版：固定寬度 */
-        flex-shrink: 0;
-        margin-bottom: 0;
-    }
-
-    .day-tab-btn {
-        padding: 12px 24px;       /* 電腦版：按鈕加大 */
-        font-size: 1rem;
-        flex: none;               /* 取消手機版的平分寬度 */
-        width: 100%;              /* 填滿 180px */
-    }
-
-    .day-content {
-        flex: 1;                  /* 右側內容佔滿剩餘空間 */
     }
     /* =========================================
        🖥️ 電腦版：底部資訊 (左右雙欄排版)
@@ -2355,8 +2174,8 @@ body.lock-scroll {
         top: 50%;                 /* 2. 垂直置中 */
         transform: translateY(-50%);
         background-color: rgba(255, 255, 255, 0.95); /* 3. 美化：半透明白底 */
-        border: 2px solid #3643BA; /* 邊框 */
-        color: #3643BA;            /* 箭頭顏色 */
+        border: 2px solid #7C3EED; /* 邊框 */
+        color: #7C3EED;            /* 箭頭顏色 */
         width: 48px;
         height: 48px;
         border-radius: 50%;        /* 變成圓形按鈕 */
@@ -2376,8 +2195,8 @@ body.lock-scroll {
         top: 50%;                 
         transform: translateY(-50%);
         background-color: rgba(255, 255, 255, 0.95); 
-        border: 2px solid #3643BA; 
-        color: #3643BA;            
+        border: 2px solid #7C3EED; 
+        color: #7C3EED;            
         width: 48px;
         height: 48px;
         border-radius: 50%;        
@@ -2404,7 +2223,7 @@ body.lock-scroll {
     /* 按鈕滑鼠移過去的特效 */
     .slider-nav-btn:hover, 
     .lightbox-nav-btn:hover {      /* 👈 共用滑過變色特效 */
-        background-color: #C7FF3C; 
+        background-color: #caf549; 
         transform: translateY(-50%) scale(1.1); 
     }
 
@@ -2522,7 +2341,7 @@ body.lock-scroll {
     width: 100%;
     min-height: 100vh;      
     min-height: 100dvh;     
-    background-color: #3643BA;
+    background-color: #7C3EED;
     margin-bottom: 8px;   
     display: flex;
     flex-direction: column;
@@ -2954,29 +2773,27 @@ body.lock-scroll {
 .deco-a { display: none; }
 .deco-b { bottom: 35%; left: 350px; width: 150px; transform: rotate(10deg); }
 .deco-c { top: 10%; left: -50px; width: 120px; transform: rotate(45deg); }
-/* 👇 🌟 新增：針對手機版的時程表與內容進行瘦身！ */
-    
-    /* 1. 調整大標題列的左右內距，讓出更多空間 */
-    .sch-header {
-        padding: 12px 10px; /* 原本是 15px 20px，左右縮小為 10px */
-        font-size: 0.95rem; /* 字體稍微縮小一點點 */
-    }
-
-    /* 2. 縮小那條佔位的分割線 */
-    .sch-event::before {
-        margin-left: 8px;   /* 減少與時間的距離 */
-        margin-right: 10px; /* 減少與標題的距離 */
-    }
-
-    /* 3. 調整展開後的內部選項 */
-    .sch-sub-row {
-        padding: 10px 15px; /* 原本左右是 25px，縮小為 15px */
-        font-size: 0.85rem; /* 內文字體微調 */
-    }
-    /* 👇 🌟 新增：針對手機版的右側白框，減少左右內距 */
     .game-right-content {
         padding-left: 20px !important;  /* 原本是 40px，縮減一半 */
         padding-right: 20px !important; /* 讓出更多空間給裡面的文字 */
+    }
+    /* 🌟 手機版：讓卡片變成「一排兩個」，超過兩個自動往下排 */
+    .mega-card-grid {
+        display: grid; /* 啟動網格魔法 */
+        grid-template-columns: repeat(2, 1fr); /* 強制劃分：一排切成 2 個等份 */
+        gap: 12px; /* 卡片之間的空隙 */
+    }
+    
+    /* 因為變成一排兩個了，卡片變窄，我們要微調內部元素的比例讓它保持精緻 */
+    .mega-card img {
+        height: 80px; 
+        padding: 5px; /* 減少內距，讓圖片大一點 */
+    }
+    
+    .mega-card p {
+        padding: 8px 5px;   /* 減少文字周圍的留白 */
+        font-size: 0.8rem;  /* 字體稍微縮小，避免在窄卡片裡折行太多 */
+        line-height: 1.3;
     }
 }
 @media (max-width: 1023px) {

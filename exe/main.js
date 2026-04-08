@@ -301,30 +301,6 @@ if (prevDetailBtn && nextDetailBtn) {
     });
 }
 
-// ==========================================
-// 🌟 新增：Day 1 / Day 2 時程表日期切換邏輯
-// ==========================================
-const dayTabBtns = document.querySelectorAll('.day-tab-btn');
-const dayContents = document.querySelectorAll('.day-content');
-
-dayTabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // 1. 移除所有日期按鈕的 active 狀態
-        dayTabBtns.forEach(b => b.classList.remove('active'));
-        // 2. 移除所有日期內容的 active 狀態
-        dayContents.forEach(c => c.classList.remove('active'));
-
-        // 3. 把點擊的按鈕加上 active
-        btn.classList.add('active');
-        
-        // 4. 找到對應的內容區塊 (day1 或 day2) 並顯示
-        const targetDayId = btn.dataset.day;
-        const targetContent = document.getElementById(targetDayId);
-        if (targetContent) {
-            targetContent.classList.add('active');
-        }
-    });
-});
 
 // ==========================================
 // 4. 排行榜功能 (Leaderboard)
@@ -799,20 +775,6 @@ if (overlayBackBtn) {
     });
 }
 
-// ==========================================
-// 6. 時程表手風琴效果 (Accordion)
-// ==========================================
-function toggleSchedule(element) {
-    // 1. 切換當前點擊的項目的 active 狀態
-    element.classList.toggle('active');
-
-    const allGroups = document.querySelectorAll('.schedule-group');
-    allGroups.forEach(group => {
-        if (group !== element) {
-            group.classList.remove('active');
-        }
-    });
-}
 
 // ==========================================
 // 7. 多語言切換系統 (i18n - 完整翻譯版)
@@ -828,9 +790,9 @@ const translations = {
         'detail_title': '賽事細節',
         'hero_welcome_1': '歡迎來到',
         'hero_welcome_2': '科技x運動體適能挑戰賽',
-        'event_p1': '【ExErcise 2.0】科技x運動體適能挑戰賽',
-        'event_p2': '用17個30秒，測試你的七大運動能力！',
-        'event_p3': '由北科大互動設計 113 級與迪卡儂中和店聯手打造。',
+        'event_p1': '【ExErcise 2.1】科技x運動體適能挑戰賽',
+        'event_p2': '用7個30秒，測試你的七大運動能力！',
+        'event_p3': '由北科大互動設計 113 級與兒童新樂園聯手打造。',
         'event_p4': '我們打破穿戴限制，將運動變好玩。挑戰全新的運動可能',
 
         // 分頁按鈕
@@ -875,8 +837,8 @@ const translations = {
 
         // Footer
         'footer_host': '主辦單位：', 
-        // 'footer_co': '合作單位：',
-        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '迪卡儂 新北中和店', 'btn_ig': '追蹤官方IG',
+        'footer_co': '合作單位：',
+        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '臺北市立兒童新樂園光XR實境樂園', 'btn_ig': '追蹤官方IG',
 
         // 排行榜
         'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
@@ -928,8 +890,8 @@ const translations = {
         'mega_exe1_vid': 'ExE 1.0回顧影片',
         'mega_address': '國立臺北科技大學<br>互動設計系 113級',
         'splash_text': 'Loading… Opening the .exe file',
-        'ht_left': '17關全能挑戰',
-        'ht_right': 'EXERCISE 2.0',
+        'ht_left': '7關全能挑戰',
+        'ht_right': 'EXERCISE 2.1',
         'hero_bottom_1': '突破關卡、獨自升級<br>一起奔向最終章',
         'ixd_title': '互動設計系',
         'ixd_desc': '互動設計系跨足運動科技，致力將肢體動作與感測技術深度融合。<br>讓數位科技釋放競技極限，探索體育與科技的交匯可能。',
@@ -940,6 +902,7 @@ const translations = {
         'map_locked': '尚未解鎖',
         'footer_highlight': '● 回顧精彩亮點',
         'btn_back': '返回',
+        'mega_exe2_web': 'ExE 2.0官方網站',
 
     },
     
@@ -953,9 +916,9 @@ const translations = {
         'detail_title': 'Event Details',
         'hero_welcome_1': 'Welcome to',
         'hero_welcome_2': 'Tech × Sports Fitness Challenge',
-        'event_p1': '【ExErcise 2.0】Tech × Sports Fitness Challenge',
-        'event_p2': 'Test your 7 major athletic abilities through 17 thirty-second challenges!',
-        'event_p3': 'Co-created by NTUT Interaction Design 113 and Decathlon Zhonghe Store.',
+        'event_p1': '【ExErcise 2.1】Tech × Sports Fitness Challenge',
+        'event_p2': 'Test your 7 major athletic abilities through 7 thirty-second challenges!',
+        'event_p3': 'Co-created by NTUT Interaction Design, Class 113, and Light X-Reality Land.',
         'event_p4': 'Breaking free from wearable constraints to make exercise fun. Experience a whole new way to move!',
 
         // Tabs
@@ -1001,8 +964,8 @@ const translations = {
 
         // Footer
         'footer_host': 'Organizer:', 
-        // 'footer_co': 'Co-organizer:',
-        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Decathlon New Taipei Zhonghe Store', 'btn_ig': 'Follow Instagram',
+        'footer_co': 'Co-organizer:',
+        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Light X-Reality Land', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
         'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
@@ -1054,8 +1017,8 @@ const translations = {
         'mega_exe1_vid': 'ExE 1.0 Recap Video',
         'mega_address': 'National Taipei University of Technology<br>Interaction Design Class of 113',
         'splash_text': 'Loading… Opening the .exe file',
-        'ht_left': '17-Stage Challenge',
-        'ht_right': 'EXERCISE 2.0',
+        'ht_left': '7-Stage Challenge',
+        'ht_right': 'EXERCISE 2.1',
         'hero_bottom_1': 'Break through levels, upgrade yourself<br>Sprint to the final chapter together',
         'ixd_title': 'Interaction Design',
         'ixd_desc': 'The Department of Interaction Design steps into sports technology, dedicated to deeply integrating physical movements with sensing technology.<br>Unleashing competitive limits through digital technology, exploring the intersection of sports and tech.',
@@ -1066,6 +1029,7 @@ const translations = {
         'map_locked': 'Locked',
         'footer_highlight': '● Past Highlights',
         'btn_back': 'Back',
+        'mega_exe2_web': 'ExE 2.0 Official Website',
 
     }
 };
