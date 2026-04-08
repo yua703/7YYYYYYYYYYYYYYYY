@@ -791,7 +791,7 @@ const translations = {
         'hero_welcome_1': '歡迎來到',
         'hero_welcome_2': '科技x運動體適能挑戰賽',
         'event_p1': '【ExErcise 2.1】科技x運動體適能挑戰賽',
-        'event_p2': '用17個30秒，測試你的七大運動能力！',
+        'event_p2': '用7個30秒，測試你的七大運動能力！',
         'event_p3': '由北科大互動設計 113 級與兒童新樂園聯手打造。',
         'event_p4': '我們打破穿戴限制，將運動變好玩。挑戰全新的運動可能',
 
@@ -837,8 +837,8 @@ const translations = {
 
         // Footer
         'footer_host': '主辦單位：', 
-        // 'footer_co': '合作單位：',
-        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '臺北市立兒童新樂園', 'btn_ig': '追蹤官方IG',
+        'footer_co': '合作單位：',
+        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '臺北市立兒童新樂園光XR實境樂園', 'btn_ig': '追蹤官方IG',
 
         // 排行榜
         'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
@@ -890,7 +890,7 @@ const translations = {
         'mega_exe1_vid': 'ExE 1.0回顧影片',
         'mega_address': '國立臺北科技大學<br>互動設計系 113級',
         'splash_text': 'Loading… Opening the .exe file',
-        'ht_left': '17關全能挑戰',
+        'ht_left': '7關全能挑戰',
         'ht_right': 'EXERCISE 2.1',
         'hero_bottom_1': '突破關卡、獨自升級<br>一起奔向最終章',
         'ixd_title': '互動設計系',
@@ -917,8 +917,8 @@ const translations = {
         'hero_welcome_1': 'Welcome to',
         'hero_welcome_2': 'Tech × Sports Fitness Challenge',
         'event_p1': '【ExErcise 2.1】Tech × Sports Fitness Challenge',
-        'event_p2': 'Test your 7 major athletic abilities through 17 thirty-second challenges!',
-        'event_p3': 'Co-created by NTUT Interaction Design, Class 113, and Taipei Children\'s Amusement Park.',
+        'event_p2': 'Test your 7 major athletic abilities through 7 thirty-second challenges!',
+        'event_p3': 'Co-created by NTUT Interaction Design, Class 113, and Light X-Reality Land.',
         'event_p4': 'Breaking free from wearable constraints to make exercise fun. Experience a whole new way to move!',
 
         // Tabs
@@ -964,8 +964,8 @@ const translations = {
 
         // Footer
         'footer_host': 'Organizer:', 
-        // 'footer_co': 'Co-organizer:',
-        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Taipei Children\'s Amusement Park', 'btn_ig': 'Follow Instagram',
+        'footer_co': 'Co-organizer:',
+        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Light X-Reality Land', 'btn_ig': 'Follow Instagram',
 
         // Leaderboard
         'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
@@ -1017,7 +1017,7 @@ const translations = {
         'mega_exe1_vid': 'ExE 1.0 Recap Video',
         'mega_address': 'National Taipei University of Technology<br>Interaction Design Class of 113',
         'splash_text': 'Loading… Opening the .exe file',
-        'ht_left': '17-Stage Challenge',
+        'ht_left': '7-Stage Challenge',
         'ht_right': 'EXERCISE 2.1',
         'hero_bottom_1': 'Break through levels, upgrade yourself<br>Sprint to the final chapter together',
         'ixd_title': 'Interaction Design',
