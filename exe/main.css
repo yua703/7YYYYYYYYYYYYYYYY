@@ -2300,14 +2300,14 @@ body.lock-scroll {
         position: relative;      /* 設定基準，讓底部的「加入按鈕」絕對定位在上面 */
     }
 
-    /* 右邊圖片的顯示方式：必須滿版裁剪 */
-    .overlay-card img {
+    /* 右邊圖片的顯示方式：必須滿版裁剪 (🌟 精準指定，不波及貼圖) */
+    .overlay-slide-img {
         top: 0; left: 0;
         width: 100%;
         height: 100%;
-        object-fit: cover;       /* 🌟 重要：圖片不變形，鋪滿整個右半邊，多餘部分自動裁切 */
-        object-position: center; /* 裁切時保持中間位置 */
-        z-index: 1;              /* 放在最底層 */
+        object-fit: cover;       
+        object-position: center; 
+        z-index: 1;              
     }
 
     /* 參考圖片結構：如果你的「加入組別」按鈕是 .overlay-add-group 
@@ -2795,6 +2795,19 @@ body.lock-scroll {
         font-size: 0.8rem;  /* 字體稍微縮小，避免在窄卡片裡折行太多 */
         line-height: 1.3;
     }
+    /* 📱 LINE手機版微調：恢復成上下堆疊才不會擠 */
+    /* 📱 手機版等比例微調 */
+    .sticker-cta-box {
+        padding: 15px;
+        gap: 12px 15px;
+    }
+    .sticker-img {
+        width: 80px;
+        height: 80px;
+    }
+    .sticker-title {
+        font-size: 1.1rem;
+    }
 }
 @media (max-width: 1023px) {
     /* =========================================
@@ -2888,5 +2901,59 @@ body.lock-scroll {
         /* 幫這張合併後的「大卡片」統一加上立體陰影，質感更好 */
         box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important;
     }
+}
+
+/* =========================================
+   🟢 LINE 貼圖專屬推廣卡片 (極淨無 !important 版)
+   ========================================= */
+.sticker-cta-link-box {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    max-width: 420px; /* 🌟 核心防護：限制最大寬度，電腦版不會被拉成長條形！ */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sticker-cta-link-box:hover {
+    transform: translateY(-3px);
+}
+
+.sticker-cta-box {
+    background-color: #f8f9fa;
+    border: 2px solid #06C755;
+    border-radius: 12px;
+    padding: 20px;
+    
+    /* 🌟 使用 Grid 排版，乾淨俐落 */
+    display: grid;
+    grid-template-columns: auto 1fr; /* 左邊配合圖片大小，右邊自動延伸 */
+    gap: 15px 20px; /* 上下 15px，左右 20px */
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+
+.sticker-img {
+    width: 100px; /* 預留給正方形貼圖的空間 */
+    height: 100px;
+    object-fit: contain;
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+}
+
+.sticker-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.sticker-title {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-size: 1rem;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
 }
 

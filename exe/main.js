@@ -792,7 +792,7 @@ const translations = {
         'hero_welcome_2': '科技x運動體適能挑戰賽',
         'event_p1': '【ExErcise 2.1】科技x運動體適能挑戰賽',
         'event_p2': '用7個30秒，測試你的七大運動能力！',
-        'event_p3': '由北科大互動設計 113 級與兒童新樂園聯手打造。',
+        'event_p3': '由北科大互動設計 113 級與光XR實境樂園聯手打造。',
         'event_p4': '我們打破穿戴限制，將運動變好玩。挑戰全新的運動可能',
 
         // 分頁按鈕
@@ -838,7 +838,7 @@ const translations = {
         // Footer
         'footer_host': '主辦單位：', 
         'footer_co': '合作單位：',
-        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '臺北市立兒童新樂園光XR實境樂園', 'btn_ig': '追蹤官方IG',
+        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '光XR實境樂園', 'btn_ig': '追蹤官方IG',
 
         // 排行榜
         'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
@@ -903,6 +903,13 @@ const translations = {
         'footer_highlight': '● 回顧精彩亮點',
         'btn_back': '返回',
         'mega_exe2_web': 'ExE 2.0官方網站',
+        //LINE貼圖
+        'g1_sticker_name': '培根行動', 'g2_sticker_name': '呸呴呸呴', 'g3_sticker_name': 'S.O.S.日常', 'g4_sticker_name': '流汗吧！健美詠者',
+        'g5_sticker_name': '企色戰隊', 'g6_sticker_name': '不是，鴿們', 'g7_sticker_name': '老娘不幹了！', 'g8_sticker_name': '賽馬郎',
+        'g9_sticker_name': '溫水煮青蛙的那隻青蛙', 'g11_sticker_name': '廢魚冰斗', 'g11222_sticker_name': '廢魚會動', 'g12_sticker_name': '跑跑跳跳愛麗絲',
+        'g13_sticker_name': 'Mistaxe 重生之我在神界當牛馬!', 'g14_sticker_name': 'Baa Hind the Door',
+        'g15_sticker_name': 'Leg Rowers',
+
 
     },
     
@@ -1030,7 +1037,12 @@ const translations = {
         'footer_highlight': '● Past Highlights',
         'btn_back': 'Back',
         'mega_exe2_web': 'ExE 2.0 Official Website',
-
+        //LINE Stickers
+        'g1_sticker_name': 'Project Bacon', 'g2_sticker_name': 'Pecopeco__', 'g3_sticker_name': 'S.O.S. with U', 'g4_sticker_name': 'Macho Magic:Sweat It Out!',
+        'g5_sticker_name': 'PENGRGB squad', 'g6_sticker_name': 'Pigeon the finder', 'g7_sticker_name': 'I Quit!!', 'g8_sticker_name': 'HANDSOME HORSE_',
+        'g9_sticker_name': 'The Boiling Frog', 'g11_sticker_name': 'Ssssalty Fish', 'g11222_sticker_name': 'Mmmmoving fish', 'g12_sticker_name': 'Running Alice',
+        'g13_sticker_name': 'Mistaxe', 'g14_sticker_name': 'Baa Hind the Door',
+        'g15_sticker_name': 'Leg Rowers',
     }
 };
 
