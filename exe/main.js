@@ -305,7 +305,7 @@ if (prevDetailBtn && nextDetailBtn) {
 // ==========================================
 // 4. 排行榜功能 (Leaderboard)
 // ==========================================
-const sheetBase = "https://opensheet.elk.sh/1jKqaT0NjIkqmguzRaNXV5KVFkXXOwmOE_Gt9Q9jFJJQ/";
+const sheetBase = "https://opensheet.elk.sh/1VM5JbEfk4_CFy0A1qfKJaFc1u3Nvm9ueXKm_pH5k0Dw/";
 let currentSheet = "七大項總錦標"; 
 
 const lbTabs = document.querySelectorAll('#leaderboard-tabs-container .lb-tab');

@@ -1,18 +1,18 @@
 // ==========================================
 // 設定區域
 // ==========================================
-const SHEET_BASE = "https://opensheet.elk.sh/1jKqaT0NjIkqmguzRaNXV5KVFkXXOwmOE_Gt9Q9jFJJQ/";
+const SHEET_BASE = "https://opensheet.elk.sh/1VM5JbEfk4_CFy0A1qfKJaFc1u3Nvm9ueXKm_pH5k0Dw/";
 const SWITCH_INTERVAL = 10000; // 每一頁停留 10 秒
 
 // 定義輪播清單 (2.1 專屬展出名單)
 const CAROUSEL_LIST = [
     { sheet: "七大項總錦標", title: "七大項總錦標" },
-    { sheet: "第一組分數計算", title: "G1 - 培根行動 (專注力)" },
+    { sheet: "第一組分數計算", title: "G1 - 培根行動 (協調力)" },
     { sheet: "第二組分數計算", title: "G2 - PECOPECO (反應力)" },
     { sheet: "第四組分數計算", title: "G4 - 流汗吧！健美詠者 (耐力)" },
     { sheet: "第七組分數計算", title: "G7 - 老娘不幹了 (爆發力)" },
     { sheet: "第十一組分數計算", title: "G11 - 翻身 (敏捷力)" },
-    { sheet: "第十三組分數計算", title: "G13 - 重生之我在神界當牛馬 (耐力)" },
+    { sheet: "第十三組分數計算", title: "G13 - 重生之我在神界當牛馬 (智力)" },
     { sheet: "第十四組分數計算", title: "G14 - Baa Hind the Door (專注力)" }
 ];
 // ==========================================
@@ -30,36 +30,11 @@ const domProgressBar = document.getElementById('progress-bar');
 
 // 1. 初始化
 function init() {
-    showKeyVisual(); // 🌟 程式一啟動，先秀出主視覺！
-}
-
-// 2. 顯示主視覺畫面 (停留 SWITCH_INTERVAL 後，自動進入排行榜)
-function showKeyVisual() {
-    const kvScreen = document.getElementById('key-visual-screen');
-    const kvProgressBar = document.getElementById('kv-progress-bar');
-    
-    kvScreen.classList.add('active'); // 淡入顯示主視覺
-    
-    // 重置主視覺專屬的進度條
-    if(kvProgressBar) {
-        kvProgressBar.style.transition = 'none';
-        kvProgressBar.style.width = '0%';
-        void kvProgressBar.offsetWidth;
-        kvProgressBar.style.transition = `width ${SWITCH_INTERVAL}ms linear`;
-        kvProgressBar.style.width = '100%';
-    }
-
-    // 🌟 在背後偷偷先載入第一組排行榜資料，這樣等一下過場才不會有白畫面
     currentIndex = 0;
-    loadCategoryPair(currentIndex);
-
-    // 設定定時器：時間到就隱藏主視覺，開始播排行榜
-    if (timer) clearInterval(timer);
-    timer = setInterval(() => {
-        kvScreen.classList.remove('active'); // 淡出隱藏主視覺
-        startLeaderboardTimer();             // 啟動排行榜的輪播
-    }, SWITCH_INTERVAL);
+    loadCategoryPair(currentIndex); // 直接載入第一組排行榜
+    startLeaderboardTimer();        // 直接啟動排行榜的輪播計時
 }
+
 
 // 3. 啟動排行榜的計時與進度條
 function startLeaderboardTimer() {
@@ -79,14 +54,12 @@ function startLeaderboardTimer() {
 function nextCategoryPair() {
     currentIndex += 2;
     
-    // 🌟 核心魔法：如果排行榜全部播完了怎麼辦？
+    // 如果排行榜全部播完了，就回到第 0 筆重新開始
     if (currentIndex >= CAROUSEL_LIST.length) {
-        // 放回主視覺，開啟新的一輪！
-        showKeyVisual();
-        return; 
+        currentIndex = 0; 
     }
 
-    // 如果還沒播完，就繼續載入下一組
+    // 繼續載入該組資料
     loadCategoryPair(currentIndex);
     
     // 重置排行榜自己的進度條
@@ -114,7 +87,7 @@ async function loadCategoryPair(index) {
     const target2 = CAROUSEL_LIST[index + 1]; 
     
     // 把主標題固定為大會名稱
-    domTitle.innerText = "ExErcise2.0 賽事即時戰況";
+    domTitle.innerText = "ExErcise2.1 賽事即時戰況";
     domList.style.opacity = '0.3';
 
     try {

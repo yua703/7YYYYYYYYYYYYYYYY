@@ -39,7 +39,7 @@ body {
     height: 95vh;
     background: #ffffff;
     border-radius: 24px;
-    border: 4px solid #3643BA; 
+    border: 4px solid #7C3EED; 
     box-shadow: 0 15px 40px rgba(54, 67, 186, 0.2); 
     display: flex;
     flex-direction: column;
@@ -50,7 +50,7 @@ body {
    頂部標題區 (含進度條)
    ========================================= */
 .lb-top-header {
-    background: #3643BA; /* 🌟 換成主題紫 */
+    background: #7C3EED; /* 🌟 換成主題紫 */
     color: #ffffff;
     padding: 25px 20px;
     text-align: center;
@@ -60,7 +60,7 @@ body {
 
 .lb-top-header h1 {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif; /* 🌟 套用像素字體 */
-    color: #C7FF3C; 
+    color: #caf549; 
     font-size: 1.5rem;
     letter-spacing: 3px;
     margin-bottom: 15px;
@@ -80,7 +80,7 @@ body {
 /* 進度條動畫 */
 .progress-bar {
     height: 100%;
-    background-color: #C7FF3C; /* 🌟 換成主題螢光綠 */
+    background-color: #caf549; /* 🌟 換成主題螢光綠 */
     box-shadow: 0 0 10px rgba(199, 255, 60, 0.8); /* 加上發光特效 */
     width: 0%;
 }
@@ -97,8 +97,8 @@ body {
     
     /* 🌟 表頭也套用像素字體與紫色 */
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    color: #3643BA; 
-    border-bottom: 3px solid #3643BA; 
+    color: #7C3EED; 
+    border-bottom: 3px solid #7C3EED; 
     font-size: 1.2rem;
 }
 
@@ -118,7 +118,7 @@ body {
 }
 /* 🌟 新增：雙欄內部專屬的各組小標題 */
 .col-group-title {
-    background-color: #3643BA;
+    background-color: #7C3EED;
     color: #ffffff;
     text-align: center;
     padding: 12px 10px;
@@ -174,14 +174,14 @@ body {
 
 .lb-player:nth-child(odd) { background-color: #fcfcfc; }
 
-.lb-rank-num { font-family: 'Cubic11', "Noto Sans TC", sans-serif; text-align: center; color: #3643BA; font-size: 1.2rem; }
+.lb-rank-num { font-family: 'Cubic11', "Noto Sans TC", sans-serif; text-align: center; color: #7C3EED; font-size: 1.2rem; }
 .lb-player.rank-1 .lb-rank-num { color: #FFD700; font-size: 1.6rem; text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333; }
 .lb-player.rank-2 .lb-rank-num { color: #E0E0E0; font-size: 1.5rem; text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333; }
 .lb-player.rank-3 .lb-rank-num { color: #CD7F32; font-size: 1.4rem; text-shadow: 1px 1px 0px #333, -1px -1px 0px #333, 1px -1px 0px #333, -1px 1px 0px #333; }
 
 .lb-player-name { font-weight: bold; color: #333; padding-left: 5px; }
 .lb-player-num { color: #888; text-align: center; font-size: 0.95rem; }
-.lb-player-score { font-family: 'Roboto', sans-serif; font-weight: 900; color: #3643BA; text-align: right; font-size: 1.2rem; }
+.lb-player-score { font-family: 'Roboto', sans-serif; font-weight: 900; color: #7C3EED; text-align: right; font-size: 1.2rem; }
 
 /* 進場動畫 */
 @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -211,7 +211,7 @@ body {
     background-color: #ffffff; 
     padding: 10px;   
     border-radius: 12px; 
-    border: 3px solid #3643BA; 
+    border: 3px solid #7C3EED; 
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -233,7 +233,7 @@ body {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif; 
     font-size: 0.9rem; 
     color: #ffffff;             
-    background-color: #3643BA;  
+    background-color: #7C3EED;  
     margin: 0;
     padding: 6px 0px;          
     border-radius: 6px;         
@@ -287,7 +287,7 @@ body {
 
 .kv-progress-bar {
     height: 100%;
-    background-color: #C7FF3C;
+    background-color: #caf549;
     box-shadow: 0 0 15px rgba(199, 255, 60, 0.8);
     width: 0%;
 }
