@@ -806,6 +806,16 @@ const translations = {
         'act_reg_4': '第四梯次報到', 'act_warm_4': '第四梯次熱身', 'act_play_4': '第四梯次體驗遊玩',
         'act_reg_5': '第五梯次報到', 'act_warm_5': '第五梯次熱身', 'act_play_5': '第五梯次體驗遊玩',
 
+        // 號碼牌與報到機制
+        'tab_ticket': '號碼牌規則',
+        'ticket_h1': '號碼牌與報到機制',
+        'ticket_sub_1': '梯次與抽取方式',
+        'ticket_desc_1': '參加者可於現場選擇合適的時段，抽取該梯次的號碼牌。每場體驗時間為 30 分鐘，為維持最佳遊玩品質，各梯次人數上限為 20 人。',
+        'ticket_sub_2': '參賽資料登記',
+        'ticket_desc_2': '取得號碼牌後，請掃描票券上的 QR Code 填寫參賽資訊，並於標示的「開始時間」準時報到。未持有該梯次號碼牌者恕不開放體驗。',
+        'ticket_sub_3': '一人一票制',
+        'ticket_desc_3': '為維護大家的權益，本賽事全面實施「一人一票」制。多人同行請務必「全員親自到場」領取號碼牌，恕不接受代領。此外，每張號碼牌的 QR Code 僅限單人登錄，重複掃描填寫多人資訊將視為無效。',
+
         // 計分方法
         'score_h1': '一、個人單項挑戰',
         'score_label_rank': '排名方式', 'score_text_rank': '比賽期間將自動登錄參賽者成績，由各項目計分方式進行排序。',
@@ -940,6 +950,16 @@ const translations = {
         'act_reg_3': 'Registration (Batch 3)', 'act_warm_3': 'Warm-up (Batch 3)', 'act_play_3': 'Gameplay (Batch 3)',
         'act_reg_4': 'Registration (Batch 4)', 'act_warm_4': 'Warm-up (Batch 4)', 'act_play_4': 'Gameplay (Batch 4)',
         'act_reg_5': 'Registration (Batch 5)', 'act_warm_5': 'Warm-up (Batch 5)', 'act_play_5': 'Gameplay (Batch 5)',
+
+        // Ticketing & Check-in System
+        'tab_ticket': 'Ticket Rules',
+        'ticket_h1': 'Ticketing & Check-in',
+        'ticket_sub_1': 'Sessions & Drawing',
+        'ticket_desc_1': 'Participants can select a suitable time slot and draw a session ticket on-site. Each experience lasts 30 minutes. To maintain the best gameplay quality, each session is limited to 20 people.',
+        'ticket_sub_2': 'Participant Registration',
+        'ticket_desc_2': 'After obtaining your ticket, please scan the QR Code on it to fill in your participant information, and arrive punctually at the indicated "Start Time". Those without a ticket for the current session will not be allowed to play.',
+        'ticket_sub_3': 'One Ticket Per Person',
+        'ticket_desc_3': 'To protect everyone\'s rights, this event strictly enforces a "one ticket per person" policy. For group attendees, all members must be physically present to draw their tickets; claiming for others is not allowed. Furthermore, each ticket\'s QR Code is valid for single-person registration only. Scanning the same code to register multiple people will be considered invalid.',
 
         // Scoring
         'score_h1': '1. Seventeen Exercises Championships',

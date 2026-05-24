@@ -177,8 +177,9 @@
                     <div class="game-left-panel">
                         <div class="game-choice-box">
                             <h2 class="game-choice-title" data-i18n="detail_title">賽事細節</h2>
-                            <div id="mobile-tab-display" class="mobile-tab-display">計分方法</div>
+                            <div id="mobile-tab-display" class="mobile-tab-display">號碼牌規則</div>
                             <div class="game-tabs-list">
+                                <button class="detail-tab-btn active" data-target="detail-ticket" data-i18n="tab_ticket">號碼牌規則</button>
                                 <button class="detail-tab-btn active" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
                                 <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
                             </div>
@@ -198,7 +199,24 @@
                     </div> 
     
                     <div class="game-right-content">
-                        
+    
+                        <div id="detail-ticket" class="detail-content active">
+                            <div class="scoring-container">
+                                <div class="scoring-card">
+                                    <h3 class="scoring-title" data-i18n="ticket_h1">號碼牌與報到機制</h3>
+
+                                    <div class="scoring-subtitle" data-i18n="ticket_sub_1">梯次與抽取方式</div>
+                                    <p class="scoring-desc" data-i18n="ticket_desc_1">參加者可於現場選擇合適的時段，抽取該梯次的號碼牌。每場體驗時間為 30 分鐘，為維持最佳遊玩品質，各梯次人數上限為 20 人。</p>
+
+                                    <div class="scoring-subtitle" data-i18n="ticket_sub_2">參賽資料登記</div>
+                                    <p class="scoring-desc" data-i18n="ticket_desc_2">取得號碼牌後，請掃描票券上的 QR Code 填寫參賽資訊，並於標示的「開始時間」準時報到。未持有該梯次號碼牌者恕不開放體驗。</p>
+
+                                    <div class="scoring-subtitle" data-i18n="ticket_sub_3">一人一票制</div>
+                                    <p class="scoring-desc" data-i18n="ticket_desc_3">為維護大家的權益，本賽事全面實施「一人一票」制。多人同行請務必「全員親自到場」領取號碼牌，恕不接受代領。此外，每張號碼牌的 QR Code 僅限單人登錄，重複掃描填寫多人資訊將視為無效。</p>
+                                </div>
+                            </div>
+                        </div>
+                            
                         <div id="detail-scoring" class="detail-content active">
                             <div class="scoring-container">
                                 <div class="scoring-card">

@@ -2675,15 +2675,19 @@ body.lock-scroll {
         flex-direction: column; 
         gap: 10px;
     }    
+    .hero-main-logo img {
+        /* 將 max-width 調小，從原本的 650px 限制到你覺得合適的數值 */
+        max-width: 390px; 
+    }
     .hero-main-logo { 
         order: 1; 
         margin-left: -40px;
-        margin-top: -60px;
-        rotate: -6deg;
+        margin-top: -40px;
+        rotate: -2deg;
     } 
     .hero-character { 
         order: 2; 
-        margin-top: -20px; 
+        margin-top: 10px; 
     } 
     /* 👇 新增或修改這段：手機版專屬的圖片控制 */
     .hero-character img {
@@ -2693,14 +2697,14 @@ body.lock-scroll {
     }
     .deco-1 { display: none; } 
     .deco-3 { 
-        top: 55%; 
-        right: -13%; 
-        width: 130px; 
+        top: 70%; 
+        right: -10%; 
+        width: 100px; 
         rotate: 25deg;
     }
     .deco-2 { 
-        bottom: 43%; 
-        left: -20%; 
+        bottom: 40%; 
+        left: -22%; 
         width: 150px; 
     }
 
