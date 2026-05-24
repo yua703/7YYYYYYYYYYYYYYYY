@@ -800,7 +800,7 @@ img {
 
 .lb-header, .lb-player {
     display: grid;
-    grid-template-columns: 40px 1fr 45px 80px;
+    grid-template-columns: 35px 1fr 60px 80px;
     gap: 5px;
     align-items: center;
     padding: 12px 5px; 
@@ -824,9 +824,9 @@ img {
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; 
     font-size: 0.8rem;
 }
-.lb-number { color: #e3e3e3; font-size: 0.8rem; text-align: right; }
+.lb-number { color: #e3e3e3; font-size: 0.75rem; text-align: right; }
 .lb-score { 
-    font-weight: bold; color: #0B0B0B; text-align: right; 
+    font-weight: bold; color: #FD93F2; text-align: right; 
     white-space: nowrap; overflow: hidden; font-size: 0.9rem;
 }
 .lb-player { background: #0B0B0B; }
@@ -1007,25 +1007,29 @@ img {
     margin-left: -8px;            
 }
 
-/* 資訊排版 (主辦/合作) */
+/* 資訊排版 (主辦/合作) - 改用 Grid 網格對齊 */
 .footer-info-grid {
-    display: flex;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: auto 1fr; /* 左邊標題自動適應寬度，右邊吃滿剩下的空間 */
+    gap: 12px 15px; /* 上下的距離是 12px，左右的距離是 15px */
+    align-items: flex-start; /* 🌟 關鍵魔法：讓左邊標題永遠對齊右邊的「第一行」 */
     margin-bottom: 20px;
     font-size: 0.9rem;
     line-height: 1.8;
 }
 
-/* 標題變成螢光綠 */
-.footer-info-left p {
-    color: #08F6AA;               
+/* 標題維持螢光綠 */
+.info-label {
+    color: #08F6AA;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: nowrap; /* 確保標題絕對不會斷行 */
+    margin: 0;
 }
 
 /* 內容維持白色 */
-.footer-info-right p {
+.info-value {
     color: #f0f0f0;
+    margin: 0;
 }
 
 /* 信箱 */

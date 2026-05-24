@@ -305,7 +305,7 @@ if (prevDetailBtn && nextDetailBtn) {
 // ==========================================
 // 4. 排行榜功能 (Leaderboard)
 // ==========================================
-const sheetBase = "https://opensheet.elk.sh/1VM5JbEfk4_CFy0A1qfKJaFc1u3Nvm9ueXKm_pH5k0Dw/";
+const sheetBase = "https://opensheet.elk.sh/1LcyVXV8zbzgebO96VmfwnsgnVseZMHh7MY9qBxJmjgQ/";
 let currentSheet = "七大項總錦標"; 
 
 const lbTabs = document.querySelectorAll('#leaderboard-tabs-container .lb-tab');
@@ -343,7 +343,7 @@ async function updateLeaderboard(sheetName) {
         // 過濾資料
         const data = rawData.filter(p => {
             const name = p.姓名 || p.Name;
-            const number = p.編號 || p.玩家號碼;
+            const number = p.UID || p.玩家號碼;
             return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
         });
                 
@@ -371,7 +371,7 @@ async function updateLeaderboard(sheetName) {
             actualRank++;
             
             const pName = p.姓名 || p.Name || "-"; 
-            const pNumber = p.編號 || p.玩家號碼 || "未知";
+            const pNumber = p.UID || "未知";
             
             let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
             if (isNaN(rawScore)) rawScore = 0;
@@ -792,7 +792,7 @@ const translations = {
         'hero_welcome_2': '科技x運動體適能挑戰賽',
         'event_p1': '【ExErcise 2.2】科技x運動體適能挑戰賽',
         'event_p2': '用7個30秒，測試你的七大運動能力！',
-        'event_p3': '由北科大互動設計 113 級與光XR實境樂園聯手打造。',
+        'event_p3': '由北科大互動設計 113 級打造。',
         'event_p4': '我們打破穿戴限制，將運動變好玩。挑戰全新的運動可能',
 
         // 分頁按鈕
@@ -838,7 +838,9 @@ const translations = {
         // Footer
         'footer_host': '主辦單位：', 
         'footer_co': '合作單位：',
-        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '光XR實境樂園', 'btn_ig': '追蹤官方IG',
+        'footer_dept': '國立臺北科技大學 互動設計系113 級<br>XR Lab@NTUT<br>MiiSLab@NTUST', 
+        'footer_locked': '不或互動娛樂有限公司<br>樂亦非凡股份有限公司', 
+        'btn_ig': '追蹤官方IG',
 
         // 排行榜
         'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
@@ -925,7 +927,7 @@ const translations = {
         'hero_welcome_2': 'Tech × Sports Fitness Challenge',
         'event_p1': '【ExErcise 2.2】Tech × Sports Fitness Challenge',
         'event_p2': 'Test your 7 major athletic abilities through 7 thirty-second challenges!',
-        'event_p3': 'Co-created by NTUT Interaction Design, Class 113, and Light X-Reality Land.',
+        'event_p3': 'Created by NTUT Interaction Design, Class 113.',
         'event_p4': 'Breaking free from wearable constraints to make exercise fun. Experience a whole new way to move!',
 
         // Tabs
@@ -972,7 +974,9 @@ const translations = {
         // Footer
         'footer_host': 'Organizer:', 
         'footer_co': 'Co-organizer:',
-        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Light X-Reality Land', 'btn_ig': 'Follow Instagram',
+        'footer_dept': 'NTUT Interaction Design 113<br>XR Lab@NTUT<br>MiiSLab@NTUST', 
+        'footer_locked': 'buho entertainment<br>SmartJoy Digital Art', 
+        'btn_ig': 'Follow Instagram',
 
         // Leaderboard
         'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
