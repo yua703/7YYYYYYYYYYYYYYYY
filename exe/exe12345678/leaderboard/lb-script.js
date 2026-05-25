@@ -28,15 +28,18 @@ const domProgressBar = document.getElementById('progress-bar');
 // 核心功能
 // ==========================================
 
+// ==========================================
+// 核心功能 (單欄滿版重構)
+// ==========================================
+
 // 1. 初始化
 function init() {
     currentIndex = 0;
-    loadCategoryPair(currentIndex); // 直接載入第一組排行榜
-    startLeaderboardTimer();        // 直接啟動排行榜的輪播計時
+    loadCategory(currentIndex); // 載入第一組
+    startLeaderboardTimer();    
 }
 
-
-// 3. 啟動排行榜的計時與進度條
+// 2. 啟動排行榜的計時與進度條
 function startLeaderboardTimer() {
     domProgressBar.style.transition = 'none';
     domProgressBar.style.width = '0%';
@@ -46,23 +49,22 @@ function startLeaderboardTimer() {
 
     if (timer) clearInterval(timer);
     timer = setInterval(() => {
-        nextCategoryPair(); // 翻到下一頁
+        nextCategory(); 
     }, SWITCH_INTERVAL);
 }
 
-// 4. 切換到下一組排行榜
-function nextCategoryPair() {
-    currentIndex += 2;
+// 3. 切換到下一組排行榜
+function nextCategory() {
+    currentIndex++; // 一次跳 1 步
     
-    // 如果排行榜全部播完了，就回到第 0 筆重新開始
+    // 播完回到第 0 筆
     if (currentIndex >= CAROUSEL_LIST.length) {
         currentIndex = 0; 
     }
 
-    // 繼續載入該組資料
-    loadCategoryPair(currentIndex);
+    loadCategory(currentIndex);
     
-    // 重置排行榜自己的進度條
+    // 重置進度條
     domProgressBar.style.transition = 'none';
     domProgressBar.style.width = '0%';
     setTimeout(() => {
@@ -71,7 +73,7 @@ function nextCategoryPair() {
     }, 50);
 }
 
-// 資料過濾小幫手
+// 4. 資料過濾
 function filterData(rawData) {
     return rawData.filter(p => {
         const name = p.姓名 || p.Name;
@@ -80,40 +82,23 @@ function filterData(rawData) {
     });
 }
 
-// 🌟 同時抓取兩張表的資料
-async function loadCategoryPair(index) {
-    const target1 = CAROUSEL_LIST[index];
-    // 如果是單數結尾，第二張表可能會空著
-    const target2 = CAROUSEL_LIST[index + 1]; 
+// 5. 抓取單張表的資料
+async function loadCategory(index) {
+    const target = CAROUSEL_LIST[index];
     
-    // 把主標題固定為大會名稱
-    domTitle.innerText = "ExErcise2.1 賽事即時戰況";
+    // 直接把該組的標題放到畫面上方的總標題位置
+    domTitle.innerText = target.title;
     domList.style.opacity = '0.3';
 
     try {
-        // 同時發送兩個 API 請求，節省時間
-        const promises = [fetch(`${SHEET_BASE}${encodeURIComponent(target1.sheet)}`, { cache: 'no-cache' })];
-        if (target2) {
-            promises.push(fetch(`${SHEET_BASE}${encodeURIComponent(target2.sheet)}`, { cache: 'no-cache' }));
-        }
+        const res = await fetch(`${SHEET_BASE}${encodeURIComponent(target.sheet)}`, { cache: 'no-cache' });
+        if(!res.ok) throw new Error("API Error");
 
-        const responses = await Promise.all(promises);
-        for(let res of responses) {
-            if(!res.ok) throw new Error("API Error");
-        }
+        const rawData = await res.json();
+        const data = filterData(rawData);
 
-        // 解析資料
-        const rawData1 = await responses[0].json();
-        const data1 = filterData(rawData1);
-
-        let data2 = [];
-        if (target2) {
-            const rawData2 = await responses[1].json();
-            data2 = filterData(rawData2);
-        }
-
-        // 渲染雙欄畫面
-        renderDualList(data1, target1, data2, target2);
+        // 渲染單欄畫面
+        renderSingleList(data, target);
 
     } catch (err) {
         console.error(err);
@@ -124,20 +109,19 @@ async function loadCategoryPair(index) {
     }
 }
 
-// 🌟 生成「單獨一欄」裡的玩家列表 HTML
+// 6. 生成玩家列表 HTML
 function generatePlayerHtml(data) {
     if (!data || data.length === 0) return `<div class="status-msg">目前尚無參賽資料</div>`;
     
-    const sorted = data.slice(0, 7); // 左/右欄都只取前 10 名
+    // 單欄空間較大，可以顯示前 10 名 (依需求可改回 7)
+    const sorted = data.slice(0, 10); 
     let lastScore = null, lastRank = 0, actualRank = 0;
 
     return sorted.map((p, i) => {
         actualRank++;
         const pName = p.姓名 || p.Name || "-";
-        // 獲取原始 UID 字串
         let rawUid = (p.UID || "").toString();
 
-        // 處理 UID：只取後四碼。如果 UID 長度小於 4，就直接顯示原始值，避免截斷錯誤。
         const pNumber = rawUid.length >= 4 
             ? rawUid.slice(-4) 
             : (rawUid || "未知");
@@ -170,50 +154,20 @@ function generatePlayerHtml(data) {
     }).join("");
 }
 
-// 🌟 將兩份資料組合成「左欄 + 右欄」
-function renderDualList(data1, target1, data2, target2) {
-    const col1Html = generatePlayerHtml(data1);
-    const scoreTitle1 = target1.sheet.includes("總錦標") ? "總積分" : "分數";
+// 7. 渲染單欄列表
+function renderSingleList(data, target) {
+    const listHtml = generatePlayerHtml(data);
+    const scoreTitle = target.sheet.includes("總錦標") ? "總積分" : "分數";
     
-    // 左邊欄位的完整 HTML (包含小標題)
-    const headerHtml1 = `
-        <div class="col-group-title">${target1.title}</div>
-        <div class="lb-list-header" style="grid-template-columns: 60px 1fr 90px 90px; padding: 15px;">
+    // 移除不必要的 inline style，全權交給 CSS 處理
+    domList.innerHTML = `
+        <div class="lb-list-header">
             <span class="col-rank">排名</span>
             <span class="col-name">暱稱</span>
             <span class="col-number">編號</span>
-            <span class="col-score">${scoreTitle1}</span>
+            <span class="col-score">${scoreTitle}</span>
         </div>
-    `;
-
-    let col2Content = "";
-    // 如果有第二組資料才渲染右邊欄位
-    if (target2) {
-        const col2Html = generatePlayerHtml(data2);
-        const scoreTitle2 = target2.sheet.includes("總錦標") ? "總積分" : "分數";
-        col2Content = `
-            <div class="col-group-title">${target2.title}</div>
-            <div class="lb-list-header" style="grid-template-columns: 60px 1fr 90px 90px; padding: 15px;">
-                <span class="col-rank">排名</span>
-                <span class="col-name">暱稱</span>
-                <span class="col-number">編號</span>
-                <span class="col-score">${scoreTitle2}</span>
-            </div>
-            <div class="lb-col-body">${col2Html}</div>
-        `;
-    }
-
-    // 塞入 DOM
-    domList.innerHTML = `
-        <div class="lb-dual-columns">
-            <div class="lb-col">
-                ${headerHtml1}
-                <div class="lb-col-body">${col1Html}</div>
-            </div>
-            <div class="lb-col">
-                ${col2Content}
-            </div>
-        </div>
+        <div class="lb-col-body">${listHtml}</div>
     `;
 }
 
