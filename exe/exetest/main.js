@@ -371,7 +371,13 @@ async function updateLeaderboard(sheetName) {
             actualRank++;
             
             const pName = p.姓名 || p.Name || "-"; 
-            const pNumber = p.UID || "未知";
+            // 獲取原始 UID 字串
+            let rawUid = (p.UID || "").toString();
+
+            // 處理 UID：只取後四碼。如果 UID 長度小於 4，就直接顯示原始值，避免截斷錯誤。
+            const pNumber = rawUid.length >= 4 
+                ? rawUid.slice(-4) 
+                : (rawUid || "未知");
             
             let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
             if (isNaN(rawScore)) rawScore = 0;

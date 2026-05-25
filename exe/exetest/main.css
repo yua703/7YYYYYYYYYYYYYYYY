@@ -472,8 +472,9 @@ img {
 .event-white-box .event-title,
 .game-choice-box .game-choice-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-weight: bold;
     font-size: 1.5rem;
-    color: #0B0B0B;       /* 強制統一深藍色 */
+    color: #0B0B0B;  
     text-shadow: none;    /* 強制殺掉黑色陰影 */
     margin-bottom: 25px;
     text-align: left;
@@ -1350,6 +1351,77 @@ body.lock-scroll {
 }
 
 /* =========================================
+   🔥 新增：號碼牌 Step 流程樣式
+   ========================================= */
+.step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.step-box {
+    display: flex;
+    align-items: flex-start;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.step-num {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    background-color: #253DD9; /* 主題紫 */
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.step-text h4 {
+    color: #0B0B0B;
+    font-size: 1.05rem;
+    margin-top: 0;
+    margin-bottom: 6px;
+    /* 新增像素字體與字距，統一風格 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    letter-spacing: 1px;
+}
+
+.step-text p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 一人一票 警告框樣式 (統一無框微紅底風格) */
+.ticket-notice-box {
+    background-color: #fff5f5; 
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 20px;
+    border: none; /* 刪除原本的 dashed 虛線，統一乾淨風格 */
+}
+
+.ticket-notice-box h4 {
+    color: #e53935; /* 統一使用與注意事項相同的紅色 */
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    /* 新增像素字體 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    letter-spacing: 1px;
+}
+
+.ticket-notice-box p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================
    🔥 更新：計分方法與競賽辦法美化 (科技電競風格)
    ========================================= */
 /* 大容器配置 */
@@ -1436,7 +1508,7 @@ body.lock-scroll {
 .intro-ixd-section h2,
 .leaderboard-header h1 {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 2rem;
     color: #5d69da;
     text-shadow: 2px 2px 0px #333333;

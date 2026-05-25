@@ -1,7 +1,7 @@
 // ==========================================
 // 設定區域
 // ==========================================
-const SHEET_BASE = "https://opensheet.elk.sh/1VM5JbEfk4_CFy0A1qfKJaFc1u3Nvm9ueXKm_pH5k0Dw/";
+const SHEET_BASE = "https://opensheet.elk.sh/1LcyVXV8zbzgebO96VmfwnsgnVseZMHh7MY9qBxJmjgQ/";
 const SWITCH_INTERVAL = 10000; // 每一頁停留 10 秒
 
 // 定義輪播清單 (2.1 專屬展出名單)
@@ -11,8 +11,8 @@ const CAROUSEL_LIST = [
     { sheet: "第二組分數計算", title: "G2 - PECOPECO (反應力)" },
     { sheet: "第四組分數計算", title: "G4 - 流汗吧！健美詠者 (耐力)" },
     { sheet: "第七組分數計算", title: "G7 - 老娘不幹了 (爆發力)" },
+    { sheet: "第九組分數計算", title: "G9 - 溫水煮青蛙 (智力)" },
     { sheet: "第十一組分數計算", title: "G11 - 翻身 (敏捷力)" },
-    { sheet: "第十三組分數計算", title: "G13 - 重生之我在神界當牛馬 (智力)" },
     { sheet: "第十四組分數計算", title: "G14 - Baa Hind the Door (專注力)" }
 ];
 // ==========================================
@@ -75,7 +75,7 @@ function nextCategoryPair() {
 function filterData(rawData) {
     return rawData.filter(p => {
         const name = p.姓名 || p.Name;
-        const number = p.編號 || p.玩家號碼;
+        const number = p.UID || p.玩家號碼;
         return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
     });
 }
@@ -134,7 +134,13 @@ function generatePlayerHtml(data) {
     return sorted.map((p, i) => {
         actualRank++;
         const pName = p.姓名 || p.Name || "-";
-        const pNumber = p.編號 || p.玩家號碼 || "未知";
+        // 獲取原始 UID 字串
+        let rawUid = (p.UID || "").toString();
+
+        // 處理 UID：只取後四碼。如果 UID 長度小於 4，就直接顯示原始值，避免截斷錯誤。
+        const pNumber = rawUid.length >= 4 
+            ? rawUid.slice(-4) 
+            : (rawUid || "未知");
         
         let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
         if (isNaN(rawScore)) rawScore = 0;

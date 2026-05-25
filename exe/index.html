@@ -66,7 +66,7 @@
                 <h3 class="mega-brand-name">【NTUT IXD】</h3>
                 <p class="mega-address" data-i18n="mega_address">
                     國立臺北科技大學<br>
-                    互動設計系 113級
+                    互動設計系113 級
                 </p>
                 <p class="mega-copyright">©ntut.ixd_113</p>
             </div>
@@ -86,7 +86,7 @@
         <section class="full-color-block hero-grid-layout">
             <div class="hero-top-bar">
                 <div class="ht-item text-left" data-i18n="ht_left">7關全能挑戰</div>
-                <div class="ht-item text-right" data-i18n="ht_right">EXERCISE 2.1</div>
+                <div class="ht-item text-right" data-i18n="ht_right">EXERCISE 2.2</div>
             </div>
 
             <div class="hero-divider-line"></div>
@@ -130,7 +130,7 @@
         <div class="pixel-ticker-wrap">
             <div class="pixel-ticker-scroller">
                 <div class="scroller-inner">
-                    <span>EXERCISE 2.1</span>
+                    <span>EXERCISE 2.2</span>
                     <span>NTUT IXD 113</span>
                 </div>
             </div>
@@ -155,9 +155,9 @@
                     <div class="event-content-layout">
                         <div class="event-left-col">
                             <div class="event-text">
-                                <p data-i18n="event_p1">【ExErcise 2.1】科技x運動體適能挑戰賽</p>
+                                <p data-i18n="event_p1">【ExErcise 2.2】科技x運動體適能挑戰賽</p>
                                 <p data-i18n="event_p2">用7個30秒，測試你的七大運動能力！</p>
-                                <p data-i18n="event_p3">由北科大互動設計 113 級與光XR實境樂園聯手打造。</p>
+                                <p data-i18n="event_p3">由北科大互動設計 113 級打造。</p>
                                 <p data-i18n="event_p4">我們打破穿戴限制，將運動變好玩。挑戰全新的運動可能</p>
                             </div>
                             <img src="img/s3.webp" class="event-sub-img" alt="Event Sub">
@@ -177,8 +177,9 @@
                     <div class="game-left-panel">
                         <div class="game-choice-box">
                             <h2 class="game-choice-title" data-i18n="detail_title">賽事細節</h2>
-                            <div id="mobile-tab-display" class="mobile-tab-display">計分方法</div>
+                            <div id="mobile-tab-display" class="mobile-tab-display">號碼牌規則</div>
                             <div class="game-tabs-list">
+                                <button class="detail-tab-btn active" data-target="detail-ticket" data-i18n="tab_ticket">號碼牌規則</button>
                                 <button class="detail-tab-btn active" data-target="detail-scoring" data-i18n="tab_scoring">計分方法</button>
                                 <button class="detail-tab-btn" data-target="detail-participants" data-i18n="tab_rules">競賽辦法</button>
                             </div>
@@ -198,7 +199,47 @@
                     </div> 
     
                     <div class="game-right-content">
-                        
+    
+                        <div id="detail-ticket" class="detail-content active">
+                            <div class="scoring-container">
+                                <div class="scoring-card">
+                                    <h3 class="scoring-title" data-i18n="ticket_h1">號碼牌與報到機制</h3>
+                                    
+                                    <div class="step-container">
+                                        <div class="step-box">
+                                            <div class="step-num">Step 1</div>
+                                            <div class="step-text">
+                                                <h4 data-i18n="ticket_step1_title">抽取號碼牌</h4>
+                                                <p data-i18n="ticket_step1_desc">參加者可於現場選擇合適的時段，抽取該梯次的號碼牌。每場體驗時間為 30 分鐘，為維持最佳遊玩品質，各梯次人數上限為 20 人。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="step-box">
+                                            <div class="step-num">Step 2</div>
+                                            <div class="step-text">
+                                                <h4 data-i18n="ticket_step2_title">參賽資料登記</h4>
+                                                <p data-i18n="ticket_step2_desc">取得號碼牌後，請掃描票券上的 QR Code 填寫參賽資訊。</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="step-box">
+                                            <div class="step-num">Step 3</div>
+                                            <div class="step-text">
+                                                <h4 data-i18n="ticket_step3_title">規定時間內入場</h4>
+                                                <p data-i18n="ticket_step3_desc">請於標示的「開始時間」準時報到。未持有該梯次號碼牌者恕不開放體驗。</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="ticket-notice-box">
+                                        <h4 data-i18n="ticket_notice_title">⚠️ 嚴格實施「一人一票制」</h4>
+                                        <p data-i18n="ticket_notice_desc">多人同行請務必「全員親自到場」領取號碼牌，恕不接受代領。此外，每張號碼牌的 QR Code 僅限單人登錄，重複掃描填寫多人資訊將視為無效。</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                            
                         <div id="detail-scoring" class="detail-content active">
                             <div class="scoring-container">
                                 <div class="scoring-card">
@@ -287,14 +328,11 @@
                     <h3 class="footer-brand-name">【NTUT IXD】</h3>
 
                     <div class="footer-info-grid">
-                        <div class="footer-info-left">
-                            <p data-i18n="footer_host">主辦單位：</p>
-                            <p data-i18n="footer_co">合作單位：</p>
-                        </div>
-                        <div class="footer-info-right">
-                            <p data-i18n="footer_dept">國立臺北科技大學 113級互動設計系</p>
-                            <p data-i18n="footer_locked">光XR實境樂園</p>
-                        </div>
+                        <p class="info-label" data-i18n="footer_host">主辦單位：</p>
+                        <p class="info-value" data-i18n="footer_dept">國立臺北科技大學 互動設計系113 級<br>XR Lab@NTUT<br>MiiSLab@NTUST</p>
+                        
+                        <p class="info-label" data-i18n="footer_co">合作單位：</p>
+                        <p class="info-value" data-i18n="footer_locked">不或互動娛樂有限公司<br>樂亦非凡股份有限公司</p>
                     </div>
                     <p class="footer-email">EMAIL：ntut.ixd.113@gmail.com</p>
 
@@ -340,8 +378,8 @@
                 <button data-sheet="第二組分數計算" class="lb-tab" data-num="2" data-i18n="g2_name">PECOPECO</button>
                 <button data-sheet="第四組分數計算" class="lb-tab" data-num="4" data-i18n="g4_name">流汗吧！健美詠者</button>
                 <button data-sheet="第七組分數計算" class="lb-tab" data-num="7" data-i18n="g7_name">老娘不幹了</button>
+                <button data-sheet="第九組分數計算" class="lb-tab" data-num="9" data-i18n="g9_name">溫水煮青蛙</button>
                 <button data-sheet="第十一組分數計算" class="lb-tab" data-num="11" data-i18n="g11_name">翻身</button>
-                <button data-sheet="第十三組分數計算" class="lb-tab" data-num="13" data-i18n="g13_name">重生之我在神界當牛馬</button>
                 <button data-sheet="第十四組分數計算" class="lb-tab" data-num="14" data-i18n="g14_name">Baa Hind the Door</button>
             </div>
             <div id="leaderboard-data">載入中...</div>
@@ -645,7 +683,6 @@
 
                 <div class="group-card">
                     <span class="group-badge">G9</span>
-                    <div class="locked-overlay"><span data-i18n="map_locked">尚未解鎖</span></div>
                     <img src="img/9.webp" alt="隊伍圖片" class="group-img" loading="lazy">
                     <div class="group-info">
                         <h3 data-i18n="g9_name">溫水煮青蛙</h3>
@@ -786,6 +823,7 @@
 
                 <div class="group-card">
                     <span class="group-badge">G13</span>
+                    <div class="locked-overlay"><span data-i18n="map_locked">尚未解鎖</span></div>
                     <img src="img/13.webp" alt="隊伍圖片" class="group-img" loading="lazy">
                     <div class="group-info">
                         <h3 data-i18n="g13_name">重生之我在神界當牛馬</h3>

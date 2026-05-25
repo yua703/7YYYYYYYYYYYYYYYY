@@ -17,34 +17,51 @@
     padding: 0;
 }
 
+/* 修改 body 排版 */
 body {
-    font-family: "Noto Sans TC", sans-serif;
-    background-color: #f0f0f0; 
-    color: #333;
-    height: 100vh;
-    overflow: hidden; 
     display: flex;
-    flex-direction: row;        /* 🌟 核心：改為橫向排列 */
-    justify-content: space-between; 
-    align-items: center;
-    padding: 0 2%;              /* 左右邊界留白 */
-    gap: 2%;                    /* 排行榜跟右側欄的間距 */
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000; /* 背景黑 */
+}
+/* 左右佔比 50% */
+.left-half { width: 50%; height: 100vh; padding: 20px; box-sizing: border-box; }
+.right-half { width: 50%; height: 100vh; position: relative; }
+
+/* 影片設定 */
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 自動裁切滿版 */
+}
+/* 將 QR Code 疊在影片上方 (右下角) */
+.qr-code-box {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10;
 }
 
-/* =========================================
-   容器佈局
-   ========================================= */
+/* lb-container 調整：填滿左邊 */
 .lb-container {
-    flex: 1;                    /* 🌟 自動佔滿左側所有剩餘空間 */
-    height: 95vh;
+    width: 100%;
+    height: 100%;
     background: #ffffff;
     border-radius: 24px;
-    border: 4px solid #7C3EED; 
-    box-shadow: 0 15px 40px rgba(54, 67, 186, 0.2); 
+    border: 4px solid #7C3EED;
     display: flex;
     flex-direction: column;
     overflow: hidden;
 }
+
+/* 確保列表寬度正確 */
+.lb-list-header, .lb-player {
+    grid-template-columns: 80px 1fr 100px 100px !important;
+}
+/* =========================================
+   容器佈局
+   ========================================= */
 
 /* =========================================
    頂部標題區 (含進度條)
@@ -130,20 +147,7 @@ body {
 /* =========================================
    🔥 雙欄排行榜專屬排版 (由 JS 生成)
    ========================================= */
-.lb-dual-columns {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    background-color: #ffffff;
-}
 
-.lb-col {
-    flex: 1;           /* 左右各佔 50% */
-    display: flex;
-    flex-direction: column;
-    border-right: 2px dashed rgba(54, 67, 186, 0.2); /* 兩欄中間加一條虛線分隔 */
-}
 .lb-col:last-child {
     border-right: none; /* 右邊那一欄的右側不需要虛線 */
 }
@@ -192,20 +196,6 @@ body {
 /* =========================================
    🔥 右側專屬側欄 & QR Code (取消固定定位，改為 Flex 佈局)
    ========================================= */
-.right-sidebar {
-    width: 140px;       /* 🌟 側欄寬度 */
-    height: 95vh;       /* 🌟 跟排行榜一樣高 */
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end; /* 把 QR 推到最底下 */
-    flex-shrink: 0;
-}
-
-.qr-code-box {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;          /* 兩個 QR code 之間的間距 */
-}
 
 .qr-item {
     background-color: #ffffff; 

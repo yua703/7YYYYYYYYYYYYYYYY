@@ -24,6 +24,7 @@ html, body {
     font-family: "Noto Sans TC", sans-serif;
     color: #333;
     -webkit-overflow-scrolling: touch;
+    background-color: #0B0B0B;
 }
 
 /* 確保所有圖片不會比螢幕寬 */
@@ -44,7 +45,7 @@ img {
     left: 0;          /* 殺掉左側留白 */
     width: 100%;      /* 強制 100% 滿版 */
     height: 80px;
-    background-color: #7C3EED; /* 統一加上紫色底色 */
+    background-color: #0B0B0B; /* 統一加上紫色底色 */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -95,8 +96,8 @@ img {
 .header-lang-btn {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     background-color: transparent;
-    background-color: #98CDF9; 
-    color: #7C3EED;
+    background-color: #FD93F2; 
+    color: #0B0B0B;
     border: none; 
     box-shadow: none; 
     padding: 8px 16px;
@@ -106,14 +107,14 @@ img {
     transition: all 0.3s;
 }
 .header-lang-btn:hover {
-    background-color: #caf549; 
-    border-color: #caf549;
+    background-color: #08F6AA; 
+    border-color: #253DD9;
     color: #333;
 }
 
 /* 漢堡按鈕 (螢光綠底色) */
 .header-menu-btn {
-    background-color: #caf549; 
+    background-color: #253DD9; 
     border: none;
     height: 40px;
     padding: 0 15px;
@@ -126,7 +127,7 @@ img {
     transition: background-color 0.3s;
 }
 .header-menu-btn:hover {
-    background-color: #ACE02D; 
+    background-color: #08F6AA; 
 }
 
 /* 漢堡按鈕的三條線 (紫色) */
@@ -138,7 +139,7 @@ img {
 .hamburger-line {
     width: 18px;
     height: 3px;
-    background-color: #7C3EED; 
+    background-color: #0B0B0B; 
     border-radius: 2px;
     transition: all 0.3s ease;
 }
@@ -181,7 +182,7 @@ img {
 
 /* 🌟 漢堡內的連結滑過效果 (紫色 + 你要的位移) */
 .mega-link:hover, .mega-link.active {
-    color: #7C3EED; 
+    color: #253DD9; 
     transform: translate(5px, -2px); 
 }
 
@@ -195,7 +196,7 @@ img {
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background-color: #f0f0f0; 
+    background-color: #00db96; 
     z-index: 10000;
     display: flex;
     justify-content: center;
@@ -274,7 +275,7 @@ img {
 }
 .mega-card-title {
     font-size: 0.95rem;
-    color: #7C3EED; 
+    color: #0B0B0B; 
     font-weight: bold;
 }
 .mega-card-grid {
@@ -295,7 +296,7 @@ img {
     text-decoration: none; /* 刪除底線 */
     color: inherit;        /* 讓文字顏色繼承原本的 #333，不要變藍色 */
 }.mega-card:hover {
-    border-color: #caf549; 
+    border-color: #253DD9; 
 }
 .mega-card img {
     width: 100%;
@@ -345,7 +346,7 @@ img {
     border-radius: 0;        
     box-shadow: none;        
     
-    background-color: #f0f0f0; /* 如果你要純白，這裡可以改成 #ffffff */
+    background-color: #08F6AA; /* 如果你要純白，這裡可以改成 #ffffff */
     
     /* 🌟 極致緊湊：這裡控制字跟白底的上下距離，2px幾乎是貼著字了 */
     padding: 2px 0;          
@@ -380,7 +381,7 @@ img {
 .scroller-inner span {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif; 
     font-size: 2rem;         
-    color: #7C3EED;           
+    color: #253DD9;           
     font-weight: bold;
     letter-spacing: 1px;      
 
@@ -471,8 +472,9 @@ img {
 .event-white-box .event-title,
 .game-choice-box .game-choice-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    font-weight: bold;
     font-size: 1.5rem;
-    color: #7C3EED;       /* 強制統一深藍色 */
+    color: #0B0B0B;  
     text-shadow: none;    /* 強制殺掉黑色陰影 */
     margin-bottom: 25px;
     text-align: left;
@@ -523,7 +525,7 @@ img {
     width: 100%;
     /* 配合下方緊湊排版，首頁高度微調 */
     min-height: 90dvh; 
-    background-color: #7C3EED;
+    background-color: #0B0B0B;
     color: #f0f0f0;
     
     display: flex;
@@ -555,12 +557,12 @@ img {
     
     background: linear-gradient(
         to bottom, 
-        #7C3EED 0%,      
-        #7C3EED 27%,     
-        #caf549 33%,     
-        #caf549 65%,     
-        #caf549 70%,     
-        #caf549 100%     
+        #0B0B0B 0%,      
+        #0B0B0B 27%,     
+        #192cac 33%,     
+        #192cac 65%,     
+        #192cac 70%,     
+        #192cac 100%     
     );
     
     /* 🌟 圓角修正：不要那麼圓 */
@@ -646,7 +648,7 @@ img {
     top: 4px;
     bottom: 4px; 
     left: 0; 
-    background-color: #7C3EED;
+    background-color: #0B0B0B;
     /* 🌟 圓角修正：微圓角 */
     border-radius: 8px;
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1), width 0.3s ease;
@@ -706,15 +708,15 @@ img {
     align-items: flex-start; 
     height: calc(100vh - 60px - 80px); 
     overflow: hidden; 
-    background-color: #f0f0f0;
+    background-color: #0B0B0B;
 }
 
 #leaderboard-tabs-container {
     display: flex;
     flex-direction: column; 
     width: 110px; 
-    background: #eef2f5; 
-    padding: 20px 0; 
+    background: #0B0B0B; 
+    padding: 0 0 20px 0; 
     height: 100%; 
     overflow-y: auto; 
     overflow-x: hidden;
@@ -730,11 +732,11 @@ img {
     flex-shrink: 0;
     border: none;       
     background: transparent;
-    border-bottom: 0.5px solid #7C3EED;
+    border-bottom: 0.5px solid #3a3a3a;
     padding: 7px 10px 0 25px; 
     text-align: left;
     font-size: 13px;
-    color: #7C3EED;
+    color: #08F6AA;
     font-weight: 500;
     line-height: 1.3;
     white-space: normal;
@@ -753,7 +755,7 @@ img {
     left: 0;
     width: 32px;
     height: 25px;
-    background-color: #d3d3d3; 
+    background-color: #0B0B0B; 
     color: #eef2f5;
     clip-path: polygon(0 0, 100% 0, 0 100%);
     display: flex;
@@ -769,8 +771,8 @@ img {
 }
 
 .lb-tab.active {
-    background: #7C3EED; 
-    color: #f0f0f0;
+    background: #0B0B0B; 
+    color: #FD93F2;
     font-weight: bold;
     border-bottom: none;
     box-shadow: 2px 2px 10px rgba(72, 130, 166, 0.4);
@@ -779,8 +781,8 @@ img {
 }
 
 .lb-tab.active:not(:first-child)::before {
-    background-color:#caf549; 
-    color: #7C3EED;          
+    background-color:#08F6AA; 
+    color: #0B0B0B;          
 }
 
 .lb-tab:first-child {
@@ -793,42 +795,42 @@ img {
     flex: 1; 
     height: 100%; 
     overflow-y: auto; 
-    padding: 10px;
-    background: #f0f0f0; 
+    padding: 0px 10px 10px 10px;
+    background: #0B0B0B; 
 }
 
 .lb-header, .lb-player {
     display: grid;
-    grid-template-columns: 40px 1fr 45px 80px;
+    grid-template-columns: 35px 1fr 60px 80px;
     gap: 5px;
     align-items: center;
     padding: 12px 5px; 
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #666;
 }
 
 .lb-header {
-    background-color: #f0f0f0;
+    background-color: #0B0B0B;
     font-size: 0.85rem;
-    color: #666;
+    color: #3d3d3d;
     font-weight: bold;
-    border-bottom: 2px solid #7C3EED;
+    border-bottom: 2px solid #0B0B0B;
     position: sticky; 
     top: 0;
     z-index: 5;
 }
 
-.lb-rank { font-weight: bold; color: #7C3EED; text-align: left; font-size: 0.9rem; }
+.lb-rank { font-weight: bold; color: #FD93F2; text-align: left; font-size: 0.9rem; }
 .lb-name { 
-    font-weight: bold; color: #888; 
+    font-weight: bold; color: #e3e3e3; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: left; 
     font-size: 0.8rem;
 }
-.lb-number { color: #888; font-size: 0.8rem; text-align: right; }
+.lb-number { color: #e3e3e3; font-size: 0.75rem; text-align: right; }
 .lb-score { 
-    font-weight: bold; color: #7C3EED; text-align: right; 
+    font-weight: bold; color: #FD93F2; text-align: right; 
     white-space: nowrap; overflow: hidden; font-size: 0.9rem;
 }
-.lb-player { background: #f0f0f0; }
+.lb-player { background: #0B0B0B; }
 
 
 /* =========================================
@@ -842,7 +844,7 @@ img {
 }
 
 .group-card {
-    background: #f0f0f0; 
+    background: #0B0B0B; 
     /* 🌟 圓角修正：微圓角 */
     border-radius: 12px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.08);
@@ -885,16 +887,20 @@ img {
 .group-info {
     padding: 12px;
     transition: padding 0.4s ease;
-    background: #f0f0f0; 
+    background: #0B0B0B; 
     position: relative;
     z-index: 10;
+    border-left: 2px solid #FD93F2;
+    border-right: 2px solid #FD93F2;
+    border-bottom: 2px solid #FD93F2;
+    border-radius: 0 0 12px 12px;
 }
 .group-info h3 { 
-    font-size: 1rem; margin-bottom: 5px; color: #7C3EED; 
+    font-size: 1rem; margin-bottom: 5px; color: #FD93F2; 
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .group-info p {
-    font-size: 0.85rem; color: #666; line-height: 1.4;
+    font-size: 0.85rem; color: #a7a7a7; line-height: 1.4;
     display: -webkit-box; -webkit-line-clamp: 2; line-clamp: 2;
     -webkit-box-orient: vertical; overflow: hidden;
 }
@@ -925,7 +931,7 @@ img {
 
 /* 遮罩上的「尚未解鎖」小牌子 */
 .locked-overlay span {
-    background-color: #7C3EED; /* 主題紫底 */
+    background-color: #0B0B0B; /* 主題紫底 */
     color: #f0f0f0;            /* 白字 */
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 0.95rem;
@@ -946,8 +952,8 @@ img {
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: rgba(255, 255, 255, 0.95);
-    color: #7C3EED;             /* 你的主題紫色 */
+    background-color: rgba(0, 0, 0, 0.95);
+    color: #ffffff;             /* 你的主題紫色 */
     padding: 8px 16px 8px 12px;
     border-radius: 30px;
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
@@ -960,7 +966,7 @@ img {
 }
 
 .overlay-top-back:hover {
-    background-color: #caf549;  /* 你的主題螢光綠 */
+    background-color: #253DD9;  /* 你的主題螢光綠 */
     color: #333;
     transform: translateX(-3px); 
 }
@@ -972,7 +978,7 @@ img {
     width: 100%;
     display: flex;
     flex-direction: column;
-    background-color: #7C3EED;    /* 🌟 整塊變成主題紫色 */
+    background-color: #0B0B0B;
     border-radius: 24px 24px 0 0; /* 🌟 頂部圓角 */
     margin-top: 40px;
     color: #f0f0f0;
@@ -1002,25 +1008,29 @@ img {
     margin-left: -8px;            
 }
 
-/* 資訊排版 (主辦/合作) */
+/* 資訊排版 (主辦/合作) - 改用 Grid 網格對齊 */
 .footer-info-grid {
-    display: flex;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: auto 1fr; /* 左邊標題自動適應寬度，右邊吃滿剩下的空間 */
+    gap: 12px 15px; /* 上下的距離是 12px，左右的距離是 15px */
+    align-items: flex-start; /* 🌟 關鍵魔法：讓左邊標題永遠對齊右邊的「第一行」 */
     margin-bottom: 20px;
     font-size: 0.9rem;
     line-height: 1.8;
 }
 
-/* 標題變成螢光綠 */
-.footer-info-left p {
-    color: #caf549;               
+/* 標題維持螢光綠 */
+.info-label {
+    color: #08F6AA;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: nowrap; /* 確保標題絕對不會斷行 */
+    margin: 0;
 }
 
 /* 內容維持白色 */
-.footer-info-right p {
+.info-value {
     color: #f0f0f0;
+    margin: 0;
 }
 
 /* 信箱 */
@@ -1042,8 +1052,8 @@ img {
 .btn-primary {
     display: inline-block;
     padding: 10px 24px;
-    background-color: #caf549; 
-    color: #7C3EED; 
+    background-color: #FD93F2; 
+    color: #0B0B0B; 
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
@@ -1064,7 +1074,7 @@ img {
 /* 小標題 */
 .footer-card-title {
     font-size: 1rem;
-    color: #caf549;               /* 🌟 因為背景變紫了，標題改成螢光綠！ */
+    color: #08F6AA;   /* 🌟 因為背景變紫了，標題改成螢光綠！ */
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -1077,7 +1087,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #f0f0f0; 
+    background-color: #0B0B0B; 
     z-index: 9999; 
     display: flex;
     justify-content: center;
@@ -1096,8 +1106,8 @@ img {
 .spinner {
     width: 50px;
     height: 50px;
-    border: 5px solid #f0f0f0; 
-    border-top: 5px solid #7C3EED; 
+    border: 5px solid #333333; 
+    border-top: 5px solid #f0f0f0; 
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
@@ -1119,7 +1129,7 @@ img {
     height: 100vh; 
     height: 100dvh;
     z-index: 9999;
-    background-color: #f0f0f0; 
+    background-color: #0B0B0B; 
     transform: translate3d(0, -100%, 0);
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     will-change: transform;
@@ -1143,7 +1153,7 @@ img {
 
 .overlay-card {
     width: 100%;
-    background: #f0f0f0; 
+    background: #0B0B0B; 
 }
 
 .overlay-img {
@@ -1159,10 +1169,10 @@ img {
 }
 
 .overlay-header { padding: 20px 20px 0 20px; }
-.overlay-title { font-size: 1.8rem; font-weight: bold; color: #7C3EED; margin-bottom: 5px; }
+.overlay-title { font-size: 1.8rem; font-weight: bold; color: #FD93F2; margin-bottom: 5px; }
 .overlay-desc {
     font-size: 1rem; 
-    color: #666;
+    color: #08F6AA;
     box-shadow: 0 1px 0 0 #333, 0 4px 6px -1px rgba(0,0,0,0.1);
     padding-bottom: 15px; 
     margin-bottom: 20px; 
@@ -1172,8 +1182,8 @@ img {
     padding-right: 20px;
     display: block;
 }
-.overlay-badge { display: inline-block; background: #7C3EED; color: #f0f0f0; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
-.overlay-body { padding: 0 20px 20px 20px; color: #333; line-height: 1.6; }
+.overlay-badge { display: inline-block; background: #08F6AA; color: #0B0B0B; padding: 2px 8px; border-radius: 10px; font-size: 0.8rem; margin-bottom: 5px; }
+.overlay-body { padding: 0 20px 20px 20px; color: #d9d9d9; line-height: 1.6; }
 
 
 .overlay-hidden {
@@ -1190,8 +1200,8 @@ body.lock-scroll {
     display: inline-block;  
     margin-top: 5px;       
     margin-bottom: 6px;     
-    border: 1.5px solid #555; 
-    color: #555;              
+    border: 1.5px solid #08F6AA; 
+    color: #08F6AA;              
     background-color: transparent; 
     padding: 4px 16px;      
     border-radius: 50px;    
@@ -1203,7 +1213,7 @@ body.lock-scroll {
 .overlay-body hr {
     border: none;
     height: 1px;       
-    background-color: #f0f0f0; 
+    background-color: #797979; 
     margin-top: 20px;    
     margin-bottom: 20px; 
     width: 100%;
@@ -1341,6 +1351,77 @@ body.lock-scroll {
 }
 
 /* =========================================
+   🔥 新增：號碼牌 Step 流程樣式
+   ========================================= */
+.step-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.step-box {
+    display: flex;
+    align-items: flex-start;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.step-num {
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    background-color: #253DD9; /* 主題紫 */
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+
+.step-text h4 {
+    color: #0B0B0B;
+    font-size: 1.05rem;
+    margin-top: 0;
+    margin-bottom: 6px;
+    /* 新增像素字體與字距，統一風格 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    letter-spacing: 1px;
+}
+
+.step-text p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 一人一票 警告框樣式 (統一無框微紅底風格) */
+.ticket-notice-box {
+    background-color: #fff5f5; 
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 20px;
+    border: none; /* 刪除原本的 dashed 虛線，統一乾淨風格 */
+}
+
+.ticket-notice-box h4 {
+    color: #e53935; /* 統一使用與注意事項相同的紅色 */
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 8px;
+    /* 新增像素字體 */
+    font-family: 'Cubic11', "Noto Sans TC", sans-serif;
+    letter-spacing: 1px;
+}
+
+.ticket-notice-box p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =========================================
    🔥 更新：計分方法與競賽辦法美化 (科技電競風格)
    ========================================= */
 /* 大容器配置 */
@@ -1360,7 +1441,7 @@ body.lock-scroll {
 .scoring-title {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
     font-size: 1.5rem;
-    color: #7C3EED;
+    color: #0B0B0B;
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid #f0f0f0; 
@@ -1381,7 +1462,7 @@ body.lock-scroll {
     display: flex;
     align-items: center;
 }
-.scoring-subtitle::before { content: ''; width: 6px; height: 16px; background-color: #caf549; margin-right: 8px; border-radius: 2px; }
+.scoring-subtitle::before { content: ''; width: 6px; height: 16px; background-color: #253DD9; margin-right: 8px; border-radius: 2px; }
 .scoring-desc { font-size: 0.9rem; color: #666; margin-bottom: 10px; line-height: 1.5; }
 /* 👇 🌟 貼在這裡！修復「二、全項總積分」下方間距過大的問題 */
 .scoring-two-col .scoring-col-left .scoring-subtitle:first-child,
@@ -1413,12 +1494,12 @@ body.lock-scroll {
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
 }
 
-.point-item span { font-family: 'Roboto', sans-serif; font-weight: 900; color: #7C3EED; font-size: 0.95rem; } /* 分數縮小 */
+.point-item span { font-family: 'Roboto', sans-serif; font-weight: 900; color: #0B0B0B; font-size: 0.95rem; } /* 分數縮小 */
 .point-item[data-i18n="rank_others"] { justify-content: center; background-color: transparent; border: none; box-shadow: none; color: #888 !important; font-weight: normal !important; }
 
 .scoring-list-style { list-style: none; padding-left: 0; }
 .scoring-list-style li { position: relative; padding-left: 20px; margin-bottom: 10px; font-size: 0.95rem; color: #444; line-height: 1.6; }
-.scoring-list-style li::before { content: '▸'; position: absolute; left: 0; top: 0; color: #7C3EED; font-size: 1.2rem; font-weight: bold; }
+.scoring-list-style li::before { content: '▸'; position: absolute; left: 0; top: 0; color: #0B0B0B; font-size: 1.2rem; font-weight: bold; }
 
 #detail-participants .scoring-card div[style*="border-top"] { border-top: none !important; margin-top: 20px !important; padding-top: 15px !important; background-color: #fff5f5; padding: 15px; border-radius: 8px; }
 #detail-participants .scoring-card h4 { font-family: 'Cubic11', sans-serif; color: #e53935 !important; letter-spacing: 1px; font-size: 1rem; }
@@ -1427,7 +1508,7 @@ body.lock-scroll {
 .intro-ixd-section h2,
 .leaderboard-header h1 {
     font-family: 'Cubic11', "Noto Sans TC", sans-serif;
-    font-weight: normal;
+    font-weight: bold;
     font-size: 2rem;
     color: #5d69da;
     text-shadow: 2px 2px 0px #333333;
@@ -1442,7 +1523,7 @@ body.lock-scroll {
     text-align: left;
 }
 .intro-ixd-section .ixd-green-title {
-    color: #caf549;
+    color: #08F6AA;
     text-align: center;
     padding-left: 0; 
     margin-bottom: 15px;
@@ -1455,7 +1536,7 @@ body.lock-scroll {
 }
 
 .point-item[data-i18n="rank_others"] {
-    color: #7C3EED !important;  
+    color: #0B0B0B !important;  
     font-weight: bold !important; 
     font-family: inherit;        
     opacity: 1;                  
@@ -1470,7 +1551,7 @@ body.lock-scroll {
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background-color: #f0f0f0; 
+    background-color: #0B0B0B; 
     z-index: 20000; 
     display: flex;
     justify-content: center;
@@ -1503,8 +1584,8 @@ body.lock-scroll {
 
 
 .splash-loader {
-    border: 5px solid #d3d3d3; 
-    border-top: 5px solid #7C3EED; 
+    border: 5px solid #333333; 
+    border-top: 5px solid #f0f0f0; 
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -1513,7 +1594,7 @@ body.lock-scroll {
 }
 
 .splash-text {
-    color: #7C3EED; 
+    color: #ffffff; 
     font-size: 1rem;
     font-weight: bold;
 }
@@ -1544,8 +1625,8 @@ body.lock-scroll {
 
 /* 🌟 手機版：上方大綠色顯示框 */
 .mobile-tab-display {
-    background-color: #caf549;
-    color: #333;
+    background-color: #08F6AA;
+    color: #0B0B0B;
     font-size: 1.2rem;
     text-align: center;
     padding: 15px;
@@ -1579,7 +1660,7 @@ body.lock-scroll {
 /* 🌟 手機版：小選項被選中時 (只有綠色外框) */
 .game-tabs-list .detail-tab-btn.active {
     background-color: transparent !important; /* 確保沒有底色 */
-    border-color: #caf549 !important;         /* 亮起綠色框線 */
+    border-color: #08F6AA !important;         /* 亮起綠色框線 */
     color: #555 !important;
     font-weight: bold !important;
     font-size: 0.8rem !important;             /* 絕對不放大 */
@@ -1595,8 +1676,8 @@ body.lock-scroll {
 }
 
 .pixel-ctrl-btn {
-    background-color: #7C3EED;
-    border: 2px solid #7C3EED;
+    background-color: #0B0B0B;
+    border: 2px solid #0B0B0B;
     border-radius: 8px;
     width: 60px;     /* 手機版按鈕稍小一點 */
     height: 45px;
@@ -1661,12 +1742,12 @@ body.lock-scroll {
         /* 也可以改變顏色佔比，讓它在寬螢幕上看起來更平衡 */
         background: linear-gradient(
             to bottom,        /* 如果想改斜的，可以改成 135deg */
-            #7C3EED 0%,      
-            #7C3EED 25%,      /* 電腦版可能紫色的比例需要少一點 */
-            #caf549 35%,     
-            #caf549 60%,     
-            #caf549 80%,     
-            #caf549 100%     
+            #0B0B0B 0%,      
+            #0B0B0B 25%,      /* 電腦版可能紫色的比例需要少一點 */
+            #253DD9 35%,     
+            #253DD9 60%,     
+            #253DD9 80%,     
+            #253DD9 100%     
         );}
 
 .event-text p {
@@ -1798,15 +1879,15 @@ body.lock-scroll {
         color: #f0f0f0; 
         transition: color 0.3s;
         text-shadow: 
-            -1px -1px 0 #7C3EED,  
-             1px -1px 0 #7C3EED,
-            -1px  1px 0 #7C3EED,
-             1px  1px 0 #7C3EED;
+            -1px -1px 0 #0B0B0B,  
+             1px -1px 0 #0B0B0B,
+            -1px  1px 0 #0B0B0B,
+             1px  1px 0 #0B0B0B;
     }
 
     .desktop-link:hover, 
     .desktop-link.active {
-        color: #caf549; 
+        color: #253DD9; 
         transform: translate(5px, -2px); 
     }
 
@@ -2071,7 +2152,7 @@ body.lock-scroll {
 
     /* 🟢 按鈕選取狀態 (Active) */
     .game-tabs-list .detail-tab-btn.active {
-        background-color: #caf549 !important; /* 🌟 整塊變成螢光綠滿版 */
+        background-color: #08F6AA !important; /* 🌟 整塊變成螢光綠滿版 */
         color: #333 !important; /* 🌟 字變成深色，且粗體 */
         font-weight: bold !important;
         font-size: 1.1rem !important; /* 🌟 字變大 */
@@ -2095,8 +2176,8 @@ body.lock-scroll {
 
     /* 2. 基礎按鈕設定 */
     .pixel-ctrl-btn {
-        background-color: #7C3EED;
-        border: 2px solid #7C3EED; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
+        background-color: #0B0B0B;
+        border: 2px solid #0B0B0B; /* 🌟 淡淡的邊框，製造掃描框的感覺 */
         border-radius: 8px;
         width: 70px; /* 按鈕加寬 */
         height: 50px;
@@ -2110,9 +2191,9 @@ body.lock-scroll {
 
     /* 3. 按鈕滑過 (Hover) 的綠色點亮效果 */
     .pixel-ctrl-btn:hover {
-        background-color: #caf549;
-        border-color: #7C3EED; /* 邊框亮起 */
-        color: #7C3EED;        /* 箭頭亮起 */
+        background-color: #253DD9;
+        border-color: #0B0B0B; /* 邊框亮起 */
+        color: #0B0B0B;        /* 箭頭亮起 */
         box-shadow: 0 4px 10px rgba(102, 102, 255, 0.3);
     }
 
@@ -2174,8 +2255,8 @@ body.lock-scroll {
         top: 50%;                 /* 2. 垂直置中 */
         transform: translateY(-50%);
         background-color: rgba(255, 255, 255, 0.95); /* 3. 美化：半透明白底 */
-        border: 2px solid #7C3EED; /* 邊框 */
-        color: #7C3EED;            /* 箭頭顏色 */
+        border: 2px solid #0B0B0B; /* 邊框 */
+        color: #0B0B0B;            /* 箭頭顏色 */
         width: 48px;
         height: 48px;
         border-radius: 50%;        /* 變成圓形按鈕 */
@@ -2195,8 +2276,8 @@ body.lock-scroll {
         top: 50%;                 
         transform: translateY(-50%);
         background-color: rgba(255, 255, 255, 0.95); 
-        border: 2px solid #7C3EED; 
-        color: #7C3EED;            
+        border: 2px solid #0B0B0B; 
+        color: #0B0B0B;            
         width: 48px;
         height: 48px;
         border-radius: 50%;        
@@ -2223,7 +2304,7 @@ body.lock-scroll {
     /* 按鈕滑鼠移過去的特效 */
     .slider-nav-btn:hover, 
     .lightbox-nav-btn:hover {      /* 👈 共用滑過變色特效 */
-        background-color: #caf549; 
+        background-color: #253DD9; 
         transform: translateY(-50%) scale(1.1); 
     }
 
@@ -2264,7 +2345,7 @@ body.lock-scroll {
         height: 100%;            /* 填滿父容器高度 */
         
         padding: 80px 60px;      /* 加大電腦版的 padding，看起來才不擁擠 */
-        background-color: #ffffff;
+        background-color: #0B0B0B;
         
         /* 圖片中文字是頂部對齊，不要用之前設的 justify-content: center */
         display: block; 
@@ -2341,7 +2422,7 @@ body.lock-scroll {
     width: 100%;
     min-height: 100vh;      
     min-height: 100dvh;     
-    background-color: #7C3EED;
+    background-color: #0B0B0B;
     margin-bottom: 8px;   
     display: flex;
     flex-direction: column;
@@ -2666,15 +2747,19 @@ body.lock-scroll {
         flex-direction: column; 
         gap: 10px;
     }    
+    .hero-main-logo img {
+        /* 將 max-width 調小，從原本的 650px 限制到你覺得合適的數值 */
+        max-width: 390px; 
+    }
     .hero-main-logo { 
         order: 1; 
         margin-left: -40px;
-        margin-top: -60px;
-        rotate: -6deg;
+        margin-top: -40px;
+        rotate: -2deg;
     } 
     .hero-character { 
         order: 2; 
-        margin-top: -20px; 
+        margin-top: 10px; 
     } 
     /* 👇 新增或修改這段：手機版專屬的圖片控制 */
     .hero-character img {
@@ -2684,14 +2769,14 @@ body.lock-scroll {
     }
     .deco-1 { display: none; } 
     .deco-3 { 
-        top: 55%; 
-        right: -13%; 
-        width: 130px; 
+        top: 70%; 
+        right: -10%; 
+        width: 100px; 
         rotate: 25deg;
     }
     .deco-2 { 
-        bottom: 43%; 
-        left: -20%; 
+        bottom: 40%; 
+        left: -22%; 
         width: 150px; 
     }
 
@@ -2921,8 +3006,8 @@ body.lock-scroll {
 }
 
 .sticker-cta-box {
-    background-color: #f8f9fa;
-    border: 2px solid #06C755;
+    background-color: #0B0B0B;
+    border: 2px solid #08F6AA;
     border-radius: 12px;
     padding: 20px;
     
@@ -2951,7 +3036,7 @@ body.lock-scroll {
 
 .sticker-title {
     font-size: 1rem;
-    color: #333;
+    color: #e8e8e8;
     line-height: 1.4;
     margin: 0;
 }

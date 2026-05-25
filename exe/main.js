@@ -305,7 +305,7 @@ if (prevDetailBtn && nextDetailBtn) {
 // ==========================================
 // 4. 排行榜功能 (Leaderboard)
 // ==========================================
-const sheetBase = "https://opensheet.elk.sh/1VM5JbEfk4_CFy0A1qfKJaFc1u3Nvm9ueXKm_pH5k0Dw/";
+const sheetBase = "https://opensheet.elk.sh/1LcyVXV8zbzgebO96VmfwnsgnVseZMHh7MY9qBxJmjgQ/";
 let currentSheet = "七大項總錦標"; 
 
 const lbTabs = document.querySelectorAll('#leaderboard-tabs-container .lb-tab');
@@ -343,7 +343,7 @@ async function updateLeaderboard(sheetName) {
         // 過濾資料
         const data = rawData.filter(p => {
             const name = p.姓名 || p.Name;
-            const number = p.編號 || p.玩家號碼;
+            const number = p.UID || p.玩家號碼;
             return (name && name.trim() !== "") || (number && number.toString().trim() !== "");
         });
                 
@@ -371,7 +371,13 @@ async function updateLeaderboard(sheetName) {
             actualRank++;
             
             const pName = p.姓名 || p.Name || "-"; 
-            const pNumber = p.編號 || p.玩家號碼 || "未知";
+            // 獲取原始 UID 字串
+            let rawUid = (p.UID || "").toString();
+
+            // 處理 UID：只取後四碼。如果 UID 長度小於 4，就直接顯示原始值，避免截斷錯誤。
+            const pNumber = rawUid.length >= 4 
+                ? rawUid.slice(-4) 
+                : (rawUid || "未知");
             
             let rawScore = p.分數 !== undefined ? Number(p.分數) : 0;
             if (isNaN(rawScore)) rawScore = 0;
@@ -790,9 +796,9 @@ const translations = {
         'detail_title': '賽事細節',
         'hero_welcome_1': '歡迎來到',
         'hero_welcome_2': '科技x運動體適能挑戰賽',
-        'event_p1': '【ExErcise 2.1】科技x運動體適能挑戰賽',
+        'event_p1': '【ExErcise 2.2】科技x運動體適能挑戰賽',
         'event_p2': '用7個30秒，測試你的七大運動能力！',
-        'event_p3': '由北科大互動設計 113 級與光XR實境樂園聯手打造。',
+        'event_p3': '由北科大互動設計 113 級打造。',
         'event_p4': '我們打破穿戴限制，將運動變好玩。挑戰全新的運動可能',
 
         // 分頁按鈕
@@ -805,6 +811,16 @@ const translations = {
         'act_reg_3': '第三梯次報到', 'act_warm_3': '第三梯次熱身', 'act_play_3': '第三梯次體驗遊玩',
         'act_reg_4': '第四梯次報到', 'act_warm_4': '第四梯次熱身', 'act_play_4': '第四梯次體驗遊玩',
         'act_reg_5': '第五梯次報到', 'act_warm_5': '第五梯次熱身', 'act_play_5': '第五梯次體驗遊玩',
+
+        // 號碼牌與報到機制
+        'tab_ticket': '號碼牌規則',
+        'ticket_h1': '號碼牌與報到機制',
+        'ticket_sub_1': '梯次與抽取方式',
+        'ticket_desc_1': '參加者可於現場選擇合適的時段，抽取該梯次的號碼牌。每場體驗時間為 30 分鐘，為維持最佳遊玩品質，各梯次人數上限為 20 人。',
+        'ticket_sub_2': '參賽資料登記',
+        'ticket_desc_2': '取得號碼牌後，請掃描票券上的 QR Code 填寫參賽資訊，並於標示的「開始時間」準時報到。未持有該梯次號碼牌者恕不開放體驗。',
+        'ticket_sub_3': '一人一票制',
+        'ticket_desc_3': '為維護大家的權益，本賽事全面實施「一人一票」制。多人同行請務必「全員親自到場」領取號碼牌，恕不接受代領。此外，每張號碼牌的 QR Code 僅限單人登錄，重複掃描填寫多人資訊將視為無效。',
 
         // 計分方法
         'score_h1': '一、個人單項挑戰',
@@ -838,7 +854,9 @@ const translations = {
         // Footer
         'footer_host': '主辦單位：', 
         'footer_co': '合作單位：',
-        'footer_dept': '國立臺北科技大學 113級互動設計系', 'footer_locked': '光XR實境樂園', 'btn_ig': '追蹤官方IG',
+        'footer_dept': '國立臺北科技大學 互動設計系113 級<br>XR Lab@NTUT<br>MiiSLab@NTUST', 
+        'footer_locked': '不或互動娛樂有限公司<br>樂亦非凡股份有限公司', 
+        'btn_ig': '追蹤官方IG',
 
         // 排行榜
         'lb_title': '即時排行榜', 'lb_loading': '載入中...', 'lb_all': '七大項總錦標',
@@ -891,7 +909,7 @@ const translations = {
         'mega_address': '國立臺北科技大學<br>互動設計系 113級',
         'splash_text': 'Loading… Opening the .exe file',
         'ht_left': '7關全能挑戰',
-        'ht_right': 'EXERCISE 2.1',
+        'ht_right': 'EXERCISE 2.2',
         'hero_bottom_1': '突破關卡、獨自升級<br>一起奔向最終章',
         'ixd_title': '互動設計系',
         'ixd_desc': '互動設計系跨足運動科技，致力將肢體動作與感測技術深度融合。<br>讓數位科技釋放競技極限，探索體育與科技的交匯可能。',
@@ -923,9 +941,9 @@ const translations = {
         'detail_title': 'Event Details',
         'hero_welcome_1': 'Welcome to',
         'hero_welcome_2': 'Tech × Sports Fitness Challenge',
-        'event_p1': '【ExErcise 2.1】Tech × Sports Fitness Challenge',
+        'event_p1': '【ExErcise 2.2】Tech × Sports Fitness Challenge',
         'event_p2': 'Test your 7 major athletic abilities through 7 thirty-second challenges!',
-        'event_p3': 'Co-created by NTUT Interaction Design, Class 113, and Light X-Reality Land.',
+        'event_p3': 'Created by NTUT Interaction Design, Class 113.',
         'event_p4': 'Breaking free from wearable constraints to make exercise fun. Experience a whole new way to move!',
 
         // Tabs
@@ -938,6 +956,16 @@ const translations = {
         'act_reg_3': 'Registration (Batch 3)', 'act_warm_3': 'Warm-up (Batch 3)', 'act_play_3': 'Gameplay (Batch 3)',
         'act_reg_4': 'Registration (Batch 4)', 'act_warm_4': 'Warm-up (Batch 4)', 'act_play_4': 'Gameplay (Batch 4)',
         'act_reg_5': 'Registration (Batch 5)', 'act_warm_5': 'Warm-up (Batch 5)', 'act_play_5': 'Gameplay (Batch 5)',
+
+        // Ticketing & Check-in System
+        'tab_ticket': 'Ticket Rules',
+        'ticket_h1': 'Ticketing & Check-in',
+        'ticket_sub_1': 'Sessions & Drawing',
+        'ticket_desc_1': 'Participants can select a suitable time slot and draw a session ticket on-site. Each experience lasts 30 minutes. To maintain the best gameplay quality, each session is limited to 20 people.',
+        'ticket_sub_2': 'Participant Registration',
+        'ticket_desc_2': 'After obtaining your ticket, please scan the QR Code on it to fill in your participant information, and arrive punctually at the indicated "Start Time". Those without a ticket for the current session will not be allowed to play.',
+        'ticket_sub_3': 'One Ticket Per Person',
+        'ticket_desc_3': 'To protect everyone\'s rights, this event strictly enforces a "one ticket per person" policy. For group attendees, all members must be physically present to draw their tickets; claiming for others is not allowed. Furthermore, each ticket\'s QR Code is valid for single-person registration only. Scanning the same code to register multiple people will be considered invalid.',
 
         // Scoring
         'score_h1': '1. Seventeen Exercises Championships',
@@ -972,7 +1000,9 @@ const translations = {
         // Footer
         'footer_host': 'Organizer:', 
         'footer_co': 'Co-organizer:',
-        'footer_dept': 'NTUT Interaction Design 113', 'footer_locked': 'Light X-Reality Land', 'btn_ig': 'Follow Instagram',
+        'footer_dept': 'NTUT Interaction Design 113<br>XR Lab@NTUT<br>MiiSLab@NTUST', 
+        'footer_locked': 'buho entertainment<br>SmartJoy Digital Art', 
+        'btn_ig': 'Follow Instagram',
 
         // Leaderboard
         'lb_title': 'Ranking', 'lb_loading': 'Loading...', 'lb_all': 'Collective Score Tournament',
@@ -1025,7 +1055,7 @@ const translations = {
         'mega_address': 'National Taipei University of Technology<br>Interaction Design Class of 113',
         'splash_text': 'Loading… Opening the .exe file',
         'ht_left': '7-Stage Challenge',
-        'ht_right': 'EXERCISE 2.1',
+        'ht_right': 'EXERCISE 2.2',
         'hero_bottom_1': 'Break through levels, upgrade yourself<br>Sprint to the final chapter together',
         'ixd_title': 'Interaction Design',
         'ixd_desc': 'The Department of Interaction Design steps into sports technology, dedicated to deeply integrating physical movements with sensing technology.<br>Unleashing competitive limits through digital technology, exploring the intersection of sports and tech.',
