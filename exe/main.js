@@ -812,15 +812,17 @@ const translations = {
         'act_reg_4': '第四梯次報到', 'act_warm_4': '第四梯次熱身', 'act_play_4': '第四梯次體驗遊玩',
         'act_reg_5': '第五梯次報到', 'act_warm_5': '第五梯次熱身', 'act_play_5': '第五梯次體驗遊玩',
 
-        // 號碼牌與報到機制
+        // 號碼牌與報到機制 (更新為Step版)
         'tab_ticket': '號碼牌規則',
         'ticket_h1': '號碼牌與報到機制',
-        'ticket_sub_1': '梯次與抽取方式',
-        'ticket_desc_1': '參加者可於現場選擇合適的時段，抽取該梯次的號碼牌。每場體驗時間為 30 分鐘，為維持最佳遊玩品質，各梯次人數上限為 20 人。',
-        'ticket_sub_2': '參賽資料登記',
-        'ticket_desc_2': '取得號碼牌後，請掃描票券上的 QR Code 填寫參賽資訊，並於標示的「開始時間」準時報到。未持有該梯次號碼牌者恕不開放體驗。',
-        'ticket_sub_3': '一人一票制',
-        'ticket_desc_3': '為維護大家的權益，本賽事全面實施「一人一票」制。多人同行請務必「全員親自到場」領取號碼牌，恕不接受代領。此外，每張號碼牌的 QR Code 僅限單人登錄，重複掃描填寫多人資訊將視為無效。',
+        'ticket_step1_title': '抽取號碼牌',
+        'ticket_step1_desc': '參加者可於現場選擇合適的時段，抽取該梯次的號碼牌。每場體驗時間為 30 分鐘，為維持最佳遊玩品質，各梯次人數上限為 20 人。',
+        'ticket_step2_title': '參賽資料登記',
+        'ticket_step2_desc': '取得號碼牌後，請掃描票券上的 QR Code 填寫參賽者資訊。',
+        'ticket_step3_title': '規定時間內入場',
+        'ticket_step3_desc': '建議於標示的「開始時間」提早五分鐘排隊入場，在時間內皆可憑卷依現場排隊入場。',
+        'ticket_notice_title': '【注意事項】「一人一票制」',
+        'ticket_notice_desc': '多人同行請務必「全員親自到場」領取號碼牌，不開放代領。此外，每張號碼牌的 QR Code 僅限單人登錄，重複掃描填寫多人資訊將視為無效。',
 
         // 計分方法
         'score_h1': '一、個人單項挑戰',
@@ -957,16 +959,18 @@ const translations = {
         'act_reg_4': 'Registration (Batch 4)', 'act_warm_4': 'Warm-up (Batch 4)', 'act_play_4': 'Gameplay (Batch 4)',
         'act_reg_5': 'Registration (Batch 5)', 'act_warm_5': 'Warm-up (Batch 5)', 'act_play_5': 'Gameplay (Batch 5)',
 
-        // Ticketing & Check-in System
+        // Ticketing & Check-in System (Updated to Step Version)
         'tab_ticket': 'Ticket Rules',
         'ticket_h1': 'Ticketing & Check-in',
-        'ticket_sub_1': 'Sessions & Drawing',
-        'ticket_desc_1': 'Participants can select a suitable time slot and draw a session ticket on-site. Each experience lasts 30 minutes. To maintain the best gameplay quality, each session is limited to 20 people.',
-        'ticket_sub_2': 'Participant Registration',
-        'ticket_desc_2': 'After obtaining your ticket, please scan the QR Code on it to fill in your participant information, and arrive punctually at the indicated "Start Time". Those without a ticket for the current session will not be allowed to play.',
-        'ticket_sub_3': 'One Ticket Per Person',
-        'ticket_desc_3': 'To protect everyone\'s rights, this event strictly enforces a "one ticket per person" policy. For group attendees, all members must be physically present to draw their tickets; claiming for others is not allowed. Furthermore, each ticket\'s QR Code is valid for single-person registration only. Scanning the same code to register multiple people will be considered invalid.',
-
+        'ticket_step1_title': 'Draw a Ticket',
+        'ticket_step1_desc': 'Select a suitable time slot on-site and draw a ticket. Each session is 30 minutes, limited to 20 people.',
+        'ticket_step2_title': 'Participant Registration',
+        'ticket_step2_desc': 'Scan the QR Code on the ticket to fill in the participant information.',
+        'ticket_step3_title': 'Enter on Time',
+        'ticket_step3_desc': 'We recommend arriving 5 minutes early before the indicated "Start Time" to line up. Entry is allowed within the time slot by presenting your ticket and joining the queue.',
+        'ticket_notice_title': '【Notice】"One Ticket Per Person"',
+        'ticket_notice_desc': 'For group attendees, all members must be physically present to draw tickets; claiming for others is not allowed. Each QR Code is valid for single-person registration only. Duplicate scans are invalid.',
+        
         // Scoring
         'score_h1': '1. Seventeen Exercises Championships',
         'score_label_rank': 'Ranking', 'score_text_rank': 'Participant scores will be automatically recorded and ranked according to the scoring method of each event.',
