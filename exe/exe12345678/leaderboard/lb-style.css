@@ -26,8 +26,8 @@ body {
     background-color: #000; /* 背景黑 */
 }
 /* 左右佔比 50% */
-.left-half { width: 50%; height: 100vh; box-sizing: border-box; }
-.right-half { width: 50%; height: 100vh; position: relative; }
+.left-half { width: 45%; height: 100vh; box-sizing: border-box; }
+.right-half { width: 55%; height: 100vh; position: relative; }
 
 /* 影片設定 */
 #bg-video {
